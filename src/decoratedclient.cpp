@@ -67,4 +67,14 @@ DELEGATE(QPalette, palette)
 
 #undef DELEGATE
 
+const DecoratedClientPrivate *DecoratedClient::handle() const
+{
+    return d.data();
+}
+
+DecoratedClientPrivate *DecoratedClient::handle()
+{
+    return d.data();
+}
+
 } // namespace
