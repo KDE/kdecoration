@@ -20,8 +20,6 @@
 #ifndef KDECORATION2_DECORATION_P_H
 #define KDECORATION2_DECORATION_P_H
 
-#include <kdecoration2_private_export.h>
-
 //
 //  W A R N I N G
 //  -------------
@@ -40,7 +38,7 @@ class Decoration;
 class DecorationButton;
 class DecoratedClient;
 
-class KDECORATIONS_PRIVATE_EXPORT DecorationPrivate
+class DecorationPrivate
 {
 public:
     DecorationPrivate(Decoration *decoration);
