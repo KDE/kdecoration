@@ -1,0 +1,60 @@
+add_subdirectory(private)
+
+set(libkdecoration2_SRCS
+    decoratedclient.cpp
+    decoration.cpp
+    decorationbutton.cpp
+    decorationbuttongroup.cpp
+    decorationsettings.cpp
+)
+
+add_library(kdecorations2 SHARED ${libkdecoration2_SRCS})
+generate_export_header(kdecorations2 EXPORT_FILE_NAME kdecoration2/kdecoration2_export.h)
+add_library(KDecoration2::KDecoration ALIAS kdecorations2)
+
+target_link_libraries(kdecorations2
+    PUBLIC
+        Qt5::Core
+        Qt5::Gui
+    PRIVATE
+        kdecorations2private
+)
+
+target_include_directories(kdecorations2 INTERFACE "$<INSTALL_INTERFACE:${KDECORATION2_INCLUDEDIR}>" )
+
+set_target_properties(kdecorations2 PROPERTIES VERSION   ${KDECORATION2_VERSION_STRING}
+                                               SOVERSION ${KDECORATION2_SOVERSION}
+                                               EXPORT_NAME KDecoration
+)
+
+ecm_generate_headers(KDecoration2_CamelCase_HEADERS
+  HEADER_NAMES
+    DecoratedClient
+    Decoration
+    DecorationButton
+    DecorationButtonGroup
+    DecorationSettings
+  PREFIX
+    KDecoration2
+  REQUIRED_HEADERS KDecoration2_HEADERS
+)
+install(FILES ${KDecoration2_CamelCase_HEADERS}
+        DESTINATION ${KDECORATION2_INCLUDEDIR}/KDecoration2
+        COMPONENT Devel)
+
+install(TARGETS kdecorations2 EXPORT KDecoration2Targets ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
+
+install(
+    FILES
+        ${CMAKE_CURRENT_BINARY_DIR}/kdecoration2/kdecoration2_export.h
+        ${KDecoration2_HEADERS}
+        decoratedclient.h
+        decoration.h
+        decorationbutton.h
+        decorationbuttongroup.h
+        decorationsettings.h
+    DESTINATION
+        ${KDECORATION2_INCLUDEDIR}/kdecoration2
+    COMPONENT
+        Devel
+)

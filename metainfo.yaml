@@ -1,0 +1,9 @@
+maintainer: graesslin
+description: Plugin based library to create window decorations.
+tier: 1
+type: integration
+platforms:
+    - name: Linux
+portingAid: false
+deprecated: false
+release: false
