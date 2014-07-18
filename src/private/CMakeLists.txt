@@ -46,7 +46,7 @@ install(TARGETS kdecorations2private EXPORT KDecoration2Targets ${KF5_INSTALL_TA
 
 install(
     FILES
-        ${CMAKE_CURRENT_BINARY_DIR}/kdecoration2_private_export.h
+        ${CMAKE_CURRENT_BINARY_DIR}/kdecoration2/private/kdecoration2_private_export.h
         ${KDecoration2Private_HEADERS}
         decoratedclientprivate.h
         decorationbridge.h
