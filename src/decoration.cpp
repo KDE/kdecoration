@@ -280,7 +280,7 @@ void Decoration::hoverLeaveEvent(QHoverEvent *event)
 void Decoration::hoverMoveEvent(QHoverEvent *event)
 {
     for (DecorationButton *button : d->buttons()) {
-        if (!button->isEnabled()) {
+        if (!button->isEnabled() || !button->isVisible()) {
             continue;
         }
         const bool hovered = button->isHovered();

@@ -296,7 +296,7 @@ bool DecorationButton::event(QEvent *event)
 
 void DecorationButton::hoverEnterEvent(QHoverEvent *event)
 {
-    if (!d->isEnabled() || !d->geometry().contains(event->pos())) {
+    if (!d->isEnabled() || !d->isVisible() || !d->geometry().contains(event->pos())) {
         return;
     }
     d->setHovered(true);
@@ -305,7 +305,7 @@ void DecorationButton::hoverEnterEvent(QHoverEvent *event)
 
 void DecorationButton::hoverLeaveEvent(QHoverEvent *event)
 {
-    if (!d->isEnabled() || !d->isHovered()) {
+    if (!d->isEnabled() || !d->isVisible() || !d->isHovered()) {
         return;
     }
     d->setHovered(false);
@@ -319,7 +319,7 @@ void DecorationButton::hoverMoveEvent(QHoverEvent *event)
 
 void DecorationButton::mouseMoveEvent(QMouseEvent *event)
 {
-    if (!d->isEnabled() || !d->isHovered()) {
+    if (!d->isEnabled() || !d->isVisible() || !d->isHovered()) {
         return;
     }
     if (!d->geometry().contains(event->pos())) {
@@ -330,7 +330,7 @@ void DecorationButton::mouseMoveEvent(QMouseEvent *event)
 
 void DecorationButton::mousePressEvent(QMouseEvent *event)
 {
-    if (!d->isEnabled() || !d->geometry().contains(event->pos())) {
+    if (!d->isEnabled() || !d->isVisible() || !d->geometry().contains(event->pos())) {
         return;
     }
     d->setPressed(event->button(), true);
@@ -339,7 +339,7 @@ void DecorationButton::mousePressEvent(QMouseEvent *event)
 
 void DecorationButton::mouseReleaseEvent(QMouseEvent *event)
 {
-    if (!d->isEnabled() || !d->isPressed(event->button())) {
+    if (!d->isEnabled() || !d->isVisible() || !d->isPressed(event->button())) {
         return;
     }
     if (d->geometry().contains(event->pos())) {
