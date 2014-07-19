@@ -218,10 +218,7 @@ DecorationButton::~DecorationButton() = default;
 
 void DecorationButton::update(const QRect &rect)
 {
-    if (rect.isNull()) {
-        decoration()->update(geometry());
-    }
-    decoration()->update(rect);
+    decoration()->update(rect.isNull() ? geometry() : rect);
 }
 
 QSize DecorationButton::size() const
