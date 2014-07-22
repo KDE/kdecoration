@@ -161,6 +161,7 @@ Decoration::Decoration(QObject *parent)
     : QObject(parent)
     , d(new DecorationPrivate(this))
 {
+    connect(this, &Decoration::bordersChanged, this, [this]{ update(); });
 }
 
 Decoration::~Decoration() = default;
