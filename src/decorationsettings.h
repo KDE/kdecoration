@@ -21,6 +21,7 @@
 #define KDECORATION2_DECORATION_SETTINGS_H
 
 #include <kdecoration2/kdecoration2_export.h>
+#include "decorationbutton.h"
 
 #include <QObject>
 
@@ -35,10 +36,14 @@ class KDECORATIONS2_EXPORT DecorationSettings : public QObject
     Q_OBJECT
     Q_PROPERTY(bool onAllDesktopsAvailable READ isOnAllDesktopsAvailable NOTIFY onAllDesktopsAvailableChanged)
     Q_PROPERTY(bool alphaChannelSupported READ isAlphaChannelSupported NOTIFY alphaChannelSupportedChanged)
+    Q_PROPERTY(QList<DecorationButtonType> decorationButtonsLeft READ decorationButtonsLeft NOTIFY decorationButtonsLeftChanged)
+    Q_PROPERTY(QList<DecorationButtonType> decorationButtonsRight READ decorationButtonsRight NOTIFY decorationButtonsRightChanged)
 public:
     virtual ~DecorationSettings();
     bool isOnAllDesktopsAvailable() const;
     bool isAlphaChannelSupported() const;
+    QList<DecorationButtonType> decorationButtonsLeft() const;
+    QList<DecorationButtonType> decorationButtonsRight() const;
 
     /**
      * @param parent Used as parent if static instance is not yet created, a Decoration plugin
@@ -50,6 +55,8 @@ public:
 Q_SIGNALS:
     void onAllDesktopsAvailableChanged(bool);
     void alphaChannelSupportedChanged(bool);
+    void decorationButtonsLeftChanged(const QList<DecorationButtonType>&);
+    void decorationButtonsRightChanged(const QList<DecorationButtonType>&);
 
 private:
     explicit DecorationSettings(QObject *parent);

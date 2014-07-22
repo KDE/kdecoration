@@ -21,6 +21,7 @@
 #define KDECORATION2_DECORATIONBUTTONGROUP_H
 #include "decorationbutton.h"
 #include <kdecoration2/kdecoration2_export.h>
+#include <functional>
 
 class QPainter;
 
@@ -63,6 +64,11 @@ class KDECORATIONS2_EXPORT DecorationButtonGroup : public QObject
      **/
     Q_PROPERTY(QPointF pos READ pos WRITE setPos NOTIFY posChanged)
 public:
+    enum class Position {
+        Left,
+        Right
+    };
+    explicit DecorationButtonGroup(Position type, Decoration *parent, std::function<DecorationButton*(DecorationButtonType, Decoration*, QObject*)> buttonCreator);
     explicit DecorationButtonGroup(Decoration *parent);
     virtual ~DecorationButtonGroup();
 

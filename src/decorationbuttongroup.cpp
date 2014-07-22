@@ -20,6 +20,9 @@
 #include "decorationbuttongroup.h"
 #include "decorationbuttongroup_p.h"
 #include "decoration.h"
+#include "decorationsettings.h"
+
+#include <QDebug>
 
 namespace KDecoration2
 {
@@ -87,6 +90,32 @@ DecorationButtonGroup::DecorationButtonGroup(Decoration *parent)
     : QObject(parent)
     , d(new DecorationButtonGroupPrivate(parent, this))
 {
+}
+
+DecorationButtonGroup::DecorationButtonGroup(DecorationButtonGroup::Position type, Decoration *parent, std::function<DecorationButton*(DecorationButtonType, Decoration*, QObject*)> buttonCreator)
+    : QObject(parent)
+    , d(new DecorationButtonGroupPrivate(parent, this))
+{
+    auto createButtons = [=] {
+        const QList<DecorationButtonType> buttons = (type == Position::Left) ?
+            DecorationSettings::self()->decorationButtonsLeft() :
+            DecorationSettings::self()->decorationButtonsRight();
+        for (DecorationButtonType type : buttons) {
+            if (DecorationButton *b = buttonCreator(type, parent, this)) {
+                addButton(b);
+            }
+        }
+    };
+    createButtons();
+    auto changed = type == Position::Left ? &DecorationSettings::decorationButtonsLeftChanged : &DecorationSettings::decorationButtonsRightChanged;
+    connect(DecorationSettings::self(), changed, this,
+        [this, createButtons] {
+            while (!d->buttons().isEmpty()) {
+                delete d->buttons().takeFirst();
+            }
+            createButtons();
+        }
+    );
 }
 
 DecorationButtonGroup::~DecorationButtonGroup() = default;

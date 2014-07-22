@@ -53,6 +53,7 @@ install(
         decorationbutton.h
         decorationbuttongroup.h
         decorationsettings.h
+        decorationdefines.h
     DESTINATION
         ${KDECORATION2_INCLUDEDIR}/kdecoration2
     COMPONENT

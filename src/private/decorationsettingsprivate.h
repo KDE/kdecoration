@@ -21,6 +21,8 @@
 #define KDECORATION2_DECORATION_SETTINGS_PRIVATE_H
 
 #include <kdecoration2/private/kdecoration2_private_export.h>
+#include "../decorationdefines.h"
+#include <QList>
 
 //
 //  W A R N I N G
@@ -44,6 +46,8 @@ public:
     virtual ~DecorationSettingsPrivate();
     virtual bool isOnAllDesktopsAvailable() const = 0;
     virtual bool isAlphaChannelSupported() const = 0;
+    virtual QList<DecorationButtonType> decorationButtonsLeft() const = 0;
+    virtual QList<DecorationButtonType> decorationButtonsRight() const = 0;
 
 protected:
     explicit DecorationSettingsPrivate(DecorationSettings *parent);

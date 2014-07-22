@@ -53,6 +53,8 @@ type DecorationSettings::method() const \
 
 DELEGATE(bool, isOnAllDesktopsAvailable)
 DELEGATE(bool, isAlphaChannelSupported)
+DELEGATE(QList<DecorationButtonType>, decorationButtonsLeft)
+DELEGATE(QList<DecorationButtonType>, decorationButtonsRight)
 
 #undef DELEGATE
 
