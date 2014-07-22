@@ -38,6 +38,7 @@ DecorationPrivate::DecorationPrivate(Decoration *deco)
     , m_borderTop(0)
     , m_borderBottom(0)
     , m_windowFrameSection(Qt::NoSection)
+    , m_opaque(false)
 {
 }
 
@@ -130,6 +131,15 @@ void DecorationPrivate::addButton(DecorationButton *button)
     );
 }
 
+void DecorationPrivate::setOpaque(bool opaque)
+{
+    if (m_opaque == opaque) {
+        return;
+    }
+    m_opaque = opaque;
+    emit q->opaqueChanged(m_opaque);
+}
+
 #define DELEGATE(name) \
 void DecorationPrivate::name() \
 { \
@@ -207,6 +217,7 @@ void Decoration::name(type a) \
 DELEGATE(requestMaximize, Qt::MouseButtons)
 DELEGATE(addButton, DecorationButton*)
 DELEGATE(setTitleRect, const QRect&)
+DELEGATE(setOpaque, bool)
 
 #undef DELEGATE
 
@@ -222,6 +233,7 @@ DELEGATE(borderTop, int)
 DELEGATE(borderBottom, int)
 DELEGATE(windowFrameSection, Qt::WindowFrameSection)
 DELEGATE(titleRect, QRect)
+DELEGATE(isOpaque, bool)
 
 #undef DELEGATE
 

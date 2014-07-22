@@ -45,6 +45,13 @@ class KDECORATIONS2_EXPORT Decoration : public QObject
     Q_PROPERTY(int borderBottom  READ borderBottom  NOTIFY bordersChanged)
     Q_PROPERTY(Qt::WindowFrameSection windowFrameSection READ windowFrameSection NOTIFY windowFrameSectionChanged)
     Q_PROPERTY(QRect titleRect READ titleRect NOTIFY titleRectChanged)
+    /**
+     * Rendering whether the Decoration is fully opaque. By default a Decoration is considered to
+     * use the alpha channel and this property has the value @c false. But for e.g. a maximized
+     * DecoratedClient it is possible that the Decoration is fully opaque. In this case the
+     * Decoration should set this property to @c true.
+     **/
+    Q_PROPERTY(bool opaque READ isOpaque NOTIFY opaqueChanged)
 public:
     virtual ~Decoration();
 
@@ -57,6 +64,7 @@ public:
     int borderBottom() const;
     Qt::WindowFrameSection windowFrameSection() const;
     QRect titleRect() const;
+    bool isOpaque() const;
 
     /**
      * The decoration's geometry in local coordinates.
@@ -92,11 +100,13 @@ Q_SIGNALS:
     void bordersChanged();
     void windowFrameSectionChanged(Qt::WindowFrameSection);
     void titleRectChanged(const QRect &);
+    void opaqueChanged(bool);
 
 protected:
     explicit Decoration(QObject *parent = nullptr);
     void setBorders(int left, int right, int top, int bottom);
     void setTitleRect(const QRect &rect);
+    void setOpaque(bool opaque);
 
     virtual void hoverEnterEvent(QHoverEvent *event);
     virtual void hoverLeaveEvent(QHoverEvent *event);

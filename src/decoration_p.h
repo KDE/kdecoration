@@ -91,6 +91,11 @@ public:
         return m_buttons;
     }
 
+    bool isOpaque() const {
+        return m_opaque;
+    }
+    void setOpaque(bool opaque);
+
 private:
     Decoration *q;
     DecoratedClient *m_client;
@@ -101,6 +106,7 @@ private:
     QList<DecorationButton*> m_buttons;
     Qt::WindowFrameSection m_windowFrameSection;
     QRect m_titleRect;
+    bool m_opaque;
 };
 
 } // namespace
