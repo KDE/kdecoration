@@ -38,12 +38,14 @@ class KDECORATIONS2_EXPORT DecorationSettings : public QObject
     Q_PROPERTY(bool alphaChannelSupported READ isAlphaChannelSupported NOTIFY alphaChannelSupportedChanged)
     Q_PROPERTY(QList<DecorationButtonType> decorationButtonsLeft READ decorationButtonsLeft NOTIFY decorationButtonsLeftChanged)
     Q_PROPERTY(QList<DecorationButtonType> decorationButtonsRight READ decorationButtonsRight NOTIFY decorationButtonsRightChanged)
+    Q_PROPERTY(BorderSize borderSize READ borderSize NOTIFY borderSizeChanged)
 public:
     virtual ~DecorationSettings();
     bool isOnAllDesktopsAvailable() const;
     bool isAlphaChannelSupported() const;
     QList<DecorationButtonType> decorationButtonsLeft() const;
     QList<DecorationButtonType> decorationButtonsRight() const;
+    BorderSize borderSize() const;
 
     /**
      * @param parent Used as parent if static instance is not yet created, a Decoration plugin
@@ -57,6 +59,7 @@ Q_SIGNALS:
     void alphaChannelSupportedChanged(bool);
     void decorationButtonsLeftChanged(const QList<DecorationButtonType>&);
     void decorationButtonsRightChanged(const QList<DecorationButtonType>&);
+    void borderSizeChanged(BorderSize size);
 
 private:
     explicit DecorationSettings(QObject *parent);
@@ -65,5 +68,7 @@ private:
 };
 
 }
+
+Q_DECLARE_METATYPE(KDecoration2::BorderSize)
 
 #endif

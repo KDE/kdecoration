@@ -87,6 +87,54 @@ enum class DecorationButtonType
     Custom
 };
 
+
+/**
+ * Border sizes are a combination of visual and accessibility features.
+ * Larger borders should be used to increase the non title bar borders to
+ * make it easier to resize the decoration
+ **/
+enum class BorderSize {
+    /**
+     * Border sizes of all non title bar sides should be set to 0.
+     **/
+    None,
+    /**
+     * Border sizes of the sides should be set to 0. Title bar and
+     * the border on opposite side of the title bar should follow the
+     * Normal settings.
+     **/
+    NoSides,
+    /**
+     * Borders should be smaller than Normal, e.g. a factor of 0.5.
+     **/
+    Tiny,
+    /**
+     * The default border size with borders on each side. This should
+     * be the base for calculating other border sizes.
+     **/
+    Normal,
+    /**
+     * Increased border sizes, considered a factor of 1.5.
+     **/
+    Large,
+    /**
+     * Increased border sizes, considered a factor of 2.0.
+     **/
+    VeryLarge,
+    /**
+     * Increased border sizes, considered a factor of 2.5.
+     **/
+    Huge,
+    /**
+     * Increased border sizes, considered a factor of 3.0.
+     **/
+    VeryHuge,
+    /**
+     * Increased border sizes, considered a factor of 5.0.
+     **/
+    Oversized
+};
+
 }
 
 #endif

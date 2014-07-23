@@ -48,6 +48,7 @@ public:
     virtual bool isAlphaChannelSupported() const = 0;
     virtual QList<DecorationButtonType> decorationButtonsLeft() const = 0;
     virtual QList<DecorationButtonType> decorationButtonsRight() const = 0;
+    virtual BorderSize borderSize() const = 0;
 
     DecorationSettings *decorationSettings();
     const DecorationSettings *decorationSettings() const;
