@@ -31,4 +31,14 @@ DecorationSettingsPrivate::~DecorationSettingsPrivate()
 {
 }
 
+DecorationSettings *DecorationSettingsPrivate::decorationSettings()
+{
+    return q;
+}
+
+const DecorationSettings *DecorationSettingsPrivate::decorationSettings() const
+{
+    return q;
+}
+
 }

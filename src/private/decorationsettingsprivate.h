@@ -49,6 +49,9 @@ public:
     virtual QList<DecorationButtonType> decorationButtonsLeft() const = 0;
     virtual QList<DecorationButtonType> decorationButtonsRight() const = 0;
 
+    DecorationSettings *decorationSettings();
+    const DecorationSettings *decorationSettings() const;
+
 protected:
     explicit DecorationSettingsPrivate(DecorationSettings *parent);
 
