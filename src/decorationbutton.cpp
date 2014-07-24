@@ -23,7 +23,11 @@
 #include "decoratedclient.h"
 #include "decorationsettings.h"
 
+#include <QElapsedTimer>
 #include <QHoverEvent>
+#include <QGuiApplication>
+#include <QStyleHints>
+#include <QTimer>
 
 namespace KDecoration2
 {
@@ -44,6 +48,8 @@ DecorationButtonPrivate::DecorationButtonPrivate(DecorationButtonType type, Deco
     , m_visible(true)
     , m_pressed(Qt::NoButton)
     , m_buttons(Qt::LeftButton)
+    , m_doubleClickEnabled(false)
+    , m_pressAndHold(false)
 {
     init();
 }
@@ -55,8 +61,16 @@ void DecorationButtonPrivate::init()
     DecoratedClient *c = m_decoration->client();
     switch (m_type) {
     case DecorationButtonType::Menu:
-        // TODO: support double click to close
         QObject::connect(q, &DecorationButton::clicked, m_decoration, &Decoration::requestShowWindowMenu);
+        QObject::connect(q, &DecorationButton::doubleClicked, m_decoration, &Decoration::requestClose);
+        QObject::connect(DecorationSettings::self(), &DecorationSettings::closeOnDoubleClickOnMenuChanged, q,
+            [this](bool enabled) {
+                setDoubleClickEnabled(enabled);
+                setPressAndHold(enabled);
+            }
+        );
+        setDoubleClickEnabled(DecorationSettings::self()->isCloseOnDoubleClickOnMenu());
+        setPressAndHold(DecorationSettings::self()->isCloseOnDoubleClickOnMenu());
         setAcceptedButtons(Qt::LeftButton | Qt::RightButton);
         break;
     case DecorationButtonType::OnAllDesktops:
@@ -200,6 +214,64 @@ void DecorationButtonPrivate::setAcceptedButtons(Qt::MouseButtons buttons)
     emit q->acceptedButtonsChanged(m_buttons);
 }
 
+void DecorationButtonPrivate::startDoubleClickTimer()
+{
+    if (!m_doubleClickEnabled) {
+        return;
+    }
+    if (m_doubleClickTimer.isNull()) {
+        m_doubleClickTimer.reset(new QElapsedTimer());
+    }
+    m_doubleClickTimer->start();
+}
+
+void DecorationButtonPrivate::invalidateDoubleClickTimer()
+{
+    if (m_doubleClickTimer.isNull()) {
+        return;
+    }
+    m_doubleClickTimer->invalidate();
+}
+
+bool DecorationButtonPrivate::wasDoubleClick() const
+{
+    if (m_doubleClickTimer.isNull() || !m_doubleClickTimer->isValid()) {
+        return false;
+    }
+    return !m_doubleClickTimer->hasExpired(QGuiApplication::styleHints()->mouseDoubleClickInterval());
+}
+
+
+void DecorationButtonPrivate::setPressAndHold(bool enable) {
+    if (m_pressAndHold == enable) {
+        return;
+    }
+    m_pressAndHold = enable;
+    if (!m_pressAndHold) {
+        m_pressAndHoldTimer.reset();
+    }
+}
+
+void DecorationButtonPrivate::startPressAndHold()
+{
+    if (!m_pressAndHold) {
+        return;
+    }
+    if (m_pressAndHoldTimer.isNull()) {
+        m_pressAndHoldTimer.reset(new QTimer());
+        m_pressAndHoldTimer->setSingleShot(true);
+        QObject::connect(m_pressAndHoldTimer.data(), &QTimer::timeout, q, [this]() { q->clicked(Qt::LeftButton); } );
+    }
+    m_pressAndHoldTimer->start(QGuiApplication::styleHints()->mousePressAndHoldInterval());
+}
+
+void DecorationButtonPrivate::stopPressAndHold()
+{
+    if (!m_pressAndHoldTimer.isNull()) {
+        m_pressAndHoldTimer->stop();
+    }
+}
+
 DecorationButton::DecorationButton(DecorationButtonType type, Decoration *decoration, QObject *parent)
     : QObject(parent)
     , d(new DecorationButtonPrivate(type, decoration, this))
@@ -332,6 +404,17 @@ void DecorationButton::mousePressEvent(QMouseEvent *event)
     }
     d->setPressed(event->button(), true);
     event->setAccepted(true);
+    if (d->isDoubleClickEnabled() && event->button() == Qt::LeftButton) {
+        // check for double click
+        if (d->wasDoubleClick()) {
+            event->setAccepted(true);
+            emit doubleClicked();
+        }
+        d->invalidateDoubleClickTimer();
+    }
+    if (d->isPressAndHold() && event->button() == Qt::LeftButton) {
+        d->startPressAndHold();
+    }
 }
 
 void DecorationButton::mouseReleaseEvent(QMouseEvent *event)
@@ -340,10 +423,18 @@ void DecorationButton::mouseReleaseEvent(QMouseEvent *event)
         return;
     }
     if (d->geometry().contains(event->pos())) {
-        emit clicked(event->button());
+        if (!d->isPressAndHold() || event->button() != Qt::LeftButton) {
+            emit clicked(event->button());
+        } else {
+            d->stopPressAndHold();
+        }
     }
     d->setPressed(event->button(), false);
     event->setAccepted(true);
+
+    if (d->isDoubleClickEnabled() && event->button() == Qt::LeftButton) {
+        d->startDoubleClickTimer();
+    }
 }
 
 }

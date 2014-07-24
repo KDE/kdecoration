@@ -72,6 +72,7 @@ type DecorationSettings::method() const \
 
 DELEGATE(bool, isOnAllDesktopsAvailable)
 DELEGATE(bool, isAlphaChannelSupported)
+DELEGATE(bool, isCloseOnDoubleClickOnMenu)
 DELEGATE(QList<DecorationButtonType>, decorationButtonsLeft)
 DELEGATE(QList<DecorationButtonType>, decorationButtonsRight)
 DELEGATE(BorderSize, borderSize)

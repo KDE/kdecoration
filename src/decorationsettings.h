@@ -36,6 +36,7 @@ class KDECORATIONS2_EXPORT DecorationSettings : public QObject
     Q_OBJECT
     Q_PROPERTY(bool onAllDesktopsAvailable READ isOnAllDesktopsAvailable NOTIFY onAllDesktopsAvailableChanged)
     Q_PROPERTY(bool alphaChannelSupported READ isAlphaChannelSupported NOTIFY alphaChannelSupportedChanged)
+    Q_PROPERTY(bool closeOnDoubleClickOnMenu READ isCloseOnDoubleClickOnMenu NOTIFY closeOnDoubleClickOnMenuChanged)
     Q_PROPERTY(QList<DecorationButtonType> decorationButtonsLeft READ decorationButtonsLeft NOTIFY decorationButtonsLeftChanged)
     Q_PROPERTY(QList<DecorationButtonType> decorationButtonsRight READ decorationButtonsRight NOTIFY decorationButtonsRightChanged)
     Q_PROPERTY(BorderSize borderSize READ borderSize NOTIFY borderSizeChanged)
@@ -67,6 +68,7 @@ public:
     virtual ~DecorationSettings();
     bool isOnAllDesktopsAvailable() const;
     bool isAlphaChannelSupported() const;
+    bool isCloseOnDoubleClickOnMenu() const;
     QList<DecorationButtonType> decorationButtonsLeft() const;
     QList<DecorationButtonType> decorationButtonsRight() const;
     BorderSize borderSize() const;
@@ -87,6 +89,7 @@ public:
 Q_SIGNALS:
     void onAllDesktopsAvailableChanged(bool);
     void alphaChannelSupportedChanged(bool);
+    void closeOnDoubleClickOnMenuChanged(bool);
     void decorationButtonsLeftChanged(const QList<DecorationButtonType>&);
     void decorationButtonsRightChanged(const QList<DecorationButtonType>&);
     void borderSizeChanged(BorderSize size);

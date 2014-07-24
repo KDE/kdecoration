@@ -148,6 +148,7 @@ Q_SIGNALS:
     void released();
     void pointerEntered();
     void pointerLeaved();
+    void doubleClicked();
 
     void pressedChanged(bool);
     void hoveredChanged(bool);

@@ -22,6 +22,9 @@
 
 #include "decorationbutton.h"
 
+class QElapsedTimer;
+class QTimer;
+
 //
 //  W A R N I N G
 //  -------------
@@ -88,6 +91,21 @@ public:
     void setChecked(bool checked);
     void setCheckable(bool checkable);
     void setVisible(bool visible);
+    bool isDoubleClickEnabled() const {
+        return m_doubleClickEnabled;
+    }
+    void setDoubleClickEnabled(bool enable) {
+        m_doubleClickEnabled = enable;
+    }
+    void startDoubleClickTimer();
+    void invalidateDoubleClickTimer();
+    bool wasDoubleClick() const;
+    bool isPressAndHold() const {
+        return m_pressAndHold;
+    }
+    void setPressAndHold(bool enable);
+    void startPressAndHold();
+    void stopPressAndHold();
 
 private:
     void init();
@@ -102,6 +120,10 @@ private:
     bool m_visible;
     Qt::MouseButtons m_pressed;
     Qt::MouseButtons m_buttons;
+    bool m_doubleClickEnabled;
+    QScopedPointer<QElapsedTimer> m_doubleClickTimer;
+    bool m_pressAndHold;
+    QScopedPointer<QTimer> m_pressAndHoldTimer;
 };
 
 }
