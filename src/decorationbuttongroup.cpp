@@ -55,8 +55,14 @@ void DecorationButtonGroupPrivate::setGeometry(const QRectF &geometry)
     emit q->geometryChanged(m_geometry);
 }
 
+static bool s_layoutRecursion = false;
+
 void DecorationButtonGroupPrivate::updateLayout()
 {
+    if (s_layoutRecursion) {
+        return;
+    }
+    s_layoutRecursion = true;
     const QPointF &pos = m_geometry.topLeft();
     // first calculate new size
     qreal height = 0;
@@ -84,6 +90,7 @@ void DecorationButtonGroupPrivate::updateLayout()
         (*it)->setGeometry(QRect(QPoint(position, pos.y()), size));
         position += size.width() + m_spacing;
     }
+    s_layoutRecursion = false;
 }
 
 DecorationButtonGroup::DecorationButtonGroup(Decoration *parent)
@@ -172,6 +179,7 @@ void DecorationButtonGroup::setSpacing(qreal spacing)
 void DecorationButtonGroup::addButton(DecorationButton *button)
 {
     connect(button, &DecorationButton::visibilityChanged, this, [this]() { d->updateLayout(); });
+    connect(button, &DecorationButton::geometryChanged, this, [this]() { d->updateLayout(); });
     d->buttons().append(button);
     d->updateLayout();
 }
