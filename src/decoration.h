@@ -111,6 +111,7 @@ Q_SIGNALS:
     void titleRectChanged(const QRect &);
     void opaqueChanged(bool);
     void shadowChanged(DecorationShadow *shadow);
+    void titleBarDoubleClicked();
 
 protected:
     explicit Decoration(QObject *parent = nullptr);

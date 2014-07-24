@@ -25,8 +25,9 @@
 #include "decorationbutton.h"
 #include "decorationshadow.h"
 
-#include <QCoreApplication>
+#include <QGuiApplication>
 #include <QHoverEvent>
+#include <QStyleHints>
 
 namespace KDecoration2
 {
@@ -149,6 +150,14 @@ void DecorationPrivate::setShadow(DecorationShadow *shadow)
     }
     m_shadow = shadow;
     emit q->shadowChanged(shadow);
+}
+
+bool DecorationPrivate::wasDoubleClick() const
+{
+    if (!m_doubleClickTimer.isValid()) {
+        return false;
+    }
+    return !m_doubleClickTimer.hasExpired(QGuiApplication::styleHints()->mouseDoubleClickInterval());
 }
 
 #define DELEGATE(name) \
@@ -349,6 +358,17 @@ void Decoration::mousePressEvent(QMouseEvent *event)
         }
     }
     // not handled, take care ourselves
+    if (event->button() == Qt::LeftButton) {
+        if (titleRect().contains(event->pos())) {
+            // check for double click
+            if (d->wasDoubleClick()) {
+                event->setAccepted(true);
+                // emit signal
+                emit titleBarDoubleClicked();
+            }
+        }
+        d->invalidateDoubleClickTimer();
+    }
 }
 
 void Decoration::mouseReleaseEvent(QMouseEvent *event)
@@ -361,6 +381,9 @@ void Decoration::mouseReleaseEvent(QMouseEvent *event)
     }
     // not handled, take care ourselves
     d->updateWindowFrameSection(event->pos());
+    if (event->button() == Qt::LeftButton && titleRect().contains(event->pos())) {
+        d->startDoubleClickTimer();
+    }
 }
 
 void Decoration::update(const QRect &r)

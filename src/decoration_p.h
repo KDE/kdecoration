@@ -20,6 +20,8 @@
 #ifndef KDECORATION2_DECORATION_P_H
 #define KDECORATION2_DECORATION_P_H
 
+#include <QElapsedTimer>
+
 //
 //  W A R N I N G
 //  -------------
@@ -105,6 +107,14 @@ public:
     }
     void setShadow(DecorationShadow *shadow);
 
+    void startDoubleClickTimer() {
+        m_doubleClickTimer.start();
+    }
+    void invalidateDoubleClickTimer() {
+        m_doubleClickTimer.invalidate();
+    }
+    bool wasDoubleClick() const;
+
 private:
     Decoration *q;
     DecoratedClient *m_client;
@@ -117,6 +127,7 @@ private:
     QRect m_titleRect;
     bool m_opaque;
     DecorationShadow *m_shadow;
+    QElapsedTimer m_doubleClickTimer;
 };
 
 } // namespace
