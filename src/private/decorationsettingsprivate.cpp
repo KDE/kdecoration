@@ -25,6 +25,9 @@ namespace KDecoration2
 
 DecorationSettingsPrivate::DecorationSettingsPrivate(DecorationSettings *parent)
     : q(parent)
+    , m_gridUnit(-1)
+    , m_smallSpacing(-1)
+    , m_largeSpacing(-1)
 {
 }
 
@@ -46,5 +49,4 @@ QFont DecorationSettingsPrivate::font() const
 {
     return QFontDatabase::systemFont(QFontDatabase::TitleFont);
 }
-
 }

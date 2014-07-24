@@ -21,6 +21,8 @@
 #include "private/decorationbridge.h"
 #include "private/decorationsettingsprivate.h"
 
+#include <QFontMetrics>
+
 namespace KDecoration2
 {
 
@@ -38,6 +40,23 @@ DecorationSettings::DecorationSettings(QObject *parent)
     : QObject(parent)
     , d(DecorationBridge::self()->settings(this))
 {
+    auto updateUnits = [this] {
+        int gridUnit = QFontMetrics(font()).boundingRect(QLatin1Char('M')).height();;
+        if (gridUnit % 2 != 0) {
+            gridUnit++;
+        }
+        if (gridUnit != d->gridUnit()) {
+            d->setGridUnit(gridUnit);
+            emit gridUnitChanged(gridUnit);
+        }
+        if (gridUnit != d->largeSpacing()) {
+            d->setSmallSpacing(qMax(2, (int)(gridUnit / 4))); // 1/4 of gridUnit, at least 2
+            d->setLargeSpacing(gridUnit); // msize.height
+            emit spacingChanged();
+        }
+    };
+    updateUnits();
+    connect(this, &DecorationSettings::fontChanged, this, updateUnits);
 }
 
 DecorationSettings::~DecorationSettings()
@@ -57,6 +76,9 @@ DELEGATE(QList<DecorationButtonType>, decorationButtonsLeft)
 DELEGATE(QList<DecorationButtonType>, decorationButtonsRight)
 DELEGATE(BorderSize, borderSize)
 DELEGATE(QFont, font)
+DELEGATE(int, gridUnit)
+DELEGATE(int, smallSpacing)
+DELEGATE(int, largeSpacing)
 
 #undef DELEGATE
 

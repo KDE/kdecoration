@@ -40,9 +40,29 @@ class KDECORATIONS2_EXPORT DecorationSettings : public QObject
     Q_PROPERTY(QList<DecorationButtonType> decorationButtonsRight READ decorationButtonsRight NOTIFY decorationButtonsRightChanged)
     Q_PROPERTY(BorderSize borderSize READ borderSize NOTIFY borderSizeChanged)
     /**
+     * The fundamental unit of space that should be used for sizes, expressed in pixels.
+     * Given the screen has an accurate DPI settings, it corresponds to a millimeter
+     */
+    Q_PROPERTY(int gridUnit READ gridUnit NOTIFY gridUnitChanged)
+    /**
      * The recommended font for the Decoration's caption.
      **/
     Q_PROPERTY(QFont font READ font NOTIFY fontChanged)
+    /**
+     * smallSpacing is the amount of spacing that should be used around smaller UI elements,
+     * for example as spacing in Columns. Internally, this size depends on the size of
+     * the default font as rendered on the screen, so it takes user-configured font size and DPI
+     * into account.
+     */
+    Q_PROPERTY(int smallSpacing READ smallSpacing NOTIFY spacingChanged)
+
+    /**
+     * largeSpacing is the amount of spacing that should be used inside bigger UI elements,
+     * for example between an icon and the corresponding text. Internally, this size depends on
+     * the size of the default font as rendered on the screen, so it takes user-configured font
+     * size and DPI into account.
+     */
+    Q_PROPERTY(int largeSpacing READ largeSpacing NOTIFY spacingChanged)
 public:
     virtual ~DecorationSettings();
     bool isOnAllDesktopsAvailable() const;
@@ -52,6 +72,10 @@ public:
     BorderSize borderSize() const;
 
     QFont font() const;
+
+    int gridUnit() const;
+    int smallSpacing() const;
+    int largeSpacing() const;
 
     /**
      * @param parent Used as parent if static instance is not yet created, a Decoration plugin
@@ -67,6 +91,8 @@ Q_SIGNALS:
     void decorationButtonsRightChanged(const QList<DecorationButtonType>&);
     void borderSizeChanged(BorderSize size);
     void fontChanged(const QFont &font);
+    void gridUnitChanged(int);
+    void spacingChanged();
 
 private:
     explicit DecorationSettings(QObject *parent);

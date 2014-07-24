@@ -55,11 +55,33 @@ public:
     DecorationSettings *decorationSettings();
     const DecorationSettings *decorationSettings() const;
 
+    int gridUnit() const {
+        return m_gridUnit;
+    }
+    int smallSpacing() const {
+        return m_smallSpacing;
+    }
+    int largeSpacing() const {
+        return m_largeSpacing;
+    }
+    void setGridUnit(int unit) {
+        m_gridUnit = unit;
+    }
+    void setLargeSpacing(int spacing) {
+        m_largeSpacing = spacing;
+    }
+    void setSmallSpacing(int spacing) {
+        m_smallSpacing = spacing;
+    }
+
 protected:
     explicit DecorationSettingsPrivate(DecorationSettings *parent);
 
 private:
     DecorationSettings *q;
+    int m_gridUnit;
+    int m_smallSpacing;
+    int m_largeSpacing;
 };
 }
 
