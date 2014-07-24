@@ -37,6 +37,7 @@ namespace KDecoration2
 class Decoration;
 class DecorationButton;
 class DecoratedClient;
+class DecorationShadow;
 
 class DecorationPrivate
 {
@@ -96,6 +97,14 @@ public:
     }
     void setOpaque(bool opaque);
 
+    DecorationShadow *shadow() {
+        return m_shadow;
+    }
+    const DecorationShadow *shadow() const {
+        return m_shadow;
+    }
+    void setShadow(DecorationShadow *shadow);
+
 private:
     Decoration *q;
     DecoratedClient *m_client;
@@ -107,6 +116,7 @@ private:
     Qt::WindowFrameSection m_windowFrameSection;
     QRect m_titleRect;
     bool m_opaque;
+    DecorationShadow *m_shadow;
 };
 
 } // namespace

@@ -23,6 +23,7 @@
 #include "private/decoratedclientprivate.h"
 #include "private/decorationbridge.h"
 #include "decorationbutton.h"
+#include "decorationshadow.h"
 
 #include <QCoreApplication>
 #include <QHoverEvent>
@@ -39,6 +40,7 @@ DecorationPrivate::DecorationPrivate(Decoration *deco)
     , m_borderBottom(0)
     , m_windowFrameSection(Qt::NoSection)
     , m_opaque(false)
+    , m_shadow(nullptr)
 {
 }
 
@@ -140,6 +142,15 @@ void DecorationPrivate::setOpaque(bool opaque)
     emit q->opaqueChanged(m_opaque);
 }
 
+void DecorationPrivate::setShadow(DecorationShadow *shadow)
+{
+    if (m_shadow == shadow) {
+        return;
+    }
+    m_shadow = shadow;
+    emit q->shadowChanged(shadow);
+}
+
 #define DELEGATE(name) \
 void DecorationPrivate::name() \
 { \
@@ -218,6 +229,7 @@ DELEGATE(requestMaximize, Qt::MouseButtons)
 DELEGATE(addButton, DecorationButton*)
 DELEGATE(setTitleRect, const QRect&)
 DELEGATE(setOpaque, bool)
+DELEGATE(setShadow, DecorationShadow*)
 
 #undef DELEGATE
 
@@ -234,8 +246,14 @@ DELEGATE(borderBottom, int)
 DELEGATE(windowFrameSection, Qt::WindowFrameSection)
 DELEGATE(titleRect, QRect)
 DELEGATE(isOpaque, bool)
+DELEGATE(shadow, DecorationShadow *)
 
 #undef DELEGATE
+
+DecorationShadow *Decoration::shadow()
+{
+    return d->shadow();
+}
 
 QSize Decoration::size() const
 {

@@ -21,6 +21,7 @@
 #define KDECORATION2_DECORATION_H
 
 #include <kdecoration2/kdecoration2_export.h>
+#include "decorationshadow.h"
 
 #include <QObject>
 #include <QRect>
@@ -52,6 +53,12 @@ class KDECORATIONS2_EXPORT Decoration : public QObject
      * Decoration should set this property to @c true.
      **/
     Q_PROPERTY(bool opaque READ isOpaque NOTIFY opaqueChanged)
+    /**
+     * DecorationShadow for this Decoration. It is recommended that multiple Decorations share
+     * the same DecorationShadow. E.g one DecorationShadow for all inactive Decorations and one
+     * for the active Decoration.
+     **/
+    Q_PROPERTY(KDecoration2::DecorationShadow *shadow READ shadow NOTIFY shadowChanged)
 public:
     virtual ~Decoration();
 
@@ -65,6 +72,8 @@ public:
     Qt::WindowFrameSection windowFrameSection() const;
     QRect titleRect() const;
     bool isOpaque() const;
+
+    DecorationShadow *shadow() const;
 
     /**
      * The decoration's geometry in local coordinates.
@@ -101,12 +110,15 @@ Q_SIGNALS:
     void windowFrameSectionChanged(Qt::WindowFrameSection);
     void titleRectChanged(const QRect &);
     void opaqueChanged(bool);
+    void shadowChanged(DecorationShadow *shadow);
 
 protected:
     explicit Decoration(QObject *parent = nullptr);
     void setBorders(int left, int right, int top, int bottom);
     void setTitleRect(const QRect &rect);
     void setOpaque(bool opaque);
+    void setShadow(DecorationShadow *shadow);
+    DecorationShadow *shadow();
 
     virtual void hoverEnterEvent(QHoverEvent *event);
     virtual void hoverLeaveEvent(QHoverEvent *event);

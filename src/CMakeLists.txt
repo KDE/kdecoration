@@ -6,6 +6,7 @@ set(libkdecoration2_SRCS
     decorationbutton.cpp
     decorationbuttongroup.cpp
     decorationsettings.cpp
+    decorationshadow.cpp
 )
 
 add_library(kdecorations2 SHARED ${libkdecoration2_SRCS})
@@ -34,6 +35,7 @@ ecm_generate_headers(KDecoration2_CamelCase_HEADERS
     DecorationButton
     DecorationButtonGroup
     DecorationSettings
+    DecorationShadow
   PREFIX
     KDecoration2
   REQUIRED_HEADERS KDecoration2_HEADERS
@@ -53,6 +55,7 @@ install(
         decorationbutton.h
         decorationbuttongroup.h
         decorationsettings.h
+        decorationshadow.h
         decorationdefines.h
     DESTINATION
         ${KDECORATION2_INCLUDEDIR}/kdecoration2
