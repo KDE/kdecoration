@@ -352,8 +352,11 @@ void Decoration::mouseMoveEvent(QMouseEvent *event)
 void Decoration::mousePressEvent(QMouseEvent *event)
 {
     for (DecorationButton *button : d->buttons()) {
-        if (button->isHovered() && button->acceptedButtons().testFlag(event->button())) {
-            QCoreApplication::instance()->sendEvent(button, event);
+        if (button->isHovered()) {
+            if (button->acceptedButtons().testFlag(event->button())) {
+                QCoreApplication::instance()->sendEvent(button, event);
+            }
+            event->setAccepted(true);
             return;
         }
     }
