@@ -26,6 +26,7 @@
 #include <QtGui/qwindowdefs.h>
 #include <QIcon>
 #include <QPalette>
+#include <QFont>
 
 namespace KDecoration2
 {

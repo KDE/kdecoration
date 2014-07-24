@@ -39,6 +39,10 @@ class KDECORATIONS2_EXPORT DecorationSettings : public QObject
     Q_PROPERTY(QList<DecorationButtonType> decorationButtonsLeft READ decorationButtonsLeft NOTIFY decorationButtonsLeftChanged)
     Q_PROPERTY(QList<DecorationButtonType> decorationButtonsRight READ decorationButtonsRight NOTIFY decorationButtonsRightChanged)
     Q_PROPERTY(BorderSize borderSize READ borderSize NOTIFY borderSizeChanged)
+    /**
+     * The recommended font for the Decoration's caption.
+     **/
+    Q_PROPERTY(QFont font READ font NOTIFY fontChanged)
 public:
     virtual ~DecorationSettings();
     bool isOnAllDesktopsAvailable() const;
@@ -46,6 +50,8 @@ public:
     QList<DecorationButtonType> decorationButtonsLeft() const;
     QList<DecorationButtonType> decorationButtonsRight() const;
     BorderSize borderSize() const;
+
+    QFont font() const;
 
     /**
      * @param parent Used as parent if static instance is not yet created, a Decoration plugin
@@ -60,6 +66,7 @@ Q_SIGNALS:
     void decorationButtonsLeftChanged(const QList<DecorationButtonType>&);
     void decorationButtonsRightChanged(const QList<DecorationButtonType>&);
     void borderSizeChanged(BorderSize size);
+    void fontChanged(const QFont &font);
 
 private:
     explicit DecorationSettings(QObject *parent);

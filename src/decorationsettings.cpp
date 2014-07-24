@@ -56,6 +56,7 @@ DELEGATE(bool, isAlphaChannelSupported)
 DELEGATE(QList<DecorationButtonType>, decorationButtonsLeft)
 DELEGATE(QList<DecorationButtonType>, decorationButtonsRight)
 DELEGATE(BorderSize, borderSize)
+DELEGATE(QFont, font)
 
 #undef DELEGATE
 

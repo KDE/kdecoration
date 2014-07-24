@@ -23,6 +23,7 @@
 #include <kdecoration2/private/kdecoration2_private_export.h>
 #include "../decorationdefines.h"
 #include <QList>
+#include <QFont>
 
 //
 //  W A R N I N G
@@ -49,6 +50,7 @@ public:
     virtual QList<DecorationButtonType> decorationButtonsLeft() const = 0;
     virtual QList<DecorationButtonType> decorationButtonsRight() const = 0;
     virtual BorderSize borderSize() const = 0;
+    virtual QFont font() const;
 
     DecorationSettings *decorationSettings();
     const DecorationSettings *decorationSettings() const;

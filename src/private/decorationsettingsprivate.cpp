@@ -18,6 +18,7 @@
  * License along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "decorationsettingsprivate.h"
+#include <QFontDatabase>
 
 namespace KDecoration2
 {
@@ -39,6 +40,11 @@ DecorationSettings *DecorationSettingsPrivate::decorationSettings()
 const DecorationSettings *DecorationSettingsPrivate::decorationSettings() const
 {
     return q;
+}
+
+QFont DecorationSettingsPrivate::font() const
+{
+    return QFontDatabase::systemFont(QFontDatabase::TitleFont);
 }
 
 }
