@@ -51,6 +51,12 @@ DecorationPrivate::DecorationPrivate(Decoration *deco)
 
 void DecorationPrivate::setBorders(int left, int right, int top, int bottom)
 {
+    if (m_borderLeft == left
+            && m_borderRight == right
+            && m_borderTop == top
+            && m_borderBottom == bottom) {
+        return;
+    }
     m_borderLeft   = left;
     m_borderRight  = right;
     m_borderTop    = top;
