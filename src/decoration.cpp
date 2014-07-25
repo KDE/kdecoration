@@ -296,6 +296,9 @@ bool Decoration::event(QEvent *event)
     case QEvent::MouseMove:
         mouseMoveEvent(static_cast<QMouseEvent*>(event));
         return true;
+    case QEvent::Wheel:
+        wheelEvent(static_cast<QWheelEvent*>(event));
+        return true;
     default:
         return QObject::event(event);
     }
@@ -386,6 +389,20 @@ void Decoration::mouseReleaseEvent(QMouseEvent *event)
     d->updateWindowFrameSection(event->pos());
     if (event->button() == Qt::LeftButton && titleRect().contains(event->pos())) {
         d->startDoubleClickTimer();
+    }
+}
+
+void Decoration::wheelEvent(QWheelEvent *event)
+{
+    if (titleRect().contains(event->pos())) {
+        event->setAccepted(true);
+        for (DecorationButton *button : d->buttons()) {
+            // check if a button contains the point
+            if (button->geometry().contains(event->pos())) {
+                return;
+            }
+        }
+        emit titleBarWheelEvent(event->angleDelta());
     }
 }
 
