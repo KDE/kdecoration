@@ -64,6 +64,7 @@ DELEGATE(int, width)
 DELEGATE(int, height)
 DELEGATE(Decoration *, decoration)
 DELEGATE(QPalette, palette)
+DELEGATE(Qt::Edges, borderingScreenEdges)
 
 #undef DELEGATE
 

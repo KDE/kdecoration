@@ -157,6 +157,11 @@ class KDECORATIONS2_EXPORT DecoratedClient : public QObject
      * DecoratedClient and the Decoration should honor the palette.
      **/
     Q_PROPERTY(QPalette palette READ palette NOTIFY paletteChanged)
+    /**
+     * The Edges which are bordering a screen edge. E.g. for a maximized DecoratedClient this
+     * will include all Edges. The Decoration can use this information to hide borders.
+     **/
+    Q_PROPERTY(Qt::Edges borderingScreenEdges READ borderingScreenEdges NOTIFY borderingScreenEdgesChanged)
 
     // TODO: properties for windowId and decorationId?
 
@@ -183,6 +188,8 @@ public:
     bool isShadeable() const;
     bool isMovable() const;
     bool isResizable() const;
+
+    Qt::Edges borderingScreenEdges() const;
 
     WId windowId() const;
     WId decorationId() const;
@@ -226,6 +233,7 @@ Q_SIGNALS:
     void widthChanged(int);
     void heightChanged(int);
     void paletteChanged(const QPalette &palette);
+    void borderingScreenEdgesChanged(Qt::Edges edges);
 
 private:
     friend class DecorationPrivate;
