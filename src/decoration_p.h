@@ -77,6 +77,20 @@ public:
     }
     void setBorders(int left, int right, int top, int bottom);
 
+    int extendedBorderLeft() const {
+        return m_extendedBorderLeft;
+    }
+    int extendedBorderRight() const {
+        return m_extendedBorderRight;
+    }
+    int extendedBorderTop() const {
+        return m_extendedBorderTop;
+    }
+    int extendedBorderBottom() const {
+        return m_extendedBorderBottom;
+    }
+    void setExtendedBorders(int left, int right, int top, int bottom);
+
     Qt::WindowFrameSection windowFrameSection() const {
         return m_windowFrameSection;
     }
@@ -122,6 +136,10 @@ private:
     int m_borderRight;
     int m_borderTop;
     int m_borderBottom;
+    int m_extendedBorderLeft;
+    int m_extendedBorderRight;
+    int m_extendedBorderTop;
+    int m_extendedBorderBottom;
     QList<DecorationButton*> m_buttons;
     Qt::WindowFrameSection m_windowFrameSection;
     QRect m_titleRect;

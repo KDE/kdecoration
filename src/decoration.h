@@ -45,6 +45,10 @@ class KDECORATIONS2_EXPORT Decoration : public QObject
     Q_PROPERTY(int borderRight   READ borderRight   NOTIFY bordersChanged)
     Q_PROPERTY(int borderTop     READ borderTop     NOTIFY bordersChanged)
     Q_PROPERTY(int borderBottom  READ borderBottom  NOTIFY bordersChanged)
+    Q_PROPERTY(int extendedBorderLeft    READ extendedBorderLeft    NOTIFY extendedBordersChanged)
+    Q_PROPERTY(int extendedBorderRight   READ extendedBorderRight   NOTIFY extendedBordersChanged)
+    Q_PROPERTY(int extendedBorderTop     READ extendedBorderTop     NOTIFY extendedBordersChanged)
+    Q_PROPERTY(int extendedBorderBottom  READ extendedBorderBottom  NOTIFY extendedBordersChanged)
     Q_PROPERTY(Qt::WindowFrameSection windowFrameSection READ windowFrameSection NOTIFY windowFrameSectionChanged)
     Q_PROPERTY(QRect titleRect READ titleRect NOTIFY titleRectChanged)
     /**
@@ -70,6 +74,10 @@ public:
     int borderRight() const;
     int borderTop() const;
     int borderBottom() const;
+    int extendedBorderLeft() const;
+    int extendedBorderRight() const;
+    int extendedBorderTop() const;
+    int extendedBorderBottom() const;
     Qt::WindowFrameSection windowFrameSection() const;
     QRect titleRect() const;
     bool isOpaque() const;
@@ -108,6 +116,7 @@ public Q_SLOTS:
 
 Q_SIGNALS:
     void bordersChanged();
+    void extendedBordersChanged();
     void windowFrameSectionChanged(Qt::WindowFrameSection);
     void titleRectChanged(const QRect &);
     void opaqueChanged(bool);
@@ -118,6 +127,7 @@ Q_SIGNALS:
 protected:
     explicit Decoration(QObject *parent = nullptr);
     void setBorders(int left, int right, int top, int bottom);
+    void setExtendedBorders(int left, int right, int top, int bottom);
     void setTitleRect(const QRect &rect);
     void setOpaque(bool opaque);
     void setShadow(DecorationShadow *shadow);

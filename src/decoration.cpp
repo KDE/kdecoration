@@ -39,6 +39,10 @@ DecorationPrivate::DecorationPrivate(Decoration *deco)
     , m_borderRight(0)
     , m_borderTop(0)
     , m_borderBottom(0)
+    , m_extendedBorderLeft(0)
+    , m_extendedBorderRight(0)
+    , m_extendedBorderTop(0)
+    , m_extendedBorderBottom(0)
     , m_windowFrameSection(Qt::NoSection)
     , m_opaque(false)
     , m_shadow(nullptr)
@@ -52,6 +56,21 @@ void DecorationPrivate::setBorders(int left, int right, int top, int bottom)
     m_borderTop    = top;
     m_borderBottom = bottom;
     emit q->bordersChanged();
+}
+
+void DecorationPrivate::setExtendedBorders(int left, int right, int top, int bottom)
+{
+    if (m_extendedBorderLeft == left
+            && m_extendedBorderRight == right
+            && m_extendedBorderTop == top
+            && m_extendedBorderBottom == bottom) {
+        return;
+    }
+    m_extendedBorderLeft   = left;
+    m_extendedBorderRight  = right;
+    m_extendedBorderTop    = top;
+    m_extendedBorderBottom = bottom;
+    emit q->extendedBordersChanged();
 }
 
 void DecorationPrivate::setWindowFrameSection(Qt::WindowFrameSection section)
@@ -211,6 +230,11 @@ void Decoration::setBorders(int left, int right, int top, int bottom)
     d->setBorders(left, right, top, bottom);
 }
 
+void Decoration::setExtendedBorders(int left, int right, int top, int bottom)
+{
+    d->setExtendedBorders(left, right, top, bottom);
+}
+
 #define DELEGATE(name) \
 void Decoration::name() \
 { \
@@ -252,6 +276,10 @@ DELEGATE(borderLeft, int)
 DELEGATE(borderRight, int)
 DELEGATE(borderTop, int)
 DELEGATE(borderBottom, int)
+DELEGATE(extendedBorderLeft, int)
+DELEGATE(extendedBorderRight, int)
+DELEGATE(extendedBorderTop, int)
+DELEGATE(extendedBorderBottom, int)
 DELEGATE(windowFrameSection, Qt::WindowFrameSection)
 DELEGATE(titleRect, QRect)
 DELEGATE(isOpaque, bool)
