@@ -61,13 +61,13 @@ void DecorationButtonPrivate::init()
     DecoratedClient *c = m_decoration->client();
     switch (m_type) {
     case DecorationButtonType::Menu:
-        QObject::connect(q, &DecorationButton::clicked, m_decoration, &Decoration::requestShowWindowMenu);
-        QObject::connect(q, &DecorationButton::doubleClicked, m_decoration, &Decoration::requestClose);
+        QObject::connect(q, &DecorationButton::clicked, m_decoration, &Decoration::requestShowWindowMenu, Qt::QueuedConnection);
+        QObject::connect(q, &DecorationButton::doubleClicked, m_decoration, &Decoration::requestClose, Qt::QueuedConnection);
         QObject::connect(DecorationSettings::self(), &DecorationSettings::closeOnDoubleClickOnMenuChanged, q,
             [this](bool enabled) {
                 setDoubleClickEnabled(enabled);
                 setPressAndHold(enabled);
-            }
+            }, Qt::QueuedConnection
         );
         setDoubleClickEnabled(DecorationSettings::self()->isCloseOnDoubleClickOnMenu());
         setPressAndHold(DecorationSettings::self()->isCloseOnDoubleClickOnMenu());
@@ -77,13 +77,13 @@ void DecorationButtonPrivate::init()
         setVisible(DecorationSettings::self()->isOnAllDesktopsAvailable());
         setCheckable(true);
         setChecked(c->isOnAllDesktops());
-        QObject::connect(q, &DecorationButton::clicked, m_decoration, &Decoration::requestToggleOnAllDesktops);
+        QObject::connect(q, &DecorationButton::clicked, m_decoration, &Decoration::requestToggleOnAllDesktops, Qt::QueuedConnection);
         QObject::connect(DecorationSettings::self(), &DecorationSettings::onAllDesktopsAvailableChanged, q, &DecorationButton::setVisible);
         QObject::connect(c, &DecoratedClient::onAllDesktopsChanged, q, &DecorationButton::setChecked);
         break;
     case DecorationButtonType::Minimize:
         setEnabled(c->isMinimizable());
-        QObject::connect(q, &DecorationButton::clicked, m_decoration, &Decoration::requestMinimize);
+        QObject::connect(q, &DecorationButton::clicked, m_decoration, &Decoration::requestMinimize, Qt::QueuedConnection);
         QObject::connect(c, &DecoratedClient::minimizableChanged, q, &DecorationButton::setEnabled);
         break;
     case DecorationButtonType::Maximize:
@@ -91,13 +91,13 @@ void DecorationButtonPrivate::init()
         setCheckable(true);
         setChecked(c->isMaximized());
         setAcceptedButtons(Qt::LeftButton | Qt::MiddleButton | Qt::RightButton);
-        QObject::connect(q, &DecorationButton::clicked, m_decoration, &Decoration::requestMaximize);
+        QObject::connect(q, &DecorationButton::clicked, m_decoration, &Decoration::requestMaximize, Qt::QueuedConnection);
         QObject::connect(c, &DecoratedClient::maximizableChanged, q, &DecorationButton::setEnabled);
         QObject::connect(c, &DecoratedClient::maximizedChanged, q, &DecorationButton::setChecked);
         break;
     case DecorationButtonType::Close:
         setEnabled(c->isCloseable());
-        QObject::connect(q, &DecorationButton::clicked, m_decoration, &Decoration::requestClose);
+        QObject::connect(q, &DecorationButton::clicked, m_decoration, &Decoration::requestClose, Qt::QueuedConnection);
         QObject::connect(c, &DecoratedClient::closeableChanged, q, &DecorationButton::setEnabled);
         break;
     case DecorationButtonType::QuickHelp:
@@ -108,20 +108,20 @@ void DecorationButtonPrivate::init()
     case DecorationButtonType::KeepAbove:
         setCheckable(true);
         setChecked(c->isKeepAbove());
-        QObject::connect(q, &DecorationButton::clicked, m_decoration, &Decoration::requestToggleKeepAbove);
+        QObject::connect(q, &DecorationButton::clicked, m_decoration, &Decoration::requestToggleKeepAbove, Qt::QueuedConnection);
         QObject::connect(c, &DecoratedClient::keepAboveChanged, q, &DecorationButton::setChecked);
         break;
     case DecorationButtonType::KeepBelow:
         setCheckable(true);
         setChecked(c->isKeepBelow());
-        QObject::connect(q, &DecorationButton::clicked, m_decoration, &Decoration::requestToggleKeepBelow);
+        QObject::connect(q, &DecorationButton::clicked, m_decoration, &Decoration::requestToggleKeepBelow, Qt::QueuedConnection);
         QObject::connect(c, &DecoratedClient::keepBelowChanged, q, &DecorationButton::setChecked);
         break;
     case DecorationButtonType::Shade:
         setEnabled(c->isShadeable());
         setCheckable(true);
         setChecked(c->isShaded());
-        QObject::connect(q, &DecorationButton::clicked, m_decoration, &Decoration::requestToggleShade);
+        QObject::connect(q, &DecorationButton::clicked, m_decoration, &Decoration::requestToggleShade, Qt::QueuedConnection);
         QObject::connect(c, &DecoratedClient::shadedChanged, q, &DecorationButton::setChecked);
         QObject::connect(c, &DecoratedClient::shadeableChanged, q, &DecorationButton::setEnabled);
         break;

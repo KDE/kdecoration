@@ -19,6 +19,9 @@
  */
 #include "decorationbridge.h"
 #include <QtGlobal>
+#include <QMetaType>
+
+Q_DECLARE_METATYPE(Qt::MouseButton)
 
 namespace KDecoration2
 {
@@ -29,6 +32,7 @@ DecorationBridge::DecorationBridge()
 {
     Q_ASSERT(!s_self);
     s_self = this;
+    qRegisterMetaType<Qt::MouseButton>();
 }
 
 DecorationBridge::~DecorationBridge()
