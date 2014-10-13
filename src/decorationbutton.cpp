@@ -103,7 +103,7 @@ void DecorationButtonPrivate::init()
     case DecorationButtonType::QuickHelp:
         // TODO: changed signal?
         setVisible(c->providesContextHelp());
-        QObject::connect(q, &DecorationButton::clicked, m_decoration, &Decoration::requestContextHelp);
+        QObject::connect(q, &DecorationButton::clicked, m_decoration, &Decoration::requestContextHelp, Qt::QueuedConnection);
         break;
     case DecorationButtonType::KeepAbove:
         setCheckable(true);
