@@ -69,6 +69,7 @@ public:
     void setMinimizable(bool set);
     void setProvidesContextHelp(bool set);
     void setShadeable(bool set);
+    void setMaximizable(bool set);
 
 Q_SIGNALS:
     void closeRequested();
@@ -83,6 +84,9 @@ private:
     bool m_keepBelow = false;
     bool m_shadeable = false;
     bool m_shaded = false;
+    bool m_maximizable = false;
+    bool m_maximizedVertically = false;
+    bool m_maximizedHorizontally = false;
 };
 
 #endif

@@ -40,6 +40,7 @@ private Q_SLOTS:
     void testKeepAbove();
     void testKeepBelow();
     void testShade();
+    void testMaximize();
 };
 
 void DecorationButtonTest::testButton()
@@ -582,6 +583,120 @@ void DecorationButtonTest::testShade()
     QCOMPARE(shadedChangedSpy.first().first().toBool(), true);
     QCOMPARE(shadedChangedSpy.last().first().toBool(), false);
     QCOMPARE(button.isChecked(), false);
+}
+
+void DecorationButtonTest::testMaximize()
+{
+    MockBridge bridge;
+    MockDecoration mockDecoration;
+    MockClient *client = bridge.lastCreatedClient();
+    MockButton button(KDecoration2::DecorationButtonType::Maximize, &mockDecoration);
+    button.setGeometry(QRect(0, 0, 10, 10));
+
+    QCOMPARE(button.isEnabled(), false);
+    QCOMPARE(button.isCheckable(), true);
+    QCOMPARE(button.isChecked(), false);
+    QCOMPARE(button.isVisible(), true);
+    QCOMPARE(button.acceptedButtons(), Qt::LeftButton | Qt::MiddleButton | Qt::RightButton);
+
+    // if the client is maximizable the button should get enabled
+    QSignalSpy maximizableChangedSpy(mockDecoration.client(), SIGNAL(maximizableChanged(bool)));
+    QVERIFY(maximizableChangedSpy.isValid());
+    client->setMaximizable(true);
+    QCOMPARE(button.isEnabled(), true);
+    QCOMPARE(maximizableChangedSpy.count(), 1);
+    QCOMPARE(maximizableChangedSpy.first().first().toBool(), true);
+
+    // clicking the button should trigger a request for keep above changed
+    QSignalSpy clickedSpy(&button, SIGNAL(clicked(Qt::MouseButton)));
+    QVERIFY(clickedSpy.isValid());
+    QSignalSpy pressedSpy(&button, SIGNAL(pressed()));
+    QVERIFY(pressedSpy.isValid());
+    QSignalSpy releasedSpy(&button, SIGNAL(released()));
+    QVERIFY(releasedSpy.isValid());
+    QSignalSpy maximizedChangedSpy(mockDecoration.client(), SIGNAL(maximizedChanged(bool)));
+    QVERIFY(maximizedChangedSpy.isValid());
+    QSignalSpy maximizedVerticallyChangedSpy(mockDecoration.client(), SIGNAL(maximizedVerticallyChanged(bool)));
+    QVERIFY(maximizedVerticallyChangedSpy.isValid());
+    QSignalSpy maximizedHorizontallyChangedSpy(mockDecoration.client(), SIGNAL(maximizedHorizontallyChanged(bool)));
+    QVERIFY(maximizedHorizontallyChangedSpy.isValid());
+    QSignalSpy pressedChangedSpy(&button, SIGNAL(pressedChanged(bool)));
+    QVERIFY(pressedChangedSpy.isValid());
+
+    QMouseEvent leftPressEvent(QEvent::MouseButtonPress, QPointF(5, 5), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+    leftPressEvent.setAccepted(false);
+    button.event(&leftPressEvent);
+    QCOMPARE(leftPressEvent.isAccepted(), true);
+    QCOMPARE(button.isPressed(), true);
+    QCOMPARE(clickedSpy.count(), 0);
+    QEXPECT_FAIL("", "Pressed signal is not yet emitted", Continue);
+    QCOMPARE(pressedSpy.count(), 1);
+    QCOMPARE(releasedSpy.count(), 0);
+    QCOMPARE(maximizedChangedSpy.count(), 0);
+    QCOMPARE(pressedChangedSpy.count(), 1);
+    QCOMPARE(pressedChangedSpy.first().first().toBool(), true);
+
+    QMouseEvent leftReleaseEvent(QEvent::MouseButtonRelease, QPointF(5, 5), Qt::LeftButton, Qt::NoButton, Qt::NoModifier);
+    leftReleaseEvent.setAccepted(false);
+    button.event(&leftReleaseEvent);
+    QCOMPARE(leftReleaseEvent.isAccepted(), true);
+    QCOMPARE(button.isPressed(), false);
+    QCOMPARE(clickedSpy.count(), 1);
+    QCOMPARE(clickedSpy.first().first().value<Qt::MouseButton>(), Qt::LeftButton);
+    QEXPECT_FAIL("", "Pressed signal is not yet emitted", Continue);
+    QCOMPARE(pressedSpy.count(), 1);
+    QEXPECT_FAIL("", "Released signal is not yet emitted", Continue);
+    QCOMPARE(releasedSpy.count(), 1);
+    QVERIFY(maximizedChangedSpy.wait());
+    QCOMPARE(maximizedChangedSpy.count(), 1);
+    QCOMPARE(maximizedChangedSpy.first().first().toBool(), true);
+    QCOMPARE(pressedChangedSpy.count(), 2);
+    QCOMPARE(pressedChangedSpy.last().first().toBool(), false);
+    QCOMPARE(button.isChecked(), true);
+
+    // clicking again should set to restored
+    button.event(&leftPressEvent);
+    button.event(&leftReleaseEvent);
+    QVERIFY(maximizedChangedSpy.wait());
+    QCOMPARE(maximizedChangedSpy.count(), 2);
+    QCOMPARE(maximizedChangedSpy.first().first().toBool(), true);
+    QCOMPARE(maximizedChangedSpy.last().first().toBool(), false);
+    QCOMPARE(button.isChecked(), false);
+
+    // test the other buttons
+    QMouseEvent rightPressEvent(QEvent::MouseButtonPress, QPointF(5, 5), Qt::RightButton, Qt::RightButton, Qt::NoModifier);
+    rightPressEvent.setAccepted(false);
+    button.event(&rightPressEvent);
+    QCOMPARE(rightPressEvent.isAccepted(), true);
+    QCOMPARE(button.isPressed(), true);
+
+    QMouseEvent middlePressEvent(QEvent::MouseButtonPress, QPointF(5, 5), Qt::MiddleButton, Qt::MiddleButton, Qt::NoModifier);
+    middlePressEvent.setAccepted(false);
+    button.event(&middlePressEvent);
+    QCOMPARE(middlePressEvent.isAccepted(), true);
+    QCOMPARE(button.isPressed(), true);
+
+    QMouseEvent middleReleaseEvent(QEvent::MouseButtonRelease, QPointF(5, 5), Qt::MiddleButton, Qt::NoButton, Qt::NoModifier);
+    middleReleaseEvent.setAccepted(false);
+    button.event(&middleReleaseEvent);
+    QCOMPARE(middleReleaseEvent.isAccepted(), true);
+    QVERIFY(maximizedHorizontallyChangedSpy.wait());
+    QCOMPARE(button.isPressed(), true);
+    QCOMPARE(clickedSpy.count(), 3);
+    QCOMPARE(button.isChecked(), false);
+    QCOMPARE(client->isMaximizedHorizontally(), true);
+    QCOMPARE(client->isMaximizedVertically(), false);
+
+    QMouseEvent rightReleaseEvent(QEvent::QEvent::MouseButtonRelease, QPointF(5, 5), Qt::RightButton, Qt::NoButton, Qt::NoModifier);
+    rightReleaseEvent.setAccepted(false);
+    button.event(&rightReleaseEvent);
+    QCOMPARE(rightReleaseEvent.isAccepted(), true);
+    QVERIFY(maximizedVerticallyChangedSpy.wait());
+    QCOMPARE(button.isPressed(), false);
+    QCOMPARE(clickedSpy.count(), 4);
+    QCOMPARE(client->isMaximizedHorizontally(), true);
+    QCOMPARE(client->isMaximizedVertically(), true);
+    QCOMPARE(button.isChecked(), true);
 }
 
 QTEST_MAIN(DecorationButtonTest)

@@ -80,22 +80,22 @@ bool MockClient::isKeepBelow() const
 
 bool MockClient::isMaximizable() const
 {
-    return false;
+    return m_maximizable;
 }
 
 bool MockClient::isMaximized() const
 {
-    return false;
+    return isMaximizedHorizontally() && isMaximizedVertically();
 }
 
 bool MockClient::isMaximizedHorizontally() const
 {
-    return false;
+    return m_maximizedHorizontally;
 }
 
 bool MockClient::isMaximizedVertically() const
 {
-    return false;
+    return m_maximizedVertically;
 }
 
 bool MockClient::isMinimizable() const
@@ -155,7 +155,30 @@ void MockClient::requestContextHelp()
 
 void MockClient::requestMaximize(Qt::MouseButtons buttons)
 {
-    Q_UNUSED(buttons)
+    bool maximizedHorizontally = m_maximizedHorizontally;
+    bool maximizedVertically = m_maximizedVertically;
+    if (buttons.testFlag(Qt::LeftButton)) {
+        maximizedHorizontally = !m_maximizedHorizontally;
+        maximizedVertically = !m_maximizedVertically;
+    }
+    if (buttons.testFlag(Qt::MiddleButton)) {
+        maximizedHorizontally = !m_maximizedHorizontally;
+    }
+    if (buttons.testFlag(Qt::RightButton)) {
+        maximizedVertically = !m_maximizedVertically;
+    }
+    const bool wasMaximized = isMaximized();
+    if (m_maximizedHorizontally != maximizedHorizontally) {
+        m_maximizedHorizontally = maximizedHorizontally;
+        emit client()->maximizedHorizontallyChanged(m_maximizedHorizontally);
+    }
+    if (m_maximizedVertically != maximizedVertically) {
+        m_maximizedVertically = maximizedVertically;
+        emit client()->maximizedVerticallyChanged(m_maximizedVertically);
+    }
+    if (wasMaximized != isMaximized()) {
+        emit client()->maximizedChanged(isMaximized());
+    }
 }
 
 void MockClient::requestMinimize()
@@ -221,4 +244,10 @@ void MockClient::setShadeable(bool set)
 {
     m_shadeable = set;
     emit client()->shadeableChanged(set);
+}
+
+void MockClient::setMaximizable(bool set)
+{
+    m_maximizable = set;
+    emit client()->maximizableChanged(set);
 }
