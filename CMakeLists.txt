@@ -25,6 +25,7 @@ set(REQUIRED_QT_VERSION 5.3.0)
 find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED COMPONENTS
     Core
     Gui
+    Test
 )
 
 include(KDEInstallDirs)
@@ -42,6 +43,7 @@ set(KDECORATION2_INCLUDEDIR "${CMAKE_INSTALL_INCLUDEDIR}/KDecoration2")
 
 # Subdirectories
 add_subdirectory(src)
+add_subdirectory(autotests)
 
 # create a Config.cmake and a ConfigVersion.cmake file and install them
 set(CMAKECONFIG_INSTALL_DIR "${CMAKECONFIG_INSTALL_PREFIX}/KDecoration2")
