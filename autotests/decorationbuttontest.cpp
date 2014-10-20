@@ -34,6 +34,8 @@ private Q_SLOTS:
     void testButton();
     void testChecked();
     void testEnabled();
+    void testPressIgnore_data();
+    void testPressIgnore();
     void testClose();
     void testMinimize();
     void testQuickHelp();
@@ -184,6 +186,50 @@ void DecorationButtonTest::testEnabled()
     button.setEnabled(false);
     QCOMPARE(hoveredChangedSpy.count(), 2);
     QCOMPARE(hoveredChangedSpy.last().first().toBool(), false);
+}
+
+void DecorationButtonTest::testPressIgnore_data()
+{
+    QTest::addColumn<bool>("enabled");
+    QTest::addColumn<bool>("visible");
+    QTest::addColumn<QPoint>("clickPos");
+    QTest::addColumn<Qt::MouseButton>("mouseButton");
+    QTest::addColumn<bool>("expectedAccepted");
+
+    QTest::newRow("all-disabled") << false << false << QPoint(0, 0) << Qt::LeftButton << false;
+    QTest::newRow("enabled") << true << false << QPoint(0, 0) << Qt::LeftButton << false;
+    QTest::newRow("visible") << false << true << QPoint(0, 0) << Qt::LeftButton << false;
+    QTest::newRow("outside") << true << true << QPoint(20, 20) << Qt::LeftButton << false;
+    QTest::newRow("wrong-button") << true << true << QPoint(0, 0) << Qt::RightButton << false;
+}
+
+void DecorationButtonTest::testPressIgnore()
+{
+    MockBridge bridge;
+    MockDecoration mockDecoration;
+    // create a custom button and verify the base settings
+    MockButton button(KDecoration2::DecorationButtonType::Custom, &mockDecoration);
+    button.setGeometry(QRect(0, 0, 10, 10));
+    button.setAcceptedButtons(Qt::LeftButton);
+    QSignalSpy pressedSpy(&button, SIGNAL(pressed()));
+    QVERIFY(pressedSpy.isValid());
+    QSignalSpy pressedChangedSpy(&button, SIGNAL(pressedChanged(bool)));
+    QVERIFY(pressedChangedSpy.isValid());
+
+    QFETCH(bool, enabled);
+    QFETCH(bool, visible);
+    button.setEnabled(enabled);
+    button.setVisible(visible);
+
+    QFETCH(QPoint, clickPos);
+    QFETCH(Qt::MouseButton, mouseButton);
+    QMouseEvent pressEvent(QEvent::MouseButtonPress, clickPos, mouseButton, mouseButton, Qt::NoModifier);
+    pressEvent.setAccepted(false);
+    button.event(&pressEvent);
+    QTEST(pressEvent.isAccepted(), "expectedAccepted");
+    QCOMPARE(button.isPressed(), false);
+    QVERIFY(pressedSpy.isEmpty());
+    QVERIFY(pressedChangedSpy.isEmpty());
 }
 
 void DecorationButtonTest::testClose()

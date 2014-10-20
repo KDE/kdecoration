@@ -399,7 +399,7 @@ void DecorationButton::mouseMoveEvent(QMouseEvent *event)
 
 void DecorationButton::mousePressEvent(QMouseEvent *event)
 {
-    if (!d->isEnabled() || !d->isVisible() || !d->geometry().contains(event->pos())) {
+    if (!d->isEnabled() || !d->isVisible() || !d->geometry().contains(event->pos()) || !d->acceptedButtons().testFlag(event->button())) {
         return;
     }
     d->setPressed(event->button(), true);
