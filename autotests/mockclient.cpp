@@ -115,7 +115,7 @@ bool MockClient::isMovable() const
 
 bool MockClient::isOnAllDesktops() const
 {
-    return false;
+    return m_onAllDesktops;
 }
 
 bool MockClient::isResizable() const
@@ -204,6 +204,8 @@ void MockClient::requestToggleKeepBelow()
 
 void MockClient::requestToggleOnAllDesktops()
 {
+    m_onAllDesktops = !m_onAllDesktops;
+    emit client()->onAllDesktopsChanged(m_onAllDesktops);
 }
 
 void MockClient::requestToggleShade()

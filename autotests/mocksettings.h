@@ -17,31 +17,27 @@
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef MOCK_BRIDGE_H
-#define MOCK_BRIDGE_H
+#ifndef MOCK_SETTINGS_H
+#define MOCK_SETTINGS_H
 
-#include "../src/private/decorationbridge.h"
+#include "../src/private/decorationsettingsprivate.h"
 
-class MockClient;
-class MockSettings;
-
-class MockBridge : public KDecoration2::DecorationBridge
+class MockSettings : public KDecoration2::DecorationSettingsPrivate
 {
 public:
-    KDecoration2::DecoratedClientPrivate *createClient(KDecoration2::DecoratedClient *client, KDecoration2::Decoration *decoration) override;
-    KDecoration2::DecorationSettingsPrivate *settings(KDecoration2::DecorationSettings *parent)  override;
-    void update(KDecoration2::Decoration *decoration, const QRect &geometry)  override;
+    explicit MockSettings(KDecoration2::DecorationSettings *parent);
 
-    MockClient * lastCreatedClient() const {
-        return m_lastCreatedClient;
-    }
-    MockSettings *lastCreatedSettings() const {
-        return m_lastCreatedSettings;
-    }
+    KDecoration2::BorderSize borderSize() const override;
+    QList< KDecoration2::DecorationButtonType > decorationButtonsLeft() const override;
+    QList< KDecoration2::DecorationButtonType > decorationButtonsRight() const override;
+    bool isAlphaChannelSupported() const override;
+    bool isCloseOnDoubleClickOnMenu() const override;
+    bool isOnAllDesktopsAvailable() const override;
+
+    void setOnAllDesktopsAvailabe(bool set);
 
 private:
-    MockClient *m_lastCreatedClient = nullptr;
-    MockSettings *m_lastCreatedSettings = nullptr;
+    bool m_onAllDesktopsAvailable = false;
 };
 
 #endif

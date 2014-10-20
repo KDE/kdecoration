@@ -5,6 +5,7 @@ set(decorationButtonTest_SRCS
     mockbutton.cpp
     mockclient.cpp
     mockdecoration.cpp
+    mocksettings.cpp
     decorationbuttontest.cpp
     )
 add_executable(decorationButtonTest ${decorationButtonTest_SRCS})

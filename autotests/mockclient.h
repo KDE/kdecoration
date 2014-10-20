@@ -87,6 +87,7 @@ private:
     bool m_maximizable = false;
     bool m_maximizedVertically = false;
     bool m_maximizedHorizontally = false;
+    bool m_onAllDesktops = false;
 };
 
 #endif

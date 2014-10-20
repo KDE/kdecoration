@@ -19,6 +19,7 @@
  */
 #include "mockbridge.h"
 #include "mockclient.h"
+#include "mocksettings.h"
 #include <QtGlobal>
 
 KDecoration2::DecoratedClientPrivate *MockBridge::createClient(KDecoration2::DecoratedClient *client, KDecoration2::Decoration *decoration)
@@ -29,8 +30,8 @@ KDecoration2::DecoratedClientPrivate *MockBridge::createClient(KDecoration2::Dec
 
 KDecoration2::DecorationSettingsPrivate *MockBridge::settings(KDecoration2::DecorationSettings *parent)
 {
-    Q_UNUSED(parent)
-    return nullptr;
+    m_lastCreatedSettings = new MockSettings(parent);
+    return m_lastCreatedSettings;
 }
 
 void MockBridge::update(KDecoration2::Decoration *decoration, const QRect &geometry)

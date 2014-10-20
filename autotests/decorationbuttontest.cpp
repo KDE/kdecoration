@@ -20,10 +20,12 @@
 #include <QTest>
 #include <QSignalSpy>
 #include "../src/decoratedclient.h"
+#include "../src/decorationsettings.h"
 #include "mockdecoration.h"
 #include "mockbridge.h"
 #include "mockbutton.h"
 #include "mockclient.h"
+#include "mocksettings.h"
 
 Q_DECLARE_METATYPE(Qt::MouseButton)
 
@@ -52,6 +54,7 @@ private Q_SLOTS:
     void testKeepBelow();
     void testShade();
     void testMaximize();
+    void testOnAllDesktops();
 };
 
 void DecorationButtonTest::testButton()
@@ -1024,6 +1027,78 @@ void DecorationButtonTest::testMaximize()
     QCOMPARE(clickedSpy.count(), 4);
     QCOMPARE(client->isMaximizedHorizontally(), true);
     QCOMPARE(client->isMaximizedVertically(), true);
+    QCOMPARE(button.isChecked(), true);
+}
+
+void DecorationButtonTest::testOnAllDesktops()
+{
+    MockBridge bridge;
+    MockDecoration mockDecoration;
+    MockButton button(KDecoration2::DecorationButtonType::OnAllDesktops, &mockDecoration);
+    button.setGeometry(QRect(0, 0, 10, 10));
+
+    QCOMPARE(button.isEnabled(), true);
+    QCOMPARE(button.isCheckable(), true);
+    QCOMPARE(button.isChecked(), false);
+    QCOMPARE(button.isVisible(), false);
+    QCOMPARE(button.acceptedButtons(), Qt::LeftButton);
+    QCOMPARE(mockDecoration.client()->isOnAllDesktops(), false);
+
+    MockSettings *settings = bridge.lastCreatedSettings();
+    QVERIFY(settings);
+
+    QSignalSpy onAllDesktopsAvailableChangedSpy(KDecoration2::DecorationSettings::self(), SIGNAL(onAllDesktopsAvailableChanged(bool)));
+    QVERIFY(onAllDesktopsAvailableChangedSpy.isValid());
+    QSignalSpy visibleChangedSpy(&button, SIGNAL(visibilityChanged(bool)));
+    QVERIFY(visibleChangedSpy.isValid());
+
+    settings->setOnAllDesktopsAvailabe(true);
+    QCOMPARE(onAllDesktopsAvailableChangedSpy.count(), 1);
+    QCOMPARE(onAllDesktopsAvailableChangedSpy.last().first().toBool(), true);
+    QCOMPARE(visibleChangedSpy.count(), 1);
+    QCOMPARE(visibleChangedSpy.last().first().toBool(), true);
+
+    // clicking the button should trigger a request for on all desktops
+    QSignalSpy clickedSpy(&button, SIGNAL(clicked(Qt::MouseButton)));
+    QVERIFY(clickedSpy.isValid());
+    QSignalSpy pressedSpy(&button, SIGNAL(pressed()));
+    QVERIFY(pressedSpy.isValid());
+    QSignalSpy releasedSpy(&button, SIGNAL(released()));
+    QVERIFY(releasedSpy.isValid());
+    QSignalSpy onAllDesktopsChangedSpy(mockDecoration.client(), SIGNAL(onAllDesktopsChanged(bool)));
+    QVERIFY(onAllDesktopsChangedSpy.isValid());
+    QSignalSpy pressedChangedSpy(&button, SIGNAL(pressedChanged(bool)));
+    QVERIFY(pressedChangedSpy.isValid());
+
+    QMouseEvent pressEvent(QEvent::MouseButtonPress, QPointF(5, 5), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+    pressEvent.setAccepted(false);
+    button.event(&pressEvent);
+    QCOMPARE(pressEvent.isAccepted(), true);
+    QCOMPARE(button.isPressed(), true);
+    QCOMPARE(clickedSpy.count(), 0);
+    QEXPECT_FAIL("", "Pressed signal is not yet emitted", Continue);
+    QCOMPARE(pressedSpy.count(), 1);
+    QCOMPARE(releasedSpy.count(), 0);
+    QCOMPARE(onAllDesktopsChangedSpy.count(), 0);
+    QCOMPARE(pressedChangedSpy.count(), 1);
+    QCOMPARE(pressedChangedSpy.first().first().toBool(), true);
+
+    QMouseEvent releaseEvent(QEvent::MouseButtonRelease, QPointF(5, 5), Qt::LeftButton, Qt::NoButton, Qt::NoModifier);
+    releaseEvent.setAccepted(false);
+    button.event(&releaseEvent);
+    QCOMPARE(releaseEvent.isAccepted(), true);
+    QCOMPARE(button.isPressed(), false);
+    QCOMPARE(clickedSpy.count(), 1);
+    QCOMPARE(clickedSpy.first().first().value<Qt::MouseButton>(), Qt::LeftButton);
+    QEXPECT_FAIL("", "Pressed signal is not yet emitted", Continue);
+    QCOMPARE(pressedSpy.count(), 1);
+    QEXPECT_FAIL("", "Released signal is not yet emitted", Continue);
+    QCOMPARE(releasedSpy.count(), 1);
+    QVERIFY(onAllDesktopsChangedSpy.wait());
+    QCOMPARE(onAllDesktopsChangedSpy.count(), 1);
+    QCOMPARE(onAllDesktopsChangedSpy.first().first().toBool(), true);
+    QCOMPARE(pressedChangedSpy.count(), 2);
+    QCOMPARE(pressedChangedSpy.last().first().toBool(), false);
     QCOMPARE(button.isChecked(), true);
 }
 
