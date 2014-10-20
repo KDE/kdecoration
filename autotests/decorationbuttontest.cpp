@@ -19,6 +19,7 @@
  */
 #include <QTest>
 #include <QSignalSpy>
+#include <QStyleHints>
 #include "../src/decoratedclient.h"
 #include "../src/decorationsettings.h"
 #include "mockdecoration.h"
@@ -56,6 +57,8 @@ private Q_SLOTS:
     void testMaximize();
     void testOnAllDesktops();
     void testMenu();
+    void testMenuDoubleClick();
+    void testMenuPressAndHold();
 };
 
 void DecorationButtonTest::testButton()
@@ -1034,6 +1037,7 @@ void DecorationButtonTest::testMaximize()
 void DecorationButtonTest::testOnAllDesktops()
 {
     MockBridge bridge;
+    KDecoration2::DecorationSettings::self(&bridge);
     MockDecoration mockDecoration;
     MockButton button(KDecoration2::DecorationButtonType::OnAllDesktops, &mockDecoration);
     button.setGeometry(QRect(0, 0, 10, 10));
@@ -1106,6 +1110,7 @@ void DecorationButtonTest::testOnAllDesktops()
 void DecorationButtonTest::testMenu()
 {
     MockBridge bridge;
+    KDecoration2::DecorationSettings::self(&bridge);
     MockDecoration mockDecoration;
     MockClient *client = bridge.lastCreatedClient();
     MockButton button(KDecoration2::DecorationButtonType::Menu, &mockDecoration);
@@ -1157,6 +1162,161 @@ void DecorationButtonTest::testMenu()
     QCOMPARE(menuRequestedSpy.count(), 1);
     QCOMPARE(pressedChangedSpy.count(), 2);
     QCOMPARE(pressedChangedSpy.last().first().toBool(), false);
+}
+
+void DecorationButtonTest::testMenuDoubleClick()
+{
+    MockBridge bridge;
+    KDecoration2::DecorationSettings::self(&bridge);
+    MockDecoration mockDecoration;
+    MockClient *client = bridge.lastCreatedClient();
+    MockButton button(KDecoration2::DecorationButtonType::Menu, &mockDecoration);
+    button.setGeometry(QRect(0, 0, 10, 10));
+
+    MockSettings *settings = bridge.lastCreatedSettings();
+    QVERIFY(settings);
+    QSignalSpy closeOnDoubleClickOnMenuChangedSpy(KDecoration2::DecorationSettings::self(), SIGNAL(closeOnDoubleClickOnMenuChanged(bool)));
+    QVERIFY(closeOnDoubleClickOnMenuChangedSpy.isValid());
+    settings->setCloseOnDoubleClickOnMenu(true);
+    QCOMPARE(closeOnDoubleClickOnMenuChangedSpy.count(), 1);
+    QCOMPARE(closeOnDoubleClickOnMenuChangedSpy.last().first().toBool(), true);
+
+    // button used a queued connection, so we need to run event loop
+    QCoreApplication::processEvents();
+
+    QSignalSpy clickedSpy(&button, SIGNAL(clicked(Qt::MouseButton)));
+    QVERIFY(clickedSpy.isValid());
+    QSignalSpy doubleClickedSpy(&button, SIGNAL(doubleClicked()));
+    QVERIFY(doubleClickedSpy.isValid());
+    QSignalSpy closeRequestedSpy(client, SIGNAL(closeRequested()));
+    QVERIFY(closeRequestedSpy.isValid());
+    QSignalSpy menuRequestedSpy(client, SIGNAL(menuRequested()));
+    QVERIFY(menuRequestedSpy.isValid());
+
+    QMouseEvent pressEvent(QEvent::MouseButtonPress, QPointF(5, 5), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+    pressEvent.setAccepted(false);
+    button.event(&pressEvent);
+    QCOMPARE(pressEvent.isAccepted(), true);
+    QMouseEvent releaseEvent(QEvent::MouseButtonRelease, QPointF(5, 5), Qt::LeftButton, Qt::NoButton, Qt::NoModifier);
+    releaseEvent.setAccepted(false);
+    button.event(&releaseEvent);
+    QCOMPARE(releaseEvent.isAccepted(), true);
+    // should not have emitted a clicked
+    QCOMPARE(clickedSpy.count(), 0);
+    QCOMPARE(doubleClickedSpy.count(), 0);
+
+    // another press should trigger the double click event
+    pressEvent.setAccepted(false);
+    button.event(&pressEvent);
+    QCOMPARE(pressEvent.isAccepted(), true);
+    QVERIFY(closeRequestedSpy.wait());
+    QCOMPARE(doubleClickedSpy.count(), 1);
+    QCOMPARE(closeRequestedSpy.count(), 1);
+    QCOMPARE(menuRequestedSpy.count(), 0);
+
+    releaseEvent.setAccepted(false);
+    button.event(&releaseEvent);
+    QCOMPARE(releaseEvent.isAccepted(), true);
+    QCOMPARE(clickedSpy.count(), 0);
+    // run events
+    QCoreApplication::processEvents();
+    QCOMPARE(closeRequestedSpy.count(), 1);
+    QCOMPARE(menuRequestedSpy.count(), 0);
+
+    // a double click of right button shouldn't trigger the double click event
+    QMouseEvent rightPressEvent(QEvent::MouseButtonPress, QPointF(5, 5), Qt::RightButton, Qt::RightButton, Qt::NoModifier);
+    rightPressEvent.setAccepted(false);
+    button.event(&rightPressEvent);
+    QCOMPARE(rightPressEvent.isAccepted(), true);
+    QMouseEvent rightReleaseEvent(QEvent::MouseButtonRelease, QPointF(5, 5), Qt::RightButton, Qt::NoButton, Qt::NoModifier);
+    rightReleaseEvent.setAccepted(false);
+    button.event(&rightReleaseEvent);
+    QCOMPARE(rightReleaseEvent.isAccepted(), true);
+    QCOMPARE(clickedSpy.count(), 1);
+    QVERIFY(menuRequestedSpy.wait());
+    QCOMPARE(menuRequestedSpy.count(), 1);
+    // second click
+    rightPressEvent.setAccepted(false);
+    button.event(&rightPressEvent);
+    QCOMPARE(rightPressEvent.isAccepted(), true);
+    rightReleaseEvent.setAccepted(false);
+    button.event(&rightReleaseEvent);
+    QCOMPARE(rightReleaseEvent.isAccepted(), true);
+    QCOMPARE(clickedSpy.count(), 2);
+    QVERIFY(menuRequestedSpy.wait());
+    QCOMPARE(menuRequestedSpy.count(), 2);
+}
+
+void DecorationButtonTest::testMenuPressAndHold()
+{
+    MockBridge bridge;
+    KDecoration2::DecorationSettings::self(&bridge);
+    MockDecoration mockDecoration;
+    MockClient *client = bridge.lastCreatedClient();
+    MockButton button(KDecoration2::DecorationButtonType::Menu, &mockDecoration);
+    button.setGeometry(QRect(0, 0, 10, 10));
+
+    MockSettings *settings = bridge.lastCreatedSettings();
+    QVERIFY(settings);
+    QSignalSpy closeOnDoubleClickOnMenuChangedSpy(KDecoration2::DecorationSettings::self(), SIGNAL(closeOnDoubleClickOnMenuChanged(bool)));
+    QVERIFY(closeOnDoubleClickOnMenuChangedSpy.isValid());
+    settings->setCloseOnDoubleClickOnMenu(true);
+    QCOMPARE(closeOnDoubleClickOnMenuChangedSpy.count(), 1);
+    QCOMPARE(closeOnDoubleClickOnMenuChangedSpy.last().first().toBool(), true);
+
+    // button used a queued connection, so we need to run event loop
+    QCoreApplication::processEvents();
+
+    QSignalSpy menuRequestedSpy(client, SIGNAL(menuRequested()));
+    QVERIFY(menuRequestedSpy.isValid());
+    QSignalSpy doubleClickedSpy(&button, SIGNAL(doubleClicked()));
+    QVERIFY(doubleClickedSpy.isValid());
+    QSignalSpy closeRequestedSpy(client, SIGNAL(closeRequested()));
+    QVERIFY(closeRequestedSpy.isValid());
+    QSignalSpy clickedSpy(&button, SIGNAL(clicked(Qt::MouseButton)));
+    QVERIFY(clickedSpy.isValid());
+
+    // send a press event
+    QMouseEvent pressEvent(QEvent::MouseButtonPress, QPointF(5, 5), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+    pressEvent.setAccepted(false);
+    button.event(&pressEvent);
+    QCOMPARE(pressEvent.isAccepted(), true);
+    QCOMPARE(clickedSpy.count(), 0);
+
+    // and wait
+    QVERIFY(menuRequestedSpy.wait());
+    QCOMPARE(menuRequestedSpy.count(), 1);
+    QCOMPARE(clickedSpy.count(), 1);
+
+    // send release event
+    QMouseEvent releaseEvent(QEvent::MouseButtonRelease, QPointF(5, 5), Qt::LeftButton, Qt::NoButton, Qt::NoModifier);
+    releaseEvent.setAccepted(false);
+    button.event(&releaseEvent);
+    QCOMPARE(releaseEvent.isAccepted(), true);
+    QCOMPARE(clickedSpy.count(), 1);
+
+    QTest::qWait(QGuiApplication::styleHints()->mouseDoubleClickInterval());
+
+    // and it shouldn't be a double click
+    pressEvent.setAccepted(false);
+    button.event(&pressEvent);
+    QCOMPARE(pressEvent.isAccepted(), true);
+
+    // while waiting we disable click and hold
+    settings->setCloseOnDoubleClickOnMenu(false);
+    QCOMPARE(closeOnDoubleClickOnMenuChangedSpy.count(), 2);
+    QCOMPARE(closeOnDoubleClickOnMenuChangedSpy.last().first().toBool(), false);
+    // button used a queued connection, so we need to run event loop
+    QCoreApplication::processEvents();
+    // and releasing should emit the menu signal
+    releaseEvent.setAccepted(false);
+    button.event(&releaseEvent);
+    QCOMPARE(releaseEvent.isAccepted(), true);
+    QCOMPARE(clickedSpy.count(), 2);
+    QVERIFY(menuRequestedSpy.wait());
+    QCOMPARE(menuRequestedSpy.count(), 2);
+    // never got a dobule click
+    QCOMPARE(closeRequestedSpy.count(), 0);
 }
 
 QTEST_MAIN(DecorationButtonTest)

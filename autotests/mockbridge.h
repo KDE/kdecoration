@@ -21,12 +21,14 @@
 #define MOCK_BRIDGE_H
 
 #include "../src/private/decorationbridge.h"
+#include <QObject>
 
 class MockClient;
 class MockSettings;
 
-class MockBridge : public KDecoration2::DecorationBridge
+class MockBridge : public QObject, public KDecoration2::DecorationBridge
 {
+    Q_OBJECT
 public:
     KDecoration2::DecoratedClientPrivate *createClient(KDecoration2::DecoratedClient *client, KDecoration2::Decoration *decoration) override;
     KDecoration2::DecorationSettingsPrivate *settings(KDecoration2::DecorationSettings *parent)  override;

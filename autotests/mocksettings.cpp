@@ -47,7 +47,7 @@ bool MockSettings::isAlphaChannelSupported() const
 
 bool MockSettings::isCloseOnDoubleClickOnMenu() const
 {
-    return false;
+    return m_closeDoubleClickOnMenu;
 }
 
 bool MockSettings::isOnAllDesktopsAvailable() const
@@ -62,4 +62,13 @@ void MockSettings::setOnAllDesktopsAvailabe(bool set)
     }
     m_onAllDesktopsAvailable = set;
     emit decorationSettings()->onAllDesktopsAvailableChanged(m_onAllDesktopsAvailable);
+}
+
+void MockSettings::setCloseOnDoubleClickOnMenu(bool set)
+{
+    if (m_closeDoubleClickOnMenu == set) {
+        return;
+    }
+    m_closeDoubleClickOnMenu = set;
+    emit decorationSettings()->closeOnDoubleClickOnMenuChanged(m_closeDoubleClickOnMenu);
 }

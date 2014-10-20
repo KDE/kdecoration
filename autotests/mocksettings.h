@@ -35,9 +35,11 @@ public:
     bool isOnAllDesktopsAvailable() const override;
 
     void setOnAllDesktopsAvailabe(bool set);
+    void setCloseOnDoubleClickOnMenu(bool set);
 
 private:
     bool m_onAllDesktopsAvailable = false;
+    bool m_closeDoubleClickOnMenu = false;
 };
 
 #endif
