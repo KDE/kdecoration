@@ -381,7 +381,7 @@ void DecorationButton::hoverEnterEvent(QHoverEvent *event)
 
 void DecorationButton::hoverLeaveEvent(QHoverEvent *event)
 {
-    if (!d->isEnabled() || !d->isVisible() || !d->isHovered()) {
+    if (!d->isEnabled() || !d->isVisible() || !d->isHovered() || d->geometry().contains(event->pos())) {
         return;
     }
     d->setHovered(false);
