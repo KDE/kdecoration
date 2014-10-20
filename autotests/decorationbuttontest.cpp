@@ -55,6 +55,7 @@ private Q_SLOTS:
     void testShade();
     void testMaximize();
     void testOnAllDesktops();
+    void testMenu();
 };
 
 void DecorationButtonTest::testButton()
@@ -1100,6 +1101,62 @@ void DecorationButtonTest::testOnAllDesktops()
     QCOMPARE(pressedChangedSpy.count(), 2);
     QCOMPARE(pressedChangedSpy.last().first().toBool(), false);
     QCOMPARE(button.isChecked(), true);
+}
+
+void DecorationButtonTest::testMenu()
+{
+    MockBridge bridge;
+    MockDecoration mockDecoration;
+    MockClient *client = bridge.lastCreatedClient();
+    MockButton button(KDecoration2::DecorationButtonType::Menu, &mockDecoration);
+    button.setGeometry(QRect(0, 0, 10, 10));
+
+    QCOMPARE(button.isEnabled(), true);
+    QCOMPARE(button.isCheckable(), false);
+    QCOMPARE(button.isChecked(), false);
+    QCOMPARE(button.isVisible(), true);
+    QCOMPARE(button.acceptedButtons(), Qt::LeftButton | Qt::RightButton);
+
+    // clicking the button should trigger a request for menu button
+    QSignalSpy clickedSpy(&button, SIGNAL(clicked(Qt::MouseButton)));
+    QVERIFY(clickedSpy.isValid());
+    QSignalSpy pressedSpy(&button, SIGNAL(pressed()));
+    QVERIFY(pressedSpy.isValid());
+    QSignalSpy releasedSpy(&button, SIGNAL(released()));
+    QVERIFY(releasedSpy.isValid());
+    QSignalSpy pressedChangedSpy(&button, SIGNAL(pressedChanged(bool)));
+    QVERIFY(pressedChangedSpy.isValid());
+    QSignalSpy menuRequestedSpy(client, SIGNAL(menuRequested()));
+    QVERIFY(menuRequestedSpy.isValid());
+
+    QMouseEvent pressEvent(QEvent::MouseButtonPress, QPointF(5, 5), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+    pressEvent.setAccepted(false);
+    button.event(&pressEvent);
+    QCOMPARE(pressEvent.isAccepted(), true);
+    QCOMPARE(button.isPressed(), true);
+    QCOMPARE(clickedSpy.count(), 0);
+    QEXPECT_FAIL("", "Pressed signal is not yet emitted", Continue);
+    QCOMPARE(pressedSpy.count(), 1);
+    QCOMPARE(releasedSpy.count(), 0);
+    QCOMPARE(menuRequestedSpy.count(), 0);
+    QCOMPARE(pressedChangedSpy.count(), 1);
+    QCOMPARE(pressedChangedSpy.first().first().toBool(), true);
+
+    QMouseEvent releaseEvent(QEvent::MouseButtonRelease, QPointF(5, 5), Qt::LeftButton, Qt::NoButton, Qt::NoModifier);
+    releaseEvent.setAccepted(false);
+    button.event(&releaseEvent);
+    QCOMPARE(releaseEvent.isAccepted(), true);
+    QCOMPARE(button.isPressed(), false);
+    QCOMPARE(clickedSpy.count(), 1);
+    QCOMPARE(clickedSpy.first().first().value<Qt::MouseButton>(), Qt::LeftButton);
+    QEXPECT_FAIL("", "Pressed signal is not yet emitted", Continue);
+    QCOMPARE(pressedSpy.count(), 1);
+    QEXPECT_FAIL("", "Released signal is not yet emitted", Continue);
+    QCOMPARE(releasedSpy.count(), 1);
+    QVERIFY(menuRequestedSpy.wait());
+    QCOMPARE(menuRequestedSpy.count(), 1);
+    QCOMPARE(pressedChangedSpy.count(), 2);
+    QCOMPARE(pressedChangedSpy.last().first().toBool(), false);
 }
 
 QTEST_MAIN(DecorationButtonTest)

@@ -188,6 +188,7 @@ void MockClient::requestMinimize()
 
 void MockClient::requestShowWindowMenu()
 {
+    emit menuRequested();
 }
 
 void MockClient::requestToggleKeepAbove()

@@ -75,6 +75,7 @@ Q_SIGNALS:
     void closeRequested();
     void minimizeRequested();
     void quickHelpRequested();
+    void menuRequested();
 
 private:
     bool m_closeable = false;
