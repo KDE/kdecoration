@@ -36,6 +36,8 @@ private Q_SLOTS:
     void testEnabled();
     void testPressIgnore_data();
     void testPressIgnore();
+    void testReleaseIgnore_data();
+    void testReleaseIgnore();
     void testClose();
     void testMinimize();
     void testQuickHelp();
@@ -230,6 +232,69 @@ void DecorationButtonTest::testPressIgnore()
     QCOMPARE(button.isPressed(), false);
     QVERIFY(pressedSpy.isEmpty());
     QVERIFY(pressedChangedSpy.isEmpty());
+}
+
+void DecorationButtonTest::testReleaseIgnore_data()
+{
+    QTest::addColumn<bool>("enabled");
+    QTest::addColumn<bool>("visible");
+    QTest::addColumn<QPoint>("clickPos");
+    QTest::addColumn<Qt::MouseButton>("mouseButton");
+    QTest::addColumn<bool>("expectedAccepted");
+    QTest::addColumn<bool>("expectedPressed");
+    QTest::addColumn<int>("expectedPressedChanged");
+
+    QTest::newRow("all-disabled") << false << false << QPoint(0, 0) << Qt::LeftButton << false << false << 2;
+    QTest::newRow("enabled") << true << false << QPoint(0, 0) << Qt::LeftButton << false << false << 2;
+    QTest::newRow("visible") << false << true << QPoint(0, 0) << Qt::LeftButton << false << false << 2;
+    QTest::newRow("outside") << true << true << QPoint(20, 20) << Qt::LeftButton << true << false << 2;
+    QTest::newRow("wrong-button") << true << true << QPoint(0, 0) << Qt::RightButton << false << true << 1;
+}
+
+void DecorationButtonTest::testReleaseIgnore()
+{
+    MockBridge bridge;
+    MockDecoration mockDecoration;
+    // create a custom button and verify the base settings
+    MockButton button(KDecoration2::DecorationButtonType::Custom, &mockDecoration);
+    button.setGeometry(QRect(0, 0, 10, 10));
+    button.setAcceptedButtons(Qt::LeftButton);
+    button.setEnabled(true);
+    button.setVisible(true);
+    QSignalSpy pressedSpy(&button, SIGNAL(pressed()));
+    QVERIFY(pressedSpy.isValid());
+    QSignalSpy pressedChangedSpy(&button, SIGNAL(pressedChanged(bool)));
+    QVERIFY(pressedChangedSpy.isValid());
+    QSignalSpy clickedSpy(&button, SIGNAL(clicked(Qt::MouseButton)));
+    QVERIFY(clickedSpy.isValid());
+
+    QMouseEvent pressEvent(QEvent::MouseButtonPress, QPoint(0, 0), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+    pressEvent.setAccepted(false);
+    button.event(&pressEvent);
+    QCOMPARE(pressEvent.isAccepted(), true);
+    QCOMPARE(button.isPressed(), true);
+    QEXPECT_FAIL("", "Pressed signal not yet implemented", Continue);
+    QCOMPARE(pressedSpy.count(), 1);
+    QCOMPARE(pressedChangedSpy.count(), 1);
+    QCOMPARE(pressedChangedSpy.last().first().toBool(), true);
+
+    QFETCH(bool, enabled);
+    QFETCH(bool, visible);
+    button.setEnabled(enabled);
+    button.setVisible(visible);
+
+    QFETCH(QPoint, clickPos);
+    QFETCH(Qt::MouseButton, mouseButton);
+    QMouseEvent releaseEvent(QEvent::MouseButtonRelease, clickPos, mouseButton, Qt::NoButton, Qt::NoModifier);
+    releaseEvent.setAccepted(false);
+    button.event(&releaseEvent);
+    QTEST(releaseEvent.isAccepted(), "expectedAccepted");
+    QTEST(button.isPressed(), "expectedPressed");
+    QEXPECT_FAIL("", "Pressed signal not yet implemented", Continue);
+    QCOMPARE(pressedSpy.count(), 1);
+    QTEST(pressedChangedSpy.count(), "expectedPressedChanged");
+    QCOMPARE(pressedChangedSpy.last().first().toBool(), button.isPressed());
+    QCOMPARE(clickedSpy.count(), 0);
 }
 
 void DecorationButtonTest::testClose()

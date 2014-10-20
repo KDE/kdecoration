@@ -172,6 +172,13 @@ void DecorationButtonPrivate::setVisible(bool visible)
     }
     m_visible = visible;
     emit q->visibilityChanged(visible);
+    if (!m_visible) {
+        setHovered(false);
+        if (isPressed()) {
+            m_pressed = Qt::NoButton;
+            emit q->pressedChanged(false);
+        }
+    }
 }
 
 void DecorationButtonPrivate::setChecked(bool checked)
