@@ -42,6 +42,9 @@ private Q_SLOTS:
     void testHoverEnterIgnore();
     void testHoverLeaveIgnore_data();
     void testHoverLeaveIgnore();
+    void testHover();
+    void testMouseMove_data();
+    void testMouseMove();
     void testClose();
     void testMinimize();
     void testQuickHelp();
@@ -406,6 +409,109 @@ void DecorationButtonTest::testHoverLeaveIgnore()
     QTEST(pointerLeavedSpy.count(), "expectedLeaveCount");
     QTEST(hoveredChangedSpy.count(), "expectedHoverChangedCount");
     QCOMPARE(hoveredChangedSpy.last().first().toBool(), button.isHovered());
+}
+
+void DecorationButtonTest::testHover()
+{
+    MockBridge bridge;
+    MockDecoration mockDecoration;
+    // create a custom button and verify the base settings
+    MockButton button(KDecoration2::DecorationButtonType::Custom, &mockDecoration);
+    button.setGeometry(QRect(0, 0, 10, 10));
+    button.setEnabled(true);
+    button.setVisible(true);
+    QSignalSpy pointerEnteredSpy(&button, SIGNAL(pointerEntered()));
+    QVERIFY(pointerEnteredSpy.isValid());
+    QSignalSpy hoveredChangedSpy(&button, SIGNAL(hoveredChanged(bool)));
+    QVERIFY(hoveredChangedSpy.isValid());
+    QSignalSpy pointerLeavedSpy(&button, SIGNAL(pointerLeaved()));
+    QVERIFY(pointerLeavedSpy.isValid());
+
+    QHoverEvent enterEvent(QEvent::HoverEnter, QPoint(0, 0), QPoint());
+    enterEvent.setAccepted(false);
+    button.event(&enterEvent);
+    QCOMPARE(enterEvent.isAccepted(), true);
+    QCOMPARE(button.isHovered(), true);
+    QEXPECT_FAIL("", "Pointer entered not yet emitted", Continue);
+    QCOMPARE(pointerEnteredSpy.count(), 1);
+    QCOMPARE(hoveredChangedSpy.count(), 1);
+    QCOMPARE(hoveredChangedSpy.last().first().toBool(), true);
+
+    // send in a hovermove event - it's passed through, but not used
+    QHoverEvent moveEvent(QEvent::HoverMove, QPoint(5, 0), QPoint(0, 0));
+    moveEvent.setAccepted(false);
+    button.event(&moveEvent);
+    QCOMPARE(moveEvent.isAccepted(), false);
+
+    QHoverEvent leftEvent(QEvent::HoverLeave, QPoint(10, 0), QPoint(0, 0));
+    leftEvent.setAccepted(false);
+    button.event(&leftEvent);
+    QCOMPARE(leftEvent.isAccepted(), true);
+    QEXPECT_FAIL("", "Pointer entered not yet emitted", Continue);
+    QCOMPARE(pointerEnteredSpy.count(), 1);
+    QEXPECT_FAIL("", "Pointer leave not yet emitted", Continue);
+    QCOMPARE(pointerLeavedSpy.count(), 1);
+    QCOMPARE(hoveredChangedSpy.count(), 2);
+    QCOMPARE(hoveredChangedSpy.last().first().toBool(), false);
+}
+
+void DecorationButtonTest::testMouseMove_data()
+{
+    QTest::addColumn<bool>("enabled");
+    QTest::addColumn<bool>("visible");
+    QTest::addColumn<QPoint>("movePos");
+    QTest::addColumn<bool>("expectedAccepted");
+    QTest::addColumn<bool>("expectedHovered");
+    QTest::addColumn<int>("expectedChangedCount");
+
+    QTest::newRow("outside") << true << true << QPoint(10, 10) << true << false << 2;
+    QTest::newRow("inside") << true << true << QPoint(5, 5) << false << true << 1;
+    QTest::newRow("disabled") << false << true << QPoint(10, 10) << false << false << 2;
+    QTest::newRow("invisible") << true << false << QPoint(10, 10) << false << false << 2;
+}
+
+void DecorationButtonTest::testMouseMove()
+{
+    MockBridge bridge;
+    MockDecoration mockDecoration;
+    // create a custom button and verify the base settings
+    MockButton button(KDecoration2::DecorationButtonType::Custom, &mockDecoration);
+    button.setGeometry(QRect(0, 0, 10, 10));
+    button.setEnabled(true);
+    button.setVisible(true);
+    QSignalSpy hoveredChangedSpy(&button, SIGNAL(hoveredChanged(bool)));
+    QVERIFY(hoveredChangedSpy.isValid());
+    QSignalSpy pointerLeavedSpy(&button, SIGNAL(pointerLeaved()));
+    QVERIFY(pointerLeavedSpy.isValid());
+
+    QHoverEvent enterEvent(QEvent::HoverEnter, QPoint(0, 0), QPoint());
+    enterEvent.setAccepted(false);
+    button.event(&enterEvent);
+    QCOMPARE(enterEvent.isAccepted(), true);
+    QCOMPARE(button.isHovered(), true);
+    QCOMPARE(hoveredChangedSpy.count(), 1);
+    QCOMPARE(hoveredChangedSpy.last().first().toBool(), true);
+
+    QFETCH(bool, enabled);
+    button.setEnabled(enabled);
+    QFETCH(bool, visible);
+    button.setVisible(visible);
+
+    QFETCH(QPoint, movePos);
+    QMouseEvent mouseMoveEvent(QEvent::MouseMove, movePos, Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+    mouseMoveEvent.setAccepted(false);
+    button.event(&mouseMoveEvent);
+    QTEST(mouseMoveEvent.isAccepted(), "expectedAccepted");
+    QTEST(button.isHovered(), "expectedHovered");
+    QTEST(hoveredChangedSpy.count(), "expectedChangedCount");
+    QCOMPARE(hoveredChangedSpy.last().first().toBool(), button.isHovered());
+
+    // explicit further move event outside of button
+    QMouseEvent mouseMoveEvent2(QEvent::MouseMove, QPoint(50, 50), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+    mouseMoveEvent2.setAccepted(false);
+    button.event(&mouseMoveEvent2);
+    QTEST(mouseMoveEvent2.isAccepted(), "expectedHovered");
+    QCOMPARE(button.isHovered(), false);
 }
 
 void DecorationButtonTest::testClose()
