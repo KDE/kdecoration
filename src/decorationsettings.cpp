@@ -38,7 +38,7 @@ DecorationSettings *DecorationSettings::self(QObject *parent)
 
 DecorationSettings::DecorationSettings(QObject *parent)
     : QObject(parent)
-    , d(DecorationBridge::self()->settings(this))
+    , d(std::move(DecorationBridge::self()->settings(this)))
 {
     auto updateUnits = [this] {
         int gridUnit = QFontMetrics(font()).boundingRect(QLatin1Char('M')).height();;

@@ -28,6 +28,8 @@
 #include <QPalette>
 #include <QFont>
 
+#include <memory>
+
 namespace KDecoration2
 {
 
@@ -238,7 +240,7 @@ Q_SIGNALS:
 private:
     friend class DecorationPrivate;
     DecoratedClient(Decoration *parent);
-    QScopedPointer<DecoratedClientPrivate> d;
+    std::unique_ptr<DecoratedClientPrivate> d;
 };
 
 } // namespace

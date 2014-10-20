@@ -25,6 +25,7 @@
 
 #include <QObject>
 
+#include <memory>
 
 namespace KDecoration2
 {
@@ -100,7 +101,7 @@ Q_SIGNALS:
 private:
     explicit DecorationSettings(QObject *parent);
     static DecorationSettings *s_self;
-    QScopedPointer<DecorationSettingsPrivate> d;
+    std::unique_ptr<DecorationSettingsPrivate> d;
 };
 
 }

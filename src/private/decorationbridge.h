@@ -20,6 +20,8 @@
 #ifndef KDECORATION2_DECORATION_BRIDGE_H
 #define KDECORATION2_DECORATION_BRIDGE_H
 
+#include <memory>
+
 #include <kdecoration2/private/kdecoration2_private_export.h>
 
 //
@@ -50,9 +52,9 @@ public:
     virtual ~DecorationBridge();
     static DecorationBridge *self();
 
-    virtual DecoratedClientPrivate *createClient(DecoratedClient *client, Decoration *decoration) = 0;
+    virtual std::unique_ptr<DecoratedClientPrivate> createClient(DecoratedClient *client, Decoration *decoration) = 0;
     virtual void update(Decoration *decoration, const QRect &geometry) = 0;
-    virtual DecorationSettingsPrivate *settings(DecorationSettings *parent) = 0;
+    virtual std::unique_ptr<DecorationSettingsPrivate> settings(DecorationSettings *parent) = 0;
 
 protected:
     explicit DecorationBridge();

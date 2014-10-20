@@ -27,7 +27,7 @@ namespace KDecoration2
 
 DecoratedClient::DecoratedClient(Decoration *parent)
     : QObject(parent)
-    , d(DecorationBridge::self()->createClient(this, parent))
+    , d(std::move(DecorationBridge::self()->createClient(this, parent)))
 {
 }
 
@@ -70,12 +70,12 @@ DELEGATE(Qt::Edges, borderingScreenEdges)
 
 const DecoratedClientPrivate *DecoratedClient::handle() const
 {
-    return d.data();
+    return d.get();
 }
 
 DecoratedClientPrivate *DecoratedClient::handle()
 {
-    return d.data();
+    return d.get();
 }
 
 } // namespace

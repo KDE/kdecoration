@@ -22,16 +22,18 @@
 #include "mocksettings.h"
 #include <QtGlobal>
 
-KDecoration2::DecoratedClientPrivate *MockBridge::createClient(KDecoration2::DecoratedClient *client, KDecoration2::Decoration *decoration)
+std::unique_ptr<KDecoration2::DecoratedClientPrivate> MockBridge::createClient(KDecoration2::DecoratedClient *client, KDecoration2::Decoration *decoration)
 {
-    m_lastCreatedClient = new MockClient(client, decoration);
-    return m_lastCreatedClient;
+    auto ptr = std::unique_ptr<MockClient>(new MockClient(client, decoration));
+    m_lastCreatedClient = ptr.get();
+    return std::move(ptr);
 }
 
-KDecoration2::DecorationSettingsPrivate *MockBridge::settings(KDecoration2::DecorationSettings *parent)
+std::unique_ptr<KDecoration2::DecorationSettingsPrivate> MockBridge::settings(KDecoration2::DecorationSettings *parent)
 {
-    m_lastCreatedSettings = new MockSettings(parent);
-    return m_lastCreatedSettings;
+    auto ptr = std::unique_ptr<MockSettings>(new MockSettings(parent));
+    m_lastCreatedSettings = ptr.get();
+    return std::move(ptr);
 }
 
 void MockBridge::update(KDecoration2::Decoration *decoration, const QRect &geometry)
