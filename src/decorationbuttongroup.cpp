@@ -109,7 +109,7 @@ DecorationButtonGroup::DecorationButtonGroup(DecorationButtonGroup::Position typ
             DecorationSettings::self()->decorationButtonsRight();
         for (DecorationButtonType type : buttons) {
             if (DecorationButton *b = buttonCreator(type, parent, this)) {
-                addButton(b);
+                addButton(QPointer<DecorationButton>(b));
             }
         }
     };
@@ -145,7 +145,7 @@ QRectF DecorationButtonGroup::geometry() const
 bool DecorationButtonGroup::hasButton(DecorationButtonType type) const
 {
     auto it = std::find_if(d->buttons().begin(), d->buttons().end(),
-        [type](DecorationButton *button) {
+        [type](const QPointer<DecorationButton> &button) {
             return button->type() == type;
         }
     );
@@ -176,15 +176,16 @@ void DecorationButtonGroup::setSpacing(qreal spacing)
     d->setSpacing(spacing);
 }
 
-void DecorationButtonGroup::addButton(DecorationButton *button)
+void DecorationButtonGroup::addButton(QPointer<DecorationButton> button)
 {
-    connect(button, &DecorationButton::visibilityChanged, this, [this]() { d->updateLayout(); });
-    connect(button, &DecorationButton::geometryChanged, this, [this]() { d->updateLayout(); });
+    Q_ASSERT(!button.isNull());
+    connect(button.data(), &DecorationButton::visibilityChanged, this, [this]() { d->updateLayout(); });
+    connect(button.data(), &DecorationButton::geometryChanged, this, [this]() { d->updateLayout(); });
     d->buttons().append(button);
     d->updateLayout();
 }
 
-QList< DecorationButton* > DecorationButtonGroup::buttons() const
+QList< QPointer<DecorationButton> > DecorationButtonGroup::buttons() const
 {
     return d->buttons();
 }
@@ -206,7 +207,7 @@ void DecorationButtonGroup::removeButton(DecorationButtonType type)
     }
 }
 
-void DecorationButtonGroup::removeButton(DecorationButton *button)
+void DecorationButtonGroup::removeButton(QPointer<DecorationButton> button)
 {
     bool needUpdate = false;
     auto it = d->buttons().begin();

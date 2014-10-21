@@ -55,10 +55,10 @@ public:
         return m_spacing;
     }
     void setSpacing(qreal spacing);
-    QList<DecorationButton*> &buttons() {
+    QList<QPointer<DecorationButton>> &buttons() {
         return m_buttons;
     }
-    const QList<DecorationButton*> &buttons() const {
+    const QList<QPointer<DecorationButton>> &buttons() const {
         return m_buttons;
     }
     const QRectF &geometry() const {
@@ -70,7 +70,7 @@ private:
     DecorationButtonGroup *q;
     Decoration *m_decoration;
     QRectF m_geometry;
-    QList<DecorationButton*> m_buttons;
+    QList<QPointer<DecorationButton>> m_buttons;
     qreal m_spacing;
 };
 

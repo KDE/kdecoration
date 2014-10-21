@@ -96,12 +96,12 @@ public:
      * Adds @p button to the DecorationButtonGroup and triggers a re-layout of all
      * DecorationButtons.
      **/
-    void addButton(DecorationButton *button);
+    void addButton(QPointer<DecorationButton> button);
     /**
      * Removes @p button from the DecorationButtonGroup and triggers a re-layout of all
      * DecorationButtons.
      **/
-    void removeButton(DecorationButton *button);
+    void removeButton(QPointer<DecorationButton> button);
     /**
      * Removes all DecorationButtons with @p type from the DecorationButtonGroup and
      * triggers a re-layout of all DecorationButtons.
@@ -114,7 +114,7 @@ public:
     /**
      * @returns All DecorationButtons in this DecorationButtonGroup
      **/
-    QList<DecorationButton*> buttons() const;
+    QList<QPointer<DecorationButton> > buttons() const;
 
 Q_SIGNALS:
     void spacingChanged(qreal);
