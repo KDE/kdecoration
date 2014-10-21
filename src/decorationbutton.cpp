@@ -297,7 +297,7 @@ DecorationButton::DecorationButton(DecorationButtonType type, QPointer<Decoratio
             if (hovered) {
                 emit pointerEntered();
             } else {
-                emit pointerLeaved();
+                emit pointerLeft();
             }
         }
     );

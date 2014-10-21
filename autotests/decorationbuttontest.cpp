@@ -383,7 +383,7 @@ void DecorationButtonTest::testHoverLeaveIgnore()
     QVERIFY(pointerEnteredSpy.isValid());
     QSignalSpy hoveredChangedSpy(&button, SIGNAL(hoveredChanged(bool)));
     QVERIFY(hoveredChangedSpy.isValid());
-    QSignalSpy pointerLeavedSpy(&button, SIGNAL(pointerLeaved()));
+    QSignalSpy pointerLeavedSpy(&button, SIGNAL(pointerLeft()));
     QVERIFY(pointerLeavedSpy.isValid());
 
     QHoverEvent enterEvent(QEvent::HoverEnter, QPoint(0, 0), QPoint());
@@ -424,7 +424,7 @@ void DecorationButtonTest::testHover()
     QVERIFY(pointerEnteredSpy.isValid());
     QSignalSpy hoveredChangedSpy(&button, SIGNAL(hoveredChanged(bool)));
     QVERIFY(hoveredChangedSpy.isValid());
-    QSignalSpy pointerLeavedSpy(&button, SIGNAL(pointerLeaved()));
+    QSignalSpy pointerLeavedSpy(&button, SIGNAL(pointerLeft()));
     QVERIFY(pointerLeavedSpy.isValid());
 
     QHoverEvent enterEvent(QEvent::HoverEnter, QPoint(0, 0), QPoint());
@@ -478,7 +478,7 @@ void DecorationButtonTest::testMouseMove()
     button.setVisible(true);
     QSignalSpy hoveredChangedSpy(&button, SIGNAL(hoveredChanged(bool)));
     QVERIFY(hoveredChangedSpy.isValid());
-    QSignalSpy pointerLeavedSpy(&button, SIGNAL(pointerLeaved()));
+    QSignalSpy pointerLeavedSpy(&button, SIGNAL(pointerLeft()));
     QVERIFY(pointerLeavedSpy.isValid());
 
     QHoverEvent enterEvent(QEvent::HoverEnter, QPoint(0, 0), QPoint());

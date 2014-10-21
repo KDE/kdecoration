@@ -147,7 +147,7 @@ Q_SIGNALS:
     void pressed();
     void released();
     void pointerEntered();
-    void pointerLeaved();
+    void pointerLeft();
     void doubleClicked();
 
     void pressedChanged(bool);
