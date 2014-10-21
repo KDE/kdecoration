@@ -59,7 +59,7 @@ DecorationButtonPrivate::~DecorationButtonPrivate() = default;
 
 void DecorationButtonPrivate::init()
 {
-    auto c = m_decoration->client();
+    auto c = m_decoration->client().data();
     switch (m_type) {
     case DecorationButtonType::Menu:
         QObject::connect(q, &DecorationButton::clicked, m_decoration, &Decoration::requestShowWindowMenu, Qt::QueuedConnection);
