@@ -62,10 +62,14 @@ DELEGATE(WId, windowId)
 DELEGATE(WId, decorationId)
 DELEGATE(int, width)
 DELEGATE(int, height)
-DELEGATE(Decoration *, decoration)
 DELEGATE(QPalette, palette)
 DELEGATE(Qt::Edges, borderingScreenEdges)
 
 #undef DELEGATE
+
+QPointer< Decoration > DecoratedClient::decoration() const
+{
+    return QPointer<Decoration>(d->decoration());
+}
 
 } // namespace

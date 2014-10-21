@@ -23,6 +23,7 @@
 #include <kdecoration2/kdecoration2_export.h>
 
 #include <QObject>
+#include <QPointer>
 #include <QtGui/qwindowdefs.h>
 #include <QIcon>
 #include <QPalette>
@@ -54,7 +55,7 @@ class KDECORATIONS2_EXPORT DecoratedClient : public QObject
     /**
      * The Decoration of this DecoratedClient
      **/
-    Q_PROPERTY(KDecoration2::Decoration *decoration READ decoration CONSTANT)
+    Q_PROPERTY(QPointer<KDecoration2::Decoration> decoration READ decoration CONSTANT)
     /**
      * Whether the DecoratedClient is active (has focus) or is inactive.
      **/
@@ -199,7 +200,7 @@ public:
     int width() const;
     int height() const;
 
-    Decoration *decoration() const;
+    QPointer<Decoration> decoration() const;
     QPalette palette() const;
 
 Q_SIGNALS:
