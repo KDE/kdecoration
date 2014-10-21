@@ -114,13 +114,10 @@ public:
     }
     void setOpaque(bool opaque);
 
-    DecorationShadow *shadow() {
+    QPointer<DecorationShadow> shadow() const {
         return m_shadow;
     }
-    const DecorationShadow *shadow() const {
-        return m_shadow;
-    }
-    void setShadow(DecorationShadow *shadow);
+    void setShadow(QPointer<DecorationShadow> shadow);
 
     void startDoubleClickTimer() {
         m_doubleClickTimer.start();
@@ -145,7 +142,7 @@ private:
     Qt::WindowFrameSection m_windowFrameSection;
     QRect m_titleRect;
     bool m_opaque;
-    DecorationShadow *m_shadow;
+    QPointer<DecorationShadow> m_shadow;
     QElapsedTimer m_doubleClickTimer;
 };
 

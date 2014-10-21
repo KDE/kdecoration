@@ -45,7 +45,7 @@ Decoration::Private::Private(Decoration *deco)
     , m_extendedBorderBottom(0)
     , m_windowFrameSection(Qt::NoSection)
     , m_opaque(false)
-    , m_shadow(nullptr)
+    , m_shadow()
 {
 }
 
@@ -168,7 +168,7 @@ void Decoration::Private::setOpaque(bool opaque)
     emit q->opaqueChanged(m_opaque);
 }
 
-void Decoration::Private::setShadow(DecorationShadow *shadow)
+void Decoration::Private::setShadow(QPointer<DecorationShadow> shadow)
 {
     if (m_shadow == shadow) {
         return;
@@ -262,7 +262,7 @@ void Decoration::name(type a) \
 DELEGATE(requestMaximize, Qt::MouseButtons)
 DELEGATE(setTitleRect, const QRect&)
 DELEGATE(setOpaque, bool)
-DELEGATE(setShadow, DecorationShadow*)
+DELEGATE(setShadow, QPointer<DecorationShadow>)
 
 #undef DELEGATE
 
@@ -283,14 +283,9 @@ DELEGATE(extendedBorderBottom, int)
 DELEGATE(windowFrameSection, Qt::WindowFrameSection)
 DELEGATE(titleRect, QRect)
 DELEGATE(isOpaque, bool)
-DELEGATE(shadow, DecorationShadow *)
+DELEGATE(shadow, QPointer<DecorationShadow>)
 
 #undef DELEGATE
-
-DecorationShadow *Decoration::shadow()
-{
-    return d->shadow();
-}
 
 QSize Decoration::size() const
 {

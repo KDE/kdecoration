@@ -64,7 +64,7 @@ class KDECORATIONS2_EXPORT Decoration : public QObject
      * the same DecorationShadow. E.g one DecorationShadow for all inactive Decorations and one
      * for the active Decoration.
      **/
-    Q_PROPERTY(KDecoration2::DecorationShadow *shadow READ shadow NOTIFY shadowChanged)
+    Q_PROPERTY(QPointer<KDecoration2::DecorationShadow> shadow READ shadow NOTIFY shadowChanged)
 public:
     virtual ~Decoration();
 
@@ -82,7 +82,7 @@ public:
     QRect titleRect() const;
     bool isOpaque() const;
 
-    DecorationShadow *shadow() const;
+    QPointer<DecorationShadow> shadow() const;
 
     /**
      * The decoration's geometry in local coordinates.
@@ -115,7 +115,7 @@ Q_SIGNALS:
     void windowFrameSectionChanged(Qt::WindowFrameSection);
     void titleRectChanged(const QRect &);
     void opaqueChanged(bool);
-    void shadowChanged(DecorationShadow *shadow);
+    void shadowChanged(QPointer<DecorationShadow> shadow);
     void titleBarDoubleClicked();
     void titleBarWheelEvent(const QPoint &angleDelta);
 
@@ -125,8 +125,7 @@ protected:
     void setExtendedBorders(int left, int right, int top, int bottom);
     void setTitleRect(const QRect &rect);
     void setOpaque(bool opaque);
-    void setShadow(DecorationShadow *shadow);
-    DecorationShadow *shadow();
+    void setShadow(QPointer<DecorationShadow> shadow);
 
     virtual void hoverEnterEvent(QHoverEvent *event);
     virtual void hoverLeaveEvent(QHoverEvent *event);
