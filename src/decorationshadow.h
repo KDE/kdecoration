@@ -142,7 +142,8 @@ Q_SIGNALS:
     void paddingLeftChanged(int);
 
 private:
-    QScopedPointer<DecorationShadowPrivate> d;
+    class Private;
+    QScopedPointer<Private> d;
 };
 
 }

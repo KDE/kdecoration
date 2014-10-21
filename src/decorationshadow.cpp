@@ -23,7 +23,7 @@
 namespace KDecoration2
 {
 
-DecorationShadowPrivate::DecorationShadowPrivate(DecorationShadow *parent)
+DecorationShadow::Private::Private(DecorationShadow *parent)
     : paddingTop(0)
     , paddingRight(0)
     , paddingBottom(0)
@@ -32,11 +32,11 @@ DecorationShadowPrivate::DecorationShadowPrivate(DecorationShadow *parent)
 {
 }
 
-DecorationShadowPrivate::~DecorationShadowPrivate() = default;
+DecorationShadow::Private::~Private() = default;
 
 DecorationShadow::DecorationShadow(QObject *parent)
     : QObject(parent)
-    , d(new DecorationShadowPrivate(this))
+    , d(new Private(this))
 {
 }
 

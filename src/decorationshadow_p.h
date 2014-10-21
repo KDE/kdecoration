@@ -31,18 +31,18 @@
 // We mean it.
 //
 
+#include "decorationshadow.h"
+
 #include <QImage>
 
 namespace KDecoration2
 {
 
-class DecorationShadow;
-
-class DecorationShadowPrivate
+class DecorationShadow::Private
 {
 public:
-    explicit DecorationShadowPrivate(DecorationShadow *parent);
-    ~DecorationShadowPrivate();
+    explicit Private(DecorationShadow *parent);
+    ~Private();
     QImage shadow;
     QSize topLeft;
     QSize top;
