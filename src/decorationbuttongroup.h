@@ -122,7 +122,8 @@ Q_SIGNALS:
     void posChanged(const QPointF&);
 
 private:
-    QScopedPointer<DecorationButtonGroupPrivate> d;
+    class Private;
+    QScopedPointer<Private> d;
 };
 
 } // namespace

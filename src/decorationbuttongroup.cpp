@@ -27,16 +27,16 @@
 namespace KDecoration2
 {
 
-DecorationButtonGroupPrivate::DecorationButtonGroupPrivate(Decoration *decoration, DecorationButtonGroup *parent)
+DecorationButtonGroup::Private::Private(Decoration *decoration, DecorationButtonGroup *parent)
     : q(parent)
     , m_decoration(decoration)
     , m_spacing(0.0)
 {
 }
 
-DecorationButtonGroupPrivate::~DecorationButtonGroupPrivate() = default;
+DecorationButtonGroup::Private::~Private() = default;
 
-void DecorationButtonGroupPrivate::setSpacing(qreal spacing)
+void DecorationButtonGroup::Private::setSpacing(qreal spacing)
 {
     if (m_spacing == spacing) {
         return;
@@ -46,7 +46,7 @@ void DecorationButtonGroupPrivate::setSpacing(qreal spacing)
     updateLayout();
 }
 
-void DecorationButtonGroupPrivate::setGeometry(const QRectF &geometry)
+void DecorationButtonGroup::Private::setGeometry(const QRectF &geometry)
 {
     if (m_geometry == geometry) {
         return;
@@ -57,7 +57,7 @@ void DecorationButtonGroupPrivate::setGeometry(const QRectF &geometry)
 
 static bool s_layoutRecursion = false;
 
-void DecorationButtonGroupPrivate::updateLayout()
+void DecorationButtonGroup::Private::updateLayout()
 {
     if (s_layoutRecursion) {
         return;
@@ -95,13 +95,13 @@ void DecorationButtonGroupPrivate::updateLayout()
 
 DecorationButtonGroup::DecorationButtonGroup(Decoration *parent)
     : QObject(parent)
-    , d(new DecorationButtonGroupPrivate(parent, this))
+    , d(new Private(parent, this))
 {
 }
 
 DecorationButtonGroup::DecorationButtonGroup(DecorationButtonGroup::Position type, Decoration *parent, std::function<DecorationButton*(DecorationButtonType, Decoration*, QObject*)> buttonCreator)
     : QObject(parent)
-    , d(new DecorationButtonGroupPrivate(parent, this))
+    , d(new Private(parent, this))
 {
     auto createButtons = [=] {
         const QList<DecorationButtonType> buttons = (type == Position::Left) ?

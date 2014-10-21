@@ -19,6 +19,7 @@
  */
 #ifndef KDECORATION2_DECORATIONBUTTONGROUP_P_H
 #define KDECORATION2_DECORATIONBUTTONGROUP_P_H
+#include "decorationbuttongroup.h"
 
 #include <QRectF>
 
@@ -37,14 +38,12 @@ namespace KDecoration2
 {
 
 class Decoration;
-class DecorationButton;
-class DecorationButtonGroup;
 
-class DecorationButtonGroupPrivate
+class DecorationButtonGroup::Private
 {
 public:
-    explicit DecorationButtonGroupPrivate(Decoration *decoration, DecorationButtonGroup *parent);
-    ~DecorationButtonGroupPrivate();
+    explicit Private(Decoration *decoration, DecorationButtonGroup *parent);
+    ~Private();
 
     Decoration *decoration() const {
         return m_decoration;
