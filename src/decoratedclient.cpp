@@ -68,14 +68,4 @@ DELEGATE(Qt::Edges, borderingScreenEdges)
 
 #undef DELEGATE
 
-const DecoratedClientPrivate *DecoratedClient::handle() const
-{
-    return d.get();
-}
-
-DecoratedClientPrivate *DecoratedClient::handle()
-{
-    return d.get();
-}
-
 } // namespace

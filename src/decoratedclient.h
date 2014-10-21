@@ -202,15 +202,6 @@ public:
     Decoration *decoration() const;
     QPalette palette() const;
 
-    /**
-     * @internal
-     **/
-    DecoratedClientPrivate *handle();
-    /**
-     * @internal
-     **/
-    const DecoratedClientPrivate *handle() const;
-
 Q_SIGNALS:
     void activeChanged(bool);
     void captionChanged(QString);
