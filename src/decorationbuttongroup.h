@@ -82,8 +82,7 @@ public:
      **/
     virtual void paint(QPainter *painter);
 
-    Decoration *decoration() const;
-    Decoration *decoration();
+    QPointer<Decoration> decoration() const;
 
     qreal spacing() const;
     void setSpacing(qreal spacing);

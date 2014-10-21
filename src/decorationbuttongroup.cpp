@@ -127,14 +127,9 @@ DecorationButtonGroup::DecorationButtonGroup(DecorationButtonGroup::Position typ
 
 DecorationButtonGroup::~DecorationButtonGroup() = default;
 
-Decoration *DecorationButtonGroup::decoration()
+QPointer<Decoration> DecorationButtonGroup::decoration() const
 {
-    return d->decoration();
-}
-
-Decoration *DecorationButtonGroup::decoration() const
-{
-    return d->decoration();
+    return QPointer<Decoration>(d->decoration());
 }
 
 QRectF DecorationButtonGroup::geometry() const
