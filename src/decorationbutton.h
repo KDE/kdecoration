@@ -24,6 +24,7 @@
 #include "decorationdefines.h"
 
 #include <QObject>
+#include <QPointer>
 #include <QRect>
 
 class QHoverEvent;
@@ -122,8 +123,7 @@ public:
      **/
     virtual void paint(QPainter *painter) = 0;
 
-    Decoration *decoration();
-    const Decoration *decoration() const;
+    QPointer<Decoration> decoration() const;
 
     virtual bool event(QEvent *event) override;
 
@@ -160,7 +160,7 @@ Q_SIGNALS:
     void visibilityChanged(bool);
 
 protected:
-    explicit DecorationButton(DecorationButtonType type, Decoration *decoration, QObject *parent = nullptr);
+    explicit DecorationButton(DecorationButtonType type, QPointer<Decoration> decoration, QObject *parent = nullptr);
 
     virtual void hoverEnterEvent(QHoverEvent *event);
     virtual void hoverLeaveEvent(QHoverEvent *event);

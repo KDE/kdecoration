@@ -19,7 +19,7 @@
  */
 #include "mockbutton.h"
 
-MockButton::MockButton(KDecoration2::DecorationButtonType type, KDecoration2::Decoration *decoration, QObject *parent)
+MockButton::MockButton(KDecoration2::DecorationButtonType type, QPointer<KDecoration2::Decoration> decoration, QObject *parent)
     : DecorationButton(type, decoration, parent)
 {
 }

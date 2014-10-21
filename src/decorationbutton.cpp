@@ -38,7 +38,7 @@ uint qHash(const DecorationButtonType &type)
     return static_cast<uint>(type);
 }
 
-DecorationButton::Private::Private(DecorationButtonType type, Decoration *decoration, DecorationButton *parent)
+DecorationButton::Private::Private(DecorationButtonType type, QPointer<Decoration> decoration, DecorationButton *parent)
     : q(parent)
     , m_decoration(decoration)
     , m_type(type)
@@ -280,7 +280,7 @@ void DecorationButton::Private::stopPressAndHold()
     }
 }
 
-DecorationButton::DecorationButton(DecorationButtonType type, Decoration *decoration, QObject *parent)
+DecorationButton::DecorationButton(DecorationButtonType type, QPointer<Decoration> decoration, QObject *parent)
     : QObject(parent)
     , d(new Private(type, decoration, this))
 {
@@ -315,7 +315,7 @@ type DecorationButton::name() const \
 DELEGATE(isHovered, bool)
 DELEGATE(isPressed, bool)
 DELEGATE(geometry, QRect)
-DELEGATE(decoration, const Decoration*)
+DELEGATE(decoration, QPointer<Decoration>)
 DELEGATE(acceptedButtons, Qt::MouseButtons)
 DELEGATE(isEnabled, bool)
 DELEGATE(isChecked, bool)
@@ -339,11 +339,6 @@ DELEGATE(setCheckable, bool)
 DELEGATE(setVisible, bool)
 
 #undef DELEGATE
-
-Decoration *DecorationButton::decoration()
-{
-    return d->decoration();
-}
 
 bool DecorationButton::event(QEvent *event)
 {

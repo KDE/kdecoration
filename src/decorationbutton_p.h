@@ -42,7 +42,7 @@ namespace KDecoration2
 class DecorationButton::Private
 {
 public:
-    explicit Private(DecorationButtonType type, Decoration *decoration, DecorationButton *parent);
+    explicit Private(DecorationButtonType type, QPointer<Decoration> decoration, DecorationButton *parent);
     ~Private();
 
     const QRect &geometry() const {
@@ -63,10 +63,7 @@ public:
         return m_pressed.testFlag(button);
     }
 
-    Decoration *decoration() {
-        return m_decoration;
-    }
-    const Decoration *decoration() const {
+    QPointer<Decoration> decoration() const {
         return m_decoration;
     }
     void setHovered(bool hovered);
@@ -110,7 +107,7 @@ public:
 private:
     void init();
     DecorationButton *q;
-    Decoration *m_decoration;
+    QPointer<Decoration> m_decoration;
     DecorationButtonType m_type;
     QRect m_geometry;
     bool m_hovered;

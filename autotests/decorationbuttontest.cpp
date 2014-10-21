@@ -67,9 +67,9 @@ void DecorationButtonTest::testButton()
     MockDecoration mockDecoration;
     // create a custom button and verify the base settings
     MockButton button(KDecoration2::DecorationButtonType::Custom, &mockDecoration);
-    QCOMPARE(button.decoration(), &mockDecoration);
+    QCOMPARE(button.decoration().data(), &mockDecoration);
     const MockButton &constRef(button);
-    QCOMPARE(constRef.decoration(), &mockDecoration);
+    QCOMPARE(constRef.decoration().data(), &mockDecoration);
     QCOMPARE(button.type(), KDecoration2::DecorationButtonType::Custom);
     QCOMPARE(button.acceptedButtons(), Qt::MouseButtons(Qt::LeftButton));
     QCOMPARE(button.isCheckable(), false);
