@@ -24,6 +24,7 @@
 #include "decorationshadow.h"
 
 #include <QObject>
+#include <QPointer>
 #include <QRect>
 
 class QHoverEvent;
@@ -67,8 +68,7 @@ class KDECORATIONS2_EXPORT Decoration : public QObject
 public:
     virtual ~Decoration();
 
-    DecoratedClient *client();
-    const DecoratedClient *client() const;
+    QPointer<DecoratedClient> client() const;
 
     int borderLeft() const;
     int borderRight() const;

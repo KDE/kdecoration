@@ -221,14 +221,9 @@ Decoration::Decoration(QObject *parent)
 
 Decoration::~Decoration() = default;
 
-DecoratedClient *Decoration::client()
+QPointer<DecoratedClient> Decoration::client() const
 {
-    return d->client();
-}
-
-const DecoratedClient *Decoration::client() const
-{
-    return d->client();
+    return QPointer<DecoratedClient>(d->client());
 }
 
 void Decoration::setBorders(int left, int right, int top, int bottom)
