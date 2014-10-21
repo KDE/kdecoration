@@ -393,7 +393,6 @@ void DecorationButtonTest::testHoverLeaveIgnore()
     button.event(&enterEvent);
     QCOMPARE(enterEvent.isAccepted(), true);
     QCOMPARE(button.isHovered(), true);
-    QEXPECT_FAIL("", "Pointer entered not yet emitted", Continue);
     QCOMPARE(pointerEnteredSpy.count(), 1);
     QCOMPARE(hoveredChangedSpy.count(), 1);
     QCOMPARE(hoveredChangedSpy.last().first().toBool(), true);
@@ -408,11 +407,7 @@ void DecorationButtonTest::testHoverLeaveIgnore()
     leftEvent.setAccepted(false);
     button.event(&leftEvent);
     QCOMPARE(leftEvent.isAccepted(), false);
-    QEXPECT_FAIL("", "Pointer entered not yet emitted", Continue);
     QCOMPARE(pointerEnteredSpy.count(), 1);
-    QEXPECT_FAIL("all-disabled", "Pointer leave not yet emitted", Continue);
-    QEXPECT_FAIL("enabled", "Pointer leave not yet emitted", Continue);
-    QEXPECT_FAIL("visible", "Pointer leave not yet emitted", Continue);
     QTEST(pointerLeavedSpy.count(), "expectedLeaveCount");
     QTEST(hoveredChangedSpy.count(), "expectedHoverChangedCount");
     QCOMPARE(hoveredChangedSpy.last().first().toBool(), button.isHovered());
@@ -439,7 +434,6 @@ void DecorationButtonTest::testHover()
     button.event(&enterEvent);
     QCOMPARE(enterEvent.isAccepted(), true);
     QCOMPARE(button.isHovered(), true);
-    QEXPECT_FAIL("", "Pointer entered not yet emitted", Continue);
     QCOMPARE(pointerEnteredSpy.count(), 1);
     QCOMPARE(hoveredChangedSpy.count(), 1);
     QCOMPARE(hoveredChangedSpy.last().first().toBool(), true);
@@ -454,9 +448,7 @@ void DecorationButtonTest::testHover()
     leftEvent.setAccepted(false);
     button.event(&leftEvent);
     QCOMPARE(leftEvent.isAccepted(), true);
-    QEXPECT_FAIL("", "Pointer entered not yet emitted", Continue);
     QCOMPARE(pointerEnteredSpy.count(), 1);
-    QEXPECT_FAIL("", "Pointer leave not yet emitted", Continue);
     QCOMPARE(pointerLeavedSpy.count(), 1);
     QCOMPARE(hoveredChangedSpy.count(), 2);
     QCOMPARE(hoveredChangedSpy.last().first().toBool(), false);

@@ -292,6 +292,15 @@ DecorationButton::DecorationButton(DecorationButtonType type, QPointer<Decoratio
     connect(this, &DecorationButton::checkedChanged, this, updateSlot);
     connect(this, &DecorationButton::enabledChanged, this, updateSlot);
     connect(this, &DecorationButton::visibilityChanged, this, updateSlot);
+    connect(this, &DecorationButton::hoveredChanged, this,
+        [this](bool hovered) {
+            if (hovered) {
+                emit pointerEntered();
+            } else {
+                emit pointerLeaved();
+            }
+        }
+    );
 }
 
 DecorationButton::~DecorationButton() = default;
