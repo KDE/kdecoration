@@ -142,7 +142,8 @@ protected:
     virtual void wheelEvent(QWheelEvent *event);
 
 private:
-    QScopedPointer<DecorationPrivate> d;
+    class Private;
+    QScopedPointer<Private> d;
 };
 
 } // namespace

@@ -19,6 +19,7 @@
  */
 #ifndef KDECORATION2_DECORATION_P_H
 #define KDECORATION2_DECORATION_P_H
+#include "decoration.h"
 
 #include <QElapsedTimer>
 
@@ -41,10 +42,10 @@ class DecorationButton;
 class DecoratedClient;
 class DecorationShadow;
 
-class DecorationPrivate
+class Decoration::Private
 {
 public:
-    DecorationPrivate(Decoration *decoration);
+    Private(Decoration *decoration);
     void requestClose();
     void requestMaximize(Qt::MouseButtons buttons);
     void requestMinimize();

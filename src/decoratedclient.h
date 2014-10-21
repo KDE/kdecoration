@@ -229,7 +229,7 @@ Q_SIGNALS:
     void borderingScreenEdgesChanged(Qt::Edges edges);
 
 private:
-    friend class DecorationPrivate;
+    friend class Decoration;
     DecoratedClient(Decoration *parent);
     std::unique_ptr<DecoratedClientPrivate> d;
 };

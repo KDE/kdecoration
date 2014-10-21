@@ -32,7 +32,7 @@
 namespace KDecoration2
 {
 
-DecorationPrivate::DecorationPrivate(Decoration *deco)
+Decoration::Private::Private(Decoration *deco)
     : q(deco)
     , m_client(new DecoratedClient(deco))
     , m_borderLeft(0)
@@ -49,7 +49,7 @@ DecorationPrivate::DecorationPrivate(Decoration *deco)
 {
 }
 
-void DecorationPrivate::setBorders(int left, int right, int top, int bottom)
+void Decoration::Private::setBorders(int left, int right, int top, int bottom)
 {
     if (m_borderLeft == left
             && m_borderRight == right
@@ -64,7 +64,7 @@ void DecorationPrivate::setBorders(int left, int right, int top, int bottom)
     emit q->bordersChanged();
 }
 
-void DecorationPrivate::setExtendedBorders(int left, int right, int top, int bottom)
+void Decoration::Private::setExtendedBorders(int left, int right, int top, int bottom)
 {
     if (m_extendedBorderLeft == left
             && m_extendedBorderRight == right
@@ -79,7 +79,7 @@ void DecorationPrivate::setExtendedBorders(int left, int right, int top, int bot
     emit q->extendedBordersChanged();
 }
 
-void DecorationPrivate::setWindowFrameSection(Qt::WindowFrameSection section)
+void Decoration::Private::setWindowFrameSection(Qt::WindowFrameSection section)
 {
     if (m_windowFrameSection == section) {
         return;
@@ -88,7 +88,7 @@ void DecorationPrivate::setWindowFrameSection(Qt::WindowFrameSection section)
     emit q->windowFrameSectionChanged(m_windowFrameSection);
 }
 
-void DecorationPrivate::updateWindowFrameSection(const QPoint &mousePosition)
+void Decoration::Private::updateWindowFrameSection(const QPoint &mousePosition)
 {
     if (m_titleRect.contains(mousePosition)) {
         setWindowFrameSection(Qt::TitleBarArea);
@@ -138,7 +138,7 @@ void DecorationPrivate::updateWindowFrameSection(const QPoint &mousePosition)
     setWindowFrameSection(Qt::NoSection);
 }
 
-void DecorationPrivate::setTitleRect(const QRect &rect)
+void Decoration::Private::setTitleRect(const QRect &rect)
 {
     if (m_titleRect == rect) {
         return;
@@ -148,7 +148,7 @@ void DecorationPrivate::setTitleRect(const QRect &rect)
     // TODO: updateWindowFrameSection?
 }
 
-void DecorationPrivate::addButton(DecorationButton *button)
+void Decoration::Private::addButton(DecorationButton *button)
 {
     Q_ASSERT(!m_buttons.contains(button));
     m_buttons << button;
@@ -159,7 +159,7 @@ void DecorationPrivate::addButton(DecorationButton *button)
     );
 }
 
-void DecorationPrivate::setOpaque(bool opaque)
+void Decoration::Private::setOpaque(bool opaque)
 {
     if (m_opaque == opaque) {
         return;
@@ -168,7 +168,7 @@ void DecorationPrivate::setOpaque(bool opaque)
     emit q->opaqueChanged(m_opaque);
 }
 
-void DecorationPrivate::setShadow(DecorationShadow *shadow)
+void Decoration::Private::setShadow(DecorationShadow *shadow)
 {
     if (m_shadow == shadow) {
         return;
@@ -177,7 +177,7 @@ void DecorationPrivate::setShadow(DecorationShadow *shadow)
     emit q->shadowChanged(shadow);
 }
 
-bool DecorationPrivate::wasDoubleClick() const
+bool Decoration::Private::wasDoubleClick() const
 {
     if (!m_doubleClickTimer.isValid()) {
         return false;
@@ -186,7 +186,7 @@ bool DecorationPrivate::wasDoubleClick() const
 }
 
 #define DELEGATE(name) \
-void DecorationPrivate::name() \
+void Decoration::Private::name() \
 { \
     m_client->d->name(); \
 }
@@ -202,7 +202,7 @@ DELEGATE(requestShowWindowMenu)
 #undef DELEGATE
 
 #define DELEGATE(name, type) \
-void DecorationPrivate::name(type a) \
+void Decoration::Private::name(type a) \
 { \
     m_client->d->name(a); \
 }
@@ -214,7 +214,7 @@ DELEGATE(requestMaximize, Qt::MouseButtons)
 
 Decoration::Decoration(QObject *parent)
     : QObject(parent)
-    , d(new DecorationPrivate(this))
+    , d(new Private(this))
 {
     connect(this, &Decoration::bordersChanged, this, [this]{ update(); });
 }
