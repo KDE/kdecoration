@@ -38,7 +38,7 @@ uint qHash(const DecorationButtonType &type)
     return static_cast<uint>(type);
 }
 
-DecorationButtonPrivate::DecorationButtonPrivate(DecorationButtonType type, Decoration *decoration, DecorationButton *parent)
+DecorationButton::Private::Private(DecorationButtonType type, Decoration *decoration, DecorationButton *parent)
     : q(parent)
     , m_decoration(decoration)
     , m_type(type)
@@ -55,9 +55,9 @@ DecorationButtonPrivate::DecorationButtonPrivate(DecorationButtonType type, Deco
     init();
 }
 
-DecorationButtonPrivate::~DecorationButtonPrivate() = default;
+DecorationButton::Private::~Private() = default;
 
-void DecorationButtonPrivate::init()
+void DecorationButton::Private::init()
 {
     auto c = m_decoration->client().data();
     switch (m_type) {
@@ -132,7 +132,7 @@ void DecorationButtonPrivate::init()
     }
 }
 
-void DecorationButtonPrivate::setGeometry(const QRect &geometry)
+void DecorationButton::Private::setGeometry(const QRect &geometry)
 {
     if (m_geometry == geometry) {
         return;
@@ -141,7 +141,7 @@ void DecorationButtonPrivate::setGeometry(const QRect &geometry)
     emit q->geometryChanged(m_geometry);
 }
 
-void DecorationButtonPrivate::setHovered(bool hovered)
+void DecorationButton::Private::setHovered(bool hovered)
 {
     if (m_hovered == hovered) {
         return;
@@ -150,7 +150,7 @@ void DecorationButtonPrivate::setHovered(bool hovered)
     emit q->hoveredChanged(m_hovered);
 }
 
-void DecorationButtonPrivate::setEnabled(bool enabled)
+void DecorationButton::Private::setEnabled(bool enabled)
 {
     if (m_enabled == enabled) {
         return;
@@ -166,7 +166,7 @@ void DecorationButtonPrivate::setEnabled(bool enabled)
     }
 }
 
-void DecorationButtonPrivate::setVisible(bool visible)
+void DecorationButton::Private::setVisible(bool visible)
 {
     if (m_visible == visible) {
         return;
@@ -182,7 +182,7 @@ void DecorationButtonPrivate::setVisible(bool visible)
     }
 }
 
-void DecorationButtonPrivate::setChecked(bool checked)
+void DecorationButton::Private::setChecked(bool checked)
 {
     if (!m_checkable || m_checked == checked) {
         return;
@@ -191,7 +191,7 @@ void DecorationButtonPrivate::setChecked(bool checked)
     emit q->checkedChanged(m_checked);
 }
 
-void DecorationButtonPrivate::setCheckable(bool checkable)
+void DecorationButton::Private::setCheckable(bool checkable)
 {
     if (m_checkable == checkable) {
         return;
@@ -203,7 +203,7 @@ void DecorationButtonPrivate::setCheckable(bool checkable)
     emit q->checkableChanged(m_checkable);
 }
 
-void DecorationButtonPrivate::setPressed(Qt::MouseButton button, bool pressed)
+void DecorationButton::Private::setPressed(Qt::MouseButton button, bool pressed)
 {
     if (pressed) {
         m_pressed = m_pressed | button;
@@ -213,7 +213,7 @@ void DecorationButtonPrivate::setPressed(Qt::MouseButton button, bool pressed)
     emit q->pressedChanged(isPressed());
 }
 
-void DecorationButtonPrivate::setAcceptedButtons(Qt::MouseButtons buttons)
+void DecorationButton::Private::setAcceptedButtons(Qt::MouseButtons buttons)
 {
     if (m_buttons == buttons) {
         return;
@@ -222,7 +222,7 @@ void DecorationButtonPrivate::setAcceptedButtons(Qt::MouseButtons buttons)
     emit q->acceptedButtonsChanged(m_buttons);
 }
 
-void DecorationButtonPrivate::startDoubleClickTimer()
+void DecorationButton::Private::startDoubleClickTimer()
 {
     if (!m_doubleClickEnabled) {
         return;
@@ -233,7 +233,7 @@ void DecorationButtonPrivate::startDoubleClickTimer()
     m_doubleClickTimer->start();
 }
 
-void DecorationButtonPrivate::invalidateDoubleClickTimer()
+void DecorationButton::Private::invalidateDoubleClickTimer()
 {
     if (m_doubleClickTimer.isNull()) {
         return;
@@ -241,7 +241,7 @@ void DecorationButtonPrivate::invalidateDoubleClickTimer()
     m_doubleClickTimer->invalidate();
 }
 
-bool DecorationButtonPrivate::wasDoubleClick() const
+bool DecorationButton::Private::wasDoubleClick() const
 {
     if (m_doubleClickTimer.isNull() || !m_doubleClickTimer->isValid()) {
         return false;
@@ -250,7 +250,7 @@ bool DecorationButtonPrivate::wasDoubleClick() const
 }
 
 
-void DecorationButtonPrivate::setPressAndHold(bool enable) {
+void DecorationButton::Private::setPressAndHold(bool enable) {
     if (m_pressAndHold == enable) {
         return;
     }
@@ -260,7 +260,7 @@ void DecorationButtonPrivate::setPressAndHold(bool enable) {
     }
 }
 
-void DecorationButtonPrivate::startPressAndHold()
+void DecorationButton::Private::startPressAndHold()
 {
     if (!m_pressAndHold) {
         return;
@@ -273,7 +273,7 @@ void DecorationButtonPrivate::startPressAndHold()
     m_pressAndHoldTimer->start(QGuiApplication::styleHints()->mousePressAndHoldInterval());
 }
 
-void DecorationButtonPrivate::stopPressAndHold()
+void DecorationButton::Private::stopPressAndHold()
 {
     if (!m_pressAndHoldTimer.isNull()) {
         m_pressAndHoldTimer->stop();
@@ -282,7 +282,7 @@ void DecorationButtonPrivate::stopPressAndHold()
 
 DecorationButton::DecorationButton(DecorationButtonType type, Decoration *decoration, QObject *parent)
     : QObject(parent)
-    , d(new DecorationButtonPrivate(type, decoration, this))
+    , d(new Private(type, decoration, this))
 {
     decoration->d->addButton(this);
     connect(this, &DecorationButton::geometryChanged, this, &DecorationButton::update);

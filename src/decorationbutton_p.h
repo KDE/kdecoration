@@ -39,11 +39,11 @@ class QTimer;
 namespace KDecoration2
 {
 
-class DecorationButtonPrivate
+class DecorationButton::Private
 {
 public:
-    explicit DecorationButtonPrivate(DecorationButtonType type, Decoration *decoration, DecorationButton *parent);
-    ~DecorationButtonPrivate();
+    explicit Private(DecorationButtonType type, Decoration *decoration, DecorationButton *parent);
+    ~Private();
 
     const QRect &geometry() const {
         return m_geometry;

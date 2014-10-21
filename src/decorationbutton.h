@@ -170,7 +170,8 @@ protected:
     virtual void mouseReleaseEvent(QMouseEvent *event);
 
 private:
-    QScopedPointer<DecorationButtonPrivate> d;
+    class Private;
+    QScopedPointer<Private> d;
 };
 
 } // namespace
