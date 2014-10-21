@@ -301,6 +301,15 @@ DecorationButton::DecorationButton(DecorationButtonType type, QPointer<Decoratio
             }
         }
     );
+    connect(this, &DecorationButton::pressedChanged, this,
+        [this](bool p) {
+            if (p) {
+                emit pressed();
+            } else {
+                emit released();
+            }
+        }
+    );
 }
 
 DecorationButton::~DecorationButton() = default;

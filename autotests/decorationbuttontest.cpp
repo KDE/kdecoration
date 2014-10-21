@@ -287,7 +287,6 @@ void DecorationButtonTest::testReleaseIgnore()
     button.event(&pressEvent);
     QCOMPARE(pressEvent.isAccepted(), true);
     QCOMPARE(button.isPressed(), true);
-    QEXPECT_FAIL("", "Pressed signal not yet implemented", Continue);
     QCOMPARE(pressedSpy.count(), 1);
     QCOMPARE(pressedChangedSpy.count(), 1);
     QCOMPARE(pressedChangedSpy.last().first().toBool(), true);
@@ -304,7 +303,6 @@ void DecorationButtonTest::testReleaseIgnore()
     button.event(&releaseEvent);
     QTEST(releaseEvent.isAccepted(), "expectedAccepted");
     QTEST(button.isPressed(), "expectedPressed");
-    QEXPECT_FAIL("", "Pressed signal not yet implemented", Continue);
     QCOMPARE(pressedSpy.count(), 1);
     QTEST(pressedChangedSpy.count(), "expectedPressedChanged");
     QCOMPARE(pressedChangedSpy.last().first().toBool(), button.isPressed());
@@ -553,7 +551,6 @@ void DecorationButtonTest::testClose()
     QCOMPARE(pressEvent.isAccepted(), true);
     QCOMPARE(button.isPressed(), true);
     QCOMPARE(clickedSpy.count(), 0);
-    QEXPECT_FAIL("", "Pressed signal is not yet emitted", Continue);
     QCOMPARE(pressedSpy.count(), 1);
     QCOMPARE(releasedSpy.count(), 0);
     QCOMPARE(closeRequestedSpy.count(), 0);
@@ -567,9 +564,7 @@ void DecorationButtonTest::testClose()
     QCOMPARE(button.isPressed(), false);
     QCOMPARE(clickedSpy.count(), 1);
     QCOMPARE(clickedSpy.first().first().value<Qt::MouseButton>(), Qt::LeftButton);
-    QEXPECT_FAIL("", "Pressed signal is not yet emitted", Continue);
     QCOMPARE(pressedSpy.count(), 1);
-    QEXPECT_FAIL("", "Released signal is not yet emitted", Continue);
     QCOMPARE(releasedSpy.count(), 1);
     QVERIFY(closeRequestedSpy.wait());
     QCOMPARE(closeRequestedSpy.count(), 1);
@@ -617,7 +612,6 @@ void DecorationButtonTest::testMinimize()
     QCOMPARE(pressEvent.isAccepted(), true);
     QCOMPARE(button.isPressed(), true);
     QCOMPARE(clickedSpy.count(), 0);
-    QEXPECT_FAIL("", "Pressed signal is not yet emitted", Continue);
     QCOMPARE(pressedSpy.count(), 1);
     QCOMPARE(releasedSpy.count(), 0);
     QCOMPARE(minimizeRequestedSpy.count(), 0);
@@ -631,9 +625,7 @@ void DecorationButtonTest::testMinimize()
     QCOMPARE(button.isPressed(), false);
     QCOMPARE(clickedSpy.count(), 1);
     QCOMPARE(clickedSpy.first().first().value<Qt::MouseButton>(), Qt::LeftButton);
-    QEXPECT_FAIL("", "Pressed signal is not yet emitted", Continue);
     QCOMPARE(pressedSpy.count(), 1);
-    QEXPECT_FAIL("", "Released signal is not yet emitted", Continue);
     QCOMPARE(releasedSpy.count(), 1);
     QVERIFY(minimizeRequestedSpy.wait());
     QCOMPARE(minimizeRequestedSpy.count(), 1);
@@ -681,7 +673,6 @@ void DecorationButtonTest::testQuickHelp()
     QCOMPARE(pressEvent.isAccepted(), true);
     QCOMPARE(button.isPressed(), true);
     QCOMPARE(clickedSpy.count(), 0);
-    QEXPECT_FAIL("", "Pressed signal is not yet emitted", Continue);
     QCOMPARE(pressedSpy.count(), 1);
     QCOMPARE(releasedSpy.count(), 0);
     QCOMPARE(quickhelpRequestedSpy.count(), 0);
@@ -695,9 +686,7 @@ void DecorationButtonTest::testQuickHelp()
     QCOMPARE(button.isPressed(), false);
     QCOMPARE(clickedSpy.count(), 1);
     QCOMPARE(clickedSpy.first().first().value<Qt::MouseButton>(), Qt::LeftButton);
-    QEXPECT_FAIL("", "Pressed signal is not yet emitted", Continue);
     QCOMPARE(pressedSpy.count(), 1);
-    QEXPECT_FAIL("", "Released signal is not yet emitted", Continue);
     QCOMPARE(releasedSpy.count(), 1);
     QVERIFY(quickhelpRequestedSpy.wait());
     QCOMPARE(quickhelpRequestedSpy.count(), 1);
@@ -736,7 +725,6 @@ void DecorationButtonTest::testKeepAbove()
     QCOMPARE(pressEvent.isAccepted(), true);
     QCOMPARE(button.isPressed(), true);
     QCOMPARE(clickedSpy.count(), 0);
-    QEXPECT_FAIL("", "Pressed signal is not yet emitted", Continue);
     QCOMPARE(pressedSpy.count(), 1);
     QCOMPARE(releasedSpy.count(), 0);
     QCOMPARE(keepAboveChangedSpy.count(), 0);
@@ -750,9 +738,7 @@ void DecorationButtonTest::testKeepAbove()
     QCOMPARE(button.isPressed(), false);
     QCOMPARE(clickedSpy.count(), 1);
     QCOMPARE(clickedSpy.first().first().value<Qt::MouseButton>(), Qt::LeftButton);
-    QEXPECT_FAIL("", "Pressed signal is not yet emitted", Continue);
     QCOMPARE(pressedSpy.count(), 1);
-    QEXPECT_FAIL("", "Released signal is not yet emitted", Continue);
     QCOMPARE(releasedSpy.count(), 1);
     QVERIFY(keepAboveChangedSpy.wait());
     QCOMPARE(keepAboveChangedSpy.count(), 1);
@@ -802,7 +788,6 @@ void DecorationButtonTest::testKeepBelow()
     QCOMPARE(pressEvent.isAccepted(), true);
     QCOMPARE(button.isPressed(), true);
     QCOMPARE(clickedSpy.count(), 0);
-    QEXPECT_FAIL("", "Pressed signal is not yet emitted", Continue);
     QCOMPARE(pressedSpy.count(), 1);
     QCOMPARE(releasedSpy.count(), 0);
     QCOMPARE(keepBelowChangedSpy.count(), 0);
@@ -816,9 +801,7 @@ void DecorationButtonTest::testKeepBelow()
     QCOMPARE(button.isPressed(), false);
     QCOMPARE(clickedSpy.count(), 1);
     QCOMPARE(clickedSpy.first().first().value<Qt::MouseButton>(), Qt::LeftButton);
-    QEXPECT_FAIL("", "Pressed signal is not yet emitted", Continue);
     QCOMPARE(pressedSpy.count(), 1);
-    QEXPECT_FAIL("", "Released signal is not yet emitted", Continue);
     QCOMPARE(releasedSpy.count(), 1);
     QVERIFY(keepBelowChangedSpy.wait());
     QCOMPARE(keepBelowChangedSpy.count(), 1);
@@ -877,7 +860,6 @@ void DecorationButtonTest::testShade()
     QCOMPARE(pressEvent.isAccepted(), true);
     QCOMPARE(button.isPressed(), true);
     QCOMPARE(clickedSpy.count(), 0);
-    QEXPECT_FAIL("", "Pressed signal is not yet emitted", Continue);
     QCOMPARE(pressedSpy.count(), 1);
     QCOMPARE(releasedSpy.count(), 0);
     QCOMPARE(shadedChangedSpy.count(), 0);
@@ -891,9 +873,7 @@ void DecorationButtonTest::testShade()
     QCOMPARE(button.isPressed(), false);
     QCOMPARE(clickedSpy.count(), 1);
     QCOMPARE(clickedSpy.first().first().value<Qt::MouseButton>(), Qt::LeftButton);
-    QEXPECT_FAIL("", "Pressed signal is not yet emitted", Continue);
     QCOMPARE(pressedSpy.count(), 1);
-    QEXPECT_FAIL("", "Released signal is not yet emitted", Continue);
     QCOMPARE(releasedSpy.count(), 1);
     QVERIFY(shadedChangedSpy.wait());
     QCOMPARE(shadedChangedSpy.count(), 1);
@@ -956,7 +936,6 @@ void DecorationButtonTest::testMaximize()
     QCOMPARE(leftPressEvent.isAccepted(), true);
     QCOMPARE(button.isPressed(), true);
     QCOMPARE(clickedSpy.count(), 0);
-    QEXPECT_FAIL("", "Pressed signal is not yet emitted", Continue);
     QCOMPARE(pressedSpy.count(), 1);
     QCOMPARE(releasedSpy.count(), 0);
     QCOMPARE(maximizedChangedSpy.count(), 0);
@@ -970,9 +949,7 @@ void DecorationButtonTest::testMaximize()
     QCOMPARE(button.isPressed(), false);
     QCOMPARE(clickedSpy.count(), 1);
     QCOMPARE(clickedSpy.first().first().value<Qt::MouseButton>(), Qt::LeftButton);
-    QEXPECT_FAIL("", "Pressed signal is not yet emitted", Continue);
     QCOMPARE(pressedSpy.count(), 1);
-    QEXPECT_FAIL("", "Released signal is not yet emitted", Continue);
     QCOMPARE(releasedSpy.count(), 1);
     QVERIFY(maximizedChangedSpy.wait());
     QCOMPARE(maximizedChangedSpy.count(), 1);
@@ -1073,7 +1050,6 @@ void DecorationButtonTest::testOnAllDesktops()
     QCOMPARE(pressEvent.isAccepted(), true);
     QCOMPARE(button.isPressed(), true);
     QCOMPARE(clickedSpy.count(), 0);
-    QEXPECT_FAIL("", "Pressed signal is not yet emitted", Continue);
     QCOMPARE(pressedSpy.count(), 1);
     QCOMPARE(releasedSpy.count(), 0);
     QCOMPARE(onAllDesktopsChangedSpy.count(), 0);
@@ -1087,9 +1063,7 @@ void DecorationButtonTest::testOnAllDesktops()
     QCOMPARE(button.isPressed(), false);
     QCOMPARE(clickedSpy.count(), 1);
     QCOMPARE(clickedSpy.first().first().value<Qt::MouseButton>(), Qt::LeftButton);
-    QEXPECT_FAIL("", "Pressed signal is not yet emitted", Continue);
     QCOMPARE(pressedSpy.count(), 1);
-    QEXPECT_FAIL("", "Released signal is not yet emitted", Continue);
     QCOMPARE(releasedSpy.count(), 1);
     QVERIFY(onAllDesktopsChangedSpy.wait());
     QCOMPARE(onAllDesktopsChangedSpy.count(), 1);
@@ -1132,7 +1106,6 @@ void DecorationButtonTest::testMenu()
     QCOMPARE(pressEvent.isAccepted(), true);
     QCOMPARE(button.isPressed(), true);
     QCOMPARE(clickedSpy.count(), 0);
-    QEXPECT_FAIL("", "Pressed signal is not yet emitted", Continue);
     QCOMPARE(pressedSpy.count(), 1);
     QCOMPARE(releasedSpy.count(), 0);
     QCOMPARE(menuRequestedSpy.count(), 0);
@@ -1146,9 +1119,7 @@ void DecorationButtonTest::testMenu()
     QCOMPARE(button.isPressed(), false);
     QCOMPARE(clickedSpy.count(), 1);
     QCOMPARE(clickedSpy.first().first().value<Qt::MouseButton>(), Qt::LeftButton);
-    QEXPECT_FAIL("", "Pressed signal is not yet emitted", Continue);
     QCOMPARE(pressedSpy.count(), 1);
-    QEXPECT_FAIL("", "Released signal is not yet emitted", Continue);
     QCOMPARE(releasedSpy.count(), 1);
     QVERIFY(menuRequestedSpy.wait());
     QCOMPARE(menuRequestedSpy.count(), 1);
