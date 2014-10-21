@@ -94,11 +94,6 @@ public:
 
     virtual void paint(QPainter *painter) = 0;
 
-    /**
-     * internal
-     **/
-    void addButton(DecorationButton *button);
-
     virtual bool event(QEvent *event) override;
 
 public Q_SLOTS:
@@ -142,6 +137,7 @@ protected:
     virtual void wheelEvent(QWheelEvent *event);
 
 private:
+    friend class DecorationButton;
     class Private;
     QScopedPointer<Private> d;
 };

@@ -20,6 +20,7 @@
 #include "decorationbutton.h"
 #include "decorationbutton_p.h"
 #include "decoration.h"
+#include "decoration_p.h"
 #include "decoratedclient.h"
 #include "decorationsettings.h"
 
@@ -283,7 +284,7 @@ DecorationButton::DecorationButton(DecorationButtonType type, Decoration *decora
     : QObject(parent)
     , d(new DecorationButtonPrivate(type, decoration, this))
 {
-    decoration->addButton(this);
+    decoration->d->addButton(this);
     connect(this, &DecorationButton::geometryChanged, this, &DecorationButton::update);
     auto updateSlot = [this]() { update(); };
     connect(this, &DecorationButton::hoveredChanged, this, updateSlot);

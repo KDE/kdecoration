@@ -265,7 +265,6 @@ void Decoration::name(type a) \
 }
 
 DELEGATE(requestMaximize, Qt::MouseButtons)
-DELEGATE(addButton, DecorationButton*)
 DELEGATE(setTitleRect, const QRect&)
 DELEGATE(setOpaque, bool)
 DELEGATE(setShadow, DecorationShadow*)
