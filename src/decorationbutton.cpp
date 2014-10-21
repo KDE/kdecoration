@@ -109,7 +109,7 @@ void DecorationButton::Private::init()
     case DecorationButtonType::KeepAbove:
         setCheckable(true);
         setChecked(c->isKeepAbove());
-        QObject::connect(q, &DecorationButton::clicked, m_decoration, &Decoration::requestToggleKeepAbove, Qt::QueuedConnection);
+        QObject::connect(q, &DecorationButton::clicked, m_decoration.data(), &Decoration::requestToggleKeepAbove, Qt::QueuedConnection);
         QObject::connect(c, &DecoratedClient::keepAboveChanged, q, &DecorationButton::setChecked);
         break;
     case DecorationButtonType::KeepBelow:
