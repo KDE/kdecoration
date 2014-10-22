@@ -64,7 +64,7 @@ class KDECORATIONS2_EXPORT Decoration : public QObject
      * the same DecorationShadow. E.g one DecorationShadow for all inactive Decorations and one
      * for the active Decoration.
      **/
-    Q_PROPERTY(QPointer<KDecoration2::DecorationShadow> shadow READ shadow NOTIFY shadowChanged)
+    Q_PROPERTY(KDecoration2::DecorationShadow *shadow READ shadow NOTIFY shadowChanged)
 public:
     virtual ~Decoration();
 

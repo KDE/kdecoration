@@ -55,7 +55,7 @@ class KDECORATIONS2_EXPORT DecoratedClient : public QObject
     /**
      * The Decoration of this DecoratedClient
      **/
-    Q_PROPERTY(QPointer<KDecoration2::Decoration> decoration READ decoration CONSTANT)
+    Q_PROPERTY(KDecoration2::Decoration *decoration READ decoration CONSTANT)
     /**
      * Whether the DecoratedClient is active (has focus) or is inactive.
      **/
