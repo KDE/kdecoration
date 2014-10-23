@@ -221,6 +221,10 @@ Decoration::Decoration(QObject *parent)
 
 Decoration::~Decoration() = default;
 
+void Decoration::init()
+{
+}
+
 QPointer<DecoratedClient> Decoration::client() const
 {
     return QPointer<DecoratedClient>(d->client());

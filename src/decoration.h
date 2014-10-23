@@ -113,6 +113,15 @@ public Q_SLOTS:
 
     void update(const QRect &rect = QRect());
 
+    /**
+     * This method gets invoked from the framework once the Decoration is created and
+     * completely setup.
+     *
+     * An inheriting class should override this method and perform all initialization in
+     * this method instead of the constructor.
+     **/
+    virtual void init();
+
 Q_SIGNALS:
     void bordersChanged();
     void extendedBordersChanged();
