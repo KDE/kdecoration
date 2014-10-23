@@ -65,6 +65,10 @@ class KDECORATIONS2_EXPORT Decoration : public QObject
      * for the active Decoration.
      **/
     Q_PROPERTY(KDecoration2::DecorationShadow *shadow READ shadow NOTIFY shadowChanged)
+    /**
+     * The DecoratedClient for this Decoration.
+     **/
+    Q_PROPERTY(KDecoration2::DecoratedClient *client READ client CONSTANT)
 public:
     virtual ~Decoration();
 
