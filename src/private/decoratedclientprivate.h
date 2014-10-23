@@ -59,13 +59,13 @@ public:
     virtual bool isKeepBelow() const = 0;
 
     virtual bool isCloseable() const = 0;
-    virtual bool isMaximizable() const = 0;
-    virtual bool isMinimizable() const = 0;
+    virtual bool isMaximizeable() const = 0;
+    virtual bool isMinimizeable() const = 0;
     virtual bool providesContextHelp() const = 0;
     virtual bool isModal() const = 0;
     virtual bool isShadeable() const = 0;
-    virtual bool isMovable() const = 0;
-    virtual bool isResizable() const = 0;
+    virtual bool isMoveable() const = 0;
+    virtual bool isResizeable() const = 0;
 
     virtual WId windowId() const = 0;
     virtual WId decorationId() const = 0;

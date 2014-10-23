@@ -118,12 +118,12 @@ class KDECORATIONS2_EXPORT DecoratedClient : public QObject
      * Whether the DecoratedClient can be maximized. If this property is @c false a DecorationButton
      * for maximizing the DecoratedClient should be disabled.
      **/
-    Q_PROPERTY(bool maximizable READ isMaximizable NOTIFY maximizableChanged)
+    Q_PROPERTY(bool maximizeable READ isMaximizeable NOTIFY maximizeableChanged)
     /**
      * Whether the DecoratedClient can be minimized. If this property is @c false a DecorationButton
      * for minimizing the DecoratedClient should be disabled.
      **/
-    Q_PROPERTY(bool minimizable READ isMinimizable NOTIFY minimizableChanged)
+    Q_PROPERTY(bool minimizeable READ isMinimizeable NOTIFY minimizeableChanged)
     /**
      * Whether the DecoratedClient provides context help.
      * The Decoration should only show a context help button if this property is @c true.
@@ -141,11 +141,11 @@ class KDECORATIONS2_EXPORT DecoratedClient : public QObject
     /**
      * Whether the DecoratedClient can be moved.
      **/
-    Q_PROPERTY(bool movable READ isMovable NOTIFY movableChanged)
+    Q_PROPERTY(bool moveable READ isMoveable NOTIFY moveableChanged)
     /**
      * Whether the DecoratedClient can be resized.
      **/
-    Q_PROPERTY(bool resizable READ isResizable NOTIFY resizableChanged)
+    Q_PROPERTY(bool resizeable READ isResizeable NOTIFY resizeableChanged)
 
     /**
      * The width of the DecoratedClient.
@@ -184,13 +184,13 @@ public:
     bool isKeepBelow() const;
 
     bool isCloseable() const;
-    bool isMaximizable() const;
-    bool isMinimizable() const;
+    bool isMaximizeable() const;
+    bool isMinimizeable() const;
     bool providesContextHelp() const;
     bool isModal() const;
     bool isShadeable() const;
-    bool isMovable() const;
-    bool isResizable() const;
+    bool isMoveable() const;
+    bool isResizeable() const;
 
     Qt::Edges borderingScreenEdges() const;
 
@@ -217,12 +217,12 @@ Q_SIGNALS:
     void keepBelowChanged(bool);
 
     void closeableChanged(bool);
-    void maximizableChanged(bool);
-    void minimizableChanged(bool);
+    void maximizeableChanged(bool);
+    void minimizeableChanged(bool);
     void providesContextHelpChanged(bool);
     void shadeableChanged(bool);
-    void movableChanged(bool);
-    void resizableChanged(bool);
+    void moveableChanged(bool);
+    void resizeableChanged(bool);
 
     void widthChanged(int);
     void heightChanged(int);

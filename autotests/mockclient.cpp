@@ -78,7 +78,7 @@ bool MockClient::isKeepBelow() const
     return m_keepBelow;
 }
 
-bool MockClient::isMaximizable() const
+bool MockClient::isMaximizeable() const
 {
     return m_maximizable;
 }
@@ -98,7 +98,7 @@ bool MockClient::isMaximizedVertically() const
     return m_maximizedVertically;
 }
 
-bool MockClient::isMinimizable() const
+bool MockClient::isMinimizeable() const
 {
     return m_minimizable;
 }
@@ -108,7 +108,7 @@ bool MockClient::isModal() const
     return false;
 }
 
-bool MockClient::isMovable() const
+bool MockClient::isMoveable() const
 {
     return false;
 }
@@ -118,7 +118,7 @@ bool MockClient::isOnAllDesktops() const
     return m_onAllDesktops;
 }
 
-bool MockClient::isResizable() const
+bool MockClient::isResizeable() const
 {
     return false;
 }
@@ -234,7 +234,7 @@ void MockClient::setCloseable(bool set)
 void MockClient::setMinimizable(bool set)
 {
     m_minimizable = set;
-    emit client()->minimizableChanged(set);
+    emit client()->minimizeableChanged(set);
 }
 
 void MockClient::setProvidesContextHelp(bool set)
@@ -252,5 +252,5 @@ void MockClient::setShadeable(bool set)
 void MockClient::setMaximizable(bool set)
 {
     m_maximizable = set;
-    emit client()->maximizableChanged(set);
+    emit client()->maximizeableChanged(set);
 }

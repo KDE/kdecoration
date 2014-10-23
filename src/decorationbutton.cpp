@@ -83,17 +83,17 @@ void DecorationButton::Private::init()
         QObject::connect(c, &DecoratedClient::onAllDesktopsChanged, q, &DecorationButton::setChecked);
         break;
     case DecorationButtonType::Minimize:
-        setEnabled(c->isMinimizable());
+        setEnabled(c->isMinimizeable());
         QObject::connect(q, &DecorationButton::clicked, m_decoration.data(), &Decoration::requestMinimize, Qt::QueuedConnection);
-        QObject::connect(c, &DecoratedClient::minimizableChanged, q, &DecorationButton::setEnabled);
+        QObject::connect(c, &DecoratedClient::minimizeableChanged, q, &DecorationButton::setEnabled);
         break;
     case DecorationButtonType::Maximize:
-        setEnabled(c->isMaximizable());
+        setEnabled(c->isMaximizeable());
         setCheckable(true);
         setChecked(c->isMaximized());
         setAcceptedButtons(Qt::LeftButton | Qt::MiddleButton | Qt::RightButton);
         QObject::connect(q, &DecorationButton::clicked, m_decoration.data(), &Decoration::requestMaximize, Qt::QueuedConnection);
-        QObject::connect(c, &DecoratedClient::maximizableChanged, q, &DecorationButton::setEnabled);
+        QObject::connect(c, &DecoratedClient::maximizeableChanged, q, &DecorationButton::setEnabled);
         QObject::connect(c, &DecoratedClient::maximizedChanged, q, &DecorationButton::setChecked);
         break;
     case DecorationButtonType::Close:

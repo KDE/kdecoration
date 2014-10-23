@@ -587,7 +587,7 @@ void DecorationButtonTest::testMinimize()
     QCOMPARE(button.acceptedButtons(), Qt::LeftButton);
 
     // if the client is minimizeable the button should get enabled
-    QSignalSpy minimizableChangedSpy(mockDecoration.client(), SIGNAL(minimizableChanged(bool)));
+    QSignalSpy minimizableChangedSpy(mockDecoration.client(), SIGNAL(minimizeableChanged(bool)));
     QVERIFY(minimizableChangedSpy.isValid());
     client->setMinimizable(true);
     QCOMPARE(button.isEnabled(), true);
@@ -907,7 +907,7 @@ void DecorationButtonTest::testMaximize()
     QCOMPARE(button.acceptedButtons(), Qt::LeftButton | Qt::MiddleButton | Qt::RightButton);
 
     // if the client is maximizable the button should get enabled
-    QSignalSpy maximizableChangedSpy(mockDecoration.client(), SIGNAL(maximizableChanged(bool)));
+    QSignalSpy maximizableChangedSpy(mockDecoration.client(), SIGNAL(maximizeableChanged(bool)));
     QVERIFY(maximizableChangedSpy.isValid());
     client->setMaximizable(true);
     QCOMPARE(button.isEnabled(), true);
