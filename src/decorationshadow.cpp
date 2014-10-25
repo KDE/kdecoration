@@ -94,8 +94,8 @@ S(setLeft,        left)
 
 #define I(setName, name) SETTER(int, setName, name)
 I(setPaddingTop,    paddingTop)
-I(setPaddingRight,  paddingBottom)
-I(setPaddingBottom, paddingRight)
+I(setPaddingRight,  paddingRight)
+I(setPaddingBottom, paddingBottom)
 I(setPaddingLeft,   paddingLeft)
 #undef I
 
