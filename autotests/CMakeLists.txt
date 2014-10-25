@@ -12,3 +12,11 @@ add_executable(decorationButtonTest ${decorationButtonTest_SRCS})
 target_link_libraries(decorationButtonTest kdecorations2 kdecorations2private Qt5::Test)
 add_test(kdecoration2-decorationButtonTest decorationButtonTest)
 ecm_mark_as_test(decorationButtonTest)
+
+set(decorationShadowTest_SRCS
+    shadowtest.cpp
+    )
+add_executable(decorationShadowTest ${decorationShadowTest_SRCS})
+target_link_libraries(decorationShadowTest kdecorations2 Qt5::Test)
+add_test(kdecoration2-decorationShadowTest decorationShadowTest)
+ecm_mark_as_test(decorationShadowTest)
