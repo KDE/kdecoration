@@ -103,10 +103,11 @@ DecorationButtonGroup::DecorationButtonGroup(DecorationButtonGroup::Position typ
     : QObject(parent)
     , d(new Private(parent, this))
 {
+    auto settings = parent->settings();
     auto createButtons = [=] {
         const QList<DecorationButtonType> buttons = (type == Position::Left) ?
-            DecorationSettings::self()->decorationButtonsLeft() :
-            DecorationSettings::self()->decorationButtonsRight();
+            settings->decorationButtonsLeft() :
+            settings->decorationButtonsRight();
         for (DecorationButtonType type : buttons) {
             if (DecorationButton *b = buttonCreator(type, parent, this)) {
                 addButton(QPointer<DecorationButton>(b));
@@ -115,7 +116,7 @@ DecorationButtonGroup::DecorationButtonGroup(DecorationButtonGroup::Position typ
     };
     createButtons();
     auto changed = type == Position::Left ? &DecorationSettings::decorationButtonsLeftChanged : &DecorationSettings::decorationButtonsRightChanged;
-    connect(DecorationSettings::self(), changed, this,
+    connect(settings.data(), changed, this,
         [this, createButtons] {
             while (!d->buttons().isEmpty()) {
                 delete d->buttons().takeFirst();

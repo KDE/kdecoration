@@ -38,6 +38,7 @@ namespace KDecoration2
 class DecorationPrivate;
 class DecoratedClient;
 class DecorationButton;
+class DecorationSettings;
 
 class KDECORATIONS2_EXPORT Decoration : public QObject
 {
@@ -95,6 +96,16 @@ public:
      **/
     QRect rect() const;
     QSize size() const;
+
+    /**
+     * Invoked by the framework to set the Settings for this Decoration before
+     * init is invoked.
+     **/
+    void setSettings(const QSharedPointer<DecorationSettings> &settings);
+    /**
+     * @returns The DeocrationSettings used for this Deocration.
+     **/
+    QSharedPointer<DecorationSettings> settings() const;
 
     virtual void paint(QPainter *painter) = 0;
 

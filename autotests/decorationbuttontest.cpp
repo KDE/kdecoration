@@ -1006,8 +1006,9 @@ void DecorationButtonTest::testMaximize()
 void DecorationButtonTest::testOnAllDesktops()
 {
     MockBridge bridge;
-    KDecoration2::DecorationSettings::self(&bridge);
+    auto decoSettings = QSharedPointer<KDecoration2::DecorationSettings>::create();
     MockDecoration mockDecoration;
+    mockDecoration.setSettings(decoSettings);
     MockButton button(KDecoration2::DecorationButtonType::OnAllDesktops, &mockDecoration);
     button.setGeometry(QRect(0, 0, 10, 10));
 
@@ -1021,7 +1022,7 @@ void DecorationButtonTest::testOnAllDesktops()
     MockSettings *settings = bridge.lastCreatedSettings();
     QVERIFY(settings);
 
-    QSignalSpy onAllDesktopsAvailableChangedSpy(KDecoration2::DecorationSettings::self(), SIGNAL(onAllDesktopsAvailableChanged(bool)));
+    QSignalSpy onAllDesktopsAvailableChangedSpy(decoSettings.data(), SIGNAL(onAllDesktopsAvailableChanged(bool)));
     QVERIFY(onAllDesktopsAvailableChangedSpy.isValid());
     QSignalSpy visibleChangedSpy(&button, SIGNAL(visibilityChanged(bool)));
     QVERIFY(visibleChangedSpy.isValid());
@@ -1076,8 +1077,9 @@ void DecorationButtonTest::testOnAllDesktops()
 void DecorationButtonTest::testMenu()
 {
     MockBridge bridge;
-    KDecoration2::DecorationSettings::self(&bridge);
+    auto decoSettings = QSharedPointer<KDecoration2::DecorationSettings>::create();
     MockDecoration mockDecoration;
+    mockDecoration.setSettings(decoSettings);
     MockClient *client = bridge.lastCreatedClient();
     MockButton button(KDecoration2::DecorationButtonType::Menu, &mockDecoration);
     button.setGeometry(QRect(0, 0, 10, 10));
@@ -1130,15 +1132,16 @@ void DecorationButtonTest::testMenu()
 void DecorationButtonTest::testMenuDoubleClick()
 {
     MockBridge bridge;
-    KDecoration2::DecorationSettings::self(&bridge);
+    auto decoSettings = QSharedPointer<KDecoration2::DecorationSettings>::create();
     MockDecoration mockDecoration;
+    mockDecoration.setSettings(decoSettings);
     MockClient *client = bridge.lastCreatedClient();
     MockButton button(KDecoration2::DecorationButtonType::Menu, &mockDecoration);
     button.setGeometry(QRect(0, 0, 10, 10));
 
     MockSettings *settings = bridge.lastCreatedSettings();
     QVERIFY(settings);
-    QSignalSpy closeOnDoubleClickOnMenuChangedSpy(KDecoration2::DecorationSettings::self(), SIGNAL(closeOnDoubleClickOnMenuChanged(bool)));
+    QSignalSpy closeOnDoubleClickOnMenuChangedSpy(decoSettings.data(), SIGNAL(closeOnDoubleClickOnMenuChanged(bool)));
     QVERIFY(closeOnDoubleClickOnMenuChangedSpy.isValid());
     settings->setCloseOnDoubleClickOnMenu(true);
     QCOMPARE(closeOnDoubleClickOnMenuChangedSpy.count(), 1);
@@ -1213,15 +1216,16 @@ void DecorationButtonTest::testMenuDoubleClick()
 void DecorationButtonTest::testMenuPressAndHold()
 {
     MockBridge bridge;
-    KDecoration2::DecorationSettings::self(&bridge);
+    auto decoSettings = QSharedPointer<KDecoration2::DecorationSettings>::create();
     MockDecoration mockDecoration;
+    mockDecoration.setSettings(decoSettings);
     MockClient *client = bridge.lastCreatedClient();
     MockButton button(KDecoration2::DecorationButtonType::Menu, &mockDecoration);
     button.setGeometry(QRect(0, 0, 10, 10));
 
     MockSettings *settings = bridge.lastCreatedSettings();
     QVERIFY(settings);
-    QSignalSpy closeOnDoubleClickOnMenuChangedSpy(KDecoration2::DecorationSettings::self(), SIGNAL(closeOnDoubleClickOnMenuChanged(bool)));
+    QSignalSpy closeOnDoubleClickOnMenuChangedSpy(decoSettings.data(), SIGNAL(closeOnDoubleClickOnMenuChanged(bool)));
     QVERIFY(closeOnDoubleClickOnMenuChangedSpy.isValid());
     settings->setCloseOnDoubleClickOnMenu(true);
     QCOMPARE(closeOnDoubleClickOnMenuChangedSpy.count(), 1);

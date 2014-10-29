@@ -26,16 +26,6 @@
 namespace KDecoration2
 {
 
-DecorationSettings *DecorationSettings::s_self = nullptr;
-
-DecorationSettings *DecorationSettings::self(QObject *parent)
-{
-    if (!s_self) {
-        s_self = new DecorationSettings(parent);
-    }
-    return s_self;
-}
-
 DecorationSettings::DecorationSettings(QObject *parent)
     : QObject(parent)
     , d(std::move(DecorationBridge::self()->settings(this)))
@@ -59,10 +49,7 @@ DecorationSettings::DecorationSettings(QObject *parent)
     connect(this, &DecorationSettings::fontChanged, this, updateUnits);
 }
 
-DecorationSettings::~DecorationSettings()
-{
-    s_self = nullptr;
-}
+DecorationSettings::~DecorationSettings() = default;
 
 #define DELEGATE(type, method) \
 type DecorationSettings::method() const \

@@ -60,26 +60,27 @@ DecorationButton::Private::~Private() = default;
 void DecorationButton::Private::init()
 {
     auto c = m_decoration->client().data();
+    auto settings = m_decoration->settings();
     switch (m_type) {
     case DecorationButtonType::Menu:
         QObject::connect(q, &DecorationButton::clicked, m_decoration.data(), &Decoration::requestShowWindowMenu, Qt::QueuedConnection);
         QObject::connect(q, &DecorationButton::doubleClicked, m_decoration.data(), &Decoration::requestClose, Qt::QueuedConnection);
-        QObject::connect(DecorationSettings::self(), &DecorationSettings::closeOnDoubleClickOnMenuChanged, q,
+        QObject::connect(settings.data(), &DecorationSettings::closeOnDoubleClickOnMenuChanged, q,
             [this](bool enabled) {
                 setDoubleClickEnabled(enabled);
                 setPressAndHold(enabled);
             }, Qt::QueuedConnection
         );
-        setDoubleClickEnabled(DecorationSettings::self()->isCloseOnDoubleClickOnMenu());
-        setPressAndHold(DecorationSettings::self()->isCloseOnDoubleClickOnMenu());
+        setDoubleClickEnabled(settings->isCloseOnDoubleClickOnMenu());
+        setPressAndHold(settings->isCloseOnDoubleClickOnMenu());
         setAcceptedButtons(Qt::LeftButton | Qt::RightButton);
         break;
     case DecorationButtonType::OnAllDesktops:
-        setVisible(DecorationSettings::self()->isOnAllDesktopsAvailable());
+        setVisible(settings->isOnAllDesktopsAvailable());
         setCheckable(true);
         setChecked(c->isOnAllDesktops());
         QObject::connect(q, &DecorationButton::clicked, m_decoration.data(), &Decoration::requestToggleOnAllDesktops, Qt::QueuedConnection);
-        QObject::connect(DecorationSettings::self(), &DecorationSettings::onAllDesktopsAvailableChanged, q, &DecorationButton::setVisible);
+        QObject::connect(settings.data(), &DecorationSettings::onAllDesktopsAvailableChanged, q, &DecorationButton::setVisible);
         QObject::connect(c, &DecoratedClient::onAllDesktopsChanged, q, &DecorationButton::setChecked);
         break;
     case DecorationButtonType::Minimize:

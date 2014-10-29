@@ -40,6 +40,7 @@ namespace KDecoration2
 class Decoration;
 class DecorationButton;
 class DecoratedClient;
+class DecorationSettings;
 class DecorationShadow;
 
 class Decoration::Private
@@ -126,6 +127,8 @@ public:
         m_doubleClickTimer.invalidate();
     }
     bool wasDoubleClick() const;
+
+    QSharedPointer<DecorationSettings> settings;
 
 private:
     Decoration *q;

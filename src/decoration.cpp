@@ -223,6 +223,7 @@ Decoration::~Decoration() = default;
 
 void Decoration::init()
 {
+    Q_ASSERT(!d->settings.isNull());
 }
 
 QPointer<DecoratedClient> Decoration::client() const
@@ -436,6 +437,16 @@ void Decoration::wheelEvent(QWheelEvent *event)
 void Decoration::update(const QRect &r)
 {
     DecorationBridge::self()->update(this, r.isNull() ? rect() : r);
+}
+
+void Decoration::setSettings(const QSharedPointer< DecorationSettings > &settings)
+{
+    d->settings = settings;
+}
+
+QSharedPointer< DecorationSettings > Decoration::settings() const
+{
+    return d->settings;
 }
 
 } // namespace

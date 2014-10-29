@@ -66,6 +66,7 @@ class KDECORATIONS2_EXPORT DecorationSettings : public QObject
      */
     Q_PROPERTY(int largeSpacing READ largeSpacing NOTIFY spacingChanged)
 public:
+    explicit DecorationSettings(QObject *parent = nullptr);
     virtual ~DecorationSettings();
     bool isOnAllDesktopsAvailable() const;
     bool isAlphaChannelSupported() const;
@@ -80,13 +81,6 @@ public:
     int smallSpacing() const;
     int largeSpacing() const;
 
-    /**
-     * @param parent Used as parent if static instance is not yet created, a Decoration plugin
-     * doesn't have to pass the parent argument. The backend ensures that the DecorationSettings
-     * is created before the Decoration is created.
-     **/
-    static DecorationSettings *self(QObject *parent = nullptr);
-
 Q_SIGNALS:
     void onAllDesktopsAvailableChanged(bool);
     void alphaChannelSupportedChanged(bool);
@@ -99,8 +93,6 @@ Q_SIGNALS:
     void spacingChanged();
 
 private:
-    explicit DecorationSettings(QObject *parent);
-    static DecorationSettings *s_self;
     std::unique_ptr<DecorationSettingsPrivate> d;
 };
 
