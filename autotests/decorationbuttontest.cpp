@@ -1006,7 +1006,7 @@ void DecorationButtonTest::testMaximize()
 void DecorationButtonTest::testOnAllDesktops()
 {
     MockBridge bridge;
-    auto decoSettings = QSharedPointer<KDecoration2::DecorationSettings>::create();
+    auto decoSettings = QSharedPointer<KDecoration2::DecorationSettings>::create(&bridge);
     MockDecoration mockDecoration;
     mockDecoration.setSettings(decoSettings);
     MockButton button(KDecoration2::DecorationButtonType::OnAllDesktops, &mockDecoration);
@@ -1077,7 +1077,7 @@ void DecorationButtonTest::testOnAllDesktops()
 void DecorationButtonTest::testMenu()
 {
     MockBridge bridge;
-    auto decoSettings = QSharedPointer<KDecoration2::DecorationSettings>::create();
+    auto decoSettings = QSharedPointer<KDecoration2::DecorationSettings>::create(&bridge);
     MockDecoration mockDecoration;
     mockDecoration.setSettings(decoSettings);
     MockClient *client = bridge.lastCreatedClient();
@@ -1132,7 +1132,7 @@ void DecorationButtonTest::testMenu()
 void DecorationButtonTest::testMenuDoubleClick()
 {
     MockBridge bridge;
-    auto decoSettings = QSharedPointer<KDecoration2::DecorationSettings>::create();
+    auto decoSettings = QSharedPointer<KDecoration2::DecorationSettings>::create(&bridge);
     MockDecoration mockDecoration;
     mockDecoration.setSettings(decoSettings);
     MockClient *client = bridge.lastCreatedClient();
@@ -1216,7 +1216,7 @@ void DecorationButtonTest::testMenuDoubleClick()
 void DecorationButtonTest::testMenuPressAndHold()
 {
     MockBridge bridge;
-    auto decoSettings = QSharedPointer<KDecoration2::DecorationSettings>::create();
+    auto decoSettings = QSharedPointer<KDecoration2::DecorationSettings>::create(&bridge);
     MockDecoration mockDecoration;
     mockDecoration.setSettings(decoSettings);
     MockClient *client = bridge.lastCreatedClient();
