@@ -35,6 +35,7 @@ namespace KDecoration2
 {
 
 class Decoration;
+class DecorationBridge;
 class DecoratedClientPrivate;
 
 /**
@@ -231,7 +232,7 @@ Q_SIGNALS:
 
 private:
     friend class Decoration;
-    DecoratedClient(Decoration *parent);
+    DecoratedClient(Decoration *parent, DecorationBridge *bridge);
     std::unique_ptr<DecoratedClientPrivate> d;
 };
 

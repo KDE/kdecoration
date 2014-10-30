@@ -22,11 +22,14 @@
 
 #include "../src/decoration.h"
 
+class MockBridge;
+
 class MockDecoration : public KDecoration2::Decoration
 {
     Q_OBJECT
 public:
-    explicit MockDecoration(QObject *parent = nullptr);
+    explicit MockDecoration(QObject *parent, const QVariantList &args);
+    explicit MockDecoration(MockBridge *bridge);
     void paint(QPainter *painter) override;
 };
 

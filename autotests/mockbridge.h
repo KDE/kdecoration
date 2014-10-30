@@ -26,7 +26,7 @@
 class MockClient;
 class MockSettings;
 
-class MockBridge : public QObject, public KDecoration2::DecorationBridge
+class MockBridge : public KDecoration2::DecorationBridge
 {
     Q_OBJECT
 public:

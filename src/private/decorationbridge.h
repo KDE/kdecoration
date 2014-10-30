@@ -20,6 +20,8 @@
 #ifndef KDECORATION2_DECORATION_BRIDGE_H
 #define KDECORATION2_DECORATION_BRIDGE_H
 
+#include <QObject>
+
 #include <memory>
 
 #include <kdecoration2/private/kdecoration2_private_export.h>
@@ -46,23 +48,22 @@ class DecorationSettingsPrivate;
 class DecoratedClient;
 class DecoratedClientPrivate;
 
-class KDECORATIONS_PRIVATE_EXPORT DecorationBridge
+class KDECORATIONS_PRIVATE_EXPORT DecorationBridge : public QObject
 {
+    Q_OBJECT
 public:
     virtual ~DecorationBridge();
-    static DecorationBridge *self();
 
     virtual std::unique_ptr<DecoratedClientPrivate> createClient(DecoratedClient *client, Decoration *decoration) = 0;
     virtual void update(Decoration *decoration, const QRect &geometry) = 0;
     virtual std::unique_ptr<DecorationSettingsPrivate> settings(DecorationSettings *parent) = 0;
 
 protected:
-    explicit DecorationBridge();
-
-private:
-    static DecorationBridge *s_self;
+    explicit DecorationBridge(QObject *parent = nullptr);
 };
 
 } // namespace
+
+Q_DECLARE_METATYPE(KDecoration2::DecorationBridge*)
 
 #endif

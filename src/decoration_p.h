@@ -38,6 +38,7 @@ namespace KDecoration2
 {
 
 class Decoration;
+class DecorationBridge;
 class DecorationButton;
 class DecoratedClient;
 class DecorationSettings;
@@ -46,7 +47,7 @@ class DecorationShadow;
 class Decoration::Private
 {
 public:
-    Private(Decoration *decoration);
+    Private(Decoration *decoration, const QVariantList &args);
     void requestClose();
     void requestMaximize(Qt::MouseButtons buttons);
     void requestMinimize();
@@ -63,6 +64,10 @@ public:
 
     const DecoratedClient *client() const {
         return m_client;
+    }
+
+    DecorationBridge *bridge() {
+        return m_bridge;
     }
 
     int borderLeft() const {
@@ -132,6 +137,7 @@ public:
 
 private:
     Decoration *q;
+    DecorationBridge *m_bridge;
     DecoratedClient *m_client;
     int m_borderLeft;
     int m_borderRight;

@@ -18,32 +18,18 @@
  * License along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "decorationbridge.h"
-#include <QtGlobal>
-#include <QMetaType>
 
 Q_DECLARE_METATYPE(Qt::MouseButton)
 
 namespace KDecoration2
 {
 
-DecorationBridge *DecorationBridge::s_self = nullptr;
-
-DecorationBridge::DecorationBridge()
+DecorationBridge::DecorationBridge(QObject *parent)
+    : QObject(parent)
 {
-    Q_ASSERT(!s_self);
-    s_self = this;
     qRegisterMetaType<Qt::MouseButton>();
 }
 
-DecorationBridge::~DecorationBridge()
-{
-    s_self = nullptr;
-}
-
-DecorationBridge *DecorationBridge::self()
-{
-    Q_ASSERT(s_self);
-    return s_self;
-}
+DecorationBridge::~DecorationBridge() = default;
 
 }

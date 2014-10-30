@@ -64,7 +64,7 @@ private Q_SLOTS:
 void DecorationButtonTest::testButton()
 {
     MockBridge bridge;
-    MockDecoration mockDecoration;
+    MockDecoration mockDecoration(&bridge);
     // create a custom button and verify the base settings
     MockButton button(KDecoration2::DecorationButtonType::Custom, &mockDecoration);
     QCOMPARE(button.decoration().data(), &mockDecoration);
@@ -110,7 +110,7 @@ void DecorationButtonTest::testButton()
 void DecorationButtonTest::testChecked()
 {
     MockBridge bridge;
-    MockDecoration mockDecoration;
+    MockDecoration mockDecoration(&bridge);
     // create a custom button and verify the base settings
     MockButton button(KDecoration2::DecorationButtonType::Custom, &mockDecoration);
     button.setGeometry(QRect(0, 0, 10, 10));
@@ -164,7 +164,7 @@ void DecorationButtonTest::testChecked()
 void DecorationButtonTest::testEnabled()
 {
     MockBridge bridge;
-    MockDecoration mockDecoration;
+    MockDecoration mockDecoration(&bridge);
     // create a custom button and verify the base settings
     MockButton button(KDecoration2::DecorationButtonType::Custom, &mockDecoration);
     button.setGeometry(QRect(0, 0, 10, 10));
@@ -222,7 +222,7 @@ void DecorationButtonTest::testPressIgnore_data()
 void DecorationButtonTest::testPressIgnore()
 {
     MockBridge bridge;
-    MockDecoration mockDecoration;
+    MockDecoration mockDecoration(&bridge);
     // create a custom button and verify the base settings
     MockButton button(KDecoration2::DecorationButtonType::Custom, &mockDecoration);
     button.setGeometry(QRect(0, 0, 10, 10));
@@ -268,7 +268,7 @@ void DecorationButtonTest::testReleaseIgnore_data()
 void DecorationButtonTest::testReleaseIgnore()
 {
     MockBridge bridge;
-    MockDecoration mockDecoration;
+    MockDecoration mockDecoration(&bridge);
     // create a custom button and verify the base settings
     MockButton button(KDecoration2::DecorationButtonType::Custom, &mockDecoration);
     button.setGeometry(QRect(0, 0, 10, 10));
@@ -324,7 +324,7 @@ void DecorationButtonTest::testHoverEnterIgnore_data()
 void DecorationButtonTest::testHoverEnterIgnore()
 {
     MockBridge bridge;
-    MockDecoration mockDecoration;
+    MockDecoration mockDecoration(&bridge);
     // create a custom button and verify the base settings
     MockButton button(KDecoration2::DecorationButtonType::Custom, &mockDecoration);
     button.setGeometry(QRect(0, 0, 10, 10));
@@ -373,7 +373,7 @@ void DecorationButtonTest::testHoverLeaveIgnore_data()
 void DecorationButtonTest::testHoverLeaveIgnore()
 {
     MockBridge bridge;
-    MockDecoration mockDecoration;
+    MockDecoration mockDecoration(&bridge);
     // create a custom button and verify the base settings
     MockButton button(KDecoration2::DecorationButtonType::Custom, &mockDecoration);
     button.setGeometry(QRect(0, 0, 10, 10));
@@ -414,7 +414,7 @@ void DecorationButtonTest::testHoverLeaveIgnore()
 void DecorationButtonTest::testHover()
 {
     MockBridge bridge;
-    MockDecoration mockDecoration;
+    MockDecoration mockDecoration(&bridge);
     // create a custom button and verify the base settings
     MockButton button(KDecoration2::DecorationButtonType::Custom, &mockDecoration);
     button.setGeometry(QRect(0, 0, 10, 10));
@@ -470,7 +470,7 @@ void DecorationButtonTest::testMouseMove_data()
 void DecorationButtonTest::testMouseMove()
 {
     MockBridge bridge;
-    MockDecoration mockDecoration;
+    MockDecoration mockDecoration(&bridge);
     // create a custom button and verify the base settings
     MockButton button(KDecoration2::DecorationButtonType::Custom, &mockDecoration);
     button.setGeometry(QRect(0, 0, 10, 10));
@@ -514,7 +514,7 @@ void DecorationButtonTest::testMouseMove()
 void DecorationButtonTest::testClose()
 {
     MockBridge bridge;
-    MockDecoration mockDecoration;
+    MockDecoration mockDecoration(&bridge);
     MockClient *client = bridge.lastCreatedClient();
     MockButton button(KDecoration2::DecorationButtonType::Close, &mockDecoration);
     button.setGeometry(QRect(0, 0, 10, 10));
@@ -575,7 +575,7 @@ void DecorationButtonTest::testClose()
 void DecorationButtonTest::testMinimize()
 {
     MockBridge bridge;
-    MockDecoration mockDecoration;
+    MockDecoration mockDecoration(&bridge);
     MockClient *client = bridge.lastCreatedClient();
     MockButton button(KDecoration2::DecorationButtonType::Minimize, &mockDecoration);
     button.setGeometry(QRect(0, 0, 10, 10));
@@ -636,7 +636,7 @@ void DecorationButtonTest::testMinimize()
 void DecorationButtonTest::testQuickHelp()
 {
     MockBridge bridge;
-    MockDecoration mockDecoration;
+    MockDecoration mockDecoration(&bridge);
     MockClient *client = bridge.lastCreatedClient();
     MockButton button(KDecoration2::DecorationButtonType::QuickHelp, &mockDecoration);
     button.setGeometry(QRect(0, 0, 10, 10));
@@ -697,7 +697,7 @@ void DecorationButtonTest::testQuickHelp()
 void DecorationButtonTest::testKeepAbove()
 {
     MockBridge bridge;
-    MockDecoration mockDecoration;
+    MockDecoration mockDecoration(&bridge);
     MockButton button(KDecoration2::DecorationButtonType::KeepAbove, &mockDecoration);
     button.setGeometry(QRect(0, 0, 10, 10));
 
@@ -760,7 +760,7 @@ void DecorationButtonTest::testKeepAbove()
 void DecorationButtonTest::testKeepBelow()
 {
     MockBridge bridge;
-    MockDecoration mockDecoration;
+    MockDecoration mockDecoration(&bridge);
     MockButton button(KDecoration2::DecorationButtonType::KeepBelow, &mockDecoration);
     button.setGeometry(QRect(0, 0, 10, 10));
 
@@ -823,7 +823,7 @@ void DecorationButtonTest::testKeepBelow()
 void DecorationButtonTest::testShade()
 {
     MockBridge bridge;
-    MockDecoration mockDecoration;
+    MockDecoration mockDecoration(&bridge);
     MockClient *client = bridge.lastCreatedClient();
     MockButton button(KDecoration2::DecorationButtonType::Shade, &mockDecoration);
     button.setGeometry(QRect(0, 0, 10, 10));
@@ -895,7 +895,7 @@ void DecorationButtonTest::testShade()
 void DecorationButtonTest::testMaximize()
 {
     MockBridge bridge;
-    MockDecoration mockDecoration;
+    MockDecoration mockDecoration(&bridge);
     MockClient *client = bridge.lastCreatedClient();
     MockButton button(KDecoration2::DecorationButtonType::Maximize, &mockDecoration);
     button.setGeometry(QRect(0, 0, 10, 10));
@@ -1007,7 +1007,7 @@ void DecorationButtonTest::testOnAllDesktops()
 {
     MockBridge bridge;
     auto decoSettings = QSharedPointer<KDecoration2::DecorationSettings>::create(&bridge);
-    MockDecoration mockDecoration;
+    MockDecoration mockDecoration(&bridge);
     mockDecoration.setSettings(decoSettings);
     MockButton button(KDecoration2::DecorationButtonType::OnAllDesktops, &mockDecoration);
     button.setGeometry(QRect(0, 0, 10, 10));
@@ -1078,7 +1078,7 @@ void DecorationButtonTest::testMenu()
 {
     MockBridge bridge;
     auto decoSettings = QSharedPointer<KDecoration2::DecorationSettings>::create(&bridge);
-    MockDecoration mockDecoration;
+    MockDecoration mockDecoration(&bridge);
     mockDecoration.setSettings(decoSettings);
     MockClient *client = bridge.lastCreatedClient();
     MockButton button(KDecoration2::DecorationButtonType::Menu, &mockDecoration);
@@ -1133,7 +1133,7 @@ void DecorationButtonTest::testMenuDoubleClick()
 {
     MockBridge bridge;
     auto decoSettings = QSharedPointer<KDecoration2::DecorationSettings>::create(&bridge);
-    MockDecoration mockDecoration;
+    MockDecoration mockDecoration(&bridge);
     mockDecoration.setSettings(decoSettings);
     MockClient *client = bridge.lastCreatedClient();
     MockButton button(KDecoration2::DecorationButtonType::Menu, &mockDecoration);
@@ -1217,7 +1217,7 @@ void DecorationButtonTest::testMenuPressAndHold()
 {
     MockBridge bridge;
     auto decoSettings = QSharedPointer<KDecoration2::DecorationSettings>::create(&bridge);
-    MockDecoration mockDecoration;
+    MockDecoration mockDecoration(&bridge);
     mockDecoration.setSettings(decoSettings);
     MockClient *client = bridge.lastCreatedClient();
     MockButton button(KDecoration2::DecorationButtonType::Menu, &mockDecoration);

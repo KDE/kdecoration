@@ -144,7 +144,7 @@ Q_SIGNALS:
     void titleBarWheelEvent(const QPoint &angleDelta);
 
 protected:
-    explicit Decoration(QObject *parent = nullptr);
+    explicit Decoration(QObject *parent, const QVariantList &args);
     void setBorders(int left, int right, int top, int bottom);
     void setExtendedBorders(int left, int right, int top, int bottom);
     void setTitleRect(const QRect &rect);

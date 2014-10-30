@@ -32,9 +32,34 @@
 namespace KDecoration2
 {
 
-Decoration::Private::Private(Decoration *deco)
+DecorationBridge *findBridge(const QVariantList &args)
+{
+    DecorationBridge *b = nullptr;
+    for (const QVariant &arg : args) {
+        if (!arg.isValid()) {
+            continue;
+        }
+        const auto map = arg.toMap();
+        if (map.isEmpty()) {
+            continue;
+        }
+        auto it = map.find(QStringLiteral("bridge"));
+        if (it == map.end()) {
+            continue;
+        }
+        b = it.value().value<DecorationBridge*>();
+        if (b) {
+            break;
+        }
+    }
+    Q_ASSERT(b);
+    return b;
+}
+
+Decoration::Private::Private(Decoration *deco, const QVariantList &args)
     : q(deco)
-    , m_client(new DecoratedClient(deco))
+    , m_bridge(findBridge(args))
+    , m_client(new DecoratedClient(deco, m_bridge))
     , m_borderLeft(0)
     , m_borderRight(0)
     , m_borderTop(0)
@@ -47,6 +72,7 @@ Decoration::Private::Private(Decoration *deco)
     , m_opaque(false)
     , m_shadow()
 {
+    Q_UNUSED(args)
 }
 
 void Decoration::Private::setBorders(int left, int right, int top, int bottom)
@@ -212,9 +238,9 @@ DELEGATE(requestMaximize, Qt::MouseButtons)
 
 
 
-Decoration::Decoration(QObject *parent)
+Decoration::Decoration(QObject *parent, const QVariantList &args)
     : QObject(parent)
-    , d(new Private(this))
+    , d(new Private(this, args))
 {
     connect(this, &Decoration::bordersChanged, this, [this]{ update(); });
 }
@@ -436,7 +462,7 @@ void Decoration::wheelEvent(QWheelEvent *event)
 
 void Decoration::update(const QRect &r)
 {
-    DecorationBridge::self()->update(this, r.isNull() ? rect() : r);
+    d->bridge()->update(this, r.isNull() ? rect() : r);
 }
 
 void Decoration::setSettings(const QSharedPointer< DecorationSettings > &settings)

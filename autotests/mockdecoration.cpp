@@ -18,9 +18,17 @@
  * License along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "mockdecoration.h"
+#include "mockbridge.h"
 
-MockDecoration::MockDecoration(QObject *parent)
-    : Decoration(parent)
+#include <QVariantMap>
+
+MockDecoration::MockDecoration(QObject *parent, const QVariantList &args)
+    : Decoration(parent, args)
+{
+}
+
+MockDecoration::MockDecoration(MockBridge *bridge)
+    : MockDecoration(nullptr, QVariantList({QVariantMap({{QStringLiteral("bridge"), QVariant::fromValue(bridge)}})}))
 {
 }
 
