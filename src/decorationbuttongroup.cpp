@@ -119,9 +119,8 @@ DecorationButtonGroup::DecorationButtonGroup(DecorationButtonGroup::Position typ
     auto changed = type == Position::Left ? &DecorationSettings::decorationButtonsLeftChanged : &DecorationSettings::decorationButtonsRightChanged;
     connect(settings.data(), changed, this,
         [this, createButtons] {
-            while (!d->buttons().isEmpty()) {
-                delete d->buttons().takeFirst();
-            }
+            qDeleteAll(d->buttons());
+            d->buttons().clear();
             createButtons();
         }
     );
