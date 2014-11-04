@@ -172,7 +172,7 @@ void DecorationButtonGroup::setSpacing(qreal spacing)
     d->setSpacing(spacing);
 }
 
-void DecorationButtonGroup::addButton(QPointer<DecorationButton> button)
+void DecorationButtonGroup::addButton(const QPointer<DecorationButton> &button)
 {
     Q_ASSERT(!button.isNull());
     connect(button.data(), &DecorationButton::visibilityChanged, this, [this]() { d->updateLayout(); });
@@ -203,7 +203,7 @@ void DecorationButtonGroup::removeButton(DecorationButtonType type)
     }
 }
 
-void DecorationButtonGroup::removeButton(QPointer<DecorationButton> button)
+void DecorationButtonGroup::removeButton(const QPointer<DecorationButton> &button)
 {
     bool needUpdate = false;
     auto it = d->buttons().begin();

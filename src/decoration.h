@@ -149,7 +149,7 @@ protected:
     void setExtendedBorders(int left, int right, int top, int bottom);
     void setTitleRect(const QRect &rect);
     void setOpaque(bool opaque);
-    void setShadow(QPointer<DecorationShadow> shadow);
+    void setShadow(const QPointer<DecorationShadow> &shadow);
 
     virtual void hoverEnterEvent(QHoverEvent *event);
     virtual void hoverLeaveEvent(QHoverEvent *event);

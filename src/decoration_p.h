@@ -123,7 +123,7 @@ public:
     QPointer<DecorationShadow> shadow() const {
         return m_shadow;
     }
-    void setShadow(QPointer<DecorationShadow> shadow);
+    void setShadow(const QPointer<DecorationShadow> &shadow);
 
     void startDoubleClickTimer() {
         m_doubleClickTimer.start();

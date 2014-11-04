@@ -38,7 +38,7 @@ uint qHash(const DecorationButtonType &type)
     return static_cast<uint>(type);
 }
 
-DecorationButton::Private::Private(DecorationButtonType type, QPointer<Decoration> decoration, DecorationButton *parent)
+DecorationButton::Private::Private(DecorationButtonType type, const QPointer<Decoration> &decoration, DecorationButton *parent)
     : q(parent)
     , m_decoration(decoration)
     , m_type(type)
@@ -281,7 +281,7 @@ void DecorationButton::Private::stopPressAndHold()
     }
 }
 
-DecorationButton::DecorationButton(DecorationButtonType type, QPointer<Decoration> decoration, QObject *parent)
+DecorationButton::DecorationButton(DecorationButtonType type, const QPointer<Decoration> &decoration, QObject *parent)
     : QObject(parent)
     , d(new Private(type, decoration, this))
 {

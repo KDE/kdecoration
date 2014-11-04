@@ -160,7 +160,7 @@ Q_SIGNALS:
     void visibilityChanged(bool);
 
 protected:
-    explicit DecorationButton(DecorationButtonType type, QPointer<Decoration> decoration, QObject *parent = nullptr);
+    explicit DecorationButton(DecorationButtonType type, const QPointer<Decoration> &decoration, QObject *parent = nullptr);
 
     virtual void hoverEnterEvent(QHoverEvent *event);
     virtual void hoverLeaveEvent(QHoverEvent *event);

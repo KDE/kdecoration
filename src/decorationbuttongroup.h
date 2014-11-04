@@ -95,12 +95,12 @@ public:
      * Adds @p button to the DecorationButtonGroup and triggers a re-layout of all
      * DecorationButtons.
      **/
-    void addButton(QPointer<DecorationButton> button);
+    void addButton(const QPointer<DecorationButton> &button);
     /**
      * Removes @p button from the DecorationButtonGroup and triggers a re-layout of all
      * DecorationButtons.
      **/
-    void removeButton(QPointer<DecorationButton> button);
+    void removeButton(const QPointer<DecorationButton> &button);
     /**
      * Removes all DecorationButtons with @p type from the DecorationButtonGroup and
      * triggers a re-layout of all DecorationButtons.

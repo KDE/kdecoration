@@ -42,7 +42,7 @@ namespace KDecoration2
 class DecorationButton::Private
 {
 public:
-    explicit Private(DecorationButtonType type, QPointer<Decoration> decoration, DecorationButton *parent);
+    explicit Private(DecorationButtonType type, const QPointer<Decoration> &decoration, DecorationButton *parent);
     ~Private();
 
     const QRect &geometry() const {

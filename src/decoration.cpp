@@ -194,7 +194,7 @@ void Decoration::Private::setOpaque(bool opaque)
     emit q->opaqueChanged(m_opaque);
 }
 
-void Decoration::Private::setShadow(QPointer<DecorationShadow> shadow)
+void Decoration::Private::setShadow(const QPointer<DecorationShadow> &shadow)
 {
     if (m_shadow == shadow) {
         return;
@@ -293,7 +293,7 @@ void Decoration::name(type a) \
 DELEGATE(requestMaximize, Qt::MouseButtons)
 DELEGATE(setTitleRect, const QRect&)
 DELEGATE(setOpaque, bool)
-DELEGATE(setShadow, QPointer<DecorationShadow>)
+DELEGATE(setShadow, const QPointer<DecorationShadow> &)
 
 #undef DELEGATE
 
