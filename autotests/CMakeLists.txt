@@ -13,6 +13,19 @@ target_link_libraries(decorationButtonTest kdecorations2 kdecorations2private Qt
 add_test(kdecoration2-decorationButtonTest decorationButtonTest)
 ecm_mark_as_test(decorationButtonTest)
 
+set(decorationTest_SRCS
+    mockbridge.cpp
+    mockbutton.cpp
+    mockclient.cpp
+    mockdecoration.cpp
+    mocksettings.cpp
+    decorationtest.cpp
+    )
+add_executable(decorationTest ${decorationTest_SRCS})
+target_link_libraries(decorationTest kdecorations2 kdecorations2private Qt5::Test)
+add_test(kdecoration2-decorationTest decorationTest)
+ecm_mark_as_test(decorationTest)
+
 set(decorationShadowTest_SRCS
     shadowtest.cpp
     )

@@ -32,28 +32,16 @@
 namespace KDecoration2
 {
 
+namespace {
 DecorationBridge *findBridge(const QVariantList &args)
 {
-    DecorationBridge *b = nullptr;
-    for (const QVariant &arg : args) {
-        if (!arg.isValid()) {
-            continue;
-        }
-        const auto map = arg.toMap();
-        if (map.isEmpty()) {
-            continue;
-        }
-        auto it = map.find(QStringLiteral("bridge"));
-        if (it == map.end()) {
-            continue;
-        }
-        b = it.value().value<DecorationBridge*>();
-        if (b) {
-            break;
+    for (const auto &arg: args) {
+        if (auto bridge = arg.toMap().value(QStringLiteral("bridge")).value<DecorationBridge*>()) {
+            return bridge;
         }
     }
-    Q_ASSERT(b);
-    return b;
+    Q_UNREACHABLE();
+}
 }
 
 Decoration::Private::Private(Decoration *deco, const QVariantList &args)
