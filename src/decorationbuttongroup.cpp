@@ -181,7 +181,7 @@ void DecorationButtonGroup::addButton(const QPointer<DecorationButton> &button)
     d->updateLayout();
 }
 
-QList< QPointer<DecorationButton> > DecorationButtonGroup::buttons() const
+QList<QPointer<DecorationButton>> DecorationButtonGroup::buttons() const
 {
     return d->buttons();
 }
