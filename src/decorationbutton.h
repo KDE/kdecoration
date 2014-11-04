@@ -140,7 +140,13 @@ public Q_SLOTS:
      * @param rect The area to repaint in Decoration local coordinates, a null QRect updates the complete geometry
      * @see paint
      **/
-    void update(const QRect &rect = QRect());
+    void update(const QRect &rect);
+    /**
+     * Schedules a repaint of the DecorationButton.
+     *
+     * Overloaded method for convenience.
+     **/
+    void update();
 
 Q_SIGNALS:
     void clicked(Qt::MouseButton);

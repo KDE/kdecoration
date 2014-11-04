@@ -286,8 +286,9 @@ DecorationButton::DecorationButton(DecorationButtonType type, const QPointer<Dec
     , d(new Private(type, decoration, this))
 {
     decoration->d->addButton(this);
-    connect(this, &DecorationButton::geometryChanged, this, &DecorationButton::update);
-    auto updateSlot = [this]() { update(); };
+    connect(this, &DecorationButton::geometryChanged,
+            this, static_cast<void (DecorationButton::*)(const QRect&)>(&DecorationButton::update));
+    auto updateSlot = static_cast<void (DecorationButton::*)()>(&DecorationButton::update);
     connect(this, &DecorationButton::hoveredChanged, this, updateSlot);
     connect(this, &DecorationButton::pressedChanged, this, updateSlot);
     connect(this, &DecorationButton::checkedChanged, this, updateSlot);
@@ -318,6 +319,11 @@ DecorationButton::~DecorationButton() = default;
 void DecorationButton::update(const QRect &rect)
 {
     decoration()->update(rect.isNull() ? geometry() : rect);
+}
+
+void DecorationButton::update()
+{
+    update(QRect());
 }
 
 QSize DecorationButton::size() const
