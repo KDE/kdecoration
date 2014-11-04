@@ -81,13 +81,14 @@ void DecorationButtonGroup::Private::updateLayout()
 
     // now position all buttons
     qreal position = pos.x();
-    for (auto it = m_buttons.constBegin(); it != m_buttons.constEnd(); ++it) {
-        if (!(*it)->isVisible()) {
+    const auto &constButtons = m_buttons;
+    for (auto button: constButtons) {
+        if (!button->isVisible()) {
             continue;
         }
-        const QSize size = (*it)->size();
+        const QSize size = button->size();
         // TODO: center
-        (*it)->setGeometry(QRect(QPoint(position, pos.y()), size));
+        button->setGeometry(QRect(QPoint(position, pos.y()), size));
         position += size.width() + m_spacing;
     }
     s_layoutRecursion = false;
@@ -222,11 +223,12 @@ void DecorationButtonGroup::removeButton(const QPointer<DecorationButton> &butto
 
 void DecorationButtonGroup::paint(QPainter *painter)
 {
-    for (auto it = d->buttons().constBegin(); it != d->buttons().constEnd(); ++it) {
-        if (!(*it)->isVisible()) {
+    const auto &buttons = d->buttons();
+    for (auto button: buttons) {
+        if (!button->isVisible()) {
             continue;
         }
-        (*it)->paint(painter);
+        button->paint(painter);
     }
 }
 
