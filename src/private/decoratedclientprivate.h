@@ -73,7 +73,7 @@ public:
     virtual int width() const = 0;
     virtual int height() const = 0;
     virtual QPalette palette() const = 0;
-    virtual Qt::Edges borderingScreenEdges() const = 0;
+    virtual Qt::Edges adjacentScreenEdges() const = 0;
 
     virtual void requestClose() = 0;
     virtual void requestToggleMaximization(Qt::MouseButtons buttons) = 0;

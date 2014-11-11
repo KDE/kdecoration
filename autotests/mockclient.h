@@ -30,7 +30,7 @@ class MockClient : public QObject, public KDecoration2::DecoratedClientPrivate
 public:
     explicit MockClient(KDecoration2::DecoratedClient *client, KDecoration2::Decoration *decoration);
 
-    Qt::Edges borderingScreenEdges() const override;
+    Qt::Edges adjacentScreenEdges() const override;
     QString caption() const override;
     WId decorationId() const override;
     int desktop() const override;

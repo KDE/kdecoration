@@ -28,7 +28,7 @@ MockClient::MockClient(KDecoration2::DecoratedClient *client, KDecoration2::Deco
 {
 }
 
-Qt::Edges MockClient::borderingScreenEdges() const
+Qt::Edges MockClient::adjacentScreenEdges() const
 {
     return Qt::Edges();
 }
