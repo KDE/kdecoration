@@ -114,6 +114,7 @@ public:
     /**
      * Invoked by the framework to set the Settings for this Decoration before
      * init is invoked.
+     * @internal
      **/
     void setSettings(const QSharedPointer<DecorationSettings> &settings);
     /**
