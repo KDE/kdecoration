@@ -32,7 +32,8 @@ MockDecoration::MockDecoration(MockBridge *bridge)
 {
 }
 
-void MockDecoration::paint(QPainter *painter)
+void MockDecoration::paint(QPainter *painter, const QRegion &repaintRegion)
 {
     Q_UNUSED(painter)
+    Q_UNUSED(repaintRegion)
 }
