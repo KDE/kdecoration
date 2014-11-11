@@ -55,7 +55,12 @@ class KDECORATIONS2_EXPORT Decoration : public QObject
     Q_PROPERTY(int resizeOnlyBorderTop     READ resizeOnlyBorderTop     NOTIFY resizeOnlyBordersChanged)
     Q_PROPERTY(int resizeOnlyBorderBottom  READ resizeOnlyBorderBottom  NOTIFY resizeOnlyBordersChanged)
     Q_PROPERTY(Qt::WindowFrameSection windowFrameSection READ windowFrameSection NOTIFY windowFrameSectionChanged)
-    Q_PROPERTY(QRect titleRect READ titleRect NOTIFY titleRectChanged)
+    /**
+     * The titleBar is the area inside the Decoration containing all controls (e.g. Buttons)
+     * and the caption. The titleBar is the main interaction area, while all other areas of the
+     * Decoration are normally used as resize areas.
+     **/
+    Q_PROPERTY(QRect titleBar READ titleBar NOTIFY titleBarChanged)
     /**
      * Rendering whether the Decoration is fully opaque. By default a Decoration is considered to
      * use the alpha channel and this property has the value @c false. But for e.g. a maximized
@@ -89,7 +94,7 @@ public:
     int resizeOnlyBorderTop() const;
     int resizeOnlyBorderBottom() const;
     Qt::WindowFrameSection windowFrameSection() const;
-    QRect titleRect() const;
+    QRect titleBar() const;
     bool isOpaque() const;
 
     QPointer<DecorationShadow> shadow() const;
@@ -142,7 +147,7 @@ Q_SIGNALS:
     void bordersChanged();
     void resizeOnlyBordersChanged();
     void windowFrameSectionChanged(Qt::WindowFrameSection);
-    void titleRectChanged(const QRect &);
+    void titleBarChanged();
     void opaqueChanged(bool);
     void shadowChanged(QPointer<DecorationShadow> shadow);
     void titleBarDoubleClicked();
@@ -152,7 +157,12 @@ protected:
     explicit Decoration(QObject *parent, const QVariantList &args);
     void setBorders(const QMargins &borders);
     void setResizeOnlyBorders(const QMargins &borders);
-    void setTitleRect(const QRect &rect);
+    /**
+     * An implementation has to invoke this method whenever the area
+     * containing the controls and caption changes.
+     * @param rect The new geometry of the titleBar in Decoration coordinates
+     **/
+    void setTitleBar(const QRect &rect);
     void setOpaque(bool opaque);
     void setShadow(const QPointer<DecorationShadow> &shadow);
 

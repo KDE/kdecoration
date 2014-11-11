@@ -79,10 +79,7 @@ public:
     void setWindowFrameSection(Qt::WindowFrameSection section);
     void updateWindowFrameSection(const QPoint &mousePosition);
 
-    const QRect &titleRect() const {
-        return m_titleRect;
-    }
-    void setTitleRect(const QRect &rect);
+    QRect titleBar;
 
     void addButton(DecorationButton *button);
 
@@ -116,7 +113,6 @@ private:
     DecoratedClient *m_client;
     QList<DecorationButton*> m_buttons;
     Qt::WindowFrameSection m_windowFrameSection;
-    QRect m_titleRect;
     bool m_opaque;
     QPointer<DecorationShadow> m_shadow;
     QElapsedTimer m_doubleClickTimer;

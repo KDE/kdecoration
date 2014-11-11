@@ -66,7 +66,7 @@ void Decoration::Private::setWindowFrameSection(Qt::WindowFrameSection section)
 
 void Decoration::Private::updateWindowFrameSection(const QPoint &mousePosition)
 {
-    if (m_titleRect.contains(mousePosition)) {
+    if (titleBar.contains(mousePosition)) {
         setWindowFrameSection(Qt::TitleBarArea);
         return;
     }
@@ -76,9 +76,9 @@ void Decoration::Private::updateWindowFrameSection(const QPoint &mousePosition)
     const bool bottom = size.height() - mousePosition.y() < borders.bottom();
     const bool right  = size.width() - mousePosition.x() < borders.right();
     if (left) {
-        if (top && mousePosition.y() < m_titleRect.y()) {
+        if (top && mousePosition.y() < titleBar.y()) {
             setWindowFrameSection(Qt::TopLeftSection);
-        } else if (bottom && (mousePosition.y() > m_titleRect.y() + m_titleRect.height())) {
+        } else if (bottom && (mousePosition.y() > titleBar.y() + titleBar.height())) {
             setWindowFrameSection(Qt::BottomLeftSection);
         } else {
             setWindowFrameSection(Qt::LeftSection);
@@ -86,9 +86,9 @@ void Decoration::Private::updateWindowFrameSection(const QPoint &mousePosition)
         return;
     }
     if (right) {
-        if (top && mousePosition.y() < m_titleRect.y()) {
+        if (top && mousePosition.y() < titleBar.y()) {
             setWindowFrameSection(Qt::TopRightSection);
-        } else if (bottom && (mousePosition.y() > m_titleRect.y() + m_titleRect.height())) {
+        } else if (bottom && (mousePosition.y() > titleBar.y() + titleBar.height())) {
             setWindowFrameSection(Qt::BottomRightSection);
         } else {
             setWindowFrameSection(Qt::RightSection);
@@ -96,7 +96,7 @@ void Decoration::Private::updateWindowFrameSection(const QPoint &mousePosition)
         return;
     }
     if (bottom) {
-        if (mousePosition.y() > m_titleRect.y() + m_titleRect.height()) {
+        if (mousePosition.y() > titleBar.y() + titleBar.height()) {
             setWindowFrameSection(Qt::BottomSection);
         } else {
             setWindowFrameSection(Qt::TitleBarArea);
@@ -104,7 +104,7 @@ void Decoration::Private::updateWindowFrameSection(const QPoint &mousePosition)
         return;
     }
     if (top) {
-        if (mousePosition.y() < m_titleRect.y()) {
+        if (mousePosition.y() < titleBar.y()) {
             setWindowFrameSection(Qt::TopSection);
         } else {
             setWindowFrameSection(Qt::TitleBarArea);
@@ -112,16 +112,6 @@ void Decoration::Private::updateWindowFrameSection(const QPoint &mousePosition)
         return;
     }
     setWindowFrameSection(Qt::NoSection);
-}
-
-void Decoration::Private::setTitleRect(const QRect &rect)
-{
-    if (m_titleRect == rect) {
-        return;
-    }
-    m_titleRect = rect;
-    emit q->titleRectChanged(rect);
-    // TODO: updateWindowFrameSection?
 }
 
 void Decoration::Private::addButton(DecorationButton *button)
@@ -231,7 +221,6 @@ void Decoration::name(type a) \
 }
 
 DELEGATE(requestToggleMaximization, Qt::MouseButtons)
-DELEGATE(setTitleRect, const QRect&)
 DELEGATE(setOpaque, bool)
 DELEGATE(setShadow, const QPointer<DecorationShadow> &)
 
@@ -249,6 +238,7 @@ void Decoration::name(type a) \
 
 DELEGATE(setBorders, borders, const QMargins&)
 DELEGATE(setResizeOnlyBorders, resizeOnlyBorders, const QMargins&)
+DELEGATE(setTitleBar, titleBar, const QRect&)
 
 #undef DELEGATE
 
@@ -259,7 +249,6 @@ type Decoration::name() const \
 }\
 
 DELEGATE(windowFrameSection, Qt::WindowFrameSection)
-DELEGATE(titleRect, QRect)
 DELEGATE(isOpaque, bool)
 DELEGATE(shadow, QPointer<DecorationShadow>)
 
@@ -273,6 +262,7 @@ type Decoration::name() const \
 
 DELEGATE(borders, QMargins)
 DELEGATE(resizeOnlyBorders, QMargins)
+DELEGATE(titleBar, QRect)
 
 #undef DELEGATE
 
@@ -394,7 +384,7 @@ void Decoration::mousePressEvent(QMouseEvent *event)
     }
     // not handled, take care ourselves
     if (event->button() == Qt::LeftButton) {
-        if (titleRect().contains(event->pos())) {
+        if (d->titleBar.contains(event->pos())) {
             // check for double click
             if (d->wasDoubleClick()) {
                 event->setAccepted(true);
@@ -416,14 +406,14 @@ void Decoration::mouseReleaseEvent(QMouseEvent *event)
     }
     // not handled, take care ourselves
     d->updateWindowFrameSection(event->pos());
-    if (event->button() == Qt::LeftButton && titleRect().contains(event->pos())) {
+    if (event->button() == Qt::LeftButton && d->titleBar.contains(event->pos())) {
         d->startDoubleClickTimer();
     }
 }
 
 void Decoration::wheelEvent(QWheelEvent *event)
 {
-    if (titleRect().contains(event->pos())) {
+    if (d->titleBar.contains(event->pos())) {
         event->setAccepted(true);
         for (DecorationButton *button : d->buttons()) {
             // check if a button contains the point
