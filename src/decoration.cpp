@@ -430,6 +430,11 @@ void Decoration::update(const QRect &r)
     d->bridge()->update(this, r.isNull() ? rect() : r);
 }
 
+void Decoration::update()
+{
+    update(QRect());
+}
+
 void Decoration::setSettings(const QSharedPointer< DecorationSettings > &settings)
 {
     d->settings = settings;

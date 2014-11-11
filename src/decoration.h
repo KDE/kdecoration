@@ -137,7 +137,8 @@ public Q_SLOTS:
     void requestToggleKeepBelow();
     void requestShowWindowMenu();
 
-    void update(const QRect &rect = QRect());
+    void update(const QRect &rect);
+    void update();
 
     /**
      * This method gets invoked from the framework once the Decoration is created and
