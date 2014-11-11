@@ -91,12 +91,12 @@ class KDECORATIONS2_EXPORT DecoratedClient : public QObject
     Q_PROPERTY(bool maximized READ isMaximized NOTIFY maximizedChanged)
     /**
      * Whether the DecoratedClient is maximized horizontally. A horizontally maximized DecoratedClient
-     * uses the maximal available width.
+     * uses the maximal possible width.
      **/
     Q_PROPERTY(bool maximizedHorizontally READ isMaximizedHorizontally NOTIFY maximizedHorizontallyChanged)
     /**
      * Whether the DecoratedClient is maximized vertically. A vertically maximized DecoratedClient
-     * uses the maximal available height.
+     * uses the maximal possible height.
      **/
     Q_PROPERTY(bool maximizedVertically READ isMaximizedVertically NOTIFY maximizedVerticallyChanged)
     /**
