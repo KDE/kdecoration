@@ -140,6 +140,7 @@ QRectF DecorationButtonGroup::geometry() const
 
 bool DecorationButtonGroup::hasButton(DecorationButtonType type) const
 {
+    // TODO: check for deletion of button
     auto it = std::find_if(d->buttons().begin(), d->buttons().end(),
         [type](const QPointer<DecorationButton> &button) {
             return button->type() == type;
