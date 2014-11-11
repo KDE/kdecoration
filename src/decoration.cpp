@@ -48,30 +48,11 @@ Decoration::Private::Private(Decoration *deco, const QVariantList &args)
     : q(deco)
     , m_bridge(findBridge(args))
     , m_client(new DecoratedClient(deco, m_bridge))
-    , m_extendedBorderLeft(0)
-    , m_extendedBorderRight(0)
-    , m_extendedBorderTop(0)
-    , m_extendedBorderBottom(0)
     , m_windowFrameSection(Qt::NoSection)
     , m_opaque(false)
     , m_shadow()
 {
     Q_UNUSED(args)
-}
-
-void Decoration::Private::setExtendedBorders(int left, int right, int top, int bottom)
-{
-    if (m_extendedBorderLeft == left
-            && m_extendedBorderRight == right
-            && m_extendedBorderTop == top
-            && m_extendedBorderBottom == bottom) {
-        return;
-    }
-    m_extendedBorderLeft   = left;
-    m_extendedBorderRight  = right;
-    m_extendedBorderTop    = top;
-    m_extendedBorderBottom = bottom;
-    emit q->extendedBordersChanged();
 }
 
 void Decoration::Private::setWindowFrameSection(Qt::WindowFrameSection section)
@@ -226,11 +207,6 @@ QPointer<DecoratedClient> Decoration::client() const
     return QPointer<DecoratedClient>(d->client());
 }
 
-void Decoration::setExtendedBorders(int left, int right, int top, int bottom)
-{
-    d->setExtendedBorders(left, right, top, bottom);
-}
-
 #define DELEGATE(name) \
 void Decoration::name() \
 { \
@@ -272,6 +248,7 @@ void Decoration::name(type a) \
 }
 
 DELEGATE(setBorders, borders, const QMargins&)
+DELEGATE(setResizeOnlyBorders, resizeOnlyBorders, const QMargins&)
 
 #undef DELEGATE
 
@@ -281,10 +258,6 @@ type Decoration::name() const \
     return d->name(); \
 }\
 
-DELEGATE(extendedBorderLeft, int)
-DELEGATE(extendedBorderRight, int)
-DELEGATE(extendedBorderTop, int)
-DELEGATE(extendedBorderBottom, int)
 DELEGATE(windowFrameSection, Qt::WindowFrameSection)
 DELEGATE(titleRect, QRect)
 DELEGATE(isOpaque, bool)
@@ -299,6 +272,7 @@ type Decoration::name() const \
 }
 
 DELEGATE(borders, QMargins)
+DELEGATE(resizeOnlyBorders, QMargins)
 
 #undef DELEGATE
 
@@ -307,6 +281,10 @@ int Decoration::border##Name() const \
 { \
     return d->borders.name(); \
 } \
+int Decoration::resizeOnlyBorder##Name() const \
+{ \
+    return d->resizeOnlyBorders.name(); \
+}
 
 BORDER(left, Left)
 BORDER(right, Right)
