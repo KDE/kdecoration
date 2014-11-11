@@ -24,11 +24,7 @@ namespace KDecoration2
 {
 
 DecorationShadow::Private::Private(DecorationShadow *parent)
-    : paddingTop(0)
-    , paddingRight(0)
-    , paddingBottom(0)
-    , paddingLeft(0)
-    , q(parent)
+    : q(parent)
 {
 }
 
@@ -49,6 +45,7 @@ DecorationShadow::~DecorationShadow() = default;
     }
 
 DELEGATE(QImage, shadow)
+DELEGATE(QMargins, padding)
 #define S(name) DELEGATE(QSize, name)
 S(topLeft)
 S(top)
@@ -60,11 +57,15 @@ S(bottomLeft)
 S(left)
 #undef S
 
-#define I(name) DELEGATE(int, name)
-I(paddingTop)
-I(paddingBottom)
-I(paddingRight)
-I(paddingLeft)
+#define I(name, Name) \
+int DecorationShadow::padding##Name() const \
+{ \
+    return d->padding.name(); \
+}
+I(top, Top)
+I(bottom, Bottom)
+I(right, Right)
+I(left, Left)
 #undef I
 
 #undef DELEGATE
@@ -92,13 +93,15 @@ S(setBottomLeft,  bottomLeft)
 S(setLeft,        left)
 #undef S
 
-#define I(setName, name) SETTER(int, setName, name)
-I(setPaddingTop,    paddingTop)
-I(setPaddingRight,  paddingRight)
-I(setPaddingBottom, paddingBottom)
-I(setPaddingLeft,   paddingLeft)
-#undef I
-
 #undef SETTER
+
+void DecorationShadow::setPadding(const QMargins &margins)
+{
+    if (d->padding == margins) {
+        return;
+    }
+    d->padding = margins;
+    emit paddingChanged();
+}
 
 }

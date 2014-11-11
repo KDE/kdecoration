@@ -52,10 +52,7 @@ public:
     QSize bottom;
     QSize bottomLeft;
     QSize left;
-    int paddingTop;
-    int paddingRight;
-    int paddingBottom;
-    int paddingLeft;
+    QMargins padding;
 
 private:
     DecorationShadow *q;

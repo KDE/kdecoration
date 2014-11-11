@@ -22,6 +22,7 @@
 
 #include <kdecoration2/kdecoration2_export.h>
 
+#include <QMargins>
 #include <QObject>
 #include <QImage>
 
@@ -90,10 +91,11 @@ class KDECORATIONS2_EXPORT DecorationShadow : public QObject
     Q_PROPERTY(QSize bottom      READ bottom        WRITE setBottom        NOTIFY bottomChanged)
     Q_PROPERTY(QSize bottomLeft  READ bottomLeft    WRITE setBottomLeft    NOTIFY bottomLeftChanged)
     Q_PROPERTY(QSize left        READ left          WRITE setLeft          NOTIFY leftChanged)
-    Q_PROPERTY(int paddingTop    READ paddingTop    WRITE setPaddingTop    NOTIFY paddingTopChanged)
-    Q_PROPERTY(int paddingRight  READ paddingRight  WRITE setPaddingRight  NOTIFY paddingRightChanged)
-    Q_PROPERTY(int paddingBottom READ paddingBottom WRITE setPaddingBottom NOTIFY paddingBottomChanged)
-    Q_PROPERTY(int paddingLeft   READ paddingLeft   WRITE setPaddingLeft   NOTIFY paddingLeftChanged)
+    Q_PROPERTY(int paddingTop    READ paddingTop    NOTIFY paddingChanged)
+    Q_PROPERTY(int paddingRight  READ paddingRight  NOTIFY paddingChanged)
+    Q_PROPERTY(int paddingBottom READ paddingBottom NOTIFY paddingChanged)
+    Q_PROPERTY(int paddingLeft   READ paddingLeft   NOTIFY paddingChanged)
+    Q_PROPERTY(QMargins padding READ padding WRITE setPadding NOTIFY paddingChanged)
 public:
     explicit DecorationShadow(QObject *parent = nullptr);
     virtual ~DecorationShadow();
@@ -111,6 +113,7 @@ public:
     int paddingRight() const;
     int paddingBottom() const;
     int paddingLeft() const;
+    QMargins padding() const;
 
     void setShadow(const QImage &image);
     void setTopLeft(const QSize &size);
@@ -121,10 +124,7 @@ public:
     void setBottom(const QSize &size);
     void setBottomLeft(const QSize &size);
     void setLeft(const QSize &size);
-    void setPaddingTop(int padding);
-    void setPaddingRight(int padding);
-    void setPaddingBottom(int padding);
-    void setPaddingLeft(int padding);
+    void setPadding(const QMargins &margins);
 
 Q_SIGNALS:
     void shadowChanged(const QImage&);
@@ -136,10 +136,7 @@ Q_SIGNALS:
     void bottomChanged(const QSize&);
     void bottomLeftChanged(const QSize&);
     void leftChanged(const QSize&);
-    void paddingTopChanged(int);
-    void paddingRightChanged(int);
-    void paddingBottomChanged(int);
-    void paddingLeftChanged(int);
+    void paddingChanged();
 
 private:
     class Private;

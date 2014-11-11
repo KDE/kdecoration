@@ -21,6 +21,8 @@
 #include <QSignalSpy>
 #include "../src/decorationshadow.h"
 
+Q_DECLARE_METATYPE(QMargins)
+
 class DecorationShadowTest : public QObject
 {
     Q_OBJECT
@@ -34,11 +36,12 @@ private Q_SLOTS:
 void DecorationShadowTest::testPadding_data()
 {
     QTest::addColumn<QByteArray>("propertyName");
+    QTest::addColumn<QMargins>("padding");
 
-    QTest::newRow("top")    << QByteArrayLiteral("paddingTop");
-    QTest::newRow("right")  << QByteArrayLiteral("paddingRight");
-    QTest::newRow("bottom") << QByteArrayLiteral("paddingBottom");
-    QTest::newRow("left")   << QByteArrayLiteral("paddingLeft");
+    QTest::newRow("top")    << QByteArrayLiteral("paddingTop")    << QMargins(0, 10, 0, 0);
+    QTest::newRow("right")  << QByteArrayLiteral("paddingRight")  << QMargins(0, 0, 10, 0);
+    QTest::newRow("bottom") << QByteArrayLiteral("paddingBottom") << QMargins(0, 0, 0, 10);
+    QTest::newRow("left")   << QByteArrayLiteral("paddingLeft")   << QMargins(10, 0, 0, 0);
 }
 
 void DecorationShadowTest::testPadding()
@@ -54,32 +57,28 @@ void DecorationShadowTest::testPadding()
     QCOMPARE(metaProperty.isReadable(), true);
     QCOMPARE(metaProperty.hasNotifySignal(), true);
     QCOMPARE(metaProperty.type(), QVariant::Int);
-    QMetaMethod notifySignal = metaProperty.notifySignal();
-    QVERIFY(notifySignal.methodSignature().startsWith(propertyName));
-    QCOMPARE(notifySignal.parameterCount(), 1);
-    QCOMPARE(notifySignal.parameterType(0), int(QMetaType::Int));
-    QByteArray signalName = QByteArrayLiteral("2") + notifySignal.methodSignature();
-    QSignalSpy changedSpy(&shadow, signalName.constData());
+    QSignalSpy changedSpy(&shadow, SIGNAL(paddingChanged()));
     QVERIFY(changedSpy.isValid());
 
     QCOMPARE(shadow.property(propertyName.constData()).isValid(), true);
     QCOMPARE(shadow.property(propertyName.constData()).toInt(), 0);
-    shadow.setProperty(propertyName.constData(), 10);
+    QFETCH(QMargins, padding);
+    shadow.setPadding(padding);
+    QCOMPARE(shadow.padding(), padding);
     QCOMPARE(shadow.property(propertyName.constData()).toInt(), 10);
     QCOMPARE(changedSpy.count(), 1);
-    QCOMPARE(changedSpy.first().first().toInt(), 10);
 
     // trying to set to same value shouldn't emit the signal
-    shadow.setProperty(propertyName.constData(), 10);
+    shadow.setPadding(padding);
     QCOMPARE(shadow.property(propertyName.constData()).toInt(), 10);
     QCOMPARE(changedSpy.count(), 1);
 
     // changing to different value should emit signal
-    shadow.setProperty(propertyName.constData(), 11);
+    padding += 1;
+    shadow.setPadding(padding);
+    QCOMPARE(shadow.padding(), padding);
     QCOMPARE(shadow.property(propertyName.constData()).toInt(), 11);
     QCOMPARE(changedSpy.count(), 2);
-    QCOMPARE(changedSpy.first().first().toInt(), 10);
-    QCOMPARE(changedSpy.last().first().toInt(), 11);
 }
 
 void DecorationShadowTest::testSizes_data()
