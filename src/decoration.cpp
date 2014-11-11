@@ -45,29 +45,29 @@ DecorationBridge *findBridge(const QVariantList &args)
 }
 
 Decoration::Private::Private(Decoration *deco, const QVariantList &args)
-    : q(deco)
+    : sectionUnderMouse(Qt::NoSection)
+    , q(deco)
     , m_bridge(findBridge(args))
     , m_client(new DecoratedClient(deco, m_bridge))
-    , m_windowFrameSection(Qt::NoSection)
     , m_opaque(false)
     , m_shadow()
 {
     Q_UNUSED(args)
 }
 
-void Decoration::Private::setWindowFrameSection(Qt::WindowFrameSection section)
+void Decoration::Private::setSectionUnderMouse(Qt::WindowFrameSection section)
 {
-    if (m_windowFrameSection == section) {
+    if (sectionUnderMouse == section) {
         return;
     }
-    m_windowFrameSection = section;
-    emit q->windowFrameSectionChanged(m_windowFrameSection);
+    sectionUnderMouse = section;
+    emit q->sectionUnderMouseChanged(sectionUnderMouse);
 }
 
-void Decoration::Private::updateWindowFrameSection(const QPoint &mousePosition)
+void Decoration::Private::updateSectionUnderMouse(const QPoint &mousePosition)
 {
     if (titleBar.contains(mousePosition)) {
-        setWindowFrameSection(Qt::TitleBarArea);
+        setSectionUnderMouse(Qt::TitleBarArea);
         return;
     }
     const QSize size = q->size();
@@ -77,41 +77,41 @@ void Decoration::Private::updateWindowFrameSection(const QPoint &mousePosition)
     const bool right  = size.width() - mousePosition.x() < borders.right();
     if (left) {
         if (top && mousePosition.y() < titleBar.y()) {
-            setWindowFrameSection(Qt::TopLeftSection);
+            setSectionUnderMouse(Qt::TopLeftSection);
         } else if (bottom && (mousePosition.y() > titleBar.y() + titleBar.height())) {
-            setWindowFrameSection(Qt::BottomLeftSection);
+            setSectionUnderMouse(Qt::BottomLeftSection);
         } else {
-            setWindowFrameSection(Qt::LeftSection);
+            setSectionUnderMouse(Qt::LeftSection);
         }
         return;
     }
     if (right) {
         if (top && mousePosition.y() < titleBar.y()) {
-            setWindowFrameSection(Qt::TopRightSection);
+            setSectionUnderMouse(Qt::TopRightSection);
         } else if (bottom && (mousePosition.y() > titleBar.y() + titleBar.height())) {
-            setWindowFrameSection(Qt::BottomRightSection);
+            setSectionUnderMouse(Qt::BottomRightSection);
         } else {
-            setWindowFrameSection(Qt::RightSection);
+            setSectionUnderMouse(Qt::RightSection);
         }
         return;
     }
     if (bottom) {
         if (mousePosition.y() > titleBar.y() + titleBar.height()) {
-            setWindowFrameSection(Qt::BottomSection);
+            setSectionUnderMouse(Qt::BottomSection);
         } else {
-            setWindowFrameSection(Qt::TitleBarArea);
+            setSectionUnderMouse(Qt::TitleBarArea);
         }
         return;
     }
     if (top) {
         if (mousePosition.y() < titleBar.y()) {
-            setWindowFrameSection(Qt::TopSection);
+            setSectionUnderMouse(Qt::TopSection);
         } else {
-            setWindowFrameSection(Qt::TitleBarArea);
+            setSectionUnderMouse(Qt::TitleBarArea);
         }
         return;
     }
-    setWindowFrameSection(Qt::NoSection);
+    setSectionUnderMouse(Qt::NoSection);
 }
 
 void Decoration::Private::addButton(DecorationButton *button)
@@ -248,7 +248,6 @@ type Decoration::name() const \
     return d->name(); \
 }\
 
-DELEGATE(windowFrameSection, Qt::WindowFrameSection)
 DELEGATE(isOpaque, bool)
 DELEGATE(shadow, QPointer<DecorationShadow>)
 
@@ -263,6 +262,7 @@ type Decoration::name() const \
 DELEGATE(borders, QMargins)
 DELEGATE(resizeOnlyBorders, QMargins)
 DELEGATE(titleBar, QRect)
+DELEGATE(sectionUnderMouse, Qt::WindowFrameSection)
 
 #undef DELEGATE
 
@@ -328,7 +328,7 @@ void Decoration::hoverEnterEvent(QHoverEvent *event)
     for (DecorationButton *button : d->buttons()) {
         QCoreApplication::instance()->sendEvent(button, event);
     }
-    d->updateWindowFrameSection(event->pos());
+    d->updateSectionUnderMouse(event->pos());
 }
 
 void Decoration::hoverLeaveEvent(QHoverEvent *event)
@@ -336,7 +336,7 @@ void Decoration::hoverLeaveEvent(QHoverEvent *event)
     for (DecorationButton *button : d->buttons()) {
         QCoreApplication::instance()->sendEvent(button, event);
     }
-    d->setWindowFrameSection(Qt::NoSection);
+    d->setSectionUnderMouse(Qt::NoSection);
 }
 
 void Decoration::hoverMoveEvent(QHoverEvent *event)
@@ -357,7 +357,7 @@ void Decoration::hoverMoveEvent(QHoverEvent *event)
             QCoreApplication::instance()->sendEvent(button, event);
         }
     }
-    d->updateWindowFrameSection(event->pos());
+    d->updateSectionUnderMouse(event->pos());
 }
 
 void Decoration::mouseMoveEvent(QMouseEvent *event)
@@ -405,7 +405,7 @@ void Decoration::mouseReleaseEvent(QMouseEvent *event)
         }
     }
     // not handled, take care ourselves
-    d->updateWindowFrameSection(event->pos());
+    d->updateSectionUnderMouse(event->pos());
     if (event->button() == Qt::LeftButton && d->titleBar.contains(event->pos())) {
         d->startDoubleClickTimer();
     }

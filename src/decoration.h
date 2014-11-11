@@ -54,7 +54,11 @@ class KDECORATIONS2_EXPORT Decoration : public QObject
     Q_PROPERTY(int resizeOnlyBorderRight   READ resizeOnlyBorderRight   NOTIFY resizeOnlyBordersChanged)
     Q_PROPERTY(int resizeOnlyBorderTop     READ resizeOnlyBorderTop     NOTIFY resizeOnlyBordersChanged)
     Q_PROPERTY(int resizeOnlyBorderBottom  READ resizeOnlyBorderBottom  NOTIFY resizeOnlyBordersChanged)
-    Q_PROPERTY(Qt::WindowFrameSection windowFrameSection READ windowFrameSection NOTIFY windowFrameSectionChanged)
+    /**
+     * This property denotes the part of the Decoration which is currently under the mouse pointer.
+     * It gets automatically updated whenever a QMouseEvent or QHoverEvent gets processed.
+     **/
+    Q_PROPERTY(Qt::WindowFrameSection sectionUnderMouse READ sectionUnderMouse NOTIFY sectionUnderMouseChanged)
     /**
      * The titleBar is the area inside the Decoration containing all controls (e.g. Buttons)
      * and the caption. The titleBar is the main interaction area, while all other areas of the
@@ -93,7 +97,7 @@ public:
     int resizeOnlyBorderRight() const;
     int resizeOnlyBorderTop() const;
     int resizeOnlyBorderBottom() const;
-    Qt::WindowFrameSection windowFrameSection() const;
+    Qt::WindowFrameSection sectionUnderMouse() const;
     QRect titleBar() const;
     bool isOpaque() const;
 
@@ -146,7 +150,7 @@ public Q_SLOTS:
 Q_SIGNALS:
     void bordersChanged();
     void resizeOnlyBordersChanged();
-    void windowFrameSectionChanged(Qt::WindowFrameSection);
+    void sectionUnderMouseChanged(Qt::WindowFrameSection);
     void titleBarChanged();
     void opaqueChanged(bool);
     void shadowChanged(QPointer<DecorationShadow> shadow);

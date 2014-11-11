@@ -73,11 +73,9 @@ public:
     QMargins borders;
     QMargins resizeOnlyBorders;
 
-    Qt::WindowFrameSection windowFrameSection() const {
-        return m_windowFrameSection;
-    }
-    void setWindowFrameSection(Qt::WindowFrameSection section);
-    void updateWindowFrameSection(const QPoint &mousePosition);
+    Qt::WindowFrameSection sectionUnderMouse;
+    void setSectionUnderMouse(Qt::WindowFrameSection section);
+    void updateSectionUnderMouse(const QPoint &mousePosition);
 
     QRect titleBar;
 
@@ -112,7 +110,6 @@ private:
     DecorationBridge *m_bridge;
     DecoratedClient *m_client;
     QList<DecorationButton*> m_buttons;
-    Qt::WindowFrameSection m_windowFrameSection;
     bool m_opaque;
     QPointer<DecorationShadow> m_shadow;
     QElapsedTimer m_doubleClickTimer;
