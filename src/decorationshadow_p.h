@@ -44,14 +44,7 @@ public:
     explicit Private(DecorationShadow *parent);
     ~Private();
     QImage shadow;
-    QSize topLeft;
-    QSize top;
-    QSize topRight;
-    QSize right;
-    QSize bottomRight;
-    QSize bottom;
-    QSize bottomLeft;
-    QSize left;
+    QRect innerShadowRect;
     QMargins padding;
 
 private:

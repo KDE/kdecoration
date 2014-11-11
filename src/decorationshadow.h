@@ -50,7 +50,7 @@ class DecorationShadowPrivate;
  * @li bottomLeft: rendered as it is
  * @li left: stretched in y direction
  *
- * The sizes of these parts is denoted in the properties of same name and the layout is the
+ * The sizes of these parts is denoted in the property innerShadowRect and the layout is the
  * following:
  * #######################################
  * # topLeft #     top        # topRight #
@@ -59,6 +59,14 @@ class DecorationShadowPrivate;
  * #######################################
  * # bottomLeft #  bottom  # bottomRight #
  * #######################################
+ *
+ * The innerShadowRect property is a QRect of the geometry of the areas not covered by any of the
+ * elements. This means that:
+ * @li x/y of the rect is the same as the size of the topLeft element
+ * @li width of the rect is the same as the width of the top and bottom element
+ * @li height of the rect is the same as the height of the left and the right element
+ * By that the actual sizes of all elements can be derived out of the size of the shadow image
+ * and the innerShadowRect.
  *
  * The position of the rendering depends on the values;
  * @li paddingTop
@@ -83,14 +91,15 @@ class KDECORATIONS2_EXPORT DecorationShadow : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QImage shadow     READ shadow        WRITE setShadow        NOTIFY shadowChanged)
-    Q_PROPERTY(QSize topLeft     READ topLeft       WRITE setTopLeft       NOTIFY topLeftChanged)
-    Q_PROPERTY(QSize top         READ top           WRITE setTop           NOTIFY topChanged)
-    Q_PROPERTY(QSize topRight    READ topRight      WRITE setTopRight      NOTIFY topRightChanged)
-    Q_PROPERTY(QSize right       READ right         WRITE setRight         NOTIFY rightChanged)
-    Q_PROPERTY(QSize bottomRight READ bottomRight   WRITE setBottomRight   NOTIFY bottomRightChanged)
-    Q_PROPERTY(QSize bottom      READ bottom        WRITE setBottom        NOTIFY bottomChanged)
-    Q_PROPERTY(QSize bottomLeft  READ bottomLeft    WRITE setBottomLeft    NOTIFY bottomLeftChanged)
-    Q_PROPERTY(QSize left        READ left          WRITE setLeft          NOTIFY leftChanged)
+    Q_PROPERTY(QRect innerShadowRect READ innerShadowRect WRITE setInnerShadowRect NOTIFY innerShadowRectChanged)
+    Q_PROPERTY(QSize topLeft     READ topLeft       NOTIFY innerShadowRectChanged)
+    Q_PROPERTY(QSize top         READ top           NOTIFY innerShadowRectChanged)
+    Q_PROPERTY(QSize topRight    READ topRight      NOTIFY innerShadowRectChanged)
+    Q_PROPERTY(QSize right       READ right         NOTIFY innerShadowRectChanged)
+    Q_PROPERTY(QSize bottomRight READ bottomRight   NOTIFY innerShadowRectChanged)
+    Q_PROPERTY(QSize bottom      READ bottom        NOTIFY innerShadowRectChanged)
+    Q_PROPERTY(QSize bottomLeft  READ bottomLeft    NOTIFY innerShadowRectChanged)
+    Q_PROPERTY(QSize left        READ left          NOTIFY innerShadowRectChanged)
     Q_PROPERTY(int paddingTop    READ paddingTop    NOTIFY paddingChanged)
     Q_PROPERTY(int paddingRight  READ paddingRight  NOTIFY paddingChanged)
     Q_PROPERTY(int paddingBottom READ paddingBottom NOTIFY paddingChanged)
@@ -101,6 +110,7 @@ public:
     virtual ~DecorationShadow();
 
     QImage shadow() const;
+    QRect innerShadowRect() const;
     QSize topLeft() const;
     QSize top() const;
     QSize topRight() const;
@@ -116,26 +126,12 @@ public:
     QMargins padding() const;
 
     void setShadow(const QImage &image);
-    void setTopLeft(const QSize &size);
-    void setTop(const QSize &size);
-    void setTopRight(const QSize &size);
-    void setRight(const QSize &size);
-    void setBottomRight(const QSize &size);
-    void setBottom(const QSize &size);
-    void setBottomLeft(const QSize &size);
-    void setLeft(const QSize &size);
+    void setInnerShadowRect(const QRect &rect);
     void setPadding(const QMargins &margins);
 
 Q_SIGNALS:
     void shadowChanged(const QImage&);
-    void topLeftChanged(const QSize&);
-    void topChanged(const QSize&);
-    void topRightChanged(const QSize&);
-    void rightChanged(const QSize&);
-    void bottomRightChanged(const QSize&);
-    void bottomChanged(const QSize&);
-    void bottomLeftChanged(const QSize&);
-    void leftChanged(const QSize&);
+    void innerShadowRectChanged();
     void paddingChanged();
 
 private:

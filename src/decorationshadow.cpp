@@ -38,6 +38,75 @@ DecorationShadow::DecorationShadow(QObject *parent)
 
 DecorationShadow::~DecorationShadow() = default;
 
+QSize DecorationShadow::topLeft() const
+{
+    if (d->innerShadowRect.isNull() || d->shadow.isNull()) {
+        return QSize();
+    }
+    return QSize(d->innerShadowRect.left(), d->innerShadowRect.top());
+}
+
+QSize DecorationShadow::top() const
+{
+    if (d->innerShadowRect.isNull() || d->shadow.isNull()) {
+        return QSize();
+    }
+    return QSize(d->innerShadowRect.width(), d->innerShadowRect.top());
+}
+
+QSize DecorationShadow::topRight() const
+{
+    if (d->innerShadowRect.isNull() || d->shadow.isNull()) {
+        return QSize();
+    }
+    return QSize(d->shadow.width() - d->innerShadowRect.width() - d->innerShadowRect.left(),
+                 d->innerShadowRect.top());
+}
+
+QSize DecorationShadow::right() const
+{
+    if (d->innerShadowRect.isNull() || d->shadow.isNull()) {
+        return QSize();
+    }
+    return QSize(d->shadow.width() - d->innerShadowRect.width() - d->innerShadowRect.left(),
+                 d->innerShadowRect.height());
+}
+
+QSize DecorationShadow::bottomRight() const
+{
+    if (d->innerShadowRect.isNull() || d->shadow.isNull()) {
+        return QSize();
+    }
+    return QSize(d->shadow.width() - d->innerShadowRect.width() - d->innerShadowRect.left(),
+                 d->shadow.height() - d->innerShadowRect.top() - d->innerShadowRect.height());
+}
+
+QSize DecorationShadow::bottom() const
+{
+    if (d->innerShadowRect.isNull() || d->shadow.isNull()) {
+        return QSize();
+    }
+    return QSize(d->innerShadowRect.width(),
+                 d->shadow.height() - d->innerShadowRect.top() - d->innerShadowRect.height());
+}
+
+QSize DecorationShadow::bottomLeft() const
+{
+    if (d->innerShadowRect.isNull() || d->shadow.isNull()) {
+        return QSize();
+    }
+    return QSize(d->innerShadowRect.left(),
+                 d->shadow.height() - d->innerShadowRect.top() - d->innerShadowRect.height());
+}
+
+QSize DecorationShadow::left() const
+{
+    if (d->innerShadowRect.isNull() || d->shadow.isNull()) {
+        return QSize();
+    }
+    return QSize(d->innerShadowRect.left(), d->innerShadowRect.height());
+}
+
 #define DELEGATE(type, name) \
     type DecorationShadow::name() const \
     { \
@@ -46,16 +115,7 @@ DecorationShadow::~DecorationShadow() = default;
 
 DELEGATE(QImage, shadow)
 DELEGATE(QMargins, padding)
-#define S(name) DELEGATE(QSize, name)
-S(topLeft)
-S(top)
-S(topRight)
-S(right)
-S(bottomRight)
-S(bottom)
-S(bottomLeft)
-S(left)
-#undef S
+DELEGATE(QRect, innerShadowRect);
 
 #define I(name, Name) \
 int DecorationShadow::padding##Name() const \
@@ -82,17 +142,6 @@ I(left, Left)
 
 SETTER(const QImage&, setShadow, shadow)
 
-#define S(setName, name) SETTER(const QSize&, setName, name)
-S(setTopLeft,     topLeft)
-S(setTop,         top)
-S(setTopRight,    topRight)
-S(setRight,       right)
-S(setBottomRight, bottomRight)
-S(setBottom,      bottom)
-S(setBottomLeft,  bottomLeft)
-S(setLeft,        left)
-#undef S
-
 #undef SETTER
 
 void DecorationShadow::setPadding(const QMargins &margins)
@@ -102,6 +151,15 @@ void DecorationShadow::setPadding(const QMargins &margins)
     }
     d->padding = margins;
     emit paddingChanged();
+}
+
+void DecorationShadow::setInnerShadowRect(const QRect &rect)
+{
+    if (d->innerShadowRect == rect) {
+        return;
+    }
+    d->innerShadowRect = rect;
+    emit innerShadowRectChanged();
 }
 
 }
