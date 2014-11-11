@@ -49,7 +49,7 @@ class Decoration::Private
 public:
     Private(Decoration *decoration, const QVariantList &args);
     void requestClose();
-    void requestMaximize(Qt::MouseButtons buttons);
+    void requestToggleMaximization(Qt::MouseButtons buttons);
     void requestMinimize();
     void requestContextHelp();
     void requestToggleOnAllDesktops();

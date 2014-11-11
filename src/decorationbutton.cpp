@@ -93,7 +93,7 @@ void DecorationButton::Private::init()
         setCheckable(true);
         setChecked(c->isMaximized());
         setAcceptedButtons(Qt::LeftButton | Qt::MiddleButton | Qt::RightButton);
-        QObject::connect(q, &DecorationButton::clicked, m_decoration.data(), &Decoration::requestMaximize, Qt::QueuedConnection);
+        QObject::connect(q, &DecorationButton::clicked, m_decoration.data(), &Decoration::requestToggleMaximization, Qt::QueuedConnection);
         QObject::connect(c, &DecoratedClient::maximizeableChanged, q, &DecorationButton::setEnabled);
         QObject::connect(c, &DecoratedClient::maximizedChanged, q, &DecorationButton::setChecked);
         break;

@@ -153,7 +153,7 @@ void MockClient::requestContextHelp()
     emit quickHelpRequested();
 }
 
-void MockClient::requestMaximize(Qt::MouseButtons buttons)
+void MockClient::requestToggleMaximization(Qt::MouseButtons buttons)
 {
     bool maximizedHorizontally = m_maximizedHorizontally;
     bool maximizedVertically = m_maximizedVertically;

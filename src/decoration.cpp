@@ -221,7 +221,7 @@ void Decoration::Private::name(type a) \
     m_client->d->name(a); \
 }
 
-DELEGATE(requestMaximize, Qt::MouseButtons)
+DELEGATE(requestToggleMaximization, Qt::MouseButtons)
 #undef DELEGATE
 
 
@@ -278,7 +278,7 @@ void Decoration::name(type a) \
     d->name(a); \
 }
 
-DELEGATE(requestMaximize, Qt::MouseButtons)
+DELEGATE(requestToggleMaximization, Qt::MouseButtons)
 DELEGATE(setTitleRect, const QRect&)
 DELEGATE(setOpaque, bool)
 DELEGATE(setShadow, const QPointer<DecorationShadow> &)

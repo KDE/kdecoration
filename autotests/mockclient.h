@@ -55,7 +55,7 @@ public:
     bool providesContextHelp() const override;
     void requestClose() override;
     void requestContextHelp() override;
-    void requestMaximize(Qt::MouseButtons buttons) override;
+    void requestToggleMaximization(Qt::MouseButtons buttons) override;
     void requestMinimize() override;
     void requestShowWindowMenu() override;
     void requestToggleKeepAbove() override;

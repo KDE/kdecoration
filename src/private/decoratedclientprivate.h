@@ -76,7 +76,7 @@ public:
     virtual Qt::Edges borderingScreenEdges() const = 0;
 
     virtual void requestClose() = 0;
-    virtual void requestMaximize(Qt::MouseButtons buttons) = 0;
+    virtual void requestToggleMaximization(Qt::MouseButtons buttons) = 0;
     virtual void requestMinimize() = 0;
     virtual void requestContextHelp() = 0;
     virtual void requestToggleOnAllDesktops() = 0;

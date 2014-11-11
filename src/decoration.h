@@ -113,7 +113,7 @@ public:
 
 public Q_SLOTS:
     void requestClose();
-    void requestMaximize(Qt::MouseButtons buttons);
+    void requestToggleMaximization(Qt::MouseButtons buttons);
     void requestMinimize();
     void requestContextHelp();
     void requestToggleOnAllDesktops();
