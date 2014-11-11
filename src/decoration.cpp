@@ -48,10 +48,6 @@ Decoration::Private::Private(Decoration *deco, const QVariantList &args)
     : q(deco)
     , m_bridge(findBridge(args))
     , m_client(new DecoratedClient(deco, m_bridge))
-    , m_borderLeft(0)
-    , m_borderRight(0)
-    , m_borderTop(0)
-    , m_borderBottom(0)
     , m_extendedBorderLeft(0)
     , m_extendedBorderRight(0)
     , m_extendedBorderTop(0)
@@ -61,21 +57,6 @@ Decoration::Private::Private(Decoration *deco, const QVariantList &args)
     , m_shadow()
 {
     Q_UNUSED(args)
-}
-
-void Decoration::Private::setBorders(int left, int right, int top, int bottom)
-{
-    if (m_borderLeft == left
-            && m_borderRight == right
-            && m_borderTop == top
-            && m_borderBottom == bottom) {
-        return;
-    }
-    m_borderLeft   = left;
-    m_borderRight  = right;
-    m_borderTop    = top;
-    m_borderBottom = bottom;
-    emit q->bordersChanged();
 }
 
 void Decoration::Private::setExtendedBorders(int left, int right, int top, int bottom)
@@ -109,10 +90,10 @@ void Decoration::Private::updateWindowFrameSection(const QPoint &mousePosition)
         return;
     }
     const QSize size = q->size();
-    const bool left   = mousePosition.x() < m_borderLeft;
-    const bool top    = mousePosition.y() < m_borderTop;
-    const bool bottom = size.height() - mousePosition.y() < m_borderBottom;
-    const bool right  = size.width() - mousePosition.x() < m_borderRight;
+    const bool left   = mousePosition.x() < borders.left();
+    const bool top    = mousePosition.y() < borders.top();
+    const bool bottom = size.height() - mousePosition.y() < borders.bottom();
+    const bool right  = size.width() - mousePosition.x() < borders.right();
     if (left) {
         if (top && mousePosition.y() < m_titleRect.y()) {
             setWindowFrameSection(Qt::TopLeftSection);
@@ -245,11 +226,6 @@ QPointer<DecoratedClient> Decoration::client() const
     return QPointer<DecoratedClient>(d->client());
 }
 
-void Decoration::setBorders(int left, int right, int top, int bottom)
-{
-    d->setBorders(left, right, top, bottom);
-}
-
 void Decoration::setExtendedBorders(int left, int right, int top, int bottom)
 {
     d->setExtendedBorders(left, right, top, bottom);
@@ -285,16 +261,26 @@ DELEGATE(setShadow, const QPointer<DecorationShadow> &)
 
 #undef DELEGATE
 
+#define DELEGATE(name, variableName, type) \
+void Decoration::name(type a) \
+{ \
+    if (d->variableName == a) { \
+        return; \
+    } \
+    d->variableName = a; \
+    emit variableName##Changed(); \
+}
+
+DELEGATE(setBorders, borders, const QMargins&)
+
+#undef DELEGATE
+
 #define DELEGATE(name, type) \
 type Decoration::name() const \
 { \
     return d->name(); \
 }\
 
-DELEGATE(borderLeft, int)
-DELEGATE(borderRight, int)
-DELEGATE(borderTop, int)
-DELEGATE(borderBottom, int)
 DELEGATE(extendedBorderLeft, int)
 DELEGATE(extendedBorderRight, int)
 DELEGATE(extendedBorderTop, int)
@@ -306,10 +292,33 @@ DELEGATE(shadow, QPointer<DecorationShadow>)
 
 #undef DELEGATE
 
+#define DELEGATE(name, type) \
+type Decoration::name() const \
+{ \
+    return d->name; \
+}
+
+DELEGATE(borders, QMargins)
+
+#undef DELEGATE
+
+#define BORDER(name, Name) \
+int Decoration::border##Name() const \
+{ \
+    return d->borders.name(); \
+} \
+
+BORDER(left, Left)
+BORDER(right, Right)
+BORDER(top, Top)
+BORDER(bottom, Bottom)
+#undef BORDER
+
 QSize Decoration::size() const
 {
-    return QSize(client()->width() + borderLeft() + borderRight(),
-                 client()->height() + borderTop() + borderBottom());
+    const QMargins &b = d->borders;
+    return QSize(client()->width() + b.left() + b.right(),
+                 client()->height() + b.top() + b.bottom());
 }
 
 QRect Decoration::rect() const

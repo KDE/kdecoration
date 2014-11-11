@@ -23,6 +23,7 @@
 #include <kdecoration2/kdecoration2_export.h>
 #include "decorationshadow.h"
 
+#include <QMargins>
 #include <QObject>
 #include <QPointer>
 #include <QRect>
@@ -43,6 +44,7 @@ class DecorationSettings;
 class KDECORATIONS2_EXPORT Decoration : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(QMargins borders READ borders NOTIFY bordersChanged)
     Q_PROPERTY(int borderLeft    READ borderLeft    NOTIFY bordersChanged)
     Q_PROPERTY(int borderRight   READ borderRight   NOTIFY bordersChanged)
     Q_PROPERTY(int borderTop     READ borderTop     NOTIFY bordersChanged)
@@ -75,6 +77,7 @@ public:
 
     QPointer<DecoratedClient> client() const;
 
+    QMargins borders() const;
     int borderLeft() const;
     int borderRight() const;
     int borderTop() const;
@@ -145,7 +148,7 @@ Q_SIGNALS:
 
 protected:
     explicit Decoration(QObject *parent, const QVariantList &args);
-    void setBorders(int left, int right, int top, int bottom);
+    void setBorders(const QMargins &borders);
     void setExtendedBorders(int left, int right, int top, int bottom);
     void setTitleRect(const QRect &rect);
     void setOpaque(bool opaque);

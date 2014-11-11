@@ -70,19 +70,7 @@ public:
         return m_bridge;
     }
 
-    int borderLeft() const {
-        return m_borderLeft;
-    }
-    int borderRight() const {
-        return m_borderRight;
-    }
-    int borderTop() const {
-        return m_borderTop;
-    }
-    int borderBottom() const {
-        return m_borderBottom;
-    }
-    void setBorders(int left, int right, int top, int bottom);
+    QMargins borders;
 
     int extendedBorderLeft() const {
         return m_extendedBorderLeft;
@@ -139,10 +127,6 @@ private:
     Decoration *q;
     DecorationBridge *m_bridge;
     DecoratedClient *m_client;
-    int m_borderLeft;
-    int m_borderRight;
-    int m_borderTop;
-    int m_borderBottom;
     int m_extendedBorderLeft;
     int m_extendedBorderRight;
     int m_extendedBorderTop;
