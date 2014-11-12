@@ -31,6 +31,7 @@ public:
     explicit MockDecoration(QObject *parent, const QVariantList &args);
     explicit MockDecoration(MockBridge *bridge);
     void paint(QPainter *painter, const QRegion &repaintRegion) override;
+    void setOpaque(bool set);
 };
 
 #endif

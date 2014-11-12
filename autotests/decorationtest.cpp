@@ -18,6 +18,7 @@
  * License along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include <QTest>
+#include <QSignalSpy>
 #include "mockbridge.h"
 #include "mockdecoration.h"
 
@@ -26,6 +27,7 @@ class DecorationTest : public QObject
     Q_OBJECT
 private Q_SLOTS:
     void testCreate();
+    void testOpaque();
 };
 
 void DecorationTest::testCreate()
@@ -39,6 +41,28 @@ void DecorationTest::testCreate()
                                                 QVariantMap({ {bridgeKey, QVariant::fromValue(&bridge)} })
                                                }));
     QVERIFY(!deco1.client().isNull());
+}
+
+void DecorationTest::testOpaque()
+{
+    MockBridge bridge;
+    MockDecoration deco(&bridge);
+    QSignalSpy opaqueChangedSpy(&deco, SIGNAL(opaqueChanged(bool)));
+    QVERIFY(opaqueChangedSpy.isValid());
+    QCOMPARE(deco.isOpaque(), false);
+    deco.setOpaque(false);
+    QVERIFY(opaqueChangedSpy.isEmpty());
+    deco.setOpaque(true);
+    QCOMPARE(opaqueChangedSpy.count(), 1);
+    QCOMPARE(opaqueChangedSpy.first().first().toBool(), true);
+    QCOMPARE(deco.isOpaque(), true);
+    deco.setOpaque(true);
+    QCOMPARE(opaqueChangedSpy.count(), 1);
+    deco.setOpaque(false);
+    QCOMPARE(opaqueChangedSpy.count(), 2);
+    QCOMPARE(opaqueChangedSpy.first().first().toBool(), true);
+    QCOMPARE(opaqueChangedSpy.last().first().toBool(), false);
+    QCOMPARE(deco.isOpaque(), false);
 }
 
 QTEST_GUILESS_MAIN(DecorationTest)

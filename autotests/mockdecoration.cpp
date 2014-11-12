@@ -37,3 +37,8 @@ void MockDecoration::paint(QPainter *painter, const QRegion &repaintRegion)
     Q_UNUSED(painter)
     Q_UNUSED(repaintRegion)
 }
+
+void MockDecoration::setOpaque(bool set)
+{
+    Decoration::setOpaque(set);
+}
