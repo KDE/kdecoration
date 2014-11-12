@@ -45,17 +45,6 @@ public:
     explicit Private(DecorationButtonType type, const QPointer<Decoration> &decoration, DecorationButton *parent);
     ~Private();
 
-    const QRect &geometry() const {
-        return m_geometry;
-    }
-    void setGeometry(const QRect &geometry);
-    DecorationButtonType type() const {
-        return m_type;
-    }
-
-    bool isHovered() const {
-        return m_hovered;
-    }
     bool isPressed() const {
         return m_pressed != Qt::NoButton;
     }
@@ -63,63 +52,37 @@ public:
         return m_pressed.testFlag(button);
     }
 
-    QPointer<Decoration> decoration() const {
-        return m_decoration;
-    }
     void setHovered(bool hovered);
     void setPressed(Qt::MouseButton, bool pressed);
     void setAcceptedButtons(Qt::MouseButtons buttons);
-    Qt::MouseButtons acceptedButtons() const {
-        return m_buttons;
-    }
     void setEnabled(bool enabled);
-    bool isEnabled() const {
-        return m_enabled;
-    }
-    bool isChecked() const {
-        return m_checked;
-    }
-    bool isCheckable() const {
-        return m_checkable;
-    }
-    bool isVisible() const {
-        return m_visible;
-    }
     void setChecked(bool checked);
     void setCheckable(bool checkable);
     void setVisible(bool visible);
-    bool isDoubleClickEnabled() const {
-        return m_doubleClickEnabled;
-    }
-    void setDoubleClickEnabled(bool enable) {
-        m_doubleClickEnabled = enable;
-    }
     void startDoubleClickTimer();
     void invalidateDoubleClickTimer();
     bool wasDoubleClick() const;
-    bool isPressAndHold() const {
-        return m_pressAndHold;
-    }
     void setPressAndHold(bool enable);
     void startPressAndHold();
     void stopPressAndHold();
 
+    QPointer<Decoration> decoration;
+    DecorationButtonType type;
+    QRect geometry;
+    bool hovered;
+    bool enabled;
+    bool checkable;
+    bool checked;
+    bool visible;
+    Qt::MouseButtons acceptedButtons;
+    bool doubleClickEnabled;
+    bool pressAndHold;
+
 private:
     void init();
     DecorationButton *q;
-    QPointer<Decoration> m_decoration;
-    DecorationButtonType m_type;
-    QRect m_geometry;
-    bool m_hovered;
-    bool m_enabled;
-    bool m_checkable;
-    bool m_checked;
-    bool m_visible;
     Qt::MouseButtons m_pressed;
-    Qt::MouseButtons m_buttons;
-    bool m_doubleClickEnabled;
     QScopedPointer<QElapsedTimer> m_doubleClickTimer;
-    bool m_pressAndHold;
     QScopedPointer<QTimer> m_pressAndHoldTimer;
 };
 

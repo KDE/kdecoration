@@ -39,18 +39,18 @@ uint qHash(const DecorationButtonType &type)
 }
 
 DecorationButton::Private::Private(DecorationButtonType type, const QPointer<Decoration> &decoration, DecorationButton *parent)
-    : q(parent)
-    , m_decoration(decoration)
-    , m_type(type)
-    , m_hovered(false)
-    , m_enabled(true)
-    , m_checkable(false)
-    , m_checked(false)
-    , m_visible(true)
+    : decoration(decoration)
+    , type(type)
+    , hovered(false)
+    , enabled(true)
+    , checkable(false)
+    , checked(false)
+    , visible(true)
+    , acceptedButtons(Qt::LeftButton)
+    , doubleClickEnabled(false)
+    , pressAndHold(false)
+    , q(parent)
     , m_pressed(Qt::NoButton)
-    , m_buttons(Qt::LeftButton)
-    , m_doubleClickEnabled(false)
-    , m_pressAndHold(false)
 {
     init();
 }
@@ -59,19 +59,19 @@ DecorationButton::Private::~Private() = default;
 
 void DecorationButton::Private::init()
 {
-    auto c = m_decoration->client().data();
-    auto settings = m_decoration->settings();
-    switch (m_type) {
+    auto c = decoration->client().data();
+    auto settings = decoration->settings();
+    switch (type) {
     case DecorationButtonType::Menu:
-        QObject::connect(q, &DecorationButton::clicked, m_decoration.data(), &Decoration::requestShowWindowMenu, Qt::QueuedConnection);
-        QObject::connect(q, &DecorationButton::doubleClicked, m_decoration.data(), &Decoration::requestClose, Qt::QueuedConnection);
+        QObject::connect(q, &DecorationButton::clicked, decoration.data(), &Decoration::requestShowWindowMenu, Qt::QueuedConnection);
+        QObject::connect(q, &DecorationButton::doubleClicked, decoration.data(), &Decoration::requestClose, Qt::QueuedConnection);
         QObject::connect(settings.data(), &DecorationSettings::closeOnDoubleClickOnMenuChanged, q,
             [this](bool enabled) {
-                setDoubleClickEnabled(enabled);
+                doubleClickEnabled = enabled;
                 setPressAndHold(enabled);
             }, Qt::QueuedConnection
         );
-        setDoubleClickEnabled(settings->isCloseOnDoubleClickOnMenu());
+        doubleClickEnabled = settings->isCloseOnDoubleClickOnMenu();
         setPressAndHold(settings->isCloseOnDoubleClickOnMenu());
         setAcceptedButtons(Qt::LeftButton | Qt::RightButton);
         break;
@@ -79,13 +79,13 @@ void DecorationButton::Private::init()
         setVisible(settings->isOnAllDesktopsAvailable());
         setCheckable(true);
         setChecked(c->isOnAllDesktops());
-        QObject::connect(q, &DecorationButton::clicked, m_decoration.data(), &Decoration::requestToggleOnAllDesktops, Qt::QueuedConnection);
+        QObject::connect(q, &DecorationButton::clicked, decoration.data(), &Decoration::requestToggleOnAllDesktops, Qt::QueuedConnection);
         QObject::connect(settings.data(), &DecorationSettings::onAllDesktopsAvailableChanged, q, &DecorationButton::setVisible);
         QObject::connect(c, &DecoratedClient::onAllDesktopsChanged, q, &DecorationButton::setChecked);
         break;
     case DecorationButtonType::Minimize:
         setEnabled(c->isMinimizeable());
-        QObject::connect(q, &DecorationButton::clicked, m_decoration.data(), &Decoration::requestMinimize, Qt::QueuedConnection);
+        QObject::connect(q, &DecorationButton::clicked, decoration.data(), &Decoration::requestMinimize, Qt::QueuedConnection);
         QObject::connect(c, &DecoratedClient::minimizeableChanged, q, &DecorationButton::setEnabled);
         break;
     case DecorationButtonType::Maximize:
@@ -93,37 +93,37 @@ void DecorationButton::Private::init()
         setCheckable(true);
         setChecked(c->isMaximized());
         setAcceptedButtons(Qt::LeftButton | Qt::MiddleButton | Qt::RightButton);
-        QObject::connect(q, &DecorationButton::clicked, m_decoration.data(), &Decoration::requestToggleMaximization, Qt::QueuedConnection);
+        QObject::connect(q, &DecorationButton::clicked, decoration.data(), &Decoration::requestToggleMaximization, Qt::QueuedConnection);
         QObject::connect(c, &DecoratedClient::maximizeableChanged, q, &DecorationButton::setEnabled);
         QObject::connect(c, &DecoratedClient::maximizedChanged, q, &DecorationButton::setChecked);
         break;
     case DecorationButtonType::Close:
         setEnabled(c->isCloseable());
-        QObject::connect(q, &DecorationButton::clicked, m_decoration.data(), &Decoration::requestClose, Qt::QueuedConnection);
+        QObject::connect(q, &DecorationButton::clicked, decoration.data(), &Decoration::requestClose, Qt::QueuedConnection);
         QObject::connect(c, &DecoratedClient::closeableChanged, q, &DecorationButton::setEnabled);
         break;
     case DecorationButtonType::QuickHelp:
         setVisible(c->providesContextHelp());
-        QObject::connect(q, &DecorationButton::clicked, m_decoration.data(), &Decoration::requestContextHelp, Qt::QueuedConnection);
+        QObject::connect(q, &DecorationButton::clicked, decoration.data(), &Decoration::requestContextHelp, Qt::QueuedConnection);
         QObject::connect(c, &DecoratedClient::providesContextHelpChanged, q, &DecorationButton::setVisible);
         break;
     case DecorationButtonType::KeepAbove:
         setCheckable(true);
         setChecked(c->isKeepAbove());
-        QObject::connect(q, &DecorationButton::clicked, m_decoration.data(), &Decoration::requestToggleKeepAbove, Qt::QueuedConnection);
+        QObject::connect(q, &DecorationButton::clicked, decoration.data(), &Decoration::requestToggleKeepAbove, Qt::QueuedConnection);
         QObject::connect(c, &DecoratedClient::keepAboveChanged, q, &DecorationButton::setChecked);
         break;
     case DecorationButtonType::KeepBelow:
         setCheckable(true);
         setChecked(c->isKeepBelow());
-        QObject::connect(q, &DecorationButton::clicked, m_decoration.data(), &Decoration::requestToggleKeepBelow, Qt::QueuedConnection);
+        QObject::connect(q, &DecorationButton::clicked, decoration.data(), &Decoration::requestToggleKeepBelow, Qt::QueuedConnection);
         QObject::connect(c, &DecoratedClient::keepBelowChanged, q, &DecorationButton::setChecked);
         break;
     case DecorationButtonType::Shade:
         setEnabled(c->isShadeable());
         setCheckable(true);
         setChecked(c->isShaded());
-        QObject::connect(q, &DecorationButton::clicked, m_decoration.data(), &Decoration::requestToggleShade, Qt::QueuedConnection);
+        QObject::connect(q, &DecorationButton::clicked, decoration.data(), &Decoration::requestToggleShade, Qt::QueuedConnection);
         QObject::connect(c, &DecoratedClient::shadedChanged, q, &DecorationButton::setChecked);
         QObject::connect(c, &DecoratedClient::shadeableChanged, q, &DecorationButton::setEnabled);
         break;
@@ -133,32 +133,23 @@ void DecorationButton::Private::init()
     }
 }
 
-void DecorationButton::Private::setGeometry(const QRect &geometry)
+void DecorationButton::Private::setHovered(bool set)
 {
-    if (m_geometry == geometry) {
+    if (hovered == set) {
         return;
     }
-    m_geometry = geometry;
-    emit q->geometryChanged(m_geometry);
+    hovered = set;
+    emit q->hoveredChanged(hovered);
 }
 
-void DecorationButton::Private::setHovered(bool hovered)
+void DecorationButton::Private::setEnabled(bool set)
 {
-    if (m_hovered == hovered) {
+    if (enabled == set) {
         return;
     }
-    m_hovered = hovered;
-    emit q->hoveredChanged(m_hovered);
-}
-
-void DecorationButton::Private::setEnabled(bool enabled)
-{
-    if (m_enabled == enabled) {
-        return;
-    }
-    m_enabled = enabled;
-    emit q->enabledChanged(m_enabled);
-    if (!m_enabled) {
+    enabled = set;
+    emit q->enabledChanged(enabled);
+    if (!enabled) {
         setHovered(false);
         if (isPressed()) {
             m_pressed = Qt::NoButton;
@@ -167,14 +158,14 @@ void DecorationButton::Private::setEnabled(bool enabled)
     }
 }
 
-void DecorationButton::Private::setVisible(bool visible)
+void DecorationButton::Private::setVisible(bool set)
 {
-    if (m_visible == visible) {
+    if (visible == set) {
         return;
     }
-    m_visible = visible;
-    emit q->visibilityChanged(visible);
-    if (!m_visible) {
+    visible = set;
+    emit q->visibilityChanged(set);
+    if (!visible) {
         setHovered(false);
         if (isPressed()) {
             m_pressed = Qt::NoButton;
@@ -183,25 +174,25 @@ void DecorationButton::Private::setVisible(bool visible)
     }
 }
 
-void DecorationButton::Private::setChecked(bool checked)
+void DecorationButton::Private::setChecked(bool set)
 {
-    if (!m_checkable || m_checked == checked) {
+    if (!checkable || checked == set) {
         return;
     }
-    m_checked = checked;
-    emit q->checkedChanged(m_checked);
+    checked = set;
+    emit q->checkedChanged(checked);
 }
 
-void DecorationButton::Private::setCheckable(bool checkable)
+void DecorationButton::Private::setCheckable(bool set)
 {
-    if (m_checkable == checkable) {
+    if (checkable == set) {
         return;
     }
-    if (!checkable) {
+    if (!set) {
         setChecked(false);
     }
-    m_checkable = checkable;
-    emit q->checkableChanged(m_checkable);
+    checkable = set;
+    emit q->checkableChanged(checkable);
 }
 
 void DecorationButton::Private::setPressed(Qt::MouseButton button, bool pressed)
@@ -216,16 +207,16 @@ void DecorationButton::Private::setPressed(Qt::MouseButton button, bool pressed)
 
 void DecorationButton::Private::setAcceptedButtons(Qt::MouseButtons buttons)
 {
-    if (m_buttons == buttons) {
+    if (acceptedButtons == buttons) {
         return;
     }
-    m_buttons = buttons;
-    emit q->acceptedButtonsChanged(m_buttons);
+    acceptedButtons = buttons;
+    emit q->acceptedButtonsChanged(acceptedButtons);
 }
 
 void DecorationButton::Private::startDoubleClickTimer()
 {
-    if (!m_doubleClickEnabled) {
+    if (!doubleClickEnabled) {
         return;
     }
     if (m_doubleClickTimer.isNull()) {
@@ -252,18 +243,18 @@ bool DecorationButton::Private::wasDoubleClick() const
 
 
 void DecorationButton::Private::setPressAndHold(bool enable) {
-    if (m_pressAndHold == enable) {
+    if (pressAndHold == enable) {
         return;
     }
-    m_pressAndHold = enable;
-    if (!m_pressAndHold) {
+    pressAndHold = enable;
+    if (!pressAndHold) {
         m_pressAndHoldTimer.reset();
     }
 }
 
 void DecorationButton::Private::startPressAndHold()
 {
-    if (!m_pressAndHold) {
+    if (!pressAndHold) {
         return;
     }
     if (m_pressAndHoldTimer.isNull()) {
@@ -328,26 +319,33 @@ void DecorationButton::update()
 
 QSize DecorationButton::size() const
 {
-    return d->geometry().size();
+    return d->geometry.size();
 }
 
-#define DELEGATE(name, type) \
+bool DecorationButton::isPressed() const
+{
+    return d->isPressed();
+}
+
+#define DELEGATE(name, variableName, type) \
 type DecorationButton::name() const \
 { \
-    return d->name(); \
-}\
+    return d->variableName; \
+}
 
-DELEGATE(isHovered, bool)
-DELEGATE(isPressed, bool)
-DELEGATE(geometry, QRect)
-DELEGATE(decoration, QPointer<Decoration>)
-DELEGATE(acceptedButtons, Qt::MouseButtons)
-DELEGATE(isEnabled, bool)
-DELEGATE(isChecked, bool)
-DELEGATE(isCheckable, bool)
-DELEGATE(isVisible, bool)
-DELEGATE(type, DecorationButtonType)
+DELEGATE(isHovered, hovered, bool)
+DELEGATE(isEnabled, enabled, bool)
+DELEGATE(isChecked, checked, bool)
+DELEGATE(isCheckable, checkable, bool)
+DELEGATE(isVisible, visible, bool)
 
+#define DELEGATE2(name, type) DELEGATE(name, name, type)
+DELEGATE2(geometry, QRect)
+DELEGATE2(decoration, QPointer<Decoration>)
+DELEGATE2(acceptedButtons, Qt::MouseButtons)
+DELEGATE2(type, DecorationButtonType)
+
+#undef DELEGATE2
 #undef DELEGATE
 
 #define DELEGATE(name, type) \
@@ -356,12 +354,25 @@ DELEGATE(type, DecorationButtonType)
         d->name(a); \
     }
 
-DELEGATE(setGeometry, const QRect &)
 DELEGATE(setAcceptedButtons, Qt::MouseButtons)
 DELEGATE(setEnabled, bool)
 DELEGATE(setChecked, bool)
 DELEGATE(setCheckable, bool)
 DELEGATE(setVisible, bool)
+
+#undef DELEGATE
+
+#define DELEGATE(name, variableName, type) \
+void DecorationButton::name(type a) \
+{ \
+    if (d->variableName == a) { \
+        return; \
+    } \
+    d->variableName = a; \
+    emit variableName##Changed(d->variableName); \
+}
+
+DELEGATE(setGeometry, geometry, const QRect &)
 
 #undef DELEGATE
 
@@ -393,7 +404,7 @@ bool DecorationButton::event(QEvent *event)
 
 void DecorationButton::hoverEnterEvent(QHoverEvent *event)
 {
-    if (!d->isEnabled() || !d->isVisible() || !d->geometry().contains(event->pos())) {
+    if (!d->enabled || !d->visible || !d->geometry.contains(event->pos())) {
         return;
     }
     d->setHovered(true);
@@ -402,7 +413,7 @@ void DecorationButton::hoverEnterEvent(QHoverEvent *event)
 
 void DecorationButton::hoverLeaveEvent(QHoverEvent *event)
 {
-    if (!d->isEnabled() || !d->isVisible() || !d->isHovered() || d->geometry().contains(event->pos())) {
+    if (!d->enabled || !d->visible || !d->hovered || d->geometry.contains(event->pos())) {
         return;
     }
     d->setHovered(false);
@@ -416,10 +427,10 @@ void DecorationButton::hoverMoveEvent(QHoverEvent *event)
 
 void DecorationButton::mouseMoveEvent(QMouseEvent *event)
 {
-    if (!d->isEnabled() || !d->isVisible() || !d->isHovered()) {
+    if (!d->enabled || !d->visible || !d->hovered) {
         return;
     }
-    if (!d->geometry().contains(event->pos())) {
+    if (!d->geometry.contains(event->pos())) {
         d->setHovered(false);
         event->setAccepted(true);
     }
@@ -427,12 +438,12 @@ void DecorationButton::mouseMoveEvent(QMouseEvent *event)
 
 void DecorationButton::mousePressEvent(QMouseEvent *event)
 {
-    if (!d->isEnabled() || !d->isVisible() || !d->geometry().contains(event->pos()) || !d->acceptedButtons().testFlag(event->button())) {
+    if (!d->enabled || !d->visible || !d->geometry.contains(event->pos()) || !d->acceptedButtons.testFlag(event->button())) {
         return;
     }
     d->setPressed(event->button(), true);
     event->setAccepted(true);
-    if (d->isDoubleClickEnabled() && event->button() == Qt::LeftButton) {
+    if (d->doubleClickEnabled && event->button() == Qt::LeftButton) {
         // check for double click
         if (d->wasDoubleClick()) {
             event->setAccepted(true);
@@ -440,18 +451,18 @@ void DecorationButton::mousePressEvent(QMouseEvent *event)
         }
         d->invalidateDoubleClickTimer();
     }
-    if (d->isPressAndHold() && event->button() == Qt::LeftButton) {
+    if (d->pressAndHold && event->button() == Qt::LeftButton) {
         d->startPressAndHold();
     }
 }
 
 void DecorationButton::mouseReleaseEvent(QMouseEvent *event)
 {
-    if (!d->isEnabled() || !d->isVisible() || !d->isPressed(event->button())) {
+    if (!d->enabled || !d->visible || !d->isPressed(event->button())) {
         return;
     }
-    if (d->geometry().contains(event->pos())) {
-        if (!d->isPressAndHold() || event->button() != Qt::LeftButton) {
+    if (d->geometry.contains(event->pos())) {
+        if (!d->pressAndHold || event->button() != Qt::LeftButton) {
             emit clicked(event->button());
         } else {
             d->stopPressAndHold();
@@ -460,7 +471,7 @@ void DecorationButton::mouseReleaseEvent(QMouseEvent *event)
     d->setPressed(event->button(), false);
     event->setAccepted(true);
 
-    if (d->isDoubleClickEnabled() && event->button() == Qt::LeftButton) {
+    if (d->doubleClickEnabled && event->button() == Qt::LeftButton) {
         d->startDoubleClickTimer();
     }
 }
