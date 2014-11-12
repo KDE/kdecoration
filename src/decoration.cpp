@@ -46,11 +46,10 @@ DecorationBridge *findBridge(const QVariantList &args)
 
 Decoration::Private::Private(Decoration *deco, const QVariantList &args)
     : sectionUnderMouse(Qt::NoSection)
+    , bridge(findBridge(args))
+    , client(new DecoratedClient(deco, bridge))
+    , opaque(false)
     , q(deco)
-    , m_bridge(findBridge(args))
-    , m_client(new DecoratedClient(deco, m_bridge))
-    , m_opaque(false)
-    , m_shadow()
 {
     Q_UNUSED(args)
 }
@@ -116,31 +115,13 @@ void Decoration::Private::updateSectionUnderMouse(const QPoint &mousePosition)
 
 void Decoration::Private::addButton(DecorationButton *button)
 {
-    Q_ASSERT(!m_buttons.contains(button));
-    m_buttons << button;
+    Q_ASSERT(!buttons.contains(button));
+    buttons << button;
     QObject::connect(button, &QObject::destroyed, q,
         [this](QObject *o) {
-            m_buttons.removeAll(static_cast<DecorationButton*>(o));
+            buttons.removeAll(static_cast<DecorationButton*>(o));
         }
     );
-}
-
-void Decoration::Private::setOpaque(bool opaque)
-{
-    if (m_opaque == opaque) {
-        return;
-    }
-    m_opaque = opaque;
-    emit q->opaqueChanged(m_opaque);
-}
-
-void Decoration::Private::setShadow(const QPointer<DecorationShadow> &shadow)
-{
-    if (m_shadow == shadow) {
-        return;
-    }
-    m_shadow = shadow;
-    emit q->shadowChanged(shadow);
 }
 
 bool Decoration::Private::wasDoubleClick() const
@@ -150,33 +131,6 @@ bool Decoration::Private::wasDoubleClick() const
     }
     return !m_doubleClickTimer.hasExpired(QGuiApplication::styleHints()->mouseDoubleClickInterval());
 }
-
-#define DELEGATE(name) \
-void Decoration::Private::name() \
-{ \
-    m_client->d->name(); \
-}
-
-DELEGATE(requestClose)
-DELEGATE(requestMinimize)
-DELEGATE(requestContextHelp)
-DELEGATE(requestToggleOnAllDesktops)
-DELEGATE(requestToggleShade)
-DELEGATE(requestToggleKeepAbove)
-DELEGATE(requestToggleKeepBelow)
-DELEGATE(requestShowWindowMenu)
-#undef DELEGATE
-
-#define DELEGATE(name, type) \
-void Decoration::Private::name(type a) \
-{ \
-    m_client->d->name(a); \
-}
-
-DELEGATE(requestToggleMaximization, Qt::MouseButtons)
-#undef DELEGATE
-
-
 
 Decoration::Decoration(QObject *parent, const QVariantList &args)
     : QObject(parent)
@@ -194,13 +148,13 @@ void Decoration::init()
 
 QPointer<DecoratedClient> Decoration::client() const
 {
-    return QPointer<DecoratedClient>(d->client());
+    return QPointer<DecoratedClient>(d->client);
 }
 
 #define DELEGATE(name) \
 void Decoration::name() \
 { \
-    d->name(); \
+    d->client->d->name(); \
 }
 
 DELEGATE(requestClose)
@@ -214,42 +168,26 @@ DELEGATE(requestShowWindowMenu)
 
 #undef DELEGATE
 
-#define DELEGATE(name, type) \
-void Decoration::name(type a) \
-{ \
-    d->name(a); \
+void Decoration::requestToggleMaximization(Qt::MouseButtons buttons)
+{
+    d->client->d->requestToggleMaximization(buttons);
 }
 
-DELEGATE(requestToggleMaximization, Qt::MouseButtons)
-DELEGATE(setOpaque, bool)
-DELEGATE(setShadow, const QPointer<DecorationShadow> &)
-
-#undef DELEGATE
-
-#define DELEGATE(name, variableName, type) \
+#define DELEGATE(name, variableName, type, emitValue) \
 void Decoration::name(type a) \
 { \
     if (d->variableName == a) { \
         return; \
     } \
     d->variableName = a; \
-    emit variableName##Changed(); \
+    emit variableName##Changed(emitValue); \
 }
 
-DELEGATE(setBorders, borders, const QMargins&)
-DELEGATE(setResizeOnlyBorders, resizeOnlyBorders, const QMargins&)
-DELEGATE(setTitleBar, titleBar, const QRect&)
-
-#undef DELEGATE
-
-#define DELEGATE(name, type) \
-type Decoration::name() const \
-{ \
-    return d->name(); \
-}\
-
-DELEGATE(isOpaque, bool)
-DELEGATE(shadow, QPointer<DecorationShadow>)
+DELEGATE(setBorders, borders, const QMargins&, )
+DELEGATE(setResizeOnlyBorders, resizeOnlyBorders, const QMargins&, )
+DELEGATE(setTitleBar, titleBar, const QRect&, )
+DELEGATE(setOpaque, opaque, bool, d->opaque)
+DELEGATE(setShadow, shadow, const QPointer<DecorationShadow> &, d->shadow)
 
 #undef DELEGATE
 
@@ -263,8 +201,14 @@ DELEGATE(borders, QMargins)
 DELEGATE(resizeOnlyBorders, QMargins)
 DELEGATE(titleBar, QRect)
 DELEGATE(sectionUnderMouse, Qt::WindowFrameSection)
+DELEGATE(shadow, QPointer<DecorationShadow>)
 
 #undef DELEGATE
+
+bool Decoration::isOpaque() const
+{
+    return d->opaque;
+}
 
 #define BORDER(name, Name) \
 int Decoration::border##Name() const \
@@ -325,7 +269,7 @@ bool Decoration::event(QEvent *event)
 
 void Decoration::hoverEnterEvent(QHoverEvent *event)
 {
-    for (DecorationButton *button : d->buttons()) {
+    for (DecorationButton *button : d->buttons) {
         QCoreApplication::instance()->sendEvent(button, event);
     }
     d->updateSectionUnderMouse(event->pos());
@@ -333,7 +277,7 @@ void Decoration::hoverEnterEvent(QHoverEvent *event)
 
 void Decoration::hoverLeaveEvent(QHoverEvent *event)
 {
-    for (DecorationButton *button : d->buttons()) {
+    for (DecorationButton *button : d->buttons) {
         QCoreApplication::instance()->sendEvent(button, event);
     }
     d->setSectionUnderMouse(Qt::NoSection);
@@ -341,7 +285,7 @@ void Decoration::hoverLeaveEvent(QHoverEvent *event)
 
 void Decoration::hoverMoveEvent(QHoverEvent *event)
 {
-    for (DecorationButton *button : d->buttons()) {
+    for (DecorationButton *button : d->buttons) {
         if (!button->isEnabled() || !button->isVisible()) {
             continue;
         }
@@ -362,7 +306,7 @@ void Decoration::hoverMoveEvent(QHoverEvent *event)
 
 void Decoration::mouseMoveEvent(QMouseEvent *event)
 {
-    for (DecorationButton *button : d->buttons()) {
+    for (DecorationButton *button : d->buttons) {
         if (button->isPressed()) {
             QCoreApplication::instance()->sendEvent(button, event);
             return;
@@ -373,7 +317,7 @@ void Decoration::mouseMoveEvent(QMouseEvent *event)
 
 void Decoration::mousePressEvent(QMouseEvent *event)
 {
-    for (DecorationButton *button : d->buttons()) {
+    for (DecorationButton *button : d->buttons) {
         if (button->isHovered()) {
             if (button->acceptedButtons().testFlag(event->button())) {
                 QCoreApplication::instance()->sendEvent(button, event);
@@ -398,7 +342,7 @@ void Decoration::mousePressEvent(QMouseEvent *event)
 
 void Decoration::mouseReleaseEvent(QMouseEvent *event)
 {
-    for (DecorationButton *button : d->buttons()) {
+    for (DecorationButton *button : d->buttons) {
         if (button->isPressed() && button->acceptedButtons().testFlag(event->button())) {
             QCoreApplication::instance()->sendEvent(button, event);
             return;
@@ -415,7 +359,7 @@ void Decoration::wheelEvent(QWheelEvent *event)
 {
     if (d->titleBar.contains(event->pos())) {
         event->setAccepted(true);
-        for (DecorationButton *button : d->buttons()) {
+        for (DecorationButton *button : d->buttons) {
             // check if a button contains the point
             if (button->geometry().contains(event->pos())) {
                 return;
@@ -427,7 +371,7 @@ void Decoration::wheelEvent(QWheelEvent *event)
 
 void Decoration::update(const QRect &r)
 {
-    d->bridge()->update(this, r.isNull() ? rect() : r);
+    d->bridge->update(this, r.isNull() ? rect() : r);
 }
 
 void Decoration::update()

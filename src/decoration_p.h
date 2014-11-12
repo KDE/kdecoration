@@ -48,27 +48,6 @@ class Decoration::Private
 {
 public:
     Private(Decoration *decoration, const QVariantList &args);
-    void requestClose();
-    void requestToggleMaximization(Qt::MouseButtons buttons);
-    void requestMinimize();
-    void requestContextHelp();
-    void requestToggleOnAllDesktops();
-    void requestToggleShade();
-    void requestToggleKeepAbove();
-    void requestToggleKeepBelow();
-    void requestShowWindowMenu();
-
-    DecoratedClient *client() {
-        return m_client;
-    }
-
-    const DecoratedClient *client() const {
-        return m_client;
-    }
-
-    DecorationBridge *bridge() {
-        return m_bridge;
-    }
 
     QMargins borders;
     QMargins resizeOnlyBorders;
@@ -81,20 +60,6 @@ public:
 
     void addButton(DecorationButton *button);
 
-    const QList<DecorationButton*> &buttons() const {
-        return m_buttons;
-    }
-
-    bool isOpaque() const {
-        return m_opaque;
-    }
-    void setOpaque(bool opaque);
-
-    QPointer<DecorationShadow> shadow() const {
-        return m_shadow;
-    }
-    void setShadow(const QPointer<DecorationShadow> &shadow);
-
     void startDoubleClickTimer() {
         m_doubleClickTimer.start();
     }
@@ -104,14 +69,14 @@ public:
     bool wasDoubleClick() const;
 
     QSharedPointer<DecorationSettings> settings;
+    DecorationBridge *bridge;
+    DecoratedClient *client;
+    bool opaque;
+    QList<DecorationButton*> buttons;
+    QPointer<DecorationShadow> shadow;
 
 private:
     Decoration *q;
-    DecorationBridge *m_bridge;
-    DecoratedClient *m_client;
-    QList<DecorationButton*> m_buttons;
-    bool m_opaque;
-    QPointer<DecorationShadow> m_shadow;
     QElapsedTimer m_doubleClickTimer;
 };
 
