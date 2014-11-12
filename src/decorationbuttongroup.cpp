@@ -28,31 +28,21 @@ namespace KDecoration2
 {
 
 DecorationButtonGroup::Private::Private(Decoration *decoration, DecorationButtonGroup *parent)
-    : q(parent)
-    , m_decoration(decoration)
-    , m_spacing(0.0)
+    : decoration(decoration)
+    , spacing(0.0)
+    , q(parent)
 {
 }
 
 DecorationButtonGroup::Private::~Private() = default;
 
-void DecorationButtonGroup::Private::setSpacing(qreal spacing)
+void DecorationButtonGroup::Private::setGeometry(const QRectF &geo)
 {
-    if (m_spacing == spacing) {
+    if (geometry == geo) {
         return;
     }
-    m_spacing = spacing;
-    emit q->spacingChanged(m_spacing);
-    updateLayout();
-}
-
-void DecorationButtonGroup::Private::setGeometry(const QRectF &geometry)
-{
-    if (m_geometry == geometry) {
-        return;
-    }
-    m_geometry = geometry;
-    emit q->geometryChanged(m_geometry);
+    geometry = geo;
+    emit q->geometryChanged(geometry);
 }
 
 static bool s_layoutRecursion = false;
@@ -63,25 +53,25 @@ void DecorationButtonGroup::Private::updateLayout()
         return;
     }
     s_layoutRecursion = true;
-    const QPointF &pos = m_geometry.topLeft();
+    const QPointF &pos = geometry.topLeft();
     // first calculate new size
     qreal height = 0;
     qreal width = 0;
-    for (auto it = m_buttons.constBegin(); it != m_buttons.constEnd(); ++it) {
+    for (auto it = buttons.constBegin(); it != buttons.constEnd(); ++it) {
         if (!(*it)->isVisible()) {
             continue;
         }
         height = qMax(height, qreal((*it)->size().height()));
         width += (*it)->size().width();
-        if (it + 1 != m_buttons.constEnd()) {
-            width += m_spacing;
+        if (it + 1 != buttons.constEnd()) {
+            width += spacing;
         }
     }
     setGeometry(QRectF(pos, QSizeF(width, height)));
 
     // now position all buttons
     qreal position = pos.x();
-    const auto &constButtons = m_buttons;
+    const auto &constButtons = buttons;
     for (auto button: constButtons) {
         if (!button->isVisible()) {
             continue;
@@ -89,7 +79,7 @@ void DecorationButtonGroup::Private::updateLayout()
         const QSize size = button->size();
         // TODO: center
         button->setGeometry(QRect(QPoint(position, pos.y()), size));
-        position += size.width() + m_spacing;
+        position += size.width() + spacing;
     }
     s_layoutRecursion = false;
 }
@@ -119,8 +109,8 @@ DecorationButtonGroup::DecorationButtonGroup(DecorationButtonGroup::Position typ
     auto changed = type == Position::Left ? &DecorationSettings::decorationButtonsLeftChanged : &DecorationSettings::decorationButtonsRightChanged;
     connect(settings.data(), changed, this,
         [this, createButtons] {
-            qDeleteAll(d->buttons());
-            d->buttons().clear();
+            qDeleteAll(d->buttons);
+            d->buttons.clear();
             createButtons();
         }
     );
@@ -130,47 +120,52 @@ DecorationButtonGroup::~DecorationButtonGroup() = default;
 
 QPointer<Decoration> DecorationButtonGroup::decoration() const
 {
-    return QPointer<Decoration>(d->decoration());
+    return QPointer<Decoration>(d->decoration);
 }
 
 QRectF DecorationButtonGroup::geometry() const
 {
-    return d->geometry();
+    return d->geometry;
 }
 
 bool DecorationButtonGroup::hasButton(DecorationButtonType type) const
 {
     // TODO: check for deletion of button
-    auto it = std::find_if(d->buttons().begin(), d->buttons().end(),
+    auto it = std::find_if(d->buttons.begin(), d->buttons.end(),
         [type](const QPointer<DecorationButton> &button) {
             return button->type() == type;
         }
     );
-    return it != d->buttons().end();
+    return it != d->buttons.end();
 }
 
 qreal DecorationButtonGroup::spacing() const
 {
-    return d->spacing();
+    return d->spacing;
 }
 
 QPointF DecorationButtonGroup::pos() const
 {
-    return d->geometry().topLeft();
+    return d->geometry.topLeft();
 }
 
 void DecorationButtonGroup::setPos(const QPointF &pos)
 {
-    if (d->geometry().topLeft() == pos) {
+    if (d->geometry.topLeft() == pos) {
         return;
     }
-    d->setGeometry(QRectF(pos, d->geometry().size()));
+    d->setGeometry(QRectF(pos, d->geometry.size()));
     d->updateLayout();
 }
 
 void DecorationButtonGroup::setSpacing(qreal spacing)
 {
-    d->setSpacing(spacing);
+    if (d->spacing == spacing) {
+        return;
+    }
+    d->spacing = spacing;
+    emit spacingChanged(d->spacing);
+    d->updateLayout();
 }
 
 void DecorationButtonGroup::addButton(const QPointer<DecorationButton> &button)
@@ -178,22 +173,22 @@ void DecorationButtonGroup::addButton(const QPointer<DecorationButton> &button)
     Q_ASSERT(!button.isNull());
     connect(button.data(), &DecorationButton::visibilityChanged, this, [this]() { d->updateLayout(); });
     connect(button.data(), &DecorationButton::geometryChanged, this, [this]() { d->updateLayout(); });
-    d->buttons().append(button);
+    d->buttons.append(button);
     d->updateLayout();
 }
 
 QList<QPointer<DecorationButton>> DecorationButtonGroup::buttons() const
 {
-    return d->buttons();
+    return d->buttons;
 }
 
 void DecorationButtonGroup::removeButton(DecorationButtonType type)
 {
     bool needUpdate = false;
-    auto it = d->buttons().begin();
-    while (it != d->buttons().end()) {
+    auto it = d->buttons.begin();
+    while (it != d->buttons.end()) {
         if ((*it)->type() == type) {
-            it = d->buttons().erase(it);
+            it = d->buttons.erase(it);
             needUpdate = true;
         } else {
             it++;
@@ -207,10 +202,10 @@ void DecorationButtonGroup::removeButton(DecorationButtonType type)
 void DecorationButtonGroup::removeButton(const QPointer<DecorationButton> &button)
 {
     bool needUpdate = false;
-    auto it = d->buttons().begin();
-    while (it != d->buttons().end()) {
+    auto it = d->buttons.begin();
+    while (it != d->buttons.end()) {
         if (*it == button) {
-            it = d->buttons().erase(it);
+            it = d->buttons.erase(it);
             needUpdate = true;
         } else {
             it++;
@@ -223,7 +218,7 @@ void DecorationButtonGroup::removeButton(const QPointer<DecorationButton> &butto
 
 void DecorationButtonGroup::paint(QPainter *painter, const QRegion &repaintRegion)
 {
-    const auto &buttons = d->buttons();
+    const auto &buttons = d->buttons;
     for (auto button: buttons) {
         if (!button->isVisible()) {
             continue;

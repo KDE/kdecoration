@@ -45,33 +45,16 @@ public:
     explicit Private(Decoration *decoration, DecorationButtonGroup *parent);
     ~Private();
 
-    Decoration *decoration() const {
-        return m_decoration;
-    }
-    Decoration *decoration() {
-        return m_decoration;
-    }
-    qreal spacing() const {
-        return m_spacing;
-    }
-    void setSpacing(qreal spacing);
-    QList<QPointer<DecorationButton>> &buttons() {
-        return m_buttons;
-    }
-    const QList<QPointer<DecorationButton>> &buttons() const {
-        return m_buttons;
-    }
-    const QRectF &geometry() const {
-        return m_geometry;
-    }
     void setGeometry(const QRectF &geometry);
     void updateLayout();
+
+    Decoration *decoration;
+    QRectF geometry;
+    QList<QPointer<DecorationButton>> buttons;
+    qreal spacing;
+
 private:
     DecorationButtonGroup *q;
-    Decoration *m_decoration;
-    QRectF m_geometry;
-    QList<QPointer<DecorationButton>> m_buttons;
-    qreal m_spacing;
 };
 
 } // namespace
