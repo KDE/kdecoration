@@ -38,73 +38,81 @@ DecorationShadow::DecorationShadow(QObject *parent)
 
 DecorationShadow::~DecorationShadow() = default;
 
-QSize DecorationShadow::topLeft() const
+QRect DecorationShadow::topLeftGeometry() const
 {
     if (d->innerShadowRect.isNull() || d->shadow.isNull()) {
-        return QSize();
+        return QRect();
     }
-    return QSize(d->innerShadowRect.left(), d->innerShadowRect.top());
+    return QRect(0, 0, d->innerShadowRect.left(), d->innerShadowRect.top());
 }
 
-QSize DecorationShadow::top() const
+QRect DecorationShadow::topGeometry() const
 {
     if (d->innerShadowRect.isNull() || d->shadow.isNull()) {
-        return QSize();
+        return QRect();
     }
-    return QSize(d->innerShadowRect.width(), d->innerShadowRect.top());
+    return QRect(d->innerShadowRect.left(), 0, d->innerShadowRect.width(), d->innerShadowRect.top());
 }
 
-QSize DecorationShadow::topRight() const
+QRect DecorationShadow::topRightGeometry() const
 {
     if (d->innerShadowRect.isNull() || d->shadow.isNull()) {
-        return QSize();
+        return QRect();
     }
-    return QSize(d->shadow.width() - d->innerShadowRect.width() - d->innerShadowRect.left(),
+    return QRect(d->innerShadowRect.left() + d->innerShadowRect.width(), 0,
+                 d->shadow.width() - d->innerShadowRect.width() - d->innerShadowRect.left(),
                  d->innerShadowRect.top());
 }
 
-QSize DecorationShadow::right() const
+QRect DecorationShadow::rightGeometry() const
 {
     if (d->innerShadowRect.isNull() || d->shadow.isNull()) {
-        return QSize();
+        return QRect();
     }
-    return QSize(d->shadow.width() - d->innerShadowRect.width() - d->innerShadowRect.left(),
+    return QRect(d->innerShadowRect.left() + d->innerShadowRect.width(),
+                 d->innerShadowRect.top(),
+                 d->shadow.width() - d->innerShadowRect.width() - d->innerShadowRect.left(),
                  d->innerShadowRect.height());
 }
 
-QSize DecorationShadow::bottomRight() const
+QRect DecorationShadow::bottomRightGeometry() const
 {
     if (d->innerShadowRect.isNull() || d->shadow.isNull()) {
-        return QSize();
+        return QRect();
     }
-    return QSize(d->shadow.width() - d->innerShadowRect.width() - d->innerShadowRect.left(),
+    return QRect(d->innerShadowRect.left() + d->innerShadowRect.width(),
+                 d->innerShadowRect.top() + d->innerShadowRect.height(),
+                 d->shadow.width() - d->innerShadowRect.width() - d->innerShadowRect.left(),
                  d->shadow.height() - d->innerShadowRect.top() - d->innerShadowRect.height());
 }
 
-QSize DecorationShadow::bottom() const
+QRect DecorationShadow::bottomGeometry() const
 {
     if (d->innerShadowRect.isNull() || d->shadow.isNull()) {
-        return QSize();
+        return QRect();
     }
-    return QSize(d->innerShadowRect.width(),
+    return QRect(d->innerShadowRect.left(),
+                 d->innerShadowRect.top() + d->innerShadowRect.height(),
+                 d->innerShadowRect.width(),
                  d->shadow.height() - d->innerShadowRect.top() - d->innerShadowRect.height());
 }
 
-QSize DecorationShadow::bottomLeft() const
+QRect DecorationShadow::bottomLeftGeometry() const
 {
     if (d->innerShadowRect.isNull() || d->shadow.isNull()) {
-        return QSize();
+        return QRect();
     }
-    return QSize(d->innerShadowRect.left(),
+    return QRect(0, d->innerShadowRect.top() + d->innerShadowRect.height(),
+                 d->innerShadowRect.left(),
                  d->shadow.height() - d->innerShadowRect.top() - d->innerShadowRect.height());
 }
 
-QSize DecorationShadow::left() const
+QRect DecorationShadow::leftGeometry() const
 {
     if (d->innerShadowRect.isNull() || d->shadow.isNull()) {
-        return QSize();
+        return QRect();
     }
-    return QSize(d->innerShadowRect.left(), d->innerShadowRect.height());
+    return QRect(0, d->innerShadowRect.top(), d->innerShadowRect.left(), d->innerShadowRect.height());
 }
 
 #define DELEGATE(type, name) \

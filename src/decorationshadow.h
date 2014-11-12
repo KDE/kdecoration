@@ -92,14 +92,14 @@ class KDECORATIONS2_EXPORT DecorationShadow : public QObject
     Q_OBJECT
     Q_PROPERTY(QImage shadow     READ shadow        WRITE setShadow        NOTIFY shadowChanged)
     Q_PROPERTY(QRect innerShadowRect READ innerShadowRect WRITE setInnerShadowRect NOTIFY innerShadowRectChanged)
-    Q_PROPERTY(QSize topLeft     READ topLeft       NOTIFY innerShadowRectChanged)
-    Q_PROPERTY(QSize top         READ top           NOTIFY innerShadowRectChanged)
-    Q_PROPERTY(QSize topRight    READ topRight      NOTIFY innerShadowRectChanged)
-    Q_PROPERTY(QSize right       READ right         NOTIFY innerShadowRectChanged)
-    Q_PROPERTY(QSize bottomRight READ bottomRight   NOTIFY innerShadowRectChanged)
-    Q_PROPERTY(QSize bottom      READ bottom        NOTIFY innerShadowRectChanged)
-    Q_PROPERTY(QSize bottomLeft  READ bottomLeft    NOTIFY innerShadowRectChanged)
-    Q_PROPERTY(QSize left        READ left          NOTIFY innerShadowRectChanged)
+    Q_PROPERTY(QRect topLeftGeometry     READ topLeftGeometry       NOTIFY innerShadowRectChanged)
+    Q_PROPERTY(QRect topGeometry         READ topGeometry           NOTIFY innerShadowRectChanged)
+    Q_PROPERTY(QRect topRightGeometry    READ topRightGeometry      NOTIFY innerShadowRectChanged)
+    Q_PROPERTY(QRect rightGeometry       READ rightGeometry         NOTIFY innerShadowRectChanged)
+    Q_PROPERTY(QRect bottomRightGeometry READ bottomRightGeometry   NOTIFY innerShadowRectChanged)
+    Q_PROPERTY(QRect bottomGeometry      READ bottomGeometry        NOTIFY innerShadowRectChanged)
+    Q_PROPERTY(QRect bottomLeftGeometry  READ bottomLeftGeometry    NOTIFY innerShadowRectChanged)
+    Q_PROPERTY(QRect leftGeometry        READ leftGeometry          NOTIFY innerShadowRectChanged)
     Q_PROPERTY(int paddingTop    READ paddingTop    NOTIFY paddingChanged)
     Q_PROPERTY(int paddingRight  READ paddingRight  NOTIFY paddingChanged)
     Q_PROPERTY(int paddingBottom READ paddingBottom NOTIFY paddingChanged)
@@ -111,14 +111,14 @@ public:
 
     QImage shadow() const;
     QRect innerShadowRect() const;
-    QSize topLeft() const;
-    QSize top() const;
-    QSize topRight() const;
-    QSize right() const;
-    QSize bottomRight() const;
-    QSize bottom() const;
-    QSize bottomLeft() const;
-    QSize left() const;
+    QRect topLeftGeometry() const;
+    QRect topGeometry() const;
+    QRect topRightGeometry() const;
+    QRect rightGeometry() const;
+    QRect bottomRightGeometry() const;
+    QRect bottomGeometry() const;
+    QRect bottomLeftGeometry() const;
+    QRect leftGeometry() const;
     int paddingTop() const;
     int paddingRight() const;
     int paddingBottom() const;

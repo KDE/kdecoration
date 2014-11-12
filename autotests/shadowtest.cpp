@@ -85,16 +85,17 @@ void DecorationShadowTest::testSizes_data()
 {
     QTest::addColumn<QByteArray>("propertyName");
     QTest::addColumn<QRect>("innerShadowRect");
+    QTest::addColumn<QRect>("shadowRect");
     QTest::addColumn<QSize>("shadowSize");
 
-    QTest::newRow("topLeft")     << QByteArrayLiteral("topLeft")     << QRect(1, 2, 5, 5) << QSize(6, 7);
-    QTest::newRow("top")         << QByteArrayLiteral("top")         << QRect(1, 2, 1, 5) << QSize(3, 7);
-    QTest::newRow("topRight")    << QByteArrayLiteral("topRight")    << QRect(0, 2, 2, 1) << QSize(3, 3);
-    QTest::newRow("right")       << QByteArrayLiteral("right")       << QRect(0, 0, 1, 2) << QSize(2, 4);
-    QTest::newRow("bottomRight") << QByteArrayLiteral("bottomRight") << QRect(0, 0, 1, 4) << QSize(2, 6);
-    QTest::newRow("bottom")      << QByteArrayLiteral("bottom")      << QRect(0, 0, 1, 1) << QSize(1, 3);
-    QTest::newRow("bottomLeft")  << QByteArrayLiteral("bottomLeft")  << QRect(1, 0, 1, 1) << QSize(2, 3);
-    QTest::newRow("left")        << QByteArrayLiteral("left")        << QRect(1, 0, 1, 2) << QSize(2, 2);
+    QTest::newRow("topLeft")     << QByteArrayLiteral("topLeftGeometry")     << QRect(1, 2, 5, 5) << QRect(0, 0, 1, 2) << QSize(6, 7);
+    QTest::newRow("top")         << QByteArrayLiteral("topGeometry")         << QRect(1, 2, 1, 5) << QRect(1, 0, 1, 2) << QSize(3, 7);
+    QTest::newRow("topRight")    << QByteArrayLiteral("topRightGeometry")    << QRect(0, 2, 2, 1) << QRect(2, 0, 1, 2) << QSize(3, 3);
+    QTest::newRow("right")       << QByteArrayLiteral("rightGeometry")       << QRect(0, 0, 1, 2) << QRect(1, 0, 1, 2) << QSize(2, 4);
+    QTest::newRow("bottomRight") << QByteArrayLiteral("bottomRightGeometry") << QRect(0, 0, 1, 4) << QRect(1, 4, 1, 2) << QSize(2, 6);
+    QTest::newRow("bottom")      << QByteArrayLiteral("bottomGeometry")      << QRect(0, 0, 1, 1) << QRect(0, 1, 1, 2) << QSize(1, 3);
+    QTest::newRow("bottomLeft")  << QByteArrayLiteral("bottomLeftGeometry")  << QRect(1, 0, 1, 1) << QRect(0, 1, 1, 2) << QSize(2, 3);
+    QTest::newRow("left")        << QByteArrayLiteral("leftGeometry")        << QRect(1, 0, 1, 2) << QRect(0, 0, 1, 2) << QSize(2, 2);
 
 }
 
@@ -110,26 +111,27 @@ void DecorationShadowTest::testSizes()
     QMetaProperty metaProperty = shadow.metaObject()->property(propertyIndex);
     QCOMPARE(metaProperty.isReadable(), true);
     QCOMPARE(metaProperty.hasNotifySignal(), true);
-    QCOMPARE(metaProperty.type(), QVariant::Size);
+    QCOMPARE(metaProperty.type(), QVariant::Rect);
     QSignalSpy changedSpy(&shadow, SIGNAL(innerShadowRectChanged()));
     QVERIFY(changedSpy.isValid());
 
     QCOMPARE(shadow.innerShadowRect(), QRect());
     QCOMPARE(shadow.property(propertyName.constData()).isValid(), true);
-    QCOMPARE(shadow.property(propertyName.constData()).toSize(), QSize());
+    QCOMPARE(shadow.property(propertyName.constData()).toRect(), QRect());
     QFETCH(QRect, innerShadowRect);
+    QFETCH(QRect, shadowRect);
     QFETCH(QSize, shadowSize);
     shadow.setInnerShadowRect(innerShadowRect);
     QCOMPARE(shadow.innerShadowRect(), innerShadowRect);
     // property should still be invalid as the image is not yet set
-    QCOMPARE(shadow.property(propertyName.constData()).toSize(), QSize());
+    QCOMPARE(shadow.property(propertyName.constData()).toRect(), QRect());
     shadow.setShadow(QImage(shadowSize, QImage::Format_ARGB32));
-    QCOMPARE(shadow.property(propertyName.constData()).toSize(), QSize(1, 2));
+    QCOMPARE(shadow.property(propertyName.constData()).toRect(), shadowRect);
     QCOMPARE(changedSpy.count(), 1);
 
     // trying to set to same value shouldn't emit the signal
     shadow.setInnerShadowRect(innerShadowRect);
-    QCOMPARE(shadow.property(propertyName.constData()).toSize(), QSize(1, 2));
+    QCOMPARE(shadow.property(propertyName.constData()).toRect(), shadowRect);
     QCOMPARE(changedSpy.count(), 1);
 
     // changing to different value should emit signal
