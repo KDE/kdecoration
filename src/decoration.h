@@ -118,7 +118,7 @@ public:
      **/
     void setSettings(const QSharedPointer<DecorationSettings> &settings);
     /**
-     * @returns The DeocrationSettings used for this Decoration.
+     * @returns The DecorationSettings used for this Decoration.
      **/
     QSharedPointer<DecorationSettings> settings() const;
 
