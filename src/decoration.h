@@ -66,7 +66,7 @@ class KDECORATIONS2_EXPORT Decoration : public QObject
      **/
     Q_PROPERTY(QRect titleBar READ titleBar NOTIFY titleBarChanged)
     /**
-     * Rendering whether the Decoration is fully opaque. By default a Decoration is considered to
+     * Whether the Decoration is fully opaque. By default a Decoration is considered to
      * use the alpha channel and this property has the value @c false. But for e.g. a maximized
      * DecoratedClient it is possible that the Decoration is fully opaque. In this case the
      * Decoration should set this property to @c true.
@@ -118,7 +118,7 @@ public:
      **/
     void setSettings(const QSharedPointer<DecorationSettings> &settings);
     /**
-     * @returns The DeocrationSettings used for this Deocration.
+     * @returns The DeocrationSettings used for this Decoration.
      **/
     QSharedPointer<DecorationSettings> settings() const;
 
