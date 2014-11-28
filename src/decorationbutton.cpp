@@ -102,7 +102,7 @@ void DecorationButton::Private::init()
         QObject::connect(q, &DecorationButton::clicked, decoration.data(), &Decoration::requestClose, Qt::QueuedConnection);
         QObject::connect(c, &DecoratedClient::closeableChanged, q, &DecorationButton::setEnabled);
         break;
-    case DecorationButtonType::QuickHelp:
+    case DecorationButtonType::ContextHelp:
         setVisible(c->providesContextHelp());
         QObject::connect(q, &DecorationButton::clicked, decoration.data(), &Decoration::requestContextHelp, Qt::QueuedConnection);
         QObject::connect(c, &DecoratedClient::providesContextHelpChanged, q, &DecorationButton::setVisible);

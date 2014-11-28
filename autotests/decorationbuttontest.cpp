@@ -638,7 +638,7 @@ void DecorationButtonTest::testQuickHelp()
     MockBridge bridge;
     MockDecoration mockDecoration(&bridge);
     MockClient *client = bridge.lastCreatedClient();
-    MockButton button(KDecoration2::DecorationButtonType::QuickHelp, &mockDecoration);
+    MockButton button(KDecoration2::DecorationButtonType::ContextHelp, &mockDecoration);
     button.setGeometry(QRect(0, 0, 10, 10));
 
     QCOMPARE(button.isEnabled(), true);

@@ -64,10 +64,10 @@ enum class DecorationButtonType
      **/
     Close,
     /**
-     * The QuickHelp button requests entering the context help mode. The DecorationButton is only
+     * The ContextHelp button requests entering the context help mode. The DecorationButton is only
      * visible if the DecoratedClient provides context help.
      **/
-    QuickHelp,
+    ContextHelp,
     /**
      * The Shade button requests toggling the DecoratedClient's shaded state. The DecoratedButton
      * is only enabled if the DecoratedClient is shadeable.
