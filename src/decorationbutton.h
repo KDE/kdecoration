@@ -30,6 +30,7 @@
 class QHoverEvent;
 class QMouseEvent;
 class QPainter;
+class QWheelEvent;
 
 namespace KDecoration2
 {
@@ -175,6 +176,7 @@ protected:
     virtual void mouseMoveEvent(QMouseEvent *event);
     virtual void mousePressEvent(QMouseEvent *event);
     virtual void mouseReleaseEvent(QMouseEvent *event);
+    virtual void wheelEvent(QWheelEvent *event);
 
 private:
     class Private;

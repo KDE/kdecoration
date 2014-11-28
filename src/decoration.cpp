@@ -357,15 +357,11 @@ void Decoration::mouseReleaseEvent(QMouseEvent *event)
 
 void Decoration::wheelEvent(QWheelEvent *event)
 {
-    if (d->titleBar.contains(event->pos())) {
-        event->setAccepted(true);
-        for (DecorationButton *button : d->buttons) {
-            // check if a button contains the point
-            if (button->geometry().contains(event->pos())) {
-                return;
-            }
+    for (DecorationButton *button : d->buttons) {
+        if (button->geometry().contains(event->posF())) {
+            QCoreApplication::instance()->sendEvent(button, event);
+            event->setAccepted(true);
         }
-        emit titleBarWheelEvent(event->angleDelta());
     }
 }
 

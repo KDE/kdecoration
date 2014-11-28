@@ -397,6 +397,9 @@ bool DecorationButton::event(QEvent *event)
     case QEvent::MouseMove:
         mouseMoveEvent(static_cast<QMouseEvent*>(event));
         return true;
+    case QEvent::Wheel:
+        wheelEvent(static_cast<QWheelEvent*>(event));
+        return true;
     default:
         return QObject::event(event);
     }
@@ -474,6 +477,11 @@ void DecorationButton::mouseReleaseEvent(QMouseEvent *event)
     if (d->doubleClickEnabled && event->button() == Qt::LeftButton) {
         d->startDoubleClickTimer();
     }
+}
+
+void DecorationButton::wheelEvent(QWheelEvent *event)
+{
+    Q_UNUSED(event)
 }
 
 }
