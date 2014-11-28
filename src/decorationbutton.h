@@ -89,7 +89,7 @@ class KDECORATIONS2_EXPORT DecorationButton : public QObject
     /**
      * The geometry of the DecorationButton in Decoration-local coordinates.
      **/
-    Q_PROPERTY(QRect geometry READ geometry NOTIFY geometryChanged)
+    Q_PROPERTY(QRectF geometry READ geometry NOTIFY geometryChanged)
     /**
      * The mouse buttons the DecorationButton accepts. By default the Qt::LeftButton gets accepted,
      * for some types more buttons are accepted.
@@ -98,9 +98,9 @@ class KDECORATIONS2_EXPORT DecorationButton : public QObject
 public:
     virtual ~DecorationButton();
 
-    QRect geometry() const;
-    QSize size() const;
-    void setGeometry(const QRect &geometry);
+    QRectF geometry() const;
+    QSizeF size() const;
+    void setGeometry(const QRectF &geometry);
 
     bool isVisible() const;
     bool isPressed() const;
@@ -141,7 +141,7 @@ public Q_SLOTS:
      * @param rect The area to repaint in Decoration local coordinates, a null QRect updates the complete geometry
      * @see paint
      **/
-    void update(const QRect &rect);
+    void update(const QRectF &rect);
     /**
      * Schedules a repaint of the DecorationButton.
      *
@@ -162,7 +162,7 @@ Q_SIGNALS:
     void enabledChanged(bool);
     void checkableChanged(bool);
     void checkedChanged(bool);
-    void geometryChanged(const QRect&);
+    void geometryChanged(const QRectF&);
     void acceptedButtonsChanged(Qt::MouseButtons);
     void visibilityChanged(bool);
 

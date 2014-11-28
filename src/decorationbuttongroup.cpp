@@ -76,9 +76,9 @@ void DecorationButtonGroup::Private::updateLayout()
         if (!button->isVisible()) {
             continue;
         }
-        const QSize size = button->size();
+        const QSizeF size = button->size();
         // TODO: center
-        button->setGeometry(QRect(QPoint(position, pos.y()), size));
+        button->setGeometry(QRectF(QPointF(position, pos.y()), size));
         position += size.width() + spacing;
     }
     s_layoutRecursion = false;

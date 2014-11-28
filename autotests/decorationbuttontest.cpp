@@ -78,23 +78,23 @@ void DecorationButtonTest::testButton()
     QCOMPARE(button.isHovered(), false);
     QCOMPARE(button.isPressed(), false);
     QCOMPARE(button.isVisible(), true);
-    QCOMPARE(button.size(), QSize(0, 0));
-    QCOMPARE(button.geometry(), QRect());
+    QCOMPARE(button.size(), QSizeF(0, 0));
+    QCOMPARE(button.geometry(), QRectF());
 
     // test setting the geometry
-    QSignalSpy geometryChangedSpy(&button, SIGNAL(geometryChanged(QRect)));
+    QSignalSpy geometryChangedSpy(&button, SIGNAL(geometryChanged(QRectF)));
     QVERIFY(geometryChangedSpy.isValid());
     // setting to default geometry shouldn't change
-    button.setGeometry(QRect());
-    QCOMPARE(button.geometry(), QRect());
+    button.setGeometry(QRectF());
+    QCOMPARE(button.geometry(), QRectF());
     QCOMPARE(geometryChangedSpy.count(), 0);
     // setting to a proper geometry should change
-    const QRect testGeometry = QRect(0, 0, 10, 20);
+    const QRectF testGeometry = QRectF(0, 0, 10, 20);
     button.setGeometry(testGeometry);
     QCOMPARE(button.geometry(), testGeometry);
     QCOMPARE(button.size(), testGeometry.size());
     QCOMPARE(geometryChangedSpy.count(), 1);
-    QCOMPARE(geometryChangedSpy.first().first().toRect(), testGeometry);
+    QCOMPARE(geometryChangedSpy.first().first().toRectF(), testGeometry);
 
     // test changing visibility
     QSignalSpy visibilityChangedSpy(&button, SIGNAL(visibilityChanged(bool)));
@@ -417,7 +417,7 @@ void DecorationButtonTest::testHover()
     MockDecoration mockDecoration(&bridge);
     // create a custom button and verify the base settings
     MockButton button(KDecoration2::DecorationButtonType::Custom, &mockDecoration);
-    button.setGeometry(QRect(0, 0, 10, 10));
+    button.setGeometry(QRectF(0, 0, 10, 10));
     button.setEnabled(true);
     button.setVisible(true);
     QSignalSpy pointerEnteredSpy(&button, SIGNAL(pointerEntered()));
@@ -442,7 +442,7 @@ void DecorationButtonTest::testHover()
     button.event(&moveEvent);
     QCOMPARE(moveEvent.isAccepted(), false);
 
-    QHoverEvent leftEvent(QEvent::HoverLeave, QPoint(10, 0), QPoint(0, 0));
+    QHoverEvent leftEvent(QEvent::HoverLeave, QPointF(10.1, 0.0), QPointF(0, 0));
     leftEvent.setAccepted(false);
     button.event(&leftEvent);
     QCOMPARE(leftEvent.isAccepted(), true);
@@ -456,15 +456,15 @@ void DecorationButtonTest::testMouseMove_data()
 {
     QTest::addColumn<bool>("enabled");
     QTest::addColumn<bool>("visible");
-    QTest::addColumn<QPoint>("movePos");
+    QTest::addColumn<QPointF>("movePos");
     QTest::addColumn<bool>("expectedAccepted");
     QTest::addColumn<bool>("expectedHovered");
     QTest::addColumn<int>("expectedChangedCount");
 
-    QTest::newRow("outside") << true << true << QPoint(10, 10) << true << false << 2;
-    QTest::newRow("inside") << true << true << QPoint(5, 5) << false << true << 1;
-    QTest::newRow("disabled") << false << true << QPoint(10, 10) << false << false << 2;
-    QTest::newRow("invisible") << true << false << QPoint(10, 10) << false << false << 2;
+    QTest::newRow("outside") << true << true << QPointF(10.1, 10) << true << false << 2;
+    QTest::newRow("inside") << true << true << QPointF(5, 5) << false << true << 1;
+    QTest::newRow("disabled") << false << true << QPointF(10, 10) << false << false << 2;
+    QTest::newRow("invisible") << true << false << QPointF(10, 10) << false << false << 2;
 }
 
 void DecorationButtonTest::testMouseMove()
@@ -473,7 +473,7 @@ void DecorationButtonTest::testMouseMove()
     MockDecoration mockDecoration(&bridge);
     // create a custom button and verify the base settings
     MockButton button(KDecoration2::DecorationButtonType::Custom, &mockDecoration);
-    button.setGeometry(QRect(0, 0, 10, 10));
+    button.setGeometry(QRectF(0, 0, 10, 10));
     button.setEnabled(true);
     button.setVisible(true);
     QSignalSpy hoveredChangedSpy(&button, SIGNAL(hoveredChanged(bool)));
@@ -494,7 +494,7 @@ void DecorationButtonTest::testMouseMove()
     QFETCH(bool, visible);
     button.setVisible(visible);
 
-    QFETCH(QPoint, movePos);
+    QFETCH(QPointF, movePos);
     QMouseEvent mouseMoveEvent(QEvent::MouseMove, movePos, Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
     mouseMoveEvent.setAccepted(false);
     button.event(&mouseMoveEvent);

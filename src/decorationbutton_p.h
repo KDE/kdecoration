@@ -68,7 +68,7 @@ public:
 
     QPointer<Decoration> decoration;
     DecorationButtonType type;
-    QRect geometry;
+    QRectF geometry;
     bool hovered;
     bool enabled;
     bool checkable;

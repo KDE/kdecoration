@@ -278,7 +278,7 @@ DecorationButton::DecorationButton(DecorationButtonType type, const QPointer<Dec
 {
     decoration->d->addButton(this);
     connect(this, &DecorationButton::geometryChanged,
-            this, static_cast<void (DecorationButton::*)(const QRect&)>(&DecorationButton::update));
+            this, static_cast<void (DecorationButton::*)(const QRectF&)>(&DecorationButton::update));
     auto updateSlot = static_cast<void (DecorationButton::*)()>(&DecorationButton::update);
     connect(this, &DecorationButton::hoveredChanged, this, updateSlot);
     connect(this, &DecorationButton::pressedChanged, this, updateSlot);
@@ -307,17 +307,17 @@ DecorationButton::DecorationButton(DecorationButtonType type, const QPointer<Dec
 
 DecorationButton::~DecorationButton() = default;
 
-void DecorationButton::update(const QRect &rect)
+void DecorationButton::update(const QRectF &rect)
 {
-    decoration()->update(rect.isNull() ? geometry() : rect);
+    decoration()->update(rect.isNull() ? geometry().toRect() : rect.toRect());
 }
 
 void DecorationButton::update()
 {
-    update(QRect());
+    update(QRectF());
 }
 
-QSize DecorationButton::size() const
+QSizeF DecorationButton::size() const
 {
     return d->geometry.size();
 }
@@ -340,7 +340,7 @@ DELEGATE(isCheckable, checkable, bool)
 DELEGATE(isVisible, visible, bool)
 
 #define DELEGATE2(name, type) DELEGATE(name, name, type)
-DELEGATE2(geometry, QRect)
+DELEGATE2(geometry, QRectF)
 DELEGATE2(decoration, QPointer<Decoration>)
 DELEGATE2(acceptedButtons, Qt::MouseButtons)
 DELEGATE2(type, DecorationButtonType)
@@ -372,7 +372,7 @@ void DecorationButton::name(type a) \
     emit variableName##Changed(d->variableName); \
 }
 
-DELEGATE(setGeometry, geometry, const QRect &)
+DELEGATE(setGeometry, geometry, const QRectF &)
 
 #undef DELEGATE
 
@@ -404,7 +404,7 @@ bool DecorationButton::event(QEvent *event)
 
 void DecorationButton::hoverEnterEvent(QHoverEvent *event)
 {
-    if (!d->enabled || !d->visible || !d->geometry.contains(event->pos())) {
+    if (!d->enabled || !d->visible || !d->geometry.contains(event->posF())) {
         return;
     }
     d->setHovered(true);
@@ -413,7 +413,7 @@ void DecorationButton::hoverEnterEvent(QHoverEvent *event)
 
 void DecorationButton::hoverLeaveEvent(QHoverEvent *event)
 {
-    if (!d->enabled || !d->visible || !d->hovered || d->geometry.contains(event->pos())) {
+    if (!d->enabled || !d->visible || !d->hovered || d->geometry.contains(event->posF())) {
         return;
     }
     d->setHovered(false);
@@ -430,7 +430,7 @@ void DecorationButton::mouseMoveEvent(QMouseEvent *event)
     if (!d->enabled || !d->visible || !d->hovered) {
         return;
     }
-    if (!d->geometry.contains(event->pos())) {
+    if (!d->geometry.contains(event->localPos())) {
         d->setHovered(false);
         event->setAccepted(true);
     }
@@ -438,7 +438,7 @@ void DecorationButton::mouseMoveEvent(QMouseEvent *event)
 
 void DecorationButton::mousePressEvent(QMouseEvent *event)
 {
-    if (!d->enabled || !d->visible || !d->geometry.contains(event->pos()) || !d->acceptedButtons.testFlag(event->button())) {
+    if (!d->enabled || !d->visible || !d->geometry.contains(event->localPos()) || !d->acceptedButtons.testFlag(event->button())) {
         return;
     }
     d->setPressed(event->button(), true);
@@ -461,7 +461,7 @@ void DecorationButton::mouseReleaseEvent(QMouseEvent *event)
     if (!d->enabled || !d->visible || !d->isPressed(event->button())) {
         return;
     }
-    if (d->geometry.contains(event->pos())) {
+    if (d->geometry.contains(event->localPos())) {
         if (!d->pressAndHold || event->button() != Qt::LeftButton) {
             emit clicked(event->button());
         } else {
