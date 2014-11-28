@@ -78,14 +78,16 @@ class KDECORATIONS2_EXPORT Decoration : public QObject
      * for the active Decoration.
      **/
     Q_PROPERTY(KDecoration2::DecorationShadow *shadow READ shadow NOTIFY shadowChanged)
-    /**
-     * The DecoratedClient for this Decoration.
-     **/
-    Q_PROPERTY(KDecoration2::DecoratedClient *client READ client CONSTANT)
 public:
     virtual ~Decoration();
 
-    QPointer<DecoratedClient> client() const;
+    /**
+     * The DecoratedClient for this Decoration.
+     * As long as the Decoration is alive it is guaranteed that the object is not
+     * deleted. Thus it is save to access using QWeakPointer::data in e.g. a sublcass
+     * of Decoration without promoting to QSharedPointer.
+     **/
+    QWeakPointer<DecoratedClient> client() const;
 
     QMargins borders() const;
     int borderLeft() const;

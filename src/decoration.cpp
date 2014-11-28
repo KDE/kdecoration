@@ -46,7 +46,7 @@ DecorationBridge *findBridge(const QVariantList &args)
 Decoration::Private::Private(Decoration *deco, const QVariantList &args)
     : sectionUnderMouse(Qt::NoSection)
     , bridge(findBridge(args))
-    , client(new DecoratedClient(deco, bridge))
+    , client(QSharedPointer<DecoratedClient>(new DecoratedClient(deco, bridge)))
     , opaque(false)
     , q(deco)
 {
@@ -137,9 +137,9 @@ void Decoration::init()
     Q_ASSERT(!d->settings.isNull());
 }
 
-QPointer<DecoratedClient> Decoration::client() const
+QWeakPointer<DecoratedClient> Decoration::client() const
 {
-    return QPointer<DecoratedClient>(d->client);
+    return d->client.toWeakRef();
 }
 
 #define DELEGATE(name) \
@@ -220,8 +220,8 @@ BORDER(bottom, Bottom)
 QSize Decoration::size() const
 {
     const QMargins &b = d->borders;
-    return QSize(client()->width() + b.left() + b.right(),
-                 client()->height() + b.top() + b.bottom());
+    return QSize(d->client->width() + b.left() + b.right(),
+                 d->client->height() + b.top() + b.bottom());
 }
 
 QRect Decoration::rect() const

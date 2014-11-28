@@ -526,7 +526,7 @@ void DecorationButtonTest::testClose()
     QCOMPARE(button.acceptedButtons(), Qt::LeftButton);
 
     // if the client is closeable the button should get enabled
-    QSignalSpy closeableChangedSpy(mockDecoration.client(), SIGNAL(closeableChanged(bool)));
+    QSignalSpy closeableChangedSpy(mockDecoration.client().data(), SIGNAL(closeableChanged(bool)));
     QVERIFY(closeableChangedSpy.isValid());
     client->setCloseable(true);
     QCOMPARE(button.isEnabled(), true);
@@ -587,7 +587,7 @@ void DecorationButtonTest::testMinimize()
     QCOMPARE(button.acceptedButtons(), Qt::LeftButton);
 
     // if the client is minimizeable the button should get enabled
-    QSignalSpy minimizableChangedSpy(mockDecoration.client(), SIGNAL(minimizeableChanged(bool)));
+    QSignalSpy minimizableChangedSpy(mockDecoration.client().data(), SIGNAL(minimizeableChanged(bool)));
     QVERIFY(minimizableChangedSpy.isValid());
     client->setMinimizable(true);
     QCOMPARE(button.isEnabled(), true);
@@ -648,7 +648,7 @@ void DecorationButtonTest::testQuickHelp()
     QCOMPARE(button.acceptedButtons(), Qt::LeftButton);
 
     // if the client provides quickhelp the button should get enabled
-    QSignalSpy providesContextHelpChangedSpy(mockDecoration.client(), SIGNAL(providesContextHelpChanged(bool)));
+    QSignalSpy providesContextHelpChangedSpy(mockDecoration.client().data(), SIGNAL(providesContextHelpChanged(bool)));
     QVERIFY(providesContextHelpChangedSpy.isValid());
     client->setProvidesContextHelp(true);
     QCOMPARE(button.isVisible(), true);
@@ -714,7 +714,7 @@ void DecorationButtonTest::testKeepAbove()
     QVERIFY(pressedSpy.isValid());
     QSignalSpy releasedSpy(&button, SIGNAL(released()));
     QVERIFY(releasedSpy.isValid());
-    QSignalSpy keepAboveChangedSpy(mockDecoration.client(), SIGNAL(keepAboveChanged(bool)));
+    QSignalSpy keepAboveChangedSpy(mockDecoration.client().data(), SIGNAL(keepAboveChanged(bool)));
     QVERIFY(keepAboveChangedSpy.isValid());
     QSignalSpy pressedChangedSpy(&button, SIGNAL(pressedChanged(bool)));
     QVERIFY(pressedChangedSpy.isValid());
@@ -777,7 +777,7 @@ void DecorationButtonTest::testKeepBelow()
     QVERIFY(pressedSpy.isValid());
     QSignalSpy releasedSpy(&button, SIGNAL(released()));
     QVERIFY(releasedSpy.isValid());
-    QSignalSpy keepBelowChangedSpy(mockDecoration.client(), SIGNAL(keepBelowChanged(bool)));
+    QSignalSpy keepBelowChangedSpy(mockDecoration.client().data(), SIGNAL(keepBelowChanged(bool)));
     QVERIFY(keepBelowChangedSpy.isValid());
     QSignalSpy pressedChangedSpy(&button, SIGNAL(pressedChanged(bool)));
     QVERIFY(pressedChangedSpy.isValid());
@@ -835,7 +835,7 @@ void DecorationButtonTest::testShade()
     QCOMPARE(button.acceptedButtons(), Qt::LeftButton);
 
     // if the client is shadeable the button should get enabled
-    QSignalSpy shadeableChangedSpy(mockDecoration.client(), SIGNAL(shadeableChanged(bool)));
+    QSignalSpy shadeableChangedSpy(mockDecoration.client().data(), SIGNAL(shadeableChanged(bool)));
     QVERIFY(shadeableChangedSpy.isValid());
     client->setShadeable(true);
     QCOMPARE(button.isEnabled(), true);
@@ -849,7 +849,7 @@ void DecorationButtonTest::testShade()
     QVERIFY(pressedSpy.isValid());
     QSignalSpy releasedSpy(&button, SIGNAL(released()));
     QVERIFY(releasedSpy.isValid());
-    QSignalSpy shadedChangedSpy(mockDecoration.client(), SIGNAL(shadedChanged(bool)));
+    QSignalSpy shadedChangedSpy(mockDecoration.client().data(), SIGNAL(shadedChanged(bool)));
     QVERIFY(shadedChangedSpy.isValid());
     QSignalSpy pressedChangedSpy(&button, SIGNAL(pressedChanged(bool)));
     QVERIFY(pressedChangedSpy.isValid());
@@ -907,7 +907,7 @@ void DecorationButtonTest::testMaximize()
     QCOMPARE(button.acceptedButtons(), Qt::LeftButton | Qt::MiddleButton | Qt::RightButton);
 
     // if the client is maximizable the button should get enabled
-    QSignalSpy maximizableChangedSpy(mockDecoration.client(), SIGNAL(maximizeableChanged(bool)));
+    QSignalSpy maximizableChangedSpy(mockDecoration.client().data(), SIGNAL(maximizeableChanged(bool)));
     QVERIFY(maximizableChangedSpy.isValid());
     client->setMaximizable(true);
     QCOMPARE(button.isEnabled(), true);
@@ -921,11 +921,11 @@ void DecorationButtonTest::testMaximize()
     QVERIFY(pressedSpy.isValid());
     QSignalSpy releasedSpy(&button, SIGNAL(released()));
     QVERIFY(releasedSpy.isValid());
-    QSignalSpy maximizedChangedSpy(mockDecoration.client(), SIGNAL(maximizedChanged(bool)));
+    QSignalSpy maximizedChangedSpy(mockDecoration.client().data(), SIGNAL(maximizedChanged(bool)));
     QVERIFY(maximizedChangedSpy.isValid());
-    QSignalSpy maximizedVerticallyChangedSpy(mockDecoration.client(), SIGNAL(maximizedVerticallyChanged(bool)));
+    QSignalSpy maximizedVerticallyChangedSpy(mockDecoration.client().data(), SIGNAL(maximizedVerticallyChanged(bool)));
     QVERIFY(maximizedVerticallyChangedSpy.isValid());
-    QSignalSpy maximizedHorizontallyChangedSpy(mockDecoration.client(), SIGNAL(maximizedHorizontallyChanged(bool)));
+    QSignalSpy maximizedHorizontallyChangedSpy(mockDecoration.client().data(), SIGNAL(maximizedHorizontallyChanged(bool)));
     QVERIFY(maximizedHorizontallyChangedSpy.isValid());
     QSignalSpy pressedChangedSpy(&button, SIGNAL(pressedChanged(bool)));
     QVERIFY(pressedChangedSpy.isValid());
@@ -1017,7 +1017,7 @@ void DecorationButtonTest::testOnAllDesktops()
     QCOMPARE(button.isChecked(), false);
     QCOMPARE(button.isVisible(), false);
     QCOMPARE(button.acceptedButtons(), Qt::LeftButton);
-    QCOMPARE(mockDecoration.client()->isOnAllDesktops(), false);
+    QCOMPARE(mockDecoration.client().data()->isOnAllDesktops(), false);
 
     MockSettings *settings = bridge.lastCreatedSettings();
     QVERIFY(settings);
@@ -1040,7 +1040,7 @@ void DecorationButtonTest::testOnAllDesktops()
     QVERIFY(pressedSpy.isValid());
     QSignalSpy releasedSpy(&button, SIGNAL(released()));
     QVERIFY(releasedSpy.isValid());
-    QSignalSpy onAllDesktopsChangedSpy(mockDecoration.client(), SIGNAL(onAllDesktopsChanged(bool)));
+    QSignalSpy onAllDesktopsChangedSpy(mockDecoration.client().data(), SIGNAL(onAllDesktopsChanged(bool)));
     QVERIFY(onAllDesktopsChangedSpy.isValid());
     QSignalSpy pressedChangedSpy(&button, SIGNAL(pressedChanged(bool)));
     QVERIFY(pressedChangedSpy.isValid());

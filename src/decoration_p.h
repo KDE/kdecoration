@@ -60,7 +60,7 @@ public:
 
     QSharedPointer<DecorationSettings> settings;
     DecorationBridge *bridge;
-    DecoratedClient *client;
+    QSharedPointer<DecoratedClient> client;
     bool opaque;
     QList<DecorationButton*> buttons;
     QPointer<DecorationShadow> shadow;
