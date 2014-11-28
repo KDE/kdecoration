@@ -25,9 +25,8 @@
 #include "decorationbutton.h"
 #include "decorationshadow.h"
 
-#include <QGuiApplication>
+#include <QCoreApplication>
 #include <QHoverEvent>
-#include <QStyleHints>
 
 namespace KDecoration2
 {
@@ -122,14 +121,6 @@ void Decoration::Private::addButton(DecorationButton *button)
             buttons.removeAll(static_cast<DecorationButton*>(o));
         }
     );
-}
-
-bool Decoration::Private::wasDoubleClick() const
-{
-    if (!m_doubleClickTimer.isValid()) {
-        return false;
-    }
-    return !m_doubleClickTimer.hasExpired(QGuiApplication::styleHints()->mouseDoubleClickInterval());
 }
 
 Decoration::Decoration(QObject *parent, const QVariantList &args)
@@ -326,18 +317,6 @@ void Decoration::mousePressEvent(QMouseEvent *event)
             return;
         }
     }
-    // not handled, take care ourselves
-    if (event->button() == Qt::LeftButton) {
-        if (d->titleBar.contains(event->pos())) {
-            // check for double click
-            if (d->wasDoubleClick()) {
-                event->setAccepted(true);
-                // emit signal
-                emit titleBarDoubleClicked();
-            }
-        }
-        d->invalidateDoubleClickTimer();
-    }
 }
 
 void Decoration::mouseReleaseEvent(QMouseEvent *event)
@@ -350,9 +329,6 @@ void Decoration::mouseReleaseEvent(QMouseEvent *event)
     }
     // not handled, take care ourselves
     d->updateSectionUnderMouse(event->pos());
-    if (event->button() == Qt::LeftButton && d->titleBar.contains(event->pos())) {
-        d->startDoubleClickTimer();
-    }
 }
 
 void Decoration::wheelEvent(QWheelEvent *event)

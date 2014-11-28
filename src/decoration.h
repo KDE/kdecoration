@@ -156,7 +156,6 @@ Q_SIGNALS:
     void titleBarChanged();
     void opaqueChanged(bool);
     void shadowChanged(QPointer<DecorationShadow> shadow);
-    void titleBarDoubleClicked();
 
 protected:
     explicit Decoration(QObject *parent, const QVariantList &args);

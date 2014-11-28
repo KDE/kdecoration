@@ -21,8 +21,6 @@
 #define KDECORATION2_DECORATION_P_H
 #include "decoration.h"
 
-#include <QElapsedTimer>
-
 //
 //  W A R N I N G
 //  -------------
@@ -60,14 +58,6 @@ public:
 
     void addButton(DecorationButton *button);
 
-    void startDoubleClickTimer() {
-        m_doubleClickTimer.start();
-    }
-    void invalidateDoubleClickTimer() {
-        m_doubleClickTimer.invalidate();
-    }
-    bool wasDoubleClick() const;
-
     QSharedPointer<DecorationSettings> settings;
     DecorationBridge *bridge;
     DecoratedClient *client;
@@ -77,7 +67,6 @@ public:
 
 private:
     Decoration *q;
-    QElapsedTimer m_doubleClickTimer;
 };
 
 } // namespace
