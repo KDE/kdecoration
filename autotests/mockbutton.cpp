@@ -24,7 +24,7 @@ MockButton::MockButton(KDecoration2::DecorationButtonType type, const QPointer<K
 {
 }
 
-void MockButton::paint(QPainter *painter, const QRegion &repaintRegion)
+void MockButton::paint(QPainter *painter, const QRect &repaintRegion)
 {
     Q_UNUSED(painter)
     Q_UNUSED(repaintRegion)

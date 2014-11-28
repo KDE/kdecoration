@@ -216,14 +216,14 @@ void DecorationButtonGroup::removeButton(const QPointer<DecorationButton> &butto
     }
 }
 
-void DecorationButtonGroup::paint(QPainter *painter, const QRegion &repaintRegion)
+void DecorationButtonGroup::paint(QPainter *painter, const QRect &repaintArea)
 {
     const auto &buttons = d->buttons;
     for (auto button: buttons) {
         if (!button->isVisible()) {
             continue;
         }
-        button->paint(painter, repaintRegion);
+        button->paint(painter, repaintArea);
     }
 }
 

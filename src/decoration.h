@@ -122,7 +122,7 @@ public:
      **/
     QSharedPointer<DecorationSettings> settings() const;
 
-    virtual void paint(QPainter *painter, const QRegion &repaintRegion) = 0;
+    virtual void paint(QPainter *painter, const QRect &repaintArea) = 0;
 
     virtual bool event(QEvent *event) override;
 

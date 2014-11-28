@@ -120,9 +120,9 @@ public:
      * This method will be invoked from the rendering thread.
      *
      * @param painter The QPainter to paint this DecorationButton.
-     * @param repaintRegion The region which is going to be repainted in Decoration coordinates
+     * @param repaintArea The area which is going to be repainted in Decoration coordinates
      **/
-    virtual void paint(QPainter *painter, const QRegion &repaintRegion) = 0;
+    virtual void paint(QPainter *painter, const QRect &repaintArea) = 0;
 
     QPointer<Decoration> decoration() const;
 

@@ -79,9 +79,9 @@ public:
      * implementation or ensure that the DecorationButtons are painted.
      *
      * @param painter The QPainter which is used to paint this DecorationButtonGroup
-     * @param repaintRegion The region which is going to be repainted in Decoration coordinates
+     * @param repaintArea The area which is going to be repainted in Decoration coordinates
      **/
-    virtual void paint(QPainter *painter, const QRegion &repaintRegion);
+    virtual void paint(QPainter *painter, const QRect &repaintArea);
 
     QPointer<Decoration> decoration() const;
 

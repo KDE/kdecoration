@@ -30,7 +30,7 @@ class MockDecoration : public KDecoration2::Decoration
 public:
     explicit MockDecoration(QObject *parent, const QVariantList &args);
     explicit MockDecoration(MockBridge *bridge);
-    void paint(QPainter *painter, const QRegion &repaintRegion) override;
+    void paint(QPainter *painter, const QRect &repaintRegion) override;
     void setOpaque(bool set);
 };
 
