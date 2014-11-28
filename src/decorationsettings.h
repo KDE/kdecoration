@@ -24,6 +24,7 @@
 #include "decorationbutton.h"
 
 #include <QObject>
+#include <QFontMetricsF>
 
 #include <memory>
 
@@ -76,6 +77,11 @@ public:
     BorderSize borderSize() const;
 
     QFont font() const;
+    /**
+     * The fontMetrics for the recommended font.
+     * @see font
+     **/
+    QFontMetricsF fontMetrics() const;
 
     int gridUnit() const;
     int smallSpacing() const;

@@ -49,4 +49,10 @@ QFont DecorationSettingsPrivate::font() const
 {
     return QFontDatabase::systemFont(QFontDatabase::TitleFont);
 }
+
+QFontMetricsF DecorationSettingsPrivate::fontMetrics() const
+{
+    return QFontMetricsF(font());
+}
+
 }

@@ -24,6 +24,7 @@
 #include "../decorationdefines.h"
 #include <QList>
 #include <QFont>
+#include <QFontMetricsF>
 
 //
 //  W A R N I N G
@@ -52,6 +53,7 @@ public:
     virtual QList<DecorationButtonType> decorationButtonsRight() const = 0;
     virtual BorderSize borderSize() const = 0;
     virtual QFont font() const;
+    virtual QFontMetricsF fontMetrics() const;
 
     DecorationSettings *decorationSettings();
     const DecorationSettings *decorationSettings() const;
