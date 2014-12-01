@@ -22,6 +22,7 @@
 #include "decorationbuttongroup.h"
 
 #include <QRectF>
+#include <QVector>
 
 //
 //  W A R N I N G
@@ -50,7 +51,7 @@ public:
 
     Decoration *decoration;
     QRectF geometry;
-    QList<QPointer<DecorationButton>> buttons;
+    QVector<QPointer<DecorationButton>> buttons;
     qreal spacing;
 
 private:
