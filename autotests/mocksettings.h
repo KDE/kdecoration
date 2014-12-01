@@ -28,8 +28,8 @@ public:
     explicit MockSettings(KDecoration2::DecorationSettings *parent);
 
     KDecoration2::BorderSize borderSize() const override;
-    QList< KDecoration2::DecorationButtonType > decorationButtonsLeft() const override;
-    QList< KDecoration2::DecorationButtonType > decorationButtonsRight() const override;
+    QVector< KDecoration2::DecorationButtonType > decorationButtonsLeft() const override;
+    QVector< KDecoration2::DecorationButtonType > decorationButtonsRight() const override;
     bool isAlphaChannelSupported() const override;
     bool isCloseOnDoubleClickOnMenu() const override;
     bool isOnAllDesktopsAvailable() const override;

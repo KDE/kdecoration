@@ -39,8 +39,8 @@ class KDECORATIONS2_EXPORT DecorationSettings : public QObject
     Q_PROPERTY(bool onAllDesktopsAvailable READ isOnAllDesktopsAvailable NOTIFY onAllDesktopsAvailableChanged)
     Q_PROPERTY(bool alphaChannelSupported READ isAlphaChannelSupported NOTIFY alphaChannelSupportedChanged)
     Q_PROPERTY(bool closeOnDoubleClickOnMenu READ isCloseOnDoubleClickOnMenu NOTIFY closeOnDoubleClickOnMenuChanged)
-    Q_PROPERTY(QList<DecorationButtonType> decorationButtonsLeft READ decorationButtonsLeft NOTIFY decorationButtonsLeftChanged)
-    Q_PROPERTY(QList<DecorationButtonType> decorationButtonsRight READ decorationButtonsRight NOTIFY decorationButtonsRightChanged)
+    Q_PROPERTY(QVector<DecorationButtonType> decorationButtonsLeft READ decorationButtonsLeft NOTIFY decorationButtonsLeftChanged)
+    Q_PROPERTY(QVector<DecorationButtonType> decorationButtonsRight READ decorationButtonsRight NOTIFY decorationButtonsRightChanged)
     Q_PROPERTY(BorderSize borderSize READ borderSize NOTIFY borderSizeChanged)
     /**
      * The fundamental unit of space that should be used for sizes, expressed in pixels.
@@ -72,8 +72,8 @@ public:
     bool isOnAllDesktopsAvailable() const;
     bool isAlphaChannelSupported() const;
     bool isCloseOnDoubleClickOnMenu() const;
-    QList<DecorationButtonType> decorationButtonsLeft() const;
-    QList<DecorationButtonType> decorationButtonsRight() const;
+    QVector<DecorationButtonType> decorationButtonsLeft() const;
+    QVector<DecorationButtonType> decorationButtonsRight() const;
     BorderSize borderSize() const;
 
     QFont font() const;
@@ -91,8 +91,8 @@ Q_SIGNALS:
     void onAllDesktopsAvailableChanged(bool);
     void alphaChannelSupportedChanged(bool);
     void closeOnDoubleClickOnMenuChanged(bool);
-    void decorationButtonsLeftChanged(const QList<DecorationButtonType>&);
-    void decorationButtonsRightChanged(const QList<DecorationButtonType>&);
+    void decorationButtonsLeftChanged(const QVector<DecorationButtonType>&);
+    void decorationButtonsRightChanged(const QVector<DecorationButtonType>&);
     void borderSizeChanged(BorderSize size);
     void fontChanged(const QFont &font);
     void gridUnitChanged(int);

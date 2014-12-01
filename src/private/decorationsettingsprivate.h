@@ -22,7 +22,7 @@
 
 #include <kdecoration2/private/kdecoration2_private_export.h>
 #include "../decorationdefines.h"
-#include <QList>
+#include <QVector>
 #include <QFont>
 #include <QFontMetricsF>
 
@@ -49,8 +49,8 @@ public:
     virtual bool isOnAllDesktopsAvailable() const = 0;
     virtual bool isAlphaChannelSupported() const = 0;
     virtual bool isCloseOnDoubleClickOnMenu() const = 0;
-    virtual QList<DecorationButtonType> decorationButtonsLeft() const = 0;
-    virtual QList<DecorationButtonType> decorationButtonsRight() const = 0;
+    virtual QVector<DecorationButtonType> decorationButtonsLeft() const = 0;
+    virtual QVector<DecorationButtonType> decorationButtonsRight() const = 0;
     virtual BorderSize borderSize() const = 0;
     virtual QFont font() const;
     virtual QFontMetricsF fontMetrics() const;

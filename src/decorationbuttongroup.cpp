@@ -96,7 +96,7 @@ DecorationButtonGroup::DecorationButtonGroup(DecorationButtonGroup::Position typ
 {
     auto settings = parent->settings();
     auto createButtons = [=] {
-        const QList<DecorationButtonType> buttons = (type == Position::Left) ?
+        const auto &buttons = (type == Position::Left) ?
             settings->decorationButtonsLeft() :
             settings->decorationButtonsRight();
         for (DecorationButtonType type : buttons) {
