@@ -63,7 +63,7 @@ public:
     QSharedPointer<DecoratedClient> client;
     bool opaque;
     QList<DecorationButton*> buttons;
-    QPointer<DecorationShadow> shadow;
+    QSharedPointer<DecorationShadow> shadow;
 
 private:
     Decoration *q;

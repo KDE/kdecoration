@@ -72,12 +72,6 @@ class KDECORATIONS2_EXPORT Decoration : public QObject
      * Decoration should set this property to @c true.
      **/
     Q_PROPERTY(bool opaque READ isOpaque NOTIFY opaqueChanged)
-    /**
-     * DecorationShadow for this Decoration. It is recommended that multiple Decorations share
-     * the same DecorationShadow. E.g one DecorationShadow for all inactive Decorations and one
-     * for the active Decoration.
-     **/
-    Q_PROPERTY(KDecoration2::DecorationShadow *shadow READ shadow NOTIFY shadowChanged)
 public:
     virtual ~Decoration();
 
@@ -103,7 +97,12 @@ public:
     QRect titleBar() const;
     bool isOpaque() const;
 
-    QPointer<DecorationShadow> shadow() const;
+    /**
+     * DecorationShadow for this Decoration. It is recommended that multiple Decorations share
+     * the same DecorationShadow. E.g one DecorationShadow for all inactive Decorations and one
+     * for the active Decoration.
+     **/
+    QSharedPointer<DecorationShadow> shadow() const;
 
     /**
      * The decoration's geometry in local coordinates.
@@ -157,7 +156,7 @@ Q_SIGNALS:
     void sectionUnderMouseChanged(Qt::WindowFrameSection);
     void titleBarChanged();
     void opaqueChanged(bool);
-    void shadowChanged(QPointer<DecorationShadow> shadow);
+    void shadowChanged(const QSharedPointer<DecorationShadow> &shadow);
 
 protected:
     explicit Decoration(QObject *parent, const QVariantList &args);
@@ -170,7 +169,7 @@ protected:
      **/
     void setTitleBar(const QRect &rect);
     void setOpaque(bool opaque);
-    void setShadow(const QPointer<DecorationShadow> &shadow);
+    void setShadow(const QSharedPointer<DecorationShadow> &shadow);
 
     virtual void hoverEnterEvent(QHoverEvent *event);
     virtual void hoverLeaveEvent(QHoverEvent *event);

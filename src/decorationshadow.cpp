@@ -30,8 +30,8 @@ DecorationShadow::Private::Private(DecorationShadow *parent)
 
 DecorationShadow::Private::~Private() = default;
 
-DecorationShadow::DecorationShadow(QObject *parent)
-    : QObject(parent)
+DecorationShadow::DecorationShadow()
+    : QObject()
     , d(new Private(this))
 {
 }

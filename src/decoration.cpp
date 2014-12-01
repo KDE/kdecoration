@@ -178,7 +178,7 @@ DELEGATE(setBorders, borders, const QMargins&, )
 DELEGATE(setResizeOnlyBorders, resizeOnlyBorders, const QMargins&, )
 DELEGATE(setTitleBar, titleBar, const QRect&, )
 DELEGATE(setOpaque, opaque, bool, d->opaque)
-DELEGATE(setShadow, shadow, const QPointer<DecorationShadow> &, d->shadow)
+DELEGATE(setShadow, shadow, const QSharedPointer<DecorationShadow> &, d->shadow)
 
 #undef DELEGATE
 
@@ -192,7 +192,7 @@ DELEGATE(borders, QMargins)
 DELEGATE(resizeOnlyBorders, QMargins)
 DELEGATE(titleBar, QRect)
 DELEGATE(sectionUnderMouse, Qt::WindowFrameSection)
-DELEGATE(shadow, QPointer<DecorationShadow>)
+DELEGATE(shadow, QSharedPointer<DecorationShadow>)
 
 #undef DELEGATE
 
