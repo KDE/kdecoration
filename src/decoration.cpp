@@ -118,7 +118,14 @@ void Decoration::Private::addButton(DecorationButton *button)
     buttons << button;
     QObject::connect(button, &QObject::destroyed, q,
         [this](QObject *o) {
-            buttons.removeAll(static_cast<DecorationButton*>(o));
+            auto it = buttons.begin();
+            while (it != buttons.end()) {
+                if (*it == static_cast<DecorationButton*>(o)) {
+                    it = buttons.erase(it);
+                } else {
+                    it++;
+                }
+            }
         }
     );
 }
