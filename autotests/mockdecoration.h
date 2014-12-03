@@ -32,6 +32,10 @@ public:
     explicit MockDecoration(MockBridge *bridge);
     void paint(QPainter *painter, const QRect &repaintRegion) override;
     void setOpaque(bool set);
+    using Decoration::setBorders;
+    void setBorders(const QMargins &m);
+    using Decoration::setTitleBar;
+    void setTitleBar(const QRect &rect);
 };
 
 #endif

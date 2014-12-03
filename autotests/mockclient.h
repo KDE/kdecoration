@@ -71,6 +71,9 @@ public:
     void setShadeable(bool set);
     void setMaximizable(bool set);
 
+    void setWidth(int w);
+    void setHeight(int h);
+
 Q_SIGNALS:
     void closeRequested();
     void minimizeRequested();
@@ -89,6 +92,8 @@ private:
     bool m_maximizedVertically = false;
     bool m_maximizedHorizontally = false;
     bool m_onAllDesktops = false;
+    int m_width = 0;
+    int m_height = 0;
 };
 
 #endif

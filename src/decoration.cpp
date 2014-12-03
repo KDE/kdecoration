@@ -71,8 +71,8 @@ void Decoration::Private::updateSectionUnderMouse(const QPoint &mousePosition)
     const QSize size = q->size();
     const bool left   = mousePosition.x() < borders.left();
     const bool top    = mousePosition.y() < borders.top();
-    const bool bottom = size.height() - mousePosition.y() < borders.bottom();
-    const bool right  = size.width() - mousePosition.x() < borders.right();
+    const bool bottom = size.height() - mousePosition.y() <= borders.bottom();
+    const bool right  = size.width() - mousePosition.x() <= borders.right();
     if (left) {
         if (top && mousePosition.y() < titleBar.y()) {
             setSectionUnderMouse(Qt::TopLeftSection);

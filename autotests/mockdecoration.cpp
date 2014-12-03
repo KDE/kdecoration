@@ -42,3 +42,13 @@ void MockDecoration::setOpaque(bool set)
 {
     Decoration::setOpaque(set);
 }
+
+void MockDecoration::setBorders(const QMargins &m)
+{
+    Decoration::setBorders(m);
+}
+
+void MockDecoration::setTitleBar(const QRect &rect)
+{
+    Decoration::setTitleBar(rect);
+}

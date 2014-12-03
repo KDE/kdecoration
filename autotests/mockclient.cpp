@@ -50,7 +50,7 @@ int MockClient::desktop() const
 
 int MockClient::height() const
 {
-    return 0;
+    return m_height;
 }
 
 QIcon MockClient::icon() const
@@ -217,7 +217,7 @@ void MockClient::requestToggleShade()
 
 int MockClient::width() const
 {
-    return 0;
+    return m_width;
 }
 
 WId MockClient::windowId() const
@@ -253,4 +253,16 @@ void MockClient::setMaximizable(bool set)
 {
     m_maximizable = set;
     emit client()->maximizeableChanged(set);
+}
+
+void MockClient::setWidth(int w)
+{
+    m_width = w;
+    emit client()->widthChanged(w);
+}
+
+void MockClient::setHeight(int h)
+{
+    m_height = h;
+    emit client()->heightChanged(h);
 }
