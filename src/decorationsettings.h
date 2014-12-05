@@ -39,9 +39,9 @@ class KDECORATIONS2_EXPORT DecorationSettings : public QObject
     Q_PROPERTY(bool onAllDesktopsAvailable READ isOnAllDesktopsAvailable NOTIFY onAllDesktopsAvailableChanged)
     Q_PROPERTY(bool alphaChannelSupported READ isAlphaChannelSupported NOTIFY alphaChannelSupportedChanged)
     Q_PROPERTY(bool closeOnDoubleClickOnMenu READ isCloseOnDoubleClickOnMenu NOTIFY closeOnDoubleClickOnMenuChanged)
-    Q_PROPERTY(QVector<DecorationButtonType> decorationButtonsLeft READ decorationButtonsLeft NOTIFY decorationButtonsLeftChanged)
-    Q_PROPERTY(QVector<DecorationButtonType> decorationButtonsRight READ decorationButtonsRight NOTIFY decorationButtonsRightChanged)
-    Q_PROPERTY(BorderSize borderSize READ borderSize NOTIFY borderSizeChanged)
+    Q_PROPERTY(QVector<KDecoration2::DecorationButtonType> decorationButtonsLeft READ decorationButtonsLeft NOTIFY decorationButtonsLeftChanged)
+    Q_PROPERTY(QVector<KDecoration2::DecorationButtonType> decorationButtonsRight READ decorationButtonsRight NOTIFY decorationButtonsRightChanged)
+    Q_PROPERTY(KDecoration2::BorderSize borderSize READ borderSize NOTIFY borderSizeChanged)
     /**
      * The fundamental unit of space that should be used for sizes, expressed in pixels.
      * Given the screen has an accurate DPI settings, it corresponds to a millimeter
@@ -91,9 +91,9 @@ Q_SIGNALS:
     void onAllDesktopsAvailableChanged(bool);
     void alphaChannelSupportedChanged(bool);
     void closeOnDoubleClickOnMenuChanged(bool);
-    void decorationButtonsLeftChanged(const QVector<DecorationButtonType>&);
-    void decorationButtonsRightChanged(const QVector<DecorationButtonType>&);
-    void borderSizeChanged(BorderSize size);
+    void decorationButtonsLeftChanged(const QVector<KDecoration2::DecorationButtonType>&);
+    void decorationButtonsRightChanged(const QVector<KDecoration2::DecorationButtonType>&);
+    void borderSizeChanged(KDecoration2::BorderSize size);
     void fontChanged(const QFont &font);
     void gridUnitChanged(int);
     void spacingChanged();
