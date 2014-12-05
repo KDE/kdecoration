@@ -98,6 +98,13 @@ Q_SIGNALS:
     void gridUnitChanged(int);
     void spacingChanged();
 
+    /**
+     * This signal is emitted when the backend got reconfigured.
+     * If the plugin uses custom settings, it is recommended to re-read
+     * them after this signal got emitted.
+     **/
+    void reconfigured();
+
 private:
     std::unique_ptr<DecorationSettingsPrivate> d;
 };
