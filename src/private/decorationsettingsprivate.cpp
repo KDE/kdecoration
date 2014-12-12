@@ -23,11 +23,23 @@
 namespace KDecoration2
 {
 
+class DecorationSettingsPrivate::Private
+{
+public:
+    explicit Private(DecorationSettings *settings);
+    DecorationSettings *settings;
+    int gridUnit = -1;
+    int smallSpacing = -1;
+    int largeSpacing = -1;
+};
+
+DecorationSettingsPrivate::Private::Private(DecorationSettings *settings)
+    : settings(settings)
+{
+}
+
 DecorationSettingsPrivate::DecorationSettingsPrivate(DecorationSettings *parent)
-    : q(parent)
-    , m_gridUnit(-1)
-    , m_smallSpacing(-1)
-    , m_largeSpacing(-1)
+    : d(new Private(parent))
 {
 }
 
@@ -37,12 +49,12 @@ DecorationSettingsPrivate::~DecorationSettingsPrivate()
 
 DecorationSettings *DecorationSettingsPrivate::decorationSettings()
 {
-    return q;
+    return d->settings;
 }
 
 const DecorationSettings *DecorationSettingsPrivate::decorationSettings() const
 {
-    return q;
+    return d->settings;
 }
 
 QFont DecorationSettingsPrivate::font() const
@@ -57,32 +69,32 @@ QFontMetricsF DecorationSettingsPrivate::fontMetrics() const
 
 int DecorationSettingsPrivate::gridUnit() const
 {
-    return m_gridUnit;
+    return d->gridUnit;
 }
 
 int DecorationSettingsPrivate::smallSpacing() const
 {
-    return m_smallSpacing;
+    return d->smallSpacing;
 }
 
 int DecorationSettingsPrivate::largeSpacing() const
 {
-    return m_largeSpacing;
+    return d->largeSpacing;
 }
 
 void DecorationSettingsPrivate::setGridUnit(int unit)
 {
-    m_gridUnit = unit;
+    d->gridUnit = unit;
 }
 
 void DecorationSettingsPrivate::setLargeSpacing(int spacing)
 {
-    m_largeSpacing = spacing;
+    d->largeSpacing = spacing;
 }
 
 void DecorationSettingsPrivate::setSmallSpacing(int spacing)
 {
-    m_smallSpacing = spacing;
+    d->smallSpacing = spacing;
 }
 
 }

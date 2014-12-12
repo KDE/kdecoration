@@ -69,10 +69,8 @@ protected:
     explicit DecorationSettingsPrivate(DecorationSettings *parent);
 
 private:
-    DecorationSettings *q;
-    int m_gridUnit;
-    int m_smallSpacing;
-    int m_largeSpacing;
+    class Private;
+    const QScopedPointer<Private> d;
 };
 }
 
