@@ -17,8 +17,8 @@
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef KDECORATION2_DECORATED_CLIENT_P_H
-#define KDECORATION2_DECORATED_CLIENT_P_H
+#ifndef KDECORATION2_DECORATED_CLIENT_PRIVATE_H
+#define KDECORATION2_DECORATED_CLIENT_PRIVATE_H
 
 #include <kdecoration2/private/kdecoration2_private_export.h>
 
