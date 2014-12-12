@@ -93,8 +93,8 @@ protected:
     DecoratedClient *client();
 
 private:
-    DecoratedClient *q;
-    Decoration *m_decoration;
+    class Private;
+    const QScopedPointer<Private> d;
 };
 
 } // namespace

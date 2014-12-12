@@ -22,9 +22,22 @@
 namespace KDecoration2
 {
 
+class DecoratedClientPrivate::Private
+{
+public:
+    explicit Private(DecoratedClient *client, Decoration *decoration);
+    DecoratedClient *client;
+    Decoration *decoration;
+};
+
+DecoratedClientPrivate::Private::Private(DecoratedClient *client, Decoration *decoration)
+    : client(client)
+    , decoration(decoration)
+{
+}
+
 DecoratedClientPrivate::DecoratedClientPrivate(DecoratedClient *client, Decoration *decoration)
-    : q(client)
-    , m_decoration(decoration)
+    : d(new Private(client, decoration))
 {
 }
 
@@ -32,17 +45,17 @@ DecoratedClientPrivate::~DecoratedClientPrivate() = default;
 
 Decoration *DecoratedClientPrivate::decoration()
 {
-    return m_decoration;
+    return d->decoration;
 }
 
 Decoration *DecoratedClientPrivate::decoration() const
 {
-    return m_decoration;
+    return d->decoration;
 }
 
 DecoratedClient *DecoratedClientPrivate::client()
 {
-    return q;
+    return d->client;
 }
 
 }
