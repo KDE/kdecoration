@@ -233,7 +233,7 @@ Q_SIGNALS:
 private:
     friend class Decoration;
     DecoratedClient(Decoration *parent, DecorationBridge *bridge);
-    std::unique_ptr<DecoratedClientPrivate> d;
+    const std::unique_ptr<DecoratedClientPrivate> d;
 };
 
 } // namespace

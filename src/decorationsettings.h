@@ -106,7 +106,7 @@ Q_SIGNALS:
     void reconfigured();
 
 private:
-    std::unique_ptr<DecorationSettingsPrivate> d;
+    const std::unique_ptr<DecorationSettingsPrivate> d;
 };
 
 }
