@@ -55,4 +55,34 @@ QFontMetricsF DecorationSettingsPrivate::fontMetrics() const
     return QFontMetricsF(font());
 }
 
+int DecorationSettingsPrivate::gridUnit() const
+{
+    return m_gridUnit;
+}
+
+int DecorationSettingsPrivate::smallSpacing() const
+{
+    return m_smallSpacing;
+}
+
+int DecorationSettingsPrivate::largeSpacing() const
+{
+    return m_largeSpacing;
+}
+
+void DecorationSettingsPrivate::setGridUnit(int unit)
+{
+    m_gridUnit = unit;
+}
+
+void DecorationSettingsPrivate::setLargeSpacing(int spacing)
+{
+    m_largeSpacing = spacing;
+}
+
+void DecorationSettingsPrivate::setSmallSpacing(int spacing)
+{
+    m_smallSpacing = spacing;
+}
+
 }
