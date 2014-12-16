@@ -19,9 +19,11 @@
  */
 #include <QTest>
 #include <QSignalSpy>
+#include "../src/decorationsettings.h"
 #include "mockbridge.h"
 #include "mockclient.h"
 #include "mockdecoration.h"
+#include "mocksettings.h"
 
 class DecorationTest : public QObject
 {
@@ -98,7 +100,13 @@ void DecorationTest::testSection_data()
 void DecorationTest::testSection()
 {
     MockBridge bridge;
+    auto decoSettings = QSharedPointer<KDecoration2::DecorationSettings>::create(&bridge);
     MockDecoration deco(&bridge);
+    deco.setSettings(decoSettings);
+
+    MockSettings *settings = bridge.lastCreatedSettings();
+    settings->setLargeSpacing(0);
+
     MockClient *client = bridge.lastCreatedClient();
     client->setWidth(100);
     client->setHeight(100);
@@ -139,5 +147,5 @@ void DecorationTest::testSection()
     QCOMPARE(spy.last().first().value<Qt::WindowFrameSection>(), Qt::NoSection);
 }
 
-QTEST_GUILESS_MAIN(DecorationTest)
+QTEST_MAIN(DecorationTest)
 #include "decorationtest.moc"
