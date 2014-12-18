@@ -76,9 +76,9 @@ void Decoration::Private::updateSectionUnderMouse(const QPoint &mousePosition)
     const bool bottom = size.height() - mousePosition.y() <= borders.bottom();
     const bool right  = size.width() - mousePosition.x() <= borders.right();
     if (left) {
-        if (top && mousePosition.y() < titleBar.y() + corner) {
+        if (top && mousePosition.y() < titleBar.top() + corner) {
             setSectionUnderMouse(Qt::TopLeftSection);
-        } else if (size.height() - mousePosition.y() <= borders.bottom() + corner && mousePosition.y() > titleBar.y() + titleBar.height()) {
+        } else if (size.height() - mousePosition.y() <= borders.bottom() + corner && mousePosition.y() > titleBar.bottom()) {
             setSectionUnderMouse(Qt::BottomLeftSection);
         } else {
             setSectionUnderMouse(Qt::LeftSection);
@@ -86,9 +86,9 @@ void Decoration::Private::updateSectionUnderMouse(const QPoint &mousePosition)
         return;
     }
     if (right) {
-        if (top && mousePosition.y() < titleBar.y() + corner) {
+        if (top && mousePosition.y() < titleBar.top() + corner) {
             setSectionUnderMouse(Qt::TopRightSection);
-        } else if (size.height() - mousePosition.y() <= borders.bottom() + corner && mousePosition.y() > titleBar.y() + titleBar.height()) {
+        } else if (size.height() - mousePosition.y() <= borders.bottom() + corner && mousePosition.y() > titleBar.bottom()) {
             setSectionUnderMouse(Qt::BottomRightSection);
         } else {
             setSectionUnderMouse(Qt::RightSection);
@@ -96,7 +96,7 @@ void Decoration::Private::updateSectionUnderMouse(const QPoint &mousePosition)
         return;
     }
     if (bottom) {
-        if (mousePosition.y() > titleBar.y() + titleBar.height()) {
+        if (mousePosition.y() > titleBar.bottom()) {
             if (mousePosition.x() < borders.left() + corner) {
                 setSectionUnderMouse(Qt::BottomLeftSection);
             } else if (size.width() - mousePosition.x() <= borders.right() + corner) {
@@ -110,7 +110,7 @@ void Decoration::Private::updateSectionUnderMouse(const QPoint &mousePosition)
         return;
     }
     if (top) {
-        if (mousePosition.y() < titleBar.y()) {
+        if (mousePosition.y() < titleBar.top()) {
             if (mousePosition.x() < borders.left() + corner) {
                 setSectionUnderMouse(Qt::TopLeftSection);
             } else if (size.width() - mousePosition.x() <= borders.right() + corner) {
