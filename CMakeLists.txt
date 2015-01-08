@@ -1,4 +1,5 @@
 project(decoration-api)
+set(PROJECT_VERSION "5.1.95")
 
 cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
 
@@ -12,10 +13,7 @@ include(ECMPackageConfigHelpers)
 include(ECMSetupVersion)
 include(ECMGenerateHeaders)
 
-set(KDECORATION2_VERSION "5.0.0") # handled by release scripts
-set(KDECORATION2)
-
-ecm_setup_version(${KDECORATION2_VERSION} VARIABLE_PREFIX KDECORATION2
+ecm_setup_version(${PROJECT_VERSION} VARIABLE_PREFIX KDECORATION2
                         VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kdecoration2_version.h"
                         PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KDecoration2ConfigVersion.cmake"
                         SOVERSION 5)
