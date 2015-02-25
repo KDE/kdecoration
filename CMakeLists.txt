@@ -19,7 +19,7 @@ ecm_setup_version(${PROJECT_VERSION} VARIABLE_PREFIX KDECORATION2
                         SOVERSION 5)
 
 #dependencies
-set(REQUIRED_QT_VERSION 5.3.0)
+set(REQUIRED_QT_VERSION 5.4.0)
 find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED COMPONENTS
     Core
     Gui
