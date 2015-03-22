@@ -48,9 +48,6 @@ install(
     FILES
         ${CMAKE_CURRENT_BINARY_DIR}/kdecoration2/private/kdecoration2_private_export.h
         ${KDecoration2Private_HEADERS}
-        decoratedclientprivate.h
-        decorationbridge.h
-        decorationsettingsprivate.h
     DESTINATION
         ${KDECORATION2_INCLUDEDIR}/kdecoration2/private
     COMPONENT

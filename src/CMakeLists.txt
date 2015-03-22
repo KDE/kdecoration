@@ -50,12 +50,6 @@ install(
     FILES
         ${CMAKE_CURRENT_BINARY_DIR}/kdecoration2/kdecoration2_export.h
         ${KDecoration2_HEADERS}
-        decoratedclient.h
-        decoration.h
-        decorationbutton.h
-        decorationbuttongroup.h
-        decorationsettings.h
-        decorationshadow.h
         decorationdefines.h
     DESTINATION
         ${KDECORATION2_INCLUDEDIR}/kdecoration2
