@@ -19,6 +19,8 @@
  */
 #include "decoratedclientprivate.h"
 
+#include <QColor>
+
 namespace KDecoration2
 {
 
@@ -56,6 +58,14 @@ Decoration *DecoratedClientPrivate::decoration() const
 DecoratedClient *DecoratedClientPrivate::client()
 {
     return d->client;
+}
+
+QColor DecoratedClientPrivate::color(ColorGroup group, ColorRole role) const
+{
+    Q_UNUSED(role)
+    Q_UNUSED(group)
+
+    return QColor();
 }
 
 }

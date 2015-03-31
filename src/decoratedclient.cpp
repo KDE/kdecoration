@@ -22,6 +22,8 @@
 #include "private/decorationbridge.h"
 #include "decoration.h"
 
+#include <QColor>
+
 namespace KDecoration2
 {
 
@@ -70,6 +72,16 @@ DELEGATE(Qt::Edges, adjacentScreenEdges)
 QPointer< Decoration > DecoratedClient::decoration() const
 {
     return QPointer<Decoration>(d->decoration());
+}
+
+QColor DecoratedClient::color(QPalette::ColorGroup group, QPalette::ColorRole role) const
+{
+    return d->palette().color(group, role);
+}
+
+QColor DecoratedClient::color(ColorGroup group, ColorRole role) const
+{
+    return d->color(group, role);
 }
 
 } // namespace

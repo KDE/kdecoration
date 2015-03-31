@@ -21,6 +21,7 @@
 #define KDECORATION2_DECORATED_CLIENT_H
 
 #include <kdecoration2/kdecoration2_export.h>
+#include "decorationdefines.h"
 
 #include <QObject>
 #include <QPointer>
@@ -203,6 +204,22 @@ public:
 
     QPointer<Decoration> decoration() const;
     QPalette palette() const;
+    /**
+     * Used to get colors in QPalette.
+     * @param group The color group
+     * @param role The color role
+     * @return palette().color(group, role)
+     * @since 5.3
+     **/
+    QColor color(QPalette::ColorGroup group, QPalette::ColorRole role) const;
+    /**
+     * Used to get additional colors that are not in QPalette.
+     * @param group The color group
+     * @param role The color role
+     * @return The color if provided for combination of group and role, otherwise invalid QColor.
+     * @since 5.3
+     **/
+    QColor color(ColorGroup group, ColorRole role) const;
 
 Q_SIGNALS:
     void activeChanged(bool);

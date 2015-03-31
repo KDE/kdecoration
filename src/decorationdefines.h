@@ -135,6 +135,45 @@ enum class BorderSize {
     Oversized
 };
 
+/**
+ * Color groups are used for DecoratedClient::color().
+ * @since 5.3
+ **/
+enum class ColorGroup {
+    /**
+     * Inactive color, used for unfocused windows.
+     **/
+    Inactive,
+    /**
+     * Active color, used for focused windows.
+     **/
+    Active,
+    /**
+     * Warning color, can only be used with ColorRole::Foreground. If used with other roles,
+     * a invalid QColor is returned. It can be used for close buttons and is typically red.
+     **/
+    Warning
+};
+
+/**
+ * Color roles are used for DecoratedClient::color().
+ * @since 5.3
+ **/
+enum class ColorRole {
+    /**
+     * The decoration's frame background color.
+     **/
+    Frame,
+    /**
+     * The decoration's title bar background color
+     **/
+    TitleBar,
+    /**
+     * The decoration's title bar forground color
+     **/
+    Foreground
+};
+
 }
 
 #endif

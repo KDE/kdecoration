@@ -21,6 +21,7 @@
 #define KDECORATION2_DECORATED_CLIENT_PRIVATE_H
 
 #include <kdecoration2/private/kdecoration2_private_export.h>
+#include "../decorationdefines.h"
 
 #include <QString>
 #include <QIcon>
@@ -87,6 +88,8 @@ public:
 
     Decoration *decoration();
     Decoration *decoration() const;
+
+    virtual QColor color(ColorGroup group, ColorRole role) const;
 
 protected:
     explicit DecoratedClientPrivate(DecoratedClient *client, Decoration *decoration);
