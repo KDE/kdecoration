@@ -242,7 +242,7 @@ QSize Decoration::size() const
 {
     const QMargins &b = d->borders;
     return QSize(d->client->width() + b.left() + b.right(),
-                 d->client->height() + b.top() + b.bottom());
+                 (d->client->isShaded() ? 0 : d->client->height()) + b.top() + b.bottom());
 }
 
 QRect Decoration::rect() const
