@@ -14,7 +14,7 @@ The library consists of two parts:
 
 ## Links
 
-- Home page: <https://projects.kde.org/projects/playground/base/kdecoration>
+- Home page: <https://projects.kde.org/projects/kde/workspace/kdecoration>
 - Mailing list: <https://mail.kde.org/mailman/listinfo/kwin>
 - IRC channel: #kde-devel or #kwin on Freenode
-- Git repository: <https://projects.kde.org/projects/playground/base/kdecoration/repository>
+- Git repository: <https://projects.kde.org/projects/kde/workspace/kdecoration/repository>
