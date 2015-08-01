@@ -19,6 +19,7 @@
  */
 #include <QTest>
 #include <QSignalSpy>
+#include <QVariant>
 #include "../src/decorationsettings.h"
 #include "mockbridge.h"
 #include "mockclient.h"

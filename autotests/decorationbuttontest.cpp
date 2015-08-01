@@ -991,7 +991,7 @@ void DecorationButtonTest::testMaximize()
     QCOMPARE(client->isMaximizedHorizontally(), true);
     QCOMPARE(client->isMaximizedVertically(), false);
 
-    QMouseEvent rightReleaseEvent(QEvent::QEvent::MouseButtonRelease, QPointF(5, 5), Qt::RightButton, Qt::NoButton, Qt::NoModifier);
+    QMouseEvent rightReleaseEvent(QEvent::MouseButtonRelease, QPointF(5, 5), Qt::RightButton, Qt::NoButton, Qt::NoModifier);
     rightReleaseEvent.setAccepted(false);
     button.event(&rightReleaseEvent);
     QCOMPARE(rightReleaseEvent.isAccepted(), true);

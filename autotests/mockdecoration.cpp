@@ -20,6 +20,8 @@
 #include "mockdecoration.h"
 #include "mockbridge.h"
 
+#include <utility>
+#include <QMap>
 #include <QVariantMap>
 
 MockDecoration::MockDecoration(QObject *parent, const QVariantList &args)
