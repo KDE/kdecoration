@@ -115,6 +115,8 @@ QRect DecorationShadow::leftGeometry() const
     return QRect(0, d->innerShadowRect.top(), d->innerShadowRect.left(), d->innerShadowRect.height());
 }
 
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
+
 #define DELEGATE(type, name) \
     type DecorationShadow::name() const \
     { \
@@ -151,6 +153,7 @@ I(left, Left)
 SETTER(const QImage&, setShadow, shadow)
 
 #undef SETTER
+#endif
 
 void DecorationShadow::setPadding(const QMargins &margins)
 {

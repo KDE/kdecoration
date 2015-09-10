@@ -33,14 +33,47 @@ namespace KDecoration2
 class DecorationBridge;
 class DecorationSettingsPrivate;
 
+/**
+ * @brief Common settings for the Decoration.
+ *
+ * This class gets injected into the Decoration and provides recommendations for the
+ * Decoration. The Decoration is suggested to honor the settings, but may decide that some
+ * settings don't fit the design and ignore them.
+ *
+ * @see Decoration
+ **/
 class KDECORATIONS2_EXPORT DecorationSettings : public QObject
 {
     Q_OBJECT
+    /**
+     * Whether the feature to put a DecoratedClient on all desktops is available.
+     *
+     * If this feature is not available a Decoration might decide to not show the
+     * DecorationButtonType::OnAllDesktops.
+     **/
     Q_PROPERTY(bool onAllDesktopsAvailable READ isOnAllDesktopsAvailable NOTIFY onAllDesktopsAvailableChanged)
+    /**
+     * Whether the Decoration will be rendered with an alpha channel.
+     *
+     * If no alpha channel is available a Decoration should not use round borders.
+     **/
     Q_PROPERTY(bool alphaChannelSupported READ isAlphaChannelSupported NOTIFY alphaChannelSupportedChanged)
+    /**
+     * Whether the Decoration should close the DecoratedClient when double clicking on the
+     * DecorationButtonType::Menu.
+     **/
     Q_PROPERTY(bool closeOnDoubleClickOnMenu READ isCloseOnDoubleClickOnMenu NOTIFY closeOnDoubleClickOnMenuChanged)
+    /**
+     * The suggested ordering of the decoration buttons on the left.
+     **/
     Q_PROPERTY(QVector<KDecoration2::DecorationButtonType> decorationButtonsLeft READ decorationButtonsLeft NOTIFY decorationButtonsLeftChanged)
+    /**
+     * The suggested ordering of the decoration buttons on the right.
+     **/
     Q_PROPERTY(QVector<KDecoration2::DecorationButtonType> decorationButtonsRight READ decorationButtonsRight NOTIFY decorationButtonsRightChanged)
+    /**
+     * The suggested border size.
+     **/
     Q_PROPERTY(KDecoration2::BorderSize borderSize READ borderSize NOTIFY borderSizeChanged)
     /**
      * The fundamental unit of space that should be used for sizes, expressed in pixels.

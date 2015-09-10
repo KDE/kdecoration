@@ -33,6 +33,10 @@ class QMouseEvent;
 class QPainter;
 class QWheelEvent;
 
+/**
+ * @brief Framework for creating window decorations.
+ *
+ **/
 namespace KDecoration2
 {
 
@@ -41,6 +45,32 @@ class DecoratedClient;
 class DecorationButton;
 class DecorationSettings;
 
+/**
+ * @brief Base class for the Decoration.
+ *
+ * To provide a Decoration one needs to inherit from this class. The framework will instantiate
+ * an instance of the inherited class for each DecoratedClient.
+ *
+ * The main tasks of the Decoration is to provide borders around the DecoratedClient. For this
+ * the Deocration provides border sizes: those should be adjusted depending on the state of the
+ * DecoratedClient. E.g. commonly a maximized DecoratedClient does not have borders on the side,
+ * only the title bar.
+ *
+ * Whenever the visual representation of the Decoration changes the slot @link Decoration::update @endlink
+ * should be invoked to request a repaint. The framework will in return invoke the
+ * @link Decoration::paint @endlink method. This method needs to be implemented by inheriting
+ * classes.
+ *
+ * A Decoration commonly provides buttons for interaction. E.g. a close button to close the
+ * DecoratedClient. For such actions the Decoration provides slots which should be connected to
+ * the clicked signals of the buttons. For convenience the framework provides the @link DecorationButton @endlink
+ * and the @link DecorationButtonGroup @endlink for easier layout. It is not required to use those,
+ * if one uses different ways to represent the actions one needs to filter the events accordingly.
+ *
+ * @see DecoratedClient
+ * @see DecorationButton
+ * @see DecorationButtonGroup
+ **/
 class KDECORATIONS2_EXPORT Decoration : public QObject
 {
     Q_OBJECT
@@ -123,6 +153,15 @@ public:
      **/
     QSharedPointer<DecorationSettings> settings() const;
 
+    /**
+     * Implement this method in inheriting classes to provide the rendering.
+     *
+     * The @p painter is set up to paint on an internal QPaintDevice. The painting is
+     * implicitly double buffered.
+     *
+     * @param painter The painter which needs to be used for rendering
+     * @param repaintArea The region which needs to be repainted.
+     **/
     virtual void paint(QPainter *painter, const QRect &repaintArea) = 0;
 
     virtual bool event(QEvent *event) override;
@@ -159,6 +198,16 @@ Q_SIGNALS:
     void shadowChanged(const QSharedPointer<DecorationShadow> &shadow);
 
 protected:
+    /**
+     * Constructor for the Decoration.
+     *
+     * The @p args are used by the decoration framework to pass meta information
+     * to the Decoration. An inheriting class is supposed to pass the args to the
+     * parent class.
+     *
+     * @param parent The parent of the Decoration
+     * @param args Additional arguments passed in from the framework
+     **/
     explicit Decoration(QObject *parent, const QVariantList &args);
     void setBorders(const QMargins &borders);
     void setResizeOnlyBorders(const QMargins &borders);

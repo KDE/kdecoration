@@ -33,10 +33,12 @@
 namespace KDecoration2
 {
 
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
 uint qHash(const DecorationButtonType &type)
 {
     return static_cast<uint>(type);
 }
+#endif
 
 DecorationButton::Private::Private(DecorationButtonType type, const QPointer<Decoration> &decoration, DecorationButton *parent)
     : decoration(decoration)

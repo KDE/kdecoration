@@ -45,7 +45,9 @@ void DecorationButtonGroup::Private::setGeometry(const QRectF &geo)
     emit q->geometryChanged(geometry);
 }
 
+namespace {
 static bool s_layoutRecursion = false;
+}
 
 void DecorationButtonGroup::Private::updateLayout()
 {
