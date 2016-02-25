@@ -36,15 +36,27 @@ private Q_SLOTS:
     void testSection();
 };
 
+#ifdef _MSC_VER
+QMap<QString, QVariant> makeMap(const QString& key, const QVariant &value);
+#endif
 void DecorationTest::testCreate()
 {
     // just test that creating the Decoration doesn't crash
     MockBridge bridge;
     const QString bridgeKey = QStringLiteral("bridge");
-    MockDecoration deco1(nullptr, QVariantList({QVariantMap({ {bridgeKey, QVariant::fromValue(5)} }),
+    MockDecoration deco1(nullptr, QVariantList({
+#ifdef _MSC_VER
+                                                makeMap(bridgeKey, QVariant::fromValue(5)),
+#else
+                                                QVariantMap({ {bridgeKey, QVariant::fromValue(5)} }),
+#endif
                                                 QVariant::fromValue(bridgeKey),
                                                 QVariantMap(),
+#ifdef _MSC_VER
+                                                makeMap(bridgeKey, QVariant::fromValue(&bridge)),
+#else
                                                 QVariantMap({ {bridgeKey, QVariant::fromValue(&bridge)} })
+#endif
                                                }));
     QVERIFY(!deco1.client().isNull());
 }

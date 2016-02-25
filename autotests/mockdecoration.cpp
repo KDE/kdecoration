@@ -29,8 +29,18 @@ MockDecoration::MockDecoration(QObject *parent, const QVariantList &args)
 {
 }
 
+#ifdef _MSC_VER
+QMap<QString, QVariant> makeMap(const QString& key, const QVariant &value) {
+    QMap<QString, QVariant> ret;
+    ret.insert(key, value);
+    return ret;
+}
+MockDecoration::MockDecoration(MockBridge *bridge)
+    : MockDecoration(nullptr, QVariantList({makeMap(QStringLiteral("bridge"), QVariant::fromValue(bridge))}))
+#else
 MockDecoration::MockDecoration(MockBridge *bridge)
     : MockDecoration(nullptr, QVariantList({QVariantMap({{QStringLiteral("bridge"), QVariant::fromValue(bridge)}})}))
+#endif
 {
 }
 
