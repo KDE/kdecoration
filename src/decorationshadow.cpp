@@ -125,7 +125,7 @@ QRect DecorationShadow::leftGeometry() const
 
 DELEGATE(QImage, shadow)
 DELEGATE(QMargins, padding)
-DELEGATE(QRect, innerShadowRect);
+DELEGATE(QRect, innerShadowRect)
 
 #define I(name, Name) \
 int DecorationShadow::padding##Name() const \
