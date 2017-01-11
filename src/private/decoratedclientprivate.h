@@ -100,6 +100,21 @@ private:
     const QScopedPointer<Private> d;
 };
 
+class KDECORATIONS_PRIVATE_EXPORT ApplicationMenuEnabledDecoratedClientPrivate : public DecoratedClientPrivate
+{
+public:
+    ~ApplicationMenuEnabledDecoratedClientPrivate() override;
+
+    virtual bool hasApplicationMenu() const = 0;
+    virtual bool isApplicationMenuActive() const = 0;
+
+    virtual void showApplicationMenu(int actionId) = 0;
+    virtual void requestShowApplicationMenu(const QRect &rect, int actionId) = 0;
+
+protected:
+    explicit ApplicationMenuEnabledDecoratedClientPrivate(DecoratedClient *client, Decoration *decoration);
+};
+
 } // namespace
 
 #endif

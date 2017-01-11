@@ -24,7 +24,7 @@
 
 #include <QObject>
 
-class MockClient : public QObject, public KDecoration2::DecoratedClientPrivate
+class MockClient : public QObject, public KDecoration2::ApplicationMenuEnabledDecoratedClientPrivate
 {
     Q_OBJECT
 public:
@@ -52,18 +52,23 @@ public:
     bool isShadeable() const override;
     bool isShaded() const override;
     QPalette palette() const override;
+    bool hasApplicationMenu() const override;
+    bool isApplicationMenuActive() const override;
     bool providesContextHelp() const override;
     void requestClose() override;
     void requestContextHelp() override;
     void requestToggleMaximization(Qt::MouseButtons buttons) override;
     void requestMinimize() override;
     void requestShowWindowMenu() override;
+    void requestShowApplicationMenu(const QRect &rect, int actionId) override;
     void requestToggleKeepAbove() override;
     void requestToggleKeepBelow() override;
     void requestToggleOnAllDesktops() override;
     void requestToggleShade() override;
     int width() const override;
     WId windowId() const override;
+
+    void showApplicationMenu(int actionId) override;
 
     void setCloseable(bool set);
     void setMinimizable(bool set);
@@ -79,6 +84,7 @@ Q_SIGNALS:
     void minimizeRequested();
     void quickHelpRequested();
     void menuRequested();
+    void applicationMenuRequested();
 
 private:
     bool m_closeable = false;

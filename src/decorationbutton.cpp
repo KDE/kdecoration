@@ -77,6 +77,16 @@ void DecorationButton::Private::init()
         setPressAndHold(settings->isCloseOnDoubleClickOnMenu());
         setAcceptedButtons(Qt::LeftButton | Qt::RightButton);
         break;
+    case DecorationButtonType::ApplicationMenu:
+        setVisible(c->hasApplicationMenu());
+        setCheckable(true); // will be "checked" whilst the menu is opened
+        // FIXME TODO connect directly and figure out the button geometry/offset stuff
+        QObject::connect(q, &DecorationButton::clicked, decoration.data(), [this] {
+            decoration->requestShowApplicationMenu(q->geometry().toRect(), 0 /* actionId */);
+        }, Qt::QueuedConnection); //&Decoration::requestShowApplicationMenu, Qt::QueuedConnection);
+        QObject::connect(c, &DecoratedClient::hasApplicationMenuChanged, q, &DecorationButton::setVisible);
+        QObject::connect(c, &DecoratedClient::applicationMenuActiveChanged, q, &DecorationButton::setChecked);
+        break;
     case DecorationButtonType::OnAllDesktops:
         setVisible(settings->isOnAllDesktopsAvailable());
         setCheckable(true);

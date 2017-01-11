@@ -69,6 +69,22 @@ DELEGATE(Qt::Edges, adjacentScreenEdges)
 
 #undef DELEGATE
 
+bool DecoratedClient::hasApplicationMenu() const
+{
+    if (const auto *appMenuEnabledPrivate = dynamic_cast<ApplicationMenuEnabledDecoratedClientPrivate *>(d.get())) {
+        return appMenuEnabledPrivate->hasApplicationMenu();
+    }
+    return false;
+}
+
+bool DecoratedClient::isApplicationMenuActive() const
+{
+    if (const auto *appMenuEnabledPrivate = dynamic_cast<ApplicationMenuEnabledDecoratedClientPrivate *>(d.get())) {
+        return appMenuEnabledPrivate->isApplicationMenuActive();
+    }
+    return false;
+}
+
 QPointer< Decoration > DecoratedClient::decoration() const
 {
     return QPointer<Decoration>(d->decoration());
@@ -82,6 +98,13 @@ QColor DecoratedClient::color(QPalette::ColorGroup group, QPalette::ColorRole ro
 QColor DecoratedClient::color(ColorGroup group, ColorRole role) const
 {
     return d->color(group, role);
+}
+
+void DecoratedClient::showApplicationMenu(int actionId)
+{
+    if (auto *appMenuEnabledPrivate = dynamic_cast<ApplicationMenuEnabledDecoratedClientPrivate *>(d.get())) {
+        appMenuEnabledPrivate->showApplicationMenu(actionId);
+    }
 }
 
 } // namespace

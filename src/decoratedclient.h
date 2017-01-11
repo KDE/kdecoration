@@ -167,6 +167,17 @@ class KDECORATIONS2_EXPORT DecoratedClient : public QObject
      * will include all Edges. The Decoration can use this information to hide borders.
      **/
     Q_PROPERTY(Qt::Edges adjacentScreenEdges READ adjacentScreenEdges NOTIFY adjacentScreenEdgesChanged)
+    /**
+     * Whether the DecoratedClient has an application menu
+     * @since 5.9
+     */
+    Q_PROPERTY(bool hasApplicationMenu READ hasApplicationMenu NOTIFY hasApplicationMenuChanged)
+    /**
+     * Whether the application menu for this DecoratedClient is currently shown to the user
+     * The Decoration can use this information to highlight the respective button.
+     * @since 5.9
+     */
+    Q_PROPERTY(bool applicationMenuActive READ isApplicationMenuActive NOTIFY applicationMenuActiveChanged)
 
     // TODO: properties for windowId and decorationId?
 
@@ -221,6 +232,24 @@ public:
      **/
     QColor color(ColorGroup group, ColorRole role) const;
 
+    /**
+     * Whether the DecoratedClient has an application menu
+     * @since 5.9
+     */
+    bool hasApplicationMenu() const;
+    /**
+     * Whether the application menu for this DecoratedClient is currently shown to the user
+     * The Decoration can use this information to highlight the respective button.
+     * @since 5.9
+     */
+    bool isApplicationMenuActive() const;
+
+    /**
+     * Request the application menu to be shown to the user
+     * @param actionId The DBus menu ID of the action that should be highlighted, 0 for none.
+     */
+    void showApplicationMenu(int actionId);
+
 Q_SIGNALS:
     void activeChanged(bool);
     void captionChanged(QString);
@@ -246,6 +275,9 @@ Q_SIGNALS:
     void heightChanged(int);
     void paletteChanged(const QPalette &palette);
     void adjacentScreenEdgesChanged(Qt::Edges edges);
+
+    void hasApplicationMenuChanged(bool);
+    void applicationMenuActiveChanged(bool);
 
 private:
     friend class Decoration;

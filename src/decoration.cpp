@@ -185,6 +185,24 @@ void Decoration::requestToggleMaximization(Qt::MouseButtons buttons)
     d->client->d->requestToggleMaximization(buttons);
 }
 
+void Decoration::showApplicationMenu(int actionId)
+{
+    auto it = std::find_if(d->buttons.constBegin(), d->buttons.constEnd(), [](DecorationButton *button) {
+        return button->type() == DecorationButtonType::ApplicationMenu;
+    });
+
+    if (it != d->buttons.constEnd()) {
+        requestShowApplicationMenu((*it)->geometry().toRect(), actionId);
+    }
+}
+
+void Decoration::requestShowApplicationMenu(const QRect &rect, int actionId)
+{
+    if (auto *appMenuEnabledPrivate = dynamic_cast<ApplicationMenuEnabledDecoratedClientPrivate *>(d->client->d.get())) {
+        appMenuEnabledPrivate->requestShowApplicationMenu(rect, actionId);
+    }
+}
+
 #define DELEGATE(name, variableName, type, emitValue) \
 void Decoration::name(type a) \
 { \

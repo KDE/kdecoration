@@ -68,4 +68,12 @@ QColor DecoratedClientPrivate::color(ColorGroup group, ColorRole role) const
     return QColor();
 }
 
+ApplicationMenuEnabledDecoratedClientPrivate::ApplicationMenuEnabledDecoratedClientPrivate(DecoratedClient *client, Decoration *decoration)
+    : DecoratedClientPrivate(client, decoration)
+{
+
+}
+
+ApplicationMenuEnabledDecoratedClientPrivate::~ApplicationMenuEnabledDecoratedClientPrivate() = default;
+
 }

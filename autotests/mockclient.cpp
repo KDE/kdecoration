@@ -24,7 +24,7 @@
 
 MockClient::MockClient(KDecoration2::DecoratedClient *client, KDecoration2::Decoration *decoration)
     : QObject()
-    , DecoratedClientPrivate(client, decoration)
+    , ApplicationMenuEnabledDecoratedClientPrivate(client, decoration)
 {
 }
 
@@ -138,6 +138,16 @@ QPalette MockClient::palette() const
     return QPalette();
 }
 
+bool MockClient::hasApplicationMenu() const
+{
+    return true;
+}
+
+bool MockClient::isApplicationMenuActive() const
+{
+    return false;
+}
+
 bool MockClient::providesContextHelp() const
 {
     return m_contextHelp;
@@ -189,6 +199,13 @@ void MockClient::requestMinimize()
 void MockClient::requestShowWindowMenu()
 {
     emit menuRequested();
+}
+
+void MockClient::requestShowApplicationMenu(const QRect &rect, int actionId)
+{
+    Q_UNUSED(rect);
+    Q_UNUSED(actionId);
+    emit applicationMenuRequested(); // FIXME TODO pass geometry
 }
 
 void MockClient::requestToggleKeepAbove()
@@ -265,4 +282,9 @@ void MockClient::setHeight(int h)
 {
     m_height = h;
     emit client()->heightChanged(h);
+}
+
+void MockClient::showApplicationMenu(int actionId)
+{
+    Q_UNUSED(actionId)
 }

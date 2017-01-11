@@ -59,6 +59,7 @@ private Q_SLOTS:
     void testMenu();
     void testMenuDoubleClick();
     void testMenuPressAndHold();
+    void testApplicationMenu();
 };
 
 void DecorationButtonTest::testButton()
@@ -1284,6 +1285,61 @@ void DecorationButtonTest::testMenuPressAndHold()
     QCOMPARE(menuRequestedSpy.count(), 2);
     // never got a dobule click
     QCOMPARE(closeRequestedSpy.count(), 0);
+}
+
+void DecorationButtonTest::testApplicationMenu()
+{
+    MockBridge bridge;
+    auto decoSettings = QSharedPointer<KDecoration2::DecorationSettings>::create(&bridge);
+    MockDecoration mockDecoration(&bridge);
+    mockDecoration.setSettings(decoSettings);
+    MockClient *client = bridge.lastCreatedClient();
+    MockButton button(KDecoration2::DecorationButtonType::ApplicationMenu, &mockDecoration);
+    button.setGeometry(QRect(0, 0, 10, 10));
+
+    QCOMPARE(button.isEnabled(), true);
+    QCOMPARE(button.isCheckable(), true);
+    QCOMPARE(button.isChecked(), false);
+    QCOMPARE(button.isVisible(), true);
+    QCOMPARE(button.acceptedButtons(), Qt::LeftButton);
+
+    // clicking the button should trigger a request for application menu
+    QSignalSpy clickedSpy(&button, SIGNAL(clicked(Qt::MouseButton)));
+    QVERIFY(clickedSpy.isValid());
+    QSignalSpy pressedSpy(&button, SIGNAL(pressed()));
+    QVERIFY(pressedSpy.isValid());
+    QSignalSpy releasedSpy(&button, SIGNAL(released()));
+    QVERIFY(releasedSpy.isValid());
+    QSignalSpy pressedChangedSpy(&button, SIGNAL(pressedChanged(bool)));
+    QVERIFY(pressedChangedSpy.isValid());
+    QSignalSpy applicationMenuRequestedSpy(client, SIGNAL(applicationMenuRequested()));
+    QVERIFY(applicationMenuRequestedSpy.isValid());
+
+    QMouseEvent pressEvent(QEvent::MouseButtonPress, QPointF(5, 5), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+    pressEvent.setAccepted(false);
+    button.event(&pressEvent);
+    QCOMPARE(pressEvent.isAccepted(), true);
+    QCOMPARE(button.isPressed(), true);
+    QCOMPARE(clickedSpy.count(), 0);
+    QCOMPARE(pressedSpy.count(), 1);
+    QCOMPARE(releasedSpy.count(), 0);
+    QCOMPARE(applicationMenuRequestedSpy.count(), 0);
+    QCOMPARE(pressedChangedSpy.count(), 1);
+    QCOMPARE(pressedChangedSpy.first().first().toBool(), true);
+
+    QMouseEvent releaseEvent(QEvent::MouseButtonRelease, QPointF(5, 5), Qt::LeftButton, Qt::NoButton, Qt::NoModifier);
+    releaseEvent.setAccepted(false);
+    button.event(&releaseEvent);
+    QCOMPARE(releaseEvent.isAccepted(), true);
+    QCOMPARE(button.isPressed(), false);
+    QCOMPARE(clickedSpy.count(), 1);
+    QCOMPARE(clickedSpy.first().first().value<Qt::MouseButton>(), Qt::LeftButton);
+    QCOMPARE(pressedSpy.count(), 1);
+    QCOMPARE(releasedSpy.count(), 1);
+    QVERIFY(applicationMenuRequestedSpy.wait());
+    QCOMPARE(applicationMenuRequestedSpy.count(), 1);
+    QCOMPARE(pressedChangedSpy.count(), 2);
+    QCOMPARE(pressedChangedSpy.last().first().toBool(), false);
 }
 
 QTEST_MAIN(DecorationButtonTest)

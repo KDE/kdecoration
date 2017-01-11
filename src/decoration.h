@@ -177,6 +177,9 @@ public Q_SLOTS:
     void requestToggleKeepBelow();
     void requestShowWindowMenu();
 
+    void showApplicationMenu(int actionId);
+    void requestShowApplicationMenu(const QRect &rect, int actionId);
+
     void update(const QRect &rect);
     void update();
 
