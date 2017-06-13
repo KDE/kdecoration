@@ -1,5 +1,5 @@
 project(decoration-api)
-set(PROJECT_VERSION "5.10.1")
+set(PROJECT_VERSION "5.10.2")
 
 cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
 
