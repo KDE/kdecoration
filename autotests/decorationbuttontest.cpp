@@ -1263,7 +1263,7 @@ void DecorationButtonTest::testMenuPressAndHold()
     QCOMPARE(releaseEvent.isAccepted(), true);
     QCOMPARE(clickedSpy.count(), 1);
 
-    QTest::qWait(QGuiApplication::styleHints()->mouseDoubleClickInterval());
+    QTest::qWait(QGuiApplication::styleHints()->mouseDoubleClickInterval() + 5);
 
     // and it shouldn't be a double click
     pressEvent.setAccepted(false);
