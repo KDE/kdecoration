@@ -66,6 +66,8 @@ public:
     void startPressAndHold();
     void stopPressAndHold();
 
+    QString typeToString(DecorationButtonType type);
+
     QPointer<Decoration> decoration;
     DecorationButtonType type;
     QRectF geometry;

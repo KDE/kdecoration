@@ -24,6 +24,9 @@
 #include "decoratedclient.h"
 #include "decorationsettings.h"
 
+#include <KLocalizedString>
+
+#include <QDebug>
 #include <QElapsedTimer>
 #include <QHoverEvent>
 #include <QGuiApplication>
@@ -284,6 +287,49 @@ void DecorationButton::Private::stopPressAndHold()
     }
 }
 
+QString DecorationButton::Private::typeToString(DecorationButtonType type)
+{
+    switch (type) {
+    case DecorationButtonType::Menu:
+        return i18n("Menu");
+    case DecorationButtonType::ApplicationMenu:
+        return i18n("Application menu");
+    case DecorationButtonType::OnAllDesktops:
+        if ( this->q->isChecked() )
+            return i18n("On one desktop");
+        else
+            return i18n("On all desktops");
+    case DecorationButtonType::Minimize:
+        return i18n("Minimize");
+    case DecorationButtonType::Maximize:
+        if ( this->q->isChecked() )
+            return i18n("Restore");
+        else
+            return i18n("Maximize");
+    case DecorationButtonType::Close:
+        return i18n("Close");
+    case DecorationButtonType::ContextHelp:
+        return i18n("Context help");
+    case DecorationButtonType::Shade:
+        if ( this->q->isChecked() )
+            return i18n("Unshade");
+        else
+            return i18n("Shade");
+    case DecorationButtonType::KeepBelow:
+        if ( this->q->isChecked() )
+            return i18n("Don't keep below");
+        else
+            return i18n("Keep below");
+    case DecorationButtonType::KeepAbove:
+        if ( this->q->isChecked() )
+            return i18n("Don't keep above");
+        else
+            return i18n("Keep above");
+    default:
+        return QString();
+    }
+}
+
 DecorationButton::DecorationButton(DecorationButtonType type, const QPointer<Decoration> &decoration, QObject *parent)
     : QObject(parent)
     , d(new Private(type, decoration, this))
@@ -293,6 +339,17 @@ DecorationButton::DecorationButton(DecorationButtonType type, const QPointer<Dec
             this, static_cast<void (DecorationButton::*)(const QRectF&)>(&DecorationButton::update));
     auto updateSlot = static_cast<void (DecorationButton::*)()>(&DecorationButton::update);
     connect(this, &DecorationButton::hoveredChanged, this, updateSlot);
+    connect(this, &DecorationButton::hoveredChanged, this,
+        [this](bool hovered) {
+            if (hovered) {
+                //TODO: show tooltip if hovered and hide if not
+                const QString type = this->d->typeToString(this->type());
+                this->decoration()->requestShowToolTip(type);
+            } else {
+                this->decoration()->requestHideToolTip();
+            }
+        }
+    );
     connect(this, &DecorationButton::pressedChanged, this, updateSlot);
     connect(this, &DecorationButton::checkedChanged, this, updateSlot);
     connect(this, &DecorationButton::enabledChanged, this, updateSlot);

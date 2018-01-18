@@ -76,6 +76,8 @@ public:
     virtual QPalette palette() const = 0;
     virtual Qt::Edges adjacentScreenEdges() const = 0;
 
+    virtual void requestShowToolTip(const QString &text) = 0;
+    virtual void requestHideToolTip() = 0;
     virtual void requestClose() = 0;
     virtual void requestToggleMaximization(Qt::MouseButtons buttons) = 0;
     virtual void requestMinimize() = 0;

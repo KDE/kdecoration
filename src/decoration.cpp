@@ -180,6 +180,16 @@ DELEGATE(requestShowWindowMenu)
 
 #undef DELEGATE
 
+void Decoration::requestShowToolTip(const QString &text)
+{
+    d->client->d->requestShowToolTip(text);
+}
+
+void Decoration::requestHideToolTip()
+{
+    d->client->d->requestHideToolTip();
+}
+
 void Decoration::requestToggleMaximization(Qt::MouseButtons buttons)
 {
     d->client->d->requestToggleMaximization(buttons);

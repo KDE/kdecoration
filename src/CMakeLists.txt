@@ -19,6 +19,7 @@ target_link_libraries(kdecorations2
         Qt5::Gui
     PRIVATE
         kdecorations2private
+        KF5::I18n
 )
 
 target_include_directories(kdecorations2 INTERFACE "$<INSTALL_INTERFACE:${KDECORATION2_INCLUDEDIR}>" )

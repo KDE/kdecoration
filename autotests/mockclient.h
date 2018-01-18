@@ -65,6 +65,8 @@ public:
     void requestToggleKeepBelow() override;
     void requestToggleOnAllDesktops() override;
     void requestToggleShade() override;
+    void requestShowToolTip(const QString &text) override;
+    void requestHideToolTip() override;
     int width() const override;
     WId windowId() const override;
 

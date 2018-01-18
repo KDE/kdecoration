@@ -176,6 +176,8 @@ public Q_SLOTS:
     void requestToggleKeepAbove();
     void requestToggleKeepBelow();
     void requestShowWindowMenu();
+    void requestShowToolTip(const QString &text);
+    void requestHideToolTip();
 
     void showApplicationMenu(int actionId);
     void requestShowApplicationMenu(const QRect &rect, int actionId);

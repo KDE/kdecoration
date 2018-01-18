@@ -38,6 +38,7 @@ if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
 endif()
 
 set(KDECORATION2_INCLUDEDIR "${CMAKE_INSTALL_INCLUDEDIR}/KDecoration2")
+find_package(KF5I18n CONFIG REQUIRED)
 
 # Subdirectories
 add_subdirectory(src)

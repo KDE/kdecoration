@@ -232,6 +232,16 @@ void MockClient::requestToggleShade()
     emit client()->shadedChanged(m_shaded);
 }
 
+void MockClient::requestShowToolTip(const QString &text)
+{
+    Q_UNUSED(text);
+}
+
+void MockClient::requestHideToolTip()
+{
+
+}
+
 int MockClient::width() const
 {
     return m_width;
