@@ -42,7 +42,9 @@ find_package(KF5I18n CONFIG REQUIRED)
 
 # Subdirectories
 add_subdirectory(src)
-add_subdirectory(autotests)
+if(BUILD_TESTING)
+   add_subdirectory(autotests)
+endif()
 
 # create a Config.cmake and a ConfigVersion.cmake file and install them
 set(CMAKECONFIG_INSTALL_DIR "${CMAKECONFIG_INSTALL_PREFIX}/KDecoration2")
