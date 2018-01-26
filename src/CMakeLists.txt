@@ -1,3 +1,5 @@
+add_definitions(-DTRANSLATION_DOMAIN=\"kdecoration\")
+
 add_subdirectory(private)
 
 set(libkdecoration2_SRCS
