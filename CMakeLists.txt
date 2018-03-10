@@ -3,6 +3,9 @@ cmake_minimum_required(VERSION 3.0)
 project(decoration-api)
 set(PROJECT_VERSION "5.12.80")
 
+set(QT_MIN_VERSION "5.9.0")
+set(KF5_MIN_VERSION "5.42.0")
+
 find_package(ECM 0.0.11 REQUIRED NO_MODULE)
 # where to look first for cmake modules, before ${CMAKE_ROOT}/Modules/ is checked
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
@@ -19,8 +22,7 @@ ecm_setup_version(${PROJECT_VERSION} VARIABLE_PREFIX KDECORATION2
                         SOVERSION 5)
 
 #dependencies
-set(REQUIRED_QT_VERSION 5.4.0)
-find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED COMPONENTS
+find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS
     Core
     Gui
     Test
@@ -38,7 +40,7 @@ if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
 endif()
 
 set(KDECORATION2_INCLUDEDIR "${CMAKE_INSTALL_INCLUDEDIR}/KDecoration2")
-find_package(KF5I18n CONFIG REQUIRED)
+find_package(KF5I18n ${KF5_MIN_VERSION} CONFIG REQUIRED)
 
 # Subdirectories
 add_subdirectory(src)
