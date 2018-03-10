@@ -1,7 +1,7 @@
+cmake_minimum_required(VERSION 3.0)
+
 project(decoration-api)
 set(PROJECT_VERSION "5.12.80")
-
-cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
 
 find_package(ECM 0.0.11 REQUIRED NO_MODULE)
 # where to look first for cmake modules, before ${CMAKE_ROOT}/Modules/ is checked
