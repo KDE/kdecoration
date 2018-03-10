@@ -101,7 +101,7 @@ class KDECORATIONS2_EXPORT DecorationSettings : public QObject
     Q_PROPERTY(int largeSpacing READ largeSpacing NOTIFY spacingChanged)
 public:
     explicit DecorationSettings(DecorationBridge *bridge, QObject *parent = nullptr);
-    virtual ~DecorationSettings();
+    ~DecorationSettings() override;
     bool isOnAllDesktopsAvailable() const;
     bool isAlphaChannelSupported() const;
     bool isCloseOnDoubleClickOnMenu() const;

@@ -70,7 +70,7 @@ public:
     };
     explicit DecorationButtonGroup(Position type, Decoration *parent, std::function<DecorationButton*(DecorationButtonType, Decoration*, QObject*)> buttonCreator);
     explicit DecorationButtonGroup(Decoration *parent);
-    virtual ~DecorationButtonGroup();
+    ~DecorationButtonGroup() override;
 
     /**
      * Paints the DecorationButtonGroup. This method should normally be invoked from the

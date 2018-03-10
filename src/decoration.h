@@ -103,7 +103,7 @@ class KDECORATIONS2_EXPORT Decoration : public QObject
      **/
     Q_PROPERTY(bool opaque READ isOpaque NOTIFY opaqueChanged)
 public:
-    virtual ~Decoration();
+    ~Decoration() override;
 
     /**
      * The DecoratedClient for this Decoration.
@@ -164,7 +164,7 @@ public:
      **/
     virtual void paint(QPainter *painter, const QRect &repaintArea) = 0;
 
-    virtual bool event(QEvent *event) override;
+    bool event(QEvent *event) override;
 
 public Q_SLOTS:
     void requestClose();

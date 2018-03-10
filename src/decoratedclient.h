@@ -183,7 +183,7 @@ class KDECORATIONS2_EXPORT DecoratedClient : public QObject
 
 public:
     DecoratedClient() = delete;
-    ~DecoratedClient();
+    ~DecoratedClient() override;
     bool isActive() const;
     QString caption() const;
     int desktop() const;

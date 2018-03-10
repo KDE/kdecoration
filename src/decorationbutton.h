@@ -99,7 +99,7 @@ class KDECORATIONS2_EXPORT DecorationButton : public QObject
      **/
     Q_PROPERTY(Qt::MouseButtons acceptedButtons READ acceptedButtons WRITE setAcceptedButtons NOTIFY acceptedButtonsChanged)
 public:
-    virtual ~DecorationButton();
+    ~DecorationButton() override;
 
     QRectF geometry() const;
     QSizeF size() const;
@@ -129,7 +129,7 @@ public:
 
     QPointer<Decoration> decoration() const;
 
-    virtual bool event(QEvent *event) override;
+    bool event(QEvent *event) override;
 
 public Q_SLOTS:
     void setEnabled(bool enabled);

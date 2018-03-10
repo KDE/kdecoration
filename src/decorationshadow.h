@@ -107,7 +107,7 @@ class KDECORATIONS2_EXPORT DecorationShadow : public QObject
     Q_PROPERTY(QMargins padding READ padding WRITE setPadding NOTIFY paddingChanged)
 public:
     explicit DecorationShadow();
-    virtual ~DecorationShadow();
+    ~DecorationShadow() override;
 
     QImage shadow() const;
     QRect innerShadowRect() const;
