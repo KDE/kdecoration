@@ -38,7 +38,7 @@
 namespace KDecoration2
 {
 
-class DecorationShadow::Private
+class Q_DECL_HIDDEN DecorationShadow::Private
 {
 public:
     explicit Private(DecorationShadow *parent);

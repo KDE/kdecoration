@@ -39,7 +39,7 @@ class QTimer;
 namespace KDecoration2
 {
 
-class DecorationButton::Private
+class Q_DECL_HIDDEN DecorationButton::Private
 {
 public:
     explicit Private(DecorationButtonType type, const QPointer<Decoration> &decoration, DecorationButton *parent);

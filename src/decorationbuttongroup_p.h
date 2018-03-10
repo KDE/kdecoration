@@ -40,7 +40,7 @@ namespace KDecoration2
 
 class Decoration;
 
-class DecorationButtonGroup::Private
+class Q_DECL_HIDDEN DecorationButtonGroup::Private
 {
 public:
     explicit Private(Decoration *decoration, DecorationButtonGroup *parent);

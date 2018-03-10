@@ -23,7 +23,7 @@
 namespace KDecoration2
 {
 
-class DecorationSettingsPrivate::Private
+class Q_DECL_HIDDEN DecorationSettingsPrivate::Private
 {
 public:
     explicit Private(DecorationSettings *settings);

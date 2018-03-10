@@ -24,7 +24,7 @@
 namespace KDecoration2
 {
 
-class DecoratedClientPrivate::Private
+class Q_DECL_HIDDEN DecoratedClientPrivate::Private
 {
 public:
     explicit Private(DecoratedClient *client, Decoration *decoration);

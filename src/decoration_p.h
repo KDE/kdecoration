@@ -42,7 +42,7 @@ class DecoratedClient;
 class DecorationSettings;
 class DecorationShadow;
 
-class Decoration::Private
+class Q_DECL_HIDDEN Decoration::Private
 {
 public:
     Private(Decoration *decoration, const QVariantList &args);
