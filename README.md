@@ -39,7 +39,7 @@ To simplify one can use the KPluginFactory macro from the KCoreAddons framework:
         registerPlugin<MyAwesomeDecoration::Decoration>();
     )
 
-The plugin needs to get installed to `${PLUGIN_INSTALL_DIR}/org.kde.kdecoration2`.
+The plugin needs to get installed to `${KDE_INSTALL_PLUGINDIR}/org.kde.kdecoration2`.
 
 
 ## Links
