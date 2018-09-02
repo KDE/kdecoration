@@ -60,6 +60,8 @@ private Q_SLOTS:
     void testMenuDoubleClick();
     void testMenuPressAndHold();
     void testApplicationMenu();
+    void testContains_data();
+    void testContains();
 };
 
 void DecorationButtonTest::testButton()
@@ -1340,6 +1342,37 @@ void DecorationButtonTest::testApplicationMenu()
     QCOMPARE(applicationMenuRequestedSpy.count(), 1);
     QCOMPARE(pressedChangedSpy.count(), 2);
     QCOMPARE(pressedChangedSpy.last().first().toBool(), false);
+}
+
+void DecorationButtonTest::testContains_data()
+{
+    QTest::addColumn<QPointF>("pos");
+    QTest::addColumn<bool>("contains");
+
+    // Button geometry: QRectF(0, 0, 10, 10).
+    QTest::newRow("on left edge")   << QPointF(0, 5)  << true;
+    QTest::newRow("on top edge")    << QPointF(5, 0)  << true;
+    QTest::newRow("on right edge")  << QPointF(9, 5)  << true;
+    QTest::newRow("on bottom edge") << QPointF(5, 9)  << true;
+    QTest::newRow("inside")         << QPointF(5, 5)  << true;
+    QTest::newRow("outside 1")      << QPointF(-1, 5) << false;
+    QTest::newRow("outside 2")      << QPointF(5, -1) << false;
+    QTest::newRow("outside 3")      << QPointF(10, 5) << false;
+    QTest::newRow("outside 4")      << QPointF(5, 10) << false;
+}
+
+void DecorationButtonTest::testContains()
+{
+    MockBridge bridge;
+    MockDecoration mockDecoration(&bridge);
+
+    MockButton button(KDecoration2::DecorationButtonType::Custom, &mockDecoration);
+    button.setGeometry(QRectF(0, 0, 10, 10));
+    button.setEnabled(true);
+    button.setVisible(true);
+
+    QFETCH(QPointF, pos);
+    QTEST(button.contains(pos), "contains");
 }
 
 QTEST_MAIN(DecorationButtonTest)

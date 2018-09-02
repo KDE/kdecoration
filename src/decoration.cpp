@@ -330,7 +330,7 @@ void Decoration::hoverMoveEvent(QHoverEvent *event)
             continue;
         }
         const bool hovered = button->isHovered();
-        const bool contains = button->geometry().contains(event->pos());
+        const bool contains = button->contains(event->posF());
         if (!hovered && contains) {
             QHoverEvent e(QEvent::HoverEnter, event->posF(), event->oldPosF(), event->modifiers());
             QCoreApplication::instance()->sendEvent(button, &e);
@@ -383,7 +383,7 @@ void Decoration::mouseReleaseEvent(QMouseEvent *event)
 void Decoration::wheelEvent(QWheelEvent *event)
 {
     for (DecorationButton *button : d->buttons) {
-        if (button->geometry().contains(event->posF())) {
+        if (button->contains(event->posF())) {
             QCoreApplication::instance()->sendEvent(button, event);
             event->setAccepted(true);
         }

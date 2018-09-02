@@ -445,6 +445,11 @@ DELEGATE(setGeometry, geometry, const QRectF &)
 
 #undef DELEGATE
 
+bool DecorationButton::contains(const QPointF &pos) const
+{
+    return d->geometry.toRect().contains(pos.toPoint());
+}
+
 bool DecorationButton::event(QEvent *event)
 {
     switch (event->type()) {
@@ -476,7 +481,7 @@ bool DecorationButton::event(QEvent *event)
 
 void DecorationButton::hoverEnterEvent(QHoverEvent *event)
 {
-    if (!d->enabled || !d->visible || !d->geometry.contains(event->posF())) {
+    if (!d->enabled || !d->visible || !contains(event->posF())) {
         return;
     }
     d->setHovered(true);
@@ -485,7 +490,7 @@ void DecorationButton::hoverEnterEvent(QHoverEvent *event)
 
 void DecorationButton::hoverLeaveEvent(QHoverEvent *event)
 {
-    if (!d->enabled || !d->visible || !d->hovered || d->geometry.contains(event->posF())) {
+    if (!d->enabled || !d->visible || !d->hovered || contains(event->posF())) {
         return;
     }
     d->setHovered(false);
@@ -502,7 +507,7 @@ void DecorationButton::mouseMoveEvent(QMouseEvent *event)
     if (!d->enabled || !d->visible || !d->hovered) {
         return;
     }
-    if (!d->geometry.contains(event->localPos())) {
+    if (!contains(event->localPos())) {
         d->setHovered(false);
         event->setAccepted(true);
     }
@@ -510,7 +515,7 @@ void DecorationButton::mouseMoveEvent(QMouseEvent *event)
 
 void DecorationButton::mousePressEvent(QMouseEvent *event)
 {
-    if (!d->enabled || !d->visible || !d->geometry.contains(event->localPos()) || !d->acceptedButtons.testFlag(event->button())) {
+    if (!d->enabled || !d->visible || !contains(event->localPos()) || !d->acceptedButtons.testFlag(event->button())) {
         return;
     }
     d->setPressed(event->button(), true);
@@ -533,7 +538,7 @@ void DecorationButton::mouseReleaseEvent(QMouseEvent *event)
     if (!d->enabled || !d->visible || !d->isPressed(event->button())) {
         return;
     }
-    if (d->geometry.contains(event->localPos())) {
+    if (contains(event->localPos())) {
         if (!d->pressAndHold || event->button() != Qt::LeftButton) {
             emit clicked(event->button());
         } else {

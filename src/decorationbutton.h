@@ -113,6 +113,11 @@ public:
     bool isCheckable() const;
     DecorationButtonType type() const;
 
+    /**
+     * Returns @c true if @p pos is inside of the button, otherwise returns @c false.
+     **/
+    bool contains(const QPointF &pos) const;
+
     Qt::MouseButtons acceptedButtons() const;
     void setAcceptedButtons(Qt::MouseButtons buttons);
 
