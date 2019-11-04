@@ -18,6 +18,7 @@ include(ECMGenerateHeaders)
 include(FeatureSummary)
 include(GenerateExportHeader)
 include(CMakePackageConfigHelpers)
+include(KDEClangFormat)
 
 ecm_setup_version(${PROJECT_VERSION} VARIABLE_PREFIX KDECORATION2
                         VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kdecoration2_version.h"
@@ -46,6 +47,10 @@ add_subdirectory(src)
 if(BUILD_TESTING)
    add_subdirectory(autotests)
 endif()
+
+# add clang-format target for all our real source files
+file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES *.cpp *.h)
+kde_clang_format(${ALL_CLANG_FORMAT_SOURCE_FILES})
 
 # create a Config.cmake and a ConfigVersion.cmake file and install them
 set(CMAKECONFIG_INSTALL_DIR "${CMAKECONFIG_INSTALL_PREFIX}/KDecoration2")
