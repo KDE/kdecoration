@@ -64,7 +64,9 @@ DecorationButton::Private::~Private() = default;
 
 void DecorationButton::Private::init()
 {
-    auto c = decoration->client().data();
+    auto clientPtr = decoration->client().toStrongRef();
+    Q_ASSERT(clientPtr);
+    auto c = clientPtr.data();
     auto settings = decoration->settings();
     switch (type) {
     case DecorationButtonType::Menu:
