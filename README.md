@@ -40,11 +40,3 @@ To simplify one can use the KPluginFactory macro from the KCoreAddons framework:
     )
 
 The plugin needs to get installed to `${KDE_INSTALL_PLUGINDIR}/org.kde.kdecoration2`.
-
-
-## Links
-
-- Home page: <https://projects.kde.org/projects/kde/workspace/kdecoration>
-- Mailing list: <https://mail.kde.org/mailman/listinfo/kwin>
-- IRC channel: #kde-devel or #kwin on Freenode
-- Git repository: <https://projects.kde.org/projects/kde/workspace/kdecoration/repository>
