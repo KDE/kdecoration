@@ -64,6 +64,7 @@ DELEGATE(WId, windowId)
 DELEGATE(WId, decorationId)
 DELEGATE(int, width)
 DELEGATE(int, height)
+DELEGATE(QSize, size)
 DELEGATE(QPalette, palette)
 DELEGATE(Qt::Edges, adjacentScreenEdges)
 

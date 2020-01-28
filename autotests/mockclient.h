@@ -67,6 +67,7 @@ public:
     void requestToggleShade() override;
     void requestShowToolTip(const QString &text) override;
     void requestHideToolTip() override;
+    QSize size() const override;
     int width() const override;
     WId windowId() const override;
 

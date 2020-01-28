@@ -242,6 +242,11 @@ void MockClient::requestHideToolTip()
 
 }
 
+QSize MockClient::size() const
+{
+    return QSize(m_width, m_height);
+}
+
 int MockClient::width() const
 {
     return m_width;
