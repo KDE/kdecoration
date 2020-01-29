@@ -37,7 +37,7 @@ namespace KDecoration2
 
 class DecorationButtonPrivate;
 class Decoration;
-#ifndef DOXYGEN_SHOULD_SKIP_THIS
+#ifndef K_DOXYGEN
 uint KDECORATIONS2_EXPORT qHash(const DecorationButtonType &type);
 #endif
 

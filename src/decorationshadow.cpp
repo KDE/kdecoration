@@ -115,7 +115,7 @@ QRect DecorationShadow::leftGeometry() const
     return QRect(0, d->innerShadowRect.top(), d->innerShadowRect.left(), d->innerShadowRect.height());
 }
 
-#ifndef DOXYGEN_SHOULD_SKIP_THIS
+#ifndef K_DOXYGEN
 
 #define DELEGATE(type, name) \
     type DecorationShadow::name() const \

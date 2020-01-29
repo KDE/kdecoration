@@ -36,7 +36,7 @@
 namespace KDecoration2
 {
 
-#ifndef DOXYGEN_SHOULD_SKIP_THIS
+#ifndef K_DOXYGEN
 uint qHash(const DecorationButtonType &type)
 {
     return static_cast<uint>(type);
