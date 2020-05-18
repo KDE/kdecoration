@@ -41,10 +41,9 @@ endif()
 
 set(KDECORATION2_INCLUDEDIR "${KDE_INSTALL_INCLUDEDIR}/KDecoration2")
 find_package(KF5I18n ${KF5_MIN_VERSION} CONFIG REQUIRED)
-if (EXISTS "${CMAKE_SOURCE_DIR}/.git")
-   add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x050d00)
-   add_definitions(-DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x054200)
-endif()
+
+add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x050d00)
+add_definitions(-DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x054200)
 
 # Subdirectories
 add_subdirectory(src)
