@@ -169,7 +169,13 @@ class KDECORATIONS2_EXPORT DecoratedClient : public QObject
      */
     Q_PROPERTY(bool applicationMenuActive READ isApplicationMenuActive NOTIFY applicationMenuActiveChanged)
 
-    // TODO: properties for windowId and decorationId?
+    /**
+     * The window id of the DecoratedClient
+     * @since 5.21
+     */
+    Q_PROPERTY(qulonglong windowId READ windowId CONSTANT)
+
+    // TODO: property for decorationId?
 
 public:
     DecoratedClient() = delete;
