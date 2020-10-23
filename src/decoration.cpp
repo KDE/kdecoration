@@ -10,7 +10,6 @@
 #include "private/decorationbridge.h"
 #include "decorationbutton.h"
 #include "decorationsettings.h"
-#include "decorationshadow.h"
 
 #include <QCoreApplication>
 #include <QHoverEvent>
