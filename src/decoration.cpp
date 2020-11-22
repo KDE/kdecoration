@@ -161,9 +161,13 @@ DELEGATE(requestToggleOnAllDesktops)
 DELEGATE(requestToggleShade)
 DELEGATE(requestToggleKeepAbove)
 DELEGATE(requestToggleKeepBelow)
-DELEGATE(requestShowWindowMenu)
 
 #undef DELEGATE
+
+void Decoration::requestShowWindowMenu(const QRect &rect)
+{
+    d->client->d->requestShowWindowMenu(rect);
+}
 
 void Decoration::requestShowToolTip(const QString &text)
 {

@@ -161,7 +161,7 @@ public Q_SLOTS:
     void requestToggleShade();
     void requestToggleKeepAbove();
     void requestToggleKeepBelow();
-    void requestShowWindowMenu();
+    void requestShowWindowMenu(const QRect &rect);
     void requestShowToolTip(const QString &text);
     void requestHideToolTip();
 

@@ -182,7 +182,7 @@ void MockClient::requestMinimize()
     emit minimizeRequested();
 }
 
-void MockClient::requestShowWindowMenu()
+void MockClient::requestShowWindowMenu(const QRect &rect)
 {
     emit menuRequested();
 }

@@ -56,7 +56,10 @@ void DecorationButton::Private::init()
     auto settings = decoration->settings();
     switch (type) {
     case DecorationButtonType::Menu:
-        QObject::connect(q, &DecorationButton::clicked, decoration.data(), &Decoration::requestShowWindowMenu, Qt::QueuedConnection);
+        QObject::connect(q, &DecorationButton::clicked, decoration.data(), [this](Qt::MouseButton button){
+            Q_UNUSED(button)
+            decoration->requestShowWindowMenu(q->geometry().toRect());
+        }, Qt::QueuedConnection);
         QObject::connect(q, &DecorationButton::doubleClicked, decoration.data(), &Decoration::requestClose, Qt::QueuedConnection);
         QObject::connect(settings.data(), &DecorationSettings::closeOnDoubleClickOnMenuChanged, q,
             [this](bool enabled) {

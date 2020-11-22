@@ -73,7 +73,7 @@ public:
     virtual void requestToggleShade() = 0;
     virtual void requestToggleKeepAbove() = 0;
     virtual void requestToggleKeepBelow() = 0;
-    virtual void requestShowWindowMenu() = 0;
+    virtual void requestShowWindowMenu(const QRect &rect) = 0;
 
     Decoration *decoration();
     Decoration *decoration() const;
