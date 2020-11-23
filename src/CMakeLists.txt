@@ -12,7 +12,13 @@ set(libkdecoration2_SRCS
 )
 
 add_library(kdecorations2 SHARED ${libkdecoration2_SRCS})
-generate_export_header(kdecorations2 EXPORT_FILE_NAME kdecoration2/kdecoration2_export.h)
+ecm_generate_export_header(kdecorations2
+                                                VERSION ${PROJECT_VERSION}
+                                                EXPORT_FILE_NAME kdecoration2/kdecoration2_export.h
+                                                DEPRECATION_VERSIONS 5.21
+                                                EXCLUDE_DEPRECATED_BEFORE_AND_AT ${EXCLUDE_DEPRECATED_BEFORE_AND_AT}
+)
+
 add_library(KDecoration2::KDecoration ALIAS kdecorations2)
 
 target_link_libraries(kdecorations2

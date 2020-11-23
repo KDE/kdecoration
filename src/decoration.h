@@ -161,6 +161,19 @@ public Q_SLOTS:
     void requestToggleShade();
     void requestToggleKeepAbove();
     void requestToggleKeepBelow();
+
+#if KDECORATIONS2_ENABLE_DEPRECATED_SINCE(5, 21)
+    /**
+     * @deprecated
+     * @see requestShowWindowMenu(const QRect &rect)
+     */
+    KDECORATIONS2_DEPRECATED_VERSION(5, 21, "Use Decoration::requestShowWindowMenu(QRect)")
+    void requestShowWindowMenu();
+#endif
+
+    /**
+     * @param rect the location at which to show the window menu
+     */
     void requestShowWindowMenu(const QRect &rect);
     void requestShowToolTip(const QString &text);
     void requestHideToolTip();
