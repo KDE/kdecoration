@@ -57,7 +57,7 @@ file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES *.cpp *.h)
 kde_clang_format(${ALL_CLANG_FORMAT_SOURCE_FILES})
 
 # create a Config.cmake and a ConfigVersion.cmake file and install them
-set(CMAKECONFIG_INSTALL_DIR "${CMAKECONFIG_INSTALL_PREFIX}/KDecoration2")
+set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KDecoration2")
 
 configure_package_config_file("${CMAKE_CURRENT_SOURCE_DIR}/KDecoration2Config.cmake.in"
                                   "${CMAKE_CURRENT_BINARY_DIR}/KDecoration2Config.cmake"
