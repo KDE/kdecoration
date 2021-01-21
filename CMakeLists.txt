@@ -4,7 +4,7 @@ project(decoration-api)
 set(PROJECT_VERSION "5.20.90")
 
 set(QT_MIN_VERSION "5.15.0")
-set(KF5_MIN_VERSION "5.74")
+set(KF5_MIN_VERSION "5.78")
 
 find_package(ECM ${KF5_MIN_VERSION} REQUIRED NO_MODULE)
 # where to look first for cmake modules, before ${CMAKE_ROOT}/Modules/ is checked
