@@ -23,8 +23,8 @@ add_library(KDecoration2::KDecoration ALIAS kdecorations2)
 
 target_link_libraries(kdecorations2
     PUBLIC
-        Qt5::Core
-        Qt5::Gui
+        Qt::Core
+        Qt::Gui
     PRIVATE
         kdecorations2private
         KF5::I18n

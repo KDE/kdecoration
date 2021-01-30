@@ -18,8 +18,8 @@ add_library(KDecoration2::KDecorationPrivate ALIAS kdecorations2private)
 
 target_link_libraries(kdecorations2private
     PUBLIC
-        Qt5::Core
-        Qt5::Gui
+        Qt::Core
+        Qt::Gui
 )
 
 target_include_directories(kdecorations2private INTERFACE "$<INSTALL_INTERFACE:${KDECORATION2_INCLUDEDIR}>" )
