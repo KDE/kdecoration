@@ -6,11 +6,11 @@
 #ifndef KDECORATION2_DECORATED_CLIENT_PRIVATE_H
 #define KDECORATION2_DECORATED_CLIENT_PRIVATE_H
 
-#include <kdecoration2/private/kdecoration2_private_export.h>
 #include "../decorationdefines.h"
+#include <kdecoration2/private/kdecoration2_private_export.h>
 
-#include <QString>
 #include <QIcon>
+#include <QString>
 
 //
 //  W A R N I N G
@@ -25,7 +25,6 @@
 
 namespace KDecoration2
 {
-
 class Decoration;
 class DecoratedClient;
 

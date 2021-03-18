@@ -4,24 +4,23 @@
  * SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
  */
 #include "decorationbutton.h"
-#include "decorationbutton_p.h"
+#include "decoratedclient.h"
 #include "decoration.h"
 #include "decoration_p.h"
-#include "decoratedclient.h"
+#include "decorationbutton_p.h"
 #include "decorationsettings.h"
 
 #include <KLocalizedString>
 
 #include <QDebug>
 #include <QElapsedTimer>
-#include <QHoverEvent>
 #include <QGuiApplication>
+#include <QHoverEvent>
 #include <QStyleHints>
 #include <QTimer>
 
 namespace KDecoration2
 {
-
 #ifndef K_DOXYGEN
 uint qHash(const DecorationButtonType &type)
 {
@@ -56,17 +55,25 @@ void DecorationButton::Private::init()
     auto settings = decoration->settings();
     switch (type) {
     case DecorationButtonType::Menu:
-        QObject::connect(q, &DecorationButton::clicked, decoration.data(), [this](Qt::MouseButton button){
-            Q_UNUSED(button)
-            decoration->requestShowWindowMenu(q->geometry().toRect());
-        }, Qt::QueuedConnection);
+        QObject::connect(
+            q,
+            &DecorationButton::clicked,
+            decoration.data(),
+            [this](Qt::MouseButton button) {
+                Q_UNUSED(button)
+                decoration->requestShowWindowMenu(q->geometry().toRect());
+            },
+            Qt::QueuedConnection);
         QObject::connect(q, &DecorationButton::doubleClicked, decoration.data(), &Decoration::requestClose, Qt::QueuedConnection);
-        QObject::connect(settings.data(), &DecorationSettings::closeOnDoubleClickOnMenuChanged, q,
+        QObject::connect(
+            settings.data(),
+            &DecorationSettings::closeOnDoubleClickOnMenuChanged,
+            q,
             [this](bool enabled) {
                 doubleClickEnabled = enabled;
                 setPressAndHold(enabled);
-            }, Qt::QueuedConnection
-        );
+            },
+            Qt::QueuedConnection);
         doubleClickEnabled = settings->isCloseOnDoubleClickOnMenu();
         setPressAndHold(settings->isCloseOnDoubleClickOnMenu());
         setAcceptedButtons(Qt::LeftButton | Qt::RightButton);
@@ -75,9 +82,14 @@ void DecorationButton::Private::init()
         setVisible(c->hasApplicationMenu());
         setCheckable(true); // will be "checked" whilst the menu is opened
         // FIXME TODO connect directly and figure out the button geometry/offset stuff
-        QObject::connect(q, &DecorationButton::clicked, decoration.data(), [this] {
-            decoration->requestShowApplicationMenu(q->geometry().toRect(), 0 /* actionId */);
-        }, Qt::QueuedConnection); //&Decoration::requestShowApplicationMenu, Qt::QueuedConnection);
+        QObject::connect(
+            q,
+            &DecorationButton::clicked,
+            decoration.data(),
+            [this] {
+                decoration->requestShowApplicationMenu(q->geometry().toRect(), 0 /* actionId */);
+            },
+            Qt::QueuedConnection); //&Decoration::requestShowApplicationMenu, Qt::QueuedConnection);
         QObject::connect(c, &DecoratedClient::hasApplicationMenuChanged, q, &DecorationButton::setVisible);
         QObject::connect(c, &DecoratedClient::applicationMenuActiveChanged, q, &DecorationButton::setChecked);
         break;
@@ -247,8 +259,8 @@ bool DecorationButton::Private::wasDoubleClick() const
     return !m_doubleClickTimer->hasExpired(QGuiApplication::styleHints()->mouseDoubleClickInterval());
 }
 
-
-void DecorationButton::Private::setPressAndHold(bool enable) {
+void DecorationButton::Private::setPressAndHold(bool enable)
+{
     if (pressAndHold == enable) {
         return;
     }
@@ -266,7 +278,9 @@ void DecorationButton::Private::startPressAndHold()
     if (m_pressAndHoldTimer.isNull()) {
         m_pressAndHoldTimer.reset(new QTimer());
         m_pressAndHoldTimer->setSingleShot(true);
-        QObject::connect(m_pressAndHoldTimer.data(), &QTimer::timeout, q, [this]() { q->clicked(Qt::LeftButton); } );
+        QObject::connect(m_pressAndHoldTimer.data(), &QTimer::timeout, q, [this]() {
+            q->clicked(Qt::LeftButton);
+        });
     }
     m_pressAndHoldTimer->start(QGuiApplication::styleHints()->mousePressAndHoldInterval());
 }
@@ -286,14 +300,14 @@ QString DecorationButton::Private::typeToString(DecorationButtonType type)
     case DecorationButtonType::ApplicationMenu:
         return i18n("Application menu");
     case DecorationButtonType::OnAllDesktops:
-        if ( this->q->isChecked() )
+        if (this->q->isChecked())
             return i18n("On one desktop");
         else
             return i18n("On all desktops");
     case DecorationButtonType::Minimize:
         return i18n("Minimize");
     case DecorationButtonType::Maximize:
-        if ( this->q->isChecked() )
+        if (this->q->isChecked())
             return i18n("Restore");
         else
             return i18n("Maximize");
@@ -302,17 +316,17 @@ QString DecorationButton::Private::typeToString(DecorationButtonType type)
     case DecorationButtonType::ContextHelp:
         return i18n("Context help");
     case DecorationButtonType::Shade:
-        if ( this->q->isChecked() )
+        if (this->q->isChecked())
             return i18n("Unshade");
         else
             return i18n("Shade");
     case DecorationButtonType::KeepBelow:
-        if ( this->q->isChecked() )
+        if (this->q->isChecked())
             return i18n("Don't keep below");
         else
             return i18n("Keep below");
     case DecorationButtonType::KeepAbove:
-        if ( this->q->isChecked() )
+        if (this->q->isChecked())
             return i18n("Don't keep above");
         else
             return i18n("Keep above");
@@ -326,43 +340,36 @@ DecorationButton::DecorationButton(DecorationButtonType type, const QPointer<Dec
     , d(new Private(type, decoration, this))
 {
     decoration->d->addButton(this);
-    connect(this, &DecorationButton::geometryChanged,
-            this, static_cast<void (DecorationButton::*)(const QRectF&)>(&DecorationButton::update));
+    connect(this, &DecorationButton::geometryChanged, this, static_cast<void (DecorationButton::*)(const QRectF &)>(&DecorationButton::update));
     auto updateSlot = static_cast<void (DecorationButton::*)()>(&DecorationButton::update);
     connect(this, &DecorationButton::hoveredChanged, this, updateSlot);
-    connect(this, &DecorationButton::hoveredChanged, this,
-        [this](bool hovered) {
-            if (hovered) {
-                //TODO: show tooltip if hovered and hide if not
-                const QString type = this->d->typeToString(this->type());
-                this->decoration()->requestShowToolTip(type);
-            } else {
-                this->decoration()->requestHideToolTip();
-            }
+    connect(this, &DecorationButton::hoveredChanged, this, [this](bool hovered) {
+        if (hovered) {
+            // TODO: show tooltip if hovered and hide if not
+            const QString type = this->d->typeToString(this->type());
+            this->decoration()->requestShowToolTip(type);
+        } else {
+            this->decoration()->requestHideToolTip();
         }
-    );
+    });
     connect(this, &DecorationButton::pressedChanged, this, updateSlot);
     connect(this, &DecorationButton::checkedChanged, this, updateSlot);
     connect(this, &DecorationButton::enabledChanged, this, updateSlot);
     connect(this, &DecorationButton::visibilityChanged, this, updateSlot);
-    connect(this, &DecorationButton::hoveredChanged, this,
-        [this](bool hovered) {
-            if (hovered) {
-                emit pointerEntered();
-            } else {
-                emit pointerLeft();
-            }
+    connect(this, &DecorationButton::hoveredChanged, this, [this](bool hovered) {
+        if (hovered) {
+            emit pointerEntered();
+        } else {
+            emit pointerLeft();
         }
-    );
-    connect(this, &DecorationButton::pressedChanged, this,
-        [this](bool p) {
-            if (p) {
-                emit pressed();
-            } else {
-                emit released();
-            }
+    });
+    connect(this, &DecorationButton::pressedChanged, this, [this](bool p) {
+        if (p) {
+            emit pressed();
+        } else {
+            emit released();
         }
-    );
+    });
 }
 
 DecorationButton::~DecorationButton() = default;
@@ -387,11 +394,11 @@ bool DecorationButton::isPressed() const
     return d->isPressed();
 }
 
-#define DELEGATE(name, variableName, type) \
-type DecorationButton::name() const \
-{ \
-    return d->variableName; \
-}
+#define DELEGATE(name, variableName, type)                                                                                                                     \
+    type DecorationButton::name() const                                                                                                                        \
+    {                                                                                                                                                          \
+        return d->variableName;                                                                                                                                \
+    }
 
 DELEGATE(isHovered, hovered, bool)
 DELEGATE(isEnabled, enabled, bool)
@@ -408,10 +415,10 @@ DELEGATE2(type, DecorationButtonType)
 #undef DELEGATE2
 #undef DELEGATE
 
-#define DELEGATE(name, type) \
-    void DecorationButton::name(type a) \
-    { \
-        d->name(a); \
+#define DELEGATE(name, type)                                                                                                                                   \
+    void DecorationButton::name(type a)                                                                                                                        \
+    {                                                                                                                                                          \
+        d->name(a);                                                                                                                                            \
     }
 
 DELEGATE(setAcceptedButtons, Qt::MouseButtons)
@@ -422,15 +429,15 @@ DELEGATE(setVisible, bool)
 
 #undef DELEGATE
 
-#define DELEGATE(name, variableName, type) \
-void DecorationButton::name(type a) \
-{ \
-    if (d->variableName == a) { \
-        return; \
-    } \
-    d->variableName = a; \
-    emit variableName##Changed(d->variableName); \
-}
+#define DELEGATE(name, variableName, type)                                                                                                                     \
+    void DecorationButton::name(type a)                                                                                                                        \
+    {                                                                                                                                                          \
+        if (d->variableName == a) {                                                                                                                            \
+            return;                                                                                                                                            \
+        }                                                                                                                                                      \
+        d->variableName = a;                                                                                                                                   \
+        emit variableName##Changed(d->variableName);                                                                                                           \
+    }
 
 DELEGATE(setGeometry, geometry, const QRectF &)
 
@@ -445,25 +452,25 @@ bool DecorationButton::event(QEvent *event)
 {
     switch (event->type()) {
     case QEvent::HoverEnter:
-        hoverEnterEvent(static_cast<QHoverEvent*>(event));
+        hoverEnterEvent(static_cast<QHoverEvent *>(event));
         return true;
     case QEvent::HoverLeave:
-        hoverLeaveEvent(static_cast<QHoverEvent*>(event));
+        hoverLeaveEvent(static_cast<QHoverEvent *>(event));
         return true;
     case QEvent::HoverMove:
-        hoverMoveEvent(static_cast<QHoverEvent*>(event));
+        hoverMoveEvent(static_cast<QHoverEvent *>(event));
         return true;
     case QEvent::MouseButtonPress:
-        mousePressEvent(static_cast<QMouseEvent*>(event));
+        mousePressEvent(static_cast<QMouseEvent *>(event));
         return true;
     case QEvent::MouseButtonRelease:
-        mouseReleaseEvent(static_cast<QMouseEvent*>(event));
+        mouseReleaseEvent(static_cast<QMouseEvent *>(event));
         return true;
     case QEvent::MouseMove:
-        mouseMoveEvent(static_cast<QMouseEvent*>(event));
+        mouseMoveEvent(static_cast<QMouseEvent *>(event));
         return true;
     case QEvent::Wheel:
-        wheelEvent(static_cast<QWheelEvent*>(event));
+        wheelEvent(static_cast<QWheelEvent *>(event));
         return true;
     default:
         return QObject::event(event);

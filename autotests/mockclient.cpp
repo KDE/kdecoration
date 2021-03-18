@@ -225,7 +225,6 @@ void MockClient::requestShowToolTip(const QString &text)
 
 void MockClient::requestHideToolTip()
 {
-
 }
 
 QSize MockClient::size() const

@@ -23,7 +23,6 @@
 
 namespace KDecoration2
 {
-
 class Decoration;
 
 class Q_DECL_HIDDEN DecorationButtonGroup::Private

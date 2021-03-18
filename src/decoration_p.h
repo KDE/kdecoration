@@ -20,7 +20,6 @@
 
 namespace KDecoration2
 {
-
 class Decoration;
 class DecorationBridge;
 class DecorationButton;
@@ -48,7 +47,7 @@ public:
     DecorationBridge *bridge;
     QSharedPointer<DecoratedClient> client;
     bool opaque;
-    QVector<DecorationButton*> buttons;
+    QVector<DecorationButton *> buttons;
     QSharedPointer<DecorationShadow> shadow;
 
 private:

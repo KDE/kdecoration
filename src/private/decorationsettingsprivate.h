@@ -6,11 +6,11 @@
 #ifndef KDECORATION2_DECORATION_SETTINGS_PRIVATE_H
 #define KDECORATION2_DECORATION_SETTINGS_PRIVATE_H
 
-#include <kdecoration2/private/kdecoration2_private_export.h>
 #include "../decorationdefines.h"
-#include <QVector>
 #include <QFont>
 #include <QFontMetricsF>
+#include <QVector>
+#include <kdecoration2/private/kdecoration2_private_export.h>
 
 //
 //  W A R N I N G
@@ -25,7 +25,6 @@
 
 namespace KDecoration2
 {
-
 class DecorationSettings;
 
 class KDECORATIONS_PRIVATE_EXPORT DecorationSettingsPrivate

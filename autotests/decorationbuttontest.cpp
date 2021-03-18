@@ -3,16 +3,16 @@
  *
  * SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
  */
-#include <QTest>
-#include <QSignalSpy>
-#include <QStyleHints>
 #include "../src/decoratedclient.h"
 #include "../src/decorationsettings.h"
-#include "mockdecoration.h"
 #include "mockbridge.h"
 #include "mockbutton.h"
 #include "mockclient.h"
+#include "mockdecoration.h"
 #include "mocksettings.h"
+#include <QSignalSpy>
+#include <QStyleHints>
+#include <QTest>
 
 Q_DECLARE_METATYPE(Qt::MouseButton)
 
@@ -1336,15 +1336,15 @@ void DecorationButtonTest::testContains_data()
     QTest::addColumn<bool>("contains");
 
     // Button geometry: QRectF(0, 0, 10, 10).
-    QTest::newRow("on left edge")   << QPointF(0, 5)  << true;
-    QTest::newRow("on top edge")    << QPointF(5, 0)  << true;
-    QTest::newRow("on right edge")  << QPointF(9, 5)  << true;
-    QTest::newRow("on bottom edge") << QPointF(5, 9)  << true;
-    QTest::newRow("inside")         << QPointF(5, 5)  << true;
-    QTest::newRow("outside 1")      << QPointF(-1, 5) << false;
-    QTest::newRow("outside 2")      << QPointF(5, -1) << false;
-    QTest::newRow("outside 3")      << QPointF(10, 5) << false;
-    QTest::newRow("outside 4")      << QPointF(5, 10) << false;
+    QTest::newRow("on left edge") << QPointF(0, 5) << true;
+    QTest::newRow("on top edge") << QPointF(5, 0) << true;
+    QTest::newRow("on right edge") << QPointF(9, 5) << true;
+    QTest::newRow("on bottom edge") << QPointF(5, 9) << true;
+    QTest::newRow("inside") << QPointF(5, 5) << true;
+    QTest::newRow("outside 1") << QPointF(-1, 5) << false;
+    QTest::newRow("outside 2") << QPointF(5, -1) << false;
+    QTest::newRow("outside 3") << QPointF(10, 5) << false;
+    QTest::newRow("outside 4") << QPointF(5, 10) << false;
 }
 
 void DecorationButtonTest::testContains()

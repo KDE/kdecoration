@@ -6,11 +6,11 @@
 #ifndef KDECORATION2_DECORATION_SETTINGS_H
 #define KDECORATION2_DECORATION_SETTINGS_H
 
-#include <kdecoration2/kdecoration2_export.h>
 #include "decorationbutton.h"
+#include <kdecoration2/kdecoration2_export.h>
 
-#include <QObject>
 #include <QFontMetricsF>
+#include <QObject>
 
 #include <memory>
 
@@ -110,8 +110,8 @@ Q_SIGNALS:
     void onAllDesktopsAvailableChanged(bool);
     void alphaChannelSupportedChanged(bool);
     void closeOnDoubleClickOnMenuChanged(bool);
-    void decorationButtonsLeftChanged(const QVector<KDecoration2::DecorationButtonType>&);
-    void decorationButtonsRightChanged(const QVector<KDecoration2::DecorationButtonType>&);
+    void decorationButtonsLeftChanged(const QVector<KDecoration2::DecorationButtonType> &);
+    void decorationButtonsRightChanged(const QVector<KDecoration2::DecorationButtonType> &);
     void borderSizeChanged(KDecoration2::BorderSize size);
     void fontChanged(const QFont &font);
     void gridUnitChanged(int);

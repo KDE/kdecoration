@@ -9,7 +9,6 @@
 
 namespace KDecoration2
 {
-
 class Q_DECL_HIDDEN DecoratedClientPrivate::Private
 {
 public:
@@ -57,7 +56,6 @@ QColor DecoratedClientPrivate::color(ColorGroup group, ColorRole role) const
 ApplicationMenuEnabledDecoratedClientPrivate::ApplicationMenuEnabledDecoratedClientPrivate(DecoratedClient *client, Decoration *decoration)
     : DecoratedClientPrivate(client, decoration)
 {
-
 }
 
 ApplicationMenuEnabledDecoratedClientPrivate::~ApplicationMenuEnabledDecoratedClientPrivate() = default;

@@ -3,14 +3,14 @@
  *
  * SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
  */
-#include <QTest>
-#include <QSignalSpy>
-#include <QVariant>
 #include "../src/decorationsettings.h"
 #include "mockbridge.h"
 #include "mockclient.h"
 #include "mockdecoration.h"
 #include "mocksettings.h"
+#include <QSignalSpy>
+#include <QTest>
+#include <QVariant>
 
 class DecorationTest : public QObject
 {
@@ -23,27 +23,28 @@ private Q_SLOTS:
 };
 
 #ifdef _MSC_VER
-QMap<QString, QVariant> makeMap(const QString& key, const QVariant &value);
+QMap<QString, QVariant> makeMap(const QString &key, const QVariant &value);
 #endif
 void DecorationTest::testCreate()
 {
     // just test that creating the Decoration doesn't crash
     MockBridge bridge;
     const QString bridgeKey = QStringLiteral("bridge");
-    MockDecoration deco1(nullptr, QVariantList({
+    MockDecoration deco1(nullptr,
+                         QVariantList({
 #ifdef _MSC_VER
-                                                makeMap(bridgeKey, QVariant::fromValue(5)),
+                             makeMap(bridgeKey, QVariant::fromValue(5)),
 #else
-                                                QVariantMap({ {bridgeKey, QVariant::fromValue(5)} }),
+                             QVariantMap({{bridgeKey, QVariant::fromValue(5)}}),
 #endif
-                                                QVariant::fromValue(bridgeKey),
-                                                QVariantMap(),
+                             QVariant::fromValue(bridgeKey),
+                             QVariantMap(),
 #ifdef _MSC_VER
-                                                makeMap(bridgeKey, QVariant::fromValue(&bridge)),
+                             makeMap(bridgeKey, QVariant::fromValue(&bridge)),
 #else
-                                                QVariantMap({ {bridgeKey, QVariant::fromValue(&bridge)} })
+                             QVariantMap({{bridgeKey, QVariant::fromValue(&bridge)}})
 #endif
-                                               }));
+                         }));
     QVERIFY(!deco1.client().isNull());
 }
 
@@ -81,19 +82,19 @@ void DecorationTest::testSection_data()
 
     QRect r(1, 1, 98, 8);
     QMargins m(1, 10, 1, 1);
-    QTest::newRow("topLeft")      << r << m << QPoint(0, 0)     << Qt::TopLeftSection;
-    QTest::newRow("top@Left")     << r << m << QPoint(1, 0)     << Qt::TopSection;
-    QTest::newRow("top@Right")    << r << m << QPoint(100, 0)   << Qt::TopSection;
-    QTest::newRow("topRight")     << r << m << QPoint(101, 0)   << Qt::TopRightSection;
-    QTest::newRow("right@top")    << r << m << QPoint(101, 1)   << Qt::RightSection;
+    QTest::newRow("topLeft") << r << m << QPoint(0, 0) << Qt::TopLeftSection;
+    QTest::newRow("top@Left") << r << m << QPoint(1, 0) << Qt::TopSection;
+    QTest::newRow("top@Right") << r << m << QPoint(100, 0) << Qt::TopSection;
+    QTest::newRow("topRight") << r << m << QPoint(101, 0) << Qt::TopRightSection;
+    QTest::newRow("right@top") << r << m << QPoint(101, 1) << Qt::RightSection;
     QTest::newRow("right@bottom") << r << m << QPoint(101, 109) << Qt::RightSection;
-    QTest::newRow("bottomRight")  << r << m << QPoint(101, 110) << Qt::BottomRightSection;
+    QTest::newRow("bottomRight") << r << m << QPoint(101, 110) << Qt::BottomRightSection;
     QTest::newRow("bottom@right") << r << m << QPoint(100, 110) << Qt::BottomSection;
-    QTest::newRow("bottom@left")  << r << m << QPoint(1, 110)   << Qt::BottomSection;
-    QTest::newRow("bottomLeft")   << r << m << QPoint(0, 110)   << Qt::BottomLeftSection;
-    QTest::newRow("left@Top")     << r << m << QPoint(0, 1)     << Qt::LeftSection;
-    QTest::newRow("left@Bottom")  << r << m << QPoint(0, 109)   << Qt::LeftSection;
-    QTest::newRow("title")        << r << m << QPoint(1, 1)     << Qt::TitleBarArea;
+    QTest::newRow("bottom@left") << r << m << QPoint(1, 110) << Qt::BottomSection;
+    QTest::newRow("bottomLeft") << r << m << QPoint(0, 110) << Qt::BottomLeftSection;
+    QTest::newRow("left@Top") << r << m << QPoint(0, 1) << Qt::LeftSection;
+    QTest::newRow("left@Bottom") << r << m << QPoint(0, 109) << Qt::LeftSection;
+    QTest::newRow("title") << r << m << QPoint(1, 1) << Qt::TitleBarArea;
 }
 
 void DecorationTest::testSection()

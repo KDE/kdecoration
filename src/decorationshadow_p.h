@@ -23,7 +23,6 @@
 
 namespace KDecoration2
 {
-
 class Q_DECL_HIDDEN DecorationShadow::Private
 {
 public:

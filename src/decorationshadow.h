@@ -8,13 +8,12 @@
 
 #include <kdecoration2/kdecoration2_export.h>
 
+#include <QImage>
 #include <QMargins>
 #include <QObject>
-#include <QImage>
 
 namespace KDecoration2
 {
-
 class DecorationShadowPrivate;
 
 /**
@@ -76,20 +75,20 @@ class DecorationShadowPrivate;
 class KDECORATIONS2_EXPORT DecorationShadow : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QImage shadow     READ shadow        WRITE setShadow        NOTIFY shadowChanged)
+    Q_PROPERTY(QImage shadow READ shadow WRITE setShadow NOTIFY shadowChanged)
     Q_PROPERTY(QRect innerShadowRect READ innerShadowRect WRITE setInnerShadowRect NOTIFY innerShadowRectChanged)
-    Q_PROPERTY(QRect topLeftGeometry     READ topLeftGeometry       NOTIFY innerShadowRectChanged)
-    Q_PROPERTY(QRect topGeometry         READ topGeometry           NOTIFY innerShadowRectChanged)
-    Q_PROPERTY(QRect topRightGeometry    READ topRightGeometry      NOTIFY innerShadowRectChanged)
-    Q_PROPERTY(QRect rightGeometry       READ rightGeometry         NOTIFY innerShadowRectChanged)
-    Q_PROPERTY(QRect bottomRightGeometry READ bottomRightGeometry   NOTIFY innerShadowRectChanged)
-    Q_PROPERTY(QRect bottomGeometry      READ bottomGeometry        NOTIFY innerShadowRectChanged)
-    Q_PROPERTY(QRect bottomLeftGeometry  READ bottomLeftGeometry    NOTIFY innerShadowRectChanged)
-    Q_PROPERTY(QRect leftGeometry        READ leftGeometry          NOTIFY innerShadowRectChanged)
-    Q_PROPERTY(int paddingTop    READ paddingTop    NOTIFY paddingChanged)
-    Q_PROPERTY(int paddingRight  READ paddingRight  NOTIFY paddingChanged)
+    Q_PROPERTY(QRect topLeftGeometry READ topLeftGeometry NOTIFY innerShadowRectChanged)
+    Q_PROPERTY(QRect topGeometry READ topGeometry NOTIFY innerShadowRectChanged)
+    Q_PROPERTY(QRect topRightGeometry READ topRightGeometry NOTIFY innerShadowRectChanged)
+    Q_PROPERTY(QRect rightGeometry READ rightGeometry NOTIFY innerShadowRectChanged)
+    Q_PROPERTY(QRect bottomRightGeometry READ bottomRightGeometry NOTIFY innerShadowRectChanged)
+    Q_PROPERTY(QRect bottomGeometry READ bottomGeometry NOTIFY innerShadowRectChanged)
+    Q_PROPERTY(QRect bottomLeftGeometry READ bottomLeftGeometry NOTIFY innerShadowRectChanged)
+    Q_PROPERTY(QRect leftGeometry READ leftGeometry NOTIFY innerShadowRectChanged)
+    Q_PROPERTY(int paddingTop READ paddingTop NOTIFY paddingChanged)
+    Q_PROPERTY(int paddingRight READ paddingRight NOTIFY paddingChanged)
     Q_PROPERTY(int paddingBottom READ paddingBottom NOTIFY paddingChanged)
-    Q_PROPERTY(int paddingLeft   READ paddingLeft   NOTIFY paddingChanged)
+    Q_PROPERTY(int paddingLeft READ paddingLeft NOTIFY paddingChanged)
     Q_PROPERTY(QMargins padding READ padding WRITE setPadding NOTIFY paddingChanged)
 public:
     explicit DecorationShadow();
@@ -116,7 +115,7 @@ public:
     void setPadding(const QMargins &margins);
 
 Q_SIGNALS:
-    void shadowChanged(const QImage&);
+    void shadowChanged(const QImage &);
     void innerShadowRectChanged();
     void paddingChanged();
 
@@ -127,6 +126,6 @@ private:
 
 }
 
-Q_DECLARE_METATYPE(KDecoration2::DecorationShadow*)
+Q_DECLARE_METATYPE(KDecoration2::DecorationShadow *)
 
 #endif

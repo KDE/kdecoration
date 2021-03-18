@@ -4,15 +4,14 @@
  * SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
  */
 #include "decoratedclient.h"
+#include "decoration.h"
 #include "private/decoratedclientprivate.h"
 #include "private/decorationbridge.h"
-#include "decoration.h"
 
 #include <QColor>
 
 namespace KDecoration2
 {
-
 DecoratedClient::DecoratedClient(Decoration *parent, DecorationBridge *bridge)
     : QObject()
     , d(std::move(bridge->createClient(this, parent)))
@@ -21,11 +20,11 @@ DecoratedClient::DecoratedClient(Decoration *parent, DecorationBridge *bridge)
 
 DecoratedClient::~DecoratedClient() = default;
 
-#define DELEGATE(type, method) \
-type DecoratedClient::method() const \
-{ \
-    return d->method(); \
-}
+#define DELEGATE(type, method)                                                                                                                                 \
+    type DecoratedClient::method() const                                                                                                                       \
+    {                                                                                                                                                          \
+        return d->method();                                                                                                                                    \
+    }
 
 DELEGATE(bool, isActive)
 DELEGATE(QString, caption)
@@ -72,7 +71,7 @@ bool DecoratedClient::isApplicationMenuActive() const
     return false;
 }
 
-QPointer< Decoration > DecoratedClient::decoration() const
+QPointer<Decoration> DecoratedClient::decoration() const
 {
     return QPointer<Decoration>(d->decoration());
 }

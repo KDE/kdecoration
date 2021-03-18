@@ -8,7 +8,6 @@
 
 namespace KDecoration2
 {
-
 /**
  * The DecorationButtonType is a helper type for the DecorationButton.
  * A Decoration should provide a DecorationButton for each of the types,
@@ -16,8 +15,7 @@ namespace KDecoration2
  * The DecorationButton gets configured depending on the type. E.g. the
  * Close button gets disabled if the DecoratedClient is not closeable.
  **/
-enum class DecorationButtonType
-{
+enum class DecorationButtonType {
     /**
      * The Menu button requests showing the window menu on left or right click.
      **/
@@ -72,7 +70,6 @@ enum class DecorationButtonType
      **/
     Custom,
 };
-
 
 /**
  * Border sizes are a combination of visual and accessibility features.

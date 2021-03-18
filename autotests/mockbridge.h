@@ -17,13 +17,15 @@ class MockBridge : public KDecoration2::DecorationBridge
     Q_OBJECT
 public:
     std::unique_ptr<KDecoration2::DecoratedClientPrivate> createClient(KDecoration2::DecoratedClient *client, KDecoration2::Decoration *decoration) override;
-    std::unique_ptr<KDecoration2::DecorationSettingsPrivate> settings(KDecoration2::DecorationSettings *parent)  override;
-    void update(KDecoration2::Decoration *decoration, const QRect &geometry)  override;
+    std::unique_ptr<KDecoration2::DecorationSettingsPrivate> settings(KDecoration2::DecorationSettings *parent) override;
+    void update(KDecoration2::Decoration *decoration, const QRect &geometry) override;
 
-    MockClient * lastCreatedClient() const {
+    MockClient *lastCreatedClient() const
+    {
         return m_lastCreatedClient;
     }
-    MockSettings *lastCreatedSettings() const {
+    MockSettings *lastCreatedSettings() const
+    {
         return m_lastCreatedSettings;
     }
 

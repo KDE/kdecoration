@@ -4,24 +4,24 @@
  * SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
  */
 #include "decoration.h"
-#include "decoration_p.h"
 #include "decoratedclient.h"
-#include "private/decoratedclientprivate.h"
-#include "private/decorationbridge.h"
+#include "decoration_p.h"
 #include "decorationbutton.h"
 #include "decorationsettings.h"
+#include "private/decoratedclientprivate.h"
+#include "private/decorationbridge.h"
 
 #include <QCoreApplication>
 #include <QHoverEvent>
 
 namespace KDecoration2
 {
-
-namespace {
+namespace
+{
 DecorationBridge *findBridge(const QVariantList &args)
 {
-    for (const auto &arg: args) {
-        if (auto bridge = arg.toMap().value(QStringLiteral("bridge")).value<DecorationBridge*>()) {
+    for (const auto &arg : args) {
+        if (auto bridge = arg.toMap().value(QStringLiteral("bridge")).value<DecorationBridge *>()) {
             return bridge;
         }
     }
@@ -55,11 +55,11 @@ void Decoration::Private::updateSectionUnderMouse(const QPoint &mousePosition)
         return;
     }
     const QSize size = q->size();
-    const int corner = 2*settings->largeSpacing();
-    const bool left   = mousePosition.x() < borders.left();
-    const bool top    = mousePosition.y() < borders.top();
+    const int corner = 2 * settings->largeSpacing();
+    const bool left = mousePosition.x() < borders.left();
+    const bool top = mousePosition.y() < borders.top();
     const bool bottom = size.height() - mousePosition.y() <= borders.bottom();
-    const bool right  = size.width() - mousePosition.x() <= borders.right();
+    const bool right = size.width() - mousePosition.x() <= borders.right();
     if (left) {
         if (top && mousePosition.y() < titleBar.top() + corner) {
             setSectionUnderMouse(Qt::TopLeftSection);
@@ -115,25 +115,25 @@ void Decoration::Private::addButton(DecorationButton *button)
 {
     Q_ASSERT(!buttons.contains(button));
     buttons << button;
-    QObject::connect(button, &QObject::destroyed, q,
-        [this](QObject *o) {
-            auto it = buttons.begin();
-            while (it != buttons.end()) {
-                if (*it == static_cast<DecorationButton*>(o)) {
-                    it = buttons.erase(it);
-                } else {
-                    it++;
-                }
+    QObject::connect(button, &QObject::destroyed, q, [this](QObject *o) {
+        auto it = buttons.begin();
+        while (it != buttons.end()) {
+            if (*it == static_cast<DecorationButton *>(o)) {
+                it = buttons.erase(it);
+            } else {
+                it++;
             }
         }
-    );
+    });
 }
 
 Decoration::Decoration(QObject *parent, const QVariantList &args)
     : QObject(parent)
     , d(new Private(this, args))
 {
-    connect(this, &Decoration::bordersChanged, this, [this]{ update(); });
+    connect(this, &Decoration::bordersChanged, this, [this] {
+        update();
+    });
 }
 
 Decoration::~Decoration() = default;
@@ -148,11 +148,11 @@ QWeakPointer<DecoratedClient> Decoration::client() const
     return d->client.toWeakRef();
 }
 
-#define DELEGATE(name) \
-void Decoration::name() \
-{ \
-    d->client->d->name(); \
-}
+#define DELEGATE(name)                                                                                                                                         \
+    void Decoration::name()                                                                                                                                    \
+    {                                                                                                                                                          \
+        d->client->d->name();                                                                                                                                  \
+    }
 
 DELEGATE(requestClose)
 DELEGATE(requestContextHelp)
@@ -209,29 +209,29 @@ void Decoration::requestShowApplicationMenu(const QRect &rect, int actionId)
     }
 }
 
-#define DELEGATE(name, variableName, type, emitValue) \
-void Decoration::name(type a) \
-{ \
-    if (d->variableName == a) { \
-        return; \
-    } \
-    d->variableName = a; \
-    emit variableName##Changed(emitValue); \
-}
+#define DELEGATE(name, variableName, type, emitValue)                                                                                                          \
+    void Decoration::name(type a)                                                                                                                              \
+    {                                                                                                                                                          \
+        if (d->variableName == a) {                                                                                                                            \
+            return;                                                                                                                                            \
+        }                                                                                                                                                      \
+        d->variableName = a;                                                                                                                                   \
+        emit variableName##Changed(emitValue);                                                                                                                 \
+    }
 
-DELEGATE(setBorders, borders, const QMargins&, )
-DELEGATE(setResizeOnlyBorders, resizeOnlyBorders, const QMargins&, )
-DELEGATE(setTitleBar, titleBar, const QRect&, )
+DELEGATE(setBorders, borders, const QMargins &, )
+DELEGATE(setResizeOnlyBorders, resizeOnlyBorders, const QMargins &, )
+DELEGATE(setTitleBar, titleBar, const QRect &, )
 DELEGATE(setOpaque, opaque, bool, d->opaque)
 DELEGATE(setShadow, shadow, const QSharedPointer<DecorationShadow> &, d->shadow)
 
 #undef DELEGATE
 
-#define DELEGATE(name, type) \
-type Decoration::name() const \
-{ \
-    return d->name; \
-}
+#define DELEGATE(name, type)                                                                                                                                   \
+    type Decoration::name() const                                                                                                                              \
+    {                                                                                                                                                          \
+        return d->name;                                                                                                                                        \
+    }
 
 DELEGATE(borders, QMargins)
 DELEGATE(resizeOnlyBorders, QMargins)
@@ -246,15 +246,15 @@ bool Decoration::isOpaque() const
     return d->opaque;
 }
 
-#define BORDER(name, Name) \
-int Decoration::border##Name() const \
-{ \
-    return d->borders.name(); \
-} \
-int Decoration::resizeOnlyBorder##Name() const \
-{ \
-    return d->resizeOnlyBorders.name(); \
-}
+#define BORDER(name, Name)                                                                                                                                     \
+    int Decoration::border##Name() const                                                                                                                       \
+    {                                                                                                                                                          \
+        return d->borders.name();                                                                                                                              \
+    }                                                                                                                                                          \
+    int Decoration::resizeOnlyBorder##Name() const                                                                                                             \
+    {                                                                                                                                                          \
+        return d->resizeOnlyBorders.name();                                                                                                                    \
+    }
 
 BORDER(left, Left)
 BORDER(right, Right)
@@ -265,7 +265,7 @@ BORDER(bottom, Bottom)
 QSize Decoration::size() const
 {
     const QMargins &b = d->borders;
-    return QSize(d->client->width() + b.left() + b.right(),
+    return QSize(d->client->width() + b.left() + b.right(), //
                  (d->client->isShaded() ? 0 : d->client->height()) + b.top() + b.bottom());
 }
 
@@ -278,25 +278,25 @@ bool Decoration::event(QEvent *event)
 {
     switch (event->type()) {
     case QEvent::HoverEnter:
-        hoverEnterEvent(static_cast<QHoverEvent*>(event));
+        hoverEnterEvent(static_cast<QHoverEvent *>(event));
         return true;
     case QEvent::HoverLeave:
-        hoverLeaveEvent(static_cast<QHoverEvent*>(event));
+        hoverLeaveEvent(static_cast<QHoverEvent *>(event));
         return true;
     case QEvent::HoverMove:
-        hoverMoveEvent(static_cast<QHoverEvent*>(event));
+        hoverMoveEvent(static_cast<QHoverEvent *>(event));
         return true;
     case QEvent::MouseButtonPress:
-        mousePressEvent(static_cast<QMouseEvent*>(event));
+        mousePressEvent(static_cast<QMouseEvent *>(event));
         return true;
     case QEvent::MouseButtonRelease:
-        mouseReleaseEvent(static_cast<QMouseEvent*>(event));
+        mouseReleaseEvent(static_cast<QMouseEvent *>(event));
         return true;
     case QEvent::MouseMove:
-        mouseMoveEvent(static_cast<QMouseEvent*>(event));
+        mouseMoveEvent(static_cast<QMouseEvent *>(event));
         return true;
     case QEvent::Wheel:
-        wheelEvent(static_cast<QWheelEvent*>(event));
+        wheelEvent(static_cast<QWheelEvent *>(event));
         return true;
     default:
         return QObject::event(event);
@@ -396,12 +396,12 @@ void Decoration::update()
     update(QRect());
 }
 
-void Decoration::setSettings(const QSharedPointer< DecorationSettings > &settings)
+void Decoration::setSettings(const QSharedPointer<DecorationSettings> &settings)
 {
     d->settings = settings;
 }
 
-QSharedPointer< DecorationSettings > Decoration::settings() const
+QSharedPointer<DecorationSettings> Decoration::settings() const
 {
     return d->settings;
 }

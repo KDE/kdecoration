@@ -24,17 +24,18 @@ class QTimer;
 
 namespace KDecoration2
 {
-
 class Q_DECL_HIDDEN DecorationButton::Private
 {
 public:
     explicit Private(DecorationButtonType type, const QPointer<Decoration> &decoration, DecorationButton *parent);
     ~Private();
 
-    bool isPressed() const {
+    bool isPressed() const
+    {
         return m_pressed != Qt::NoButton;
     }
-    bool isPressed(Qt::MouseButton button) const {
+    bool isPressed(Qt::MouseButton button) const
+    {
         return m_pressed.testFlag(button);
     }
 

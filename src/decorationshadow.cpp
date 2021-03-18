@@ -8,7 +8,6 @@
 
 namespace KDecoration2
 {
-
 DecorationShadow::Private::Private(DecorationShadow *parent)
     : q(parent)
 {
@@ -45,7 +44,8 @@ QRect DecorationShadow::topRightGeometry() const
     if (d->innerShadowRect.isNull() || d->shadow.isNull()) {
         return QRect();
     }
-    return QRect(d->innerShadowRect.left() + d->innerShadowRect.width(), 0,
+    return QRect(d->innerShadowRect.left() + d->innerShadowRect.width(),
+                 0,
                  d->shadow.width() - d->innerShadowRect.width() - d->innerShadowRect.left(),
                  d->innerShadowRect.top());
 }
@@ -88,7 +88,8 @@ QRect DecorationShadow::bottomLeftGeometry() const
     if (d->innerShadowRect.isNull() || d->shadow.isNull()) {
         return QRect();
     }
-    return QRect(0, d->innerShadowRect.top() + d->innerShadowRect.height(),
+    return QRect(0,
+                 d->innerShadowRect.top() + d->innerShadowRect.height(),
                  d->innerShadowRect.left(),
                  d->shadow.height() - d->innerShadowRect.top() - d->innerShadowRect.height());
 }
@@ -103,21 +104,21 @@ QRect DecorationShadow::leftGeometry() const
 
 #ifndef K_DOXYGEN
 
-#define DELEGATE(type, name) \
-    type DecorationShadow::name() const \
-    { \
-        return d->name; \
+#define DELEGATE(type, name)                                                                                                                                   \
+    type DecorationShadow::name() const                                                                                                                        \
+    {                                                                                                                                                          \
+        return d->name;                                                                                                                                        \
     }
 
 DELEGATE(QImage, shadow)
 DELEGATE(QMargins, padding)
 DELEGATE(QRect, innerShadowRect)
 
-#define I(name, Name) \
-int DecorationShadow::padding##Name() const \
-{ \
-    return d->padding.name(); \
-}
+#define I(name, Name)                                                                                                                                          \
+    int DecorationShadow::padding##Name() const                                                                                                                \
+    {                                                                                                                                                          \
+        return d->padding.name();                                                                                                                              \
+    }
 I(top, Top)
 I(bottom, Bottom)
 I(right, Right)
@@ -126,17 +127,17 @@ I(left, Left)
 
 #undef DELEGATE
 
-#define SETTER(type, setName, name) \
-    void DecorationShadow::setName(type arg) \
-    { \
-        if (d->name == arg) { \
-            return; \
-        } \
-        d->name = arg; \
-        emit name##Changed(d->name); \
+#define SETTER(type, setName, name)                                                                                                                            \
+    void DecorationShadow::setName(type arg)                                                                                                                   \
+    {                                                                                                                                                          \
+        if (d->name == arg) {                                                                                                                                  \
+            return;                                                                                                                                            \
+        }                                                                                                                                                      \
+        d->name = arg;                                                                                                                                         \
+        emit name##Changed(d->name);                                                                                                                           \
     }
 
-SETTER(const QImage&, setShadow, shadow)
+SETTER(const QImage &, setShadow, shadow)
 
 #undef SETTER
 #endif

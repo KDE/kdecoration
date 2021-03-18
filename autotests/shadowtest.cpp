@@ -3,9 +3,9 @@
  *
  * SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
  */
-#include <QTest>
-#include <QSignalSpy>
 #include "../src/decorationshadow.h"
+#include <QSignalSpy>
+#include <QTest>
 
 Q_DECLARE_METATYPE(QMargins)
 
@@ -24,10 +24,10 @@ void DecorationShadowTest::testPadding_data()
     QTest::addColumn<QByteArray>("propertyName");
     QTest::addColumn<QMargins>("padding");
 
-    QTest::newRow("top")    << QByteArrayLiteral("paddingTop")    << QMargins(0, 10, 0, 0);
-    QTest::newRow("right")  << QByteArrayLiteral("paddingRight")  << QMargins(0, 0, 10, 0);
+    QTest::newRow("top") << QByteArrayLiteral("paddingTop") << QMargins(0, 10, 0, 0);
+    QTest::newRow("right") << QByteArrayLiteral("paddingRight") << QMargins(0, 0, 10, 0);
     QTest::newRow("bottom") << QByteArrayLiteral("paddingBottom") << QMargins(0, 0, 0, 10);
-    QTest::newRow("left")   << QByteArrayLiteral("paddingLeft")   << QMargins(10, 0, 0, 0);
+    QTest::newRow("left") << QByteArrayLiteral("paddingLeft") << QMargins(10, 0, 0, 0);
 }
 
 void DecorationShadowTest::testPadding()
@@ -74,15 +74,14 @@ void DecorationShadowTest::testSizes_data()
     QTest::addColumn<QRect>("shadowRect");
     QTest::addColumn<QSize>("shadowSize");
 
-    QTest::newRow("topLeft")     << QByteArrayLiteral("topLeftGeometry")     << QRect(1, 2, 5, 5) << QRect(0, 0, 1, 2) << QSize(6, 7);
-    QTest::newRow("top")         << QByteArrayLiteral("topGeometry")         << QRect(1, 2, 1, 5) << QRect(1, 0, 1, 2) << QSize(3, 7);
-    QTest::newRow("topRight")    << QByteArrayLiteral("topRightGeometry")    << QRect(0, 2, 2, 1) << QRect(2, 0, 1, 2) << QSize(3, 3);
-    QTest::newRow("right")       << QByteArrayLiteral("rightGeometry")       << QRect(0, 0, 1, 2) << QRect(1, 0, 1, 2) << QSize(2, 4);
+    QTest::newRow("topLeft") << QByteArrayLiteral("topLeftGeometry") << QRect(1, 2, 5, 5) << QRect(0, 0, 1, 2) << QSize(6, 7);
+    QTest::newRow("top") << QByteArrayLiteral("topGeometry") << QRect(1, 2, 1, 5) << QRect(1, 0, 1, 2) << QSize(3, 7);
+    QTest::newRow("topRight") << QByteArrayLiteral("topRightGeometry") << QRect(0, 2, 2, 1) << QRect(2, 0, 1, 2) << QSize(3, 3);
+    QTest::newRow("right") << QByteArrayLiteral("rightGeometry") << QRect(0, 0, 1, 2) << QRect(1, 0, 1, 2) << QSize(2, 4);
     QTest::newRow("bottomRight") << QByteArrayLiteral("bottomRightGeometry") << QRect(0, 0, 1, 4) << QRect(1, 4, 1, 2) << QSize(2, 6);
-    QTest::newRow("bottom")      << QByteArrayLiteral("bottomGeometry")      << QRect(0, 0, 1, 1) << QRect(0, 1, 1, 2) << QSize(1, 3);
-    QTest::newRow("bottomLeft")  << QByteArrayLiteral("bottomLeftGeometry")  << QRect(1, 0, 1, 1) << QRect(0, 1, 1, 2) << QSize(2, 3);
-    QTest::newRow("left")        << QByteArrayLiteral("leftGeometry")        << QRect(1, 0, 1, 2) << QRect(0, 0, 1, 2) << QSize(2, 2);
-
+    QTest::newRow("bottom") << QByteArrayLiteral("bottomGeometry") << QRect(0, 0, 1, 1) << QRect(0, 1, 1, 2) << QSize(1, 3);
+    QTest::newRow("bottomLeft") << QByteArrayLiteral("bottomLeftGeometry") << QRect(1, 0, 1, 1) << QRect(0, 1, 1, 2) << QSize(2, 3);
+    QTest::newRow("left") << QByteArrayLiteral("leftGeometry") << QRect(1, 0, 1, 2) << QRect(0, 0, 1, 2) << QSize(2, 2);
 }
 
 void DecorationShadowTest::testSizes()

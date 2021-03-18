@@ -9,7 +9,6 @@ Q_DECLARE_METATYPE(Qt::MouseButton)
 
 namespace KDecoration2
 {
-
 DecorationBridge::DecorationBridge(QObject *parent)
     : QObject(parent)
 {

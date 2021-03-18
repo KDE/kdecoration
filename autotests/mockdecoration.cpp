@@ -6,9 +6,9 @@
 #include "mockdecoration.h"
 #include "mockbridge.h"
 
-#include <utility>
 #include <QMap>
 #include <QVariantMap>
+#include <utility>
 
 MockDecoration::MockDecoration(QObject *parent, const QVariantList &args)
     : Decoration(parent, args)
@@ -16,7 +16,8 @@ MockDecoration::MockDecoration(QObject *parent, const QVariantList &args)
 }
 
 #ifdef _MSC_VER
-QMap<QString, QVariant> makeMap(const QString& key, const QVariant &value) {
+QMap<QString, QVariant> makeMap(const QString &key, const QVariant &value)
+{
     QMap<QString, QVariant> ret;
     ret.insert(key, value);
     return ret;

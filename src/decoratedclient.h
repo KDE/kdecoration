@@ -6,21 +6,20 @@
 #ifndef KDECORATION2_DECORATED_CLIENT_H
 #define KDECORATION2_DECORATED_CLIENT_H
 
-#include <kdecoration2/kdecoration2_export.h>
 #include "decorationdefines.h"
+#include <kdecoration2/kdecoration2_export.h>
 
+#include <QFont>
+#include <QIcon>
 #include <QObject>
+#include <QPalette>
 #include <QPointer>
 #include <QtGui/qwindowdefs.h>
-#include <QIcon>
-#include <QPalette>
-#include <QFont>
 
 #include <memory>
 
 namespace KDecoration2
 {
-
 class Decoration;
 class DecorationBridge;
 class DecoratedClientPrivate;

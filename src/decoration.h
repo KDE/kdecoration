@@ -6,8 +6,8 @@
 #ifndef KDECORATION2_DECORATION_H
 #define KDECORATION2_DECORATION_H
 
-#include <kdecoration2/kdecoration2_export.h>
 #include "decorationshadow.h"
+#include <kdecoration2/kdecoration2_export.h>
 
 #include <QMargins>
 #include <QObject>
@@ -25,7 +25,6 @@ class QWheelEvent;
  **/
 namespace KDecoration2
 {
-
 class DecorationPrivate;
 class DecoratedClient;
 class DecorationButton;
@@ -61,15 +60,15 @@ class KDECORATIONS2_EXPORT Decoration : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QMargins borders READ borders NOTIFY bordersChanged)
-    Q_PROPERTY(int borderLeft    READ borderLeft    NOTIFY bordersChanged)
-    Q_PROPERTY(int borderRight   READ borderRight   NOTIFY bordersChanged)
-    Q_PROPERTY(int borderTop     READ borderTop     NOTIFY bordersChanged)
-    Q_PROPERTY(int borderBottom  READ borderBottom  NOTIFY bordersChanged)
+    Q_PROPERTY(int borderLeft READ borderLeft NOTIFY bordersChanged)
+    Q_PROPERTY(int borderRight READ borderRight NOTIFY bordersChanged)
+    Q_PROPERTY(int borderTop READ borderTop NOTIFY bordersChanged)
+    Q_PROPERTY(int borderBottom READ borderBottom NOTIFY bordersChanged)
     Q_PROPERTY(QMargins resizeOnlyBorders READ resizeOnlyBorders NOTIFY resizeOnlyBordersChanged)
-    Q_PROPERTY(int resizeOnlyBorderLeft    READ resizeOnlyBorderLeft    NOTIFY resizeOnlyBordersChanged)
-    Q_PROPERTY(int resizeOnlyBorderRight   READ resizeOnlyBorderRight   NOTIFY resizeOnlyBordersChanged)
-    Q_PROPERTY(int resizeOnlyBorderTop     READ resizeOnlyBorderTop     NOTIFY resizeOnlyBordersChanged)
-    Q_PROPERTY(int resizeOnlyBorderBottom  READ resizeOnlyBorderBottom  NOTIFY resizeOnlyBordersChanged)
+    Q_PROPERTY(int resizeOnlyBorderLeft READ resizeOnlyBorderLeft NOTIFY resizeOnlyBordersChanged)
+    Q_PROPERTY(int resizeOnlyBorderRight READ resizeOnlyBorderRight NOTIFY resizeOnlyBordersChanged)
+    Q_PROPERTY(int resizeOnlyBorderTop READ resizeOnlyBorderTop NOTIFY resizeOnlyBordersChanged)
+    Q_PROPERTY(int resizeOnlyBorderBottom READ resizeOnlyBorderBottom NOTIFY resizeOnlyBordersChanged)
     /**
      * This property denotes the part of the Decoration which is currently under the mouse pointer.
      * It gets automatically updated whenever a QMouseEvent or QHoverEvent gets processed.
@@ -240,6 +239,6 @@ private:
 
 } // namespace
 
-Q_DECLARE_METATYPE(KDecoration2::Decoration*)
+Q_DECLARE_METATYPE(KDecoration2::Decoration *)
 
 #endif

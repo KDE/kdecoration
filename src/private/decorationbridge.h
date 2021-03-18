@@ -27,7 +27,6 @@ class QRect;
 
 namespace KDecoration2
 {
-
 class Decoration;
 class DecorationSettings;
 class DecorationSettingsPrivate;
@@ -50,6 +49,6 @@ protected:
 
 } // namespace
 
-Q_DECLARE_METATYPE(KDecoration2::DecorationBridge*)
+Q_DECLARE_METATYPE(KDecoration2::DecorationBridge *)
 
 #endif

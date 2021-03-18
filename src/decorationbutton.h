@@ -6,8 +6,8 @@
 #ifndef KDECORATION2_DECORATIONBUTTON_H
 #define KDECORATION2_DECORATIONBUTTON_H
 
-#include <kdecoration2/kdecoration2_export.h>
 #include "decorationdefines.h"
+#include <kdecoration2/kdecoration2_export.h>
 
 #include <QObject>
 #include <QPointer>
@@ -20,7 +20,6 @@ class QWheelEvent;
 
 namespace KDecoration2
 {
-
 class DecorationButtonPrivate;
 class Decoration;
 #ifndef K_DOXYGEN
@@ -156,7 +155,7 @@ Q_SIGNALS:
     void enabledChanged(bool);
     void checkableChanged(bool);
     void checkedChanged(bool);
-    void geometryChanged(const QRectF&);
+    void geometryChanged(const QRectF &);
     void acceptedButtonsChanged(Qt::MouseButtons);
     void visibilityChanged(bool);
 

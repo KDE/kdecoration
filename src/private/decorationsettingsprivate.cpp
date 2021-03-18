@@ -8,7 +8,6 @@
 
 namespace KDecoration2
 {
-
 class Q_DECL_HIDDEN DecorationSettingsPrivate::Private
 {
 public:
