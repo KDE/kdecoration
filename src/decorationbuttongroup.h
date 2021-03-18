@@ -52,7 +52,7 @@ class KDECORATIONS2_EXPORT DecorationButtonGroup : public QObject
 public:
     enum class Position {
         Left,
-        Right
+        Right,
     };
     explicit DecorationButtonGroup(Position type, Decoration *parent, std::function<DecorationButton*(DecorationButtonType, Decoration*, QObject*)> buttonCreator);
     explicit DecorationButtonGroup(Decoration *parent);

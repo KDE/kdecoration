@@ -70,7 +70,7 @@ enum class DecorationButtonType
     /**
      * The Custom type allows a Decoration to provide custom DecorationButtons.
      **/
-    Custom
+    Custom,
 };
 
 
@@ -118,7 +118,7 @@ enum class BorderSize {
     /**
      * Increased border sizes, considered a factor of 5.0.
      **/
-    Oversized
+    Oversized,
 };
 
 /**
@@ -138,7 +138,7 @@ enum class ColorGroup {
      * Warning color, can only be used with ColorRole::Foreground. If used with other roles,
      * a invalid QColor is returned. It can be used for close buttons and is typically red.
      **/
-    Warning
+    Warning,
 };
 
 /**
@@ -157,7 +157,7 @@ enum class ColorRole {
     /**
      * The decoration's title bar forground color
      **/
-    Foreground
+    Foreground,
 };
 
 }
