@@ -322,14 +322,14 @@ QString DecorationButton::Private::typeToString(DecorationButtonType type)
             return i18n("Shade");
     case DecorationButtonType::KeepBelow:
         if (this->q->isChecked())
-            return i18n("Don't keep below");
+            return i18n("Don't keep below other windows");
         else
-            return i18n("Keep below");
+            return i18n("Keep below other windows");
     case DecorationButtonType::KeepAbove:
         if (this->q->isChecked())
-            return i18n("Don't keep above");
+            return i18n("Don't keep above other windows");
         else
-            return i18n("Keep above");
+            return i18n("Keep above other windows");
     default:
         return QString();
     }
