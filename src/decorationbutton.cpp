@@ -296,7 +296,7 @@ QString DecorationButton::Private::typeToString(DecorationButtonType type)
 {
     switch (type) {
     case DecorationButtonType::Menu:
-        return i18n("Menu");
+        return i18n("More actions for this window");
     case DecorationButtonType::ApplicationMenu:
         return i18n("Application menu");
     case DecorationButtonType::OnAllDesktops:
