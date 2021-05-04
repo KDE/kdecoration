@@ -199,6 +199,7 @@ Q_SIGNALS:
     void titleBarChanged();
     void opaqueChanged(bool);
     void shadowChanged(const QSharedPointer<DecorationShadow> &shadow);
+    void damaged(const QRegion &region);
 
 protected:
     /**

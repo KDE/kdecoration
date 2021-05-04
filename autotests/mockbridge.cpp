@@ -21,9 +21,3 @@ std::unique_ptr<KDecoration2::DecorationSettingsPrivate> MockBridge::settings(KD
     m_lastCreatedSettings = ptr.get();
     return std::move(ptr);
 }
-
-void MockBridge::update(KDecoration2::Decoration *decoration, const QRect &geometry)
-{
-    Q_UNUSED(decoration)
-    Q_UNUSED(geometry)
-}

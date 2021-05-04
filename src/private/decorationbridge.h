@@ -40,7 +40,6 @@ public:
     ~DecorationBridge() override;
 
     virtual std::unique_ptr<DecoratedClientPrivate> createClient(DecoratedClient *client, Decoration *decoration) = 0;
-    virtual void update(Decoration *decoration, const QRect &geometry) = 0;
     virtual std::unique_ptr<DecorationSettingsPrivate> settings(DecorationSettings *parent) = 0;
 
 protected:
