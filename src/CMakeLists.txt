@@ -32,7 +32,7 @@ target_link_libraries(kdecorations2
 
 target_include_directories(kdecorations2 INTERFACE "$<INSTALL_INTERFACE:${KDECORATION2_INCLUDEDIR}>" )
 
-set_target_properties(kdecorations2 PROPERTIES VERSION   ${KDECORATION2_VERSION_STRING}
+set_target_properties(kdecorations2 PROPERTIES VERSION   ${KDECORATION2_VERSION}
                                                SOVERSION ${KDECORATION2_SOVERSION}
                                                EXPORT_NAME KDecoration
 )
