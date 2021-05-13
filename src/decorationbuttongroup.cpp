@@ -27,7 +27,7 @@ void DecorationButtonGroup::Private::setGeometry(const QRectF &geo)
         return;
     }
     geometry = geo;
-    emit q->geometryChanged(geometry);
+    Q_EMIT q->geometryChanged(geometry);
 }
 
 namespace
@@ -148,7 +148,7 @@ void DecorationButtonGroup::setSpacing(qreal spacing)
         return;
     }
     d->spacing = spacing;
-    emit spacingChanged(d->spacing);
+    Q_EMIT spacingChanged(d->spacing);
     d->updateLayout();
 }
 

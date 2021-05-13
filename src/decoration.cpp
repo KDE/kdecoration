@@ -45,7 +45,7 @@ void Decoration::Private::setSectionUnderMouse(Qt::WindowFrameSection section)
         return;
     }
     sectionUnderMouse = section;
-    emit q->sectionUnderMouseChanged(sectionUnderMouse);
+    Q_EMIT q->sectionUnderMouseChanged(sectionUnderMouse);
 }
 
 void Decoration::Private::updateSectionUnderMouse(const QPoint &mousePosition)
@@ -216,7 +216,7 @@ void Decoration::requestShowApplicationMenu(const QRect &rect, int actionId)
             return;                                                                                                                                            \
         }                                                                                                                                                      \
         d->variableName = a;                                                                                                                                   \
-        emit variableName##Changed(emitValue);                                                                                                                 \
+        Q_EMIT variableName##Changed(emitValue);                                                                                                               \
     }
 
 DELEGATE(setBorders, borders, const QMargins &, )

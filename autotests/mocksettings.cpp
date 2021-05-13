@@ -47,7 +47,7 @@ void MockSettings::setOnAllDesktopsAvailabe(bool set)
         return;
     }
     m_onAllDesktopsAvailable = set;
-    emit decorationSettings()->onAllDesktopsAvailableChanged(m_onAllDesktopsAvailable);
+    Q_EMIT decorationSettings()->onAllDesktopsAvailableChanged(m_onAllDesktopsAvailable);
 }
 
 void MockSettings::setCloseOnDoubleClickOnMenu(bool set)
@@ -56,5 +56,5 @@ void MockSettings::setCloseOnDoubleClickOnMenu(bool set)
         return;
     }
     m_closeDoubleClickOnMenu = set;
-    emit decorationSettings()->closeOnDoubleClickOnMenuChanged(m_closeDoubleClickOnMenu);
+    Q_EMIT decorationSettings()->closeOnDoubleClickOnMenuChanged(m_closeDoubleClickOnMenu);
 }

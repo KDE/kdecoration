@@ -157,7 +157,7 @@ void DecorationButton::Private::setHovered(bool set)
         return;
     }
     hovered = set;
-    emit q->hoveredChanged(hovered);
+    Q_EMIT q->hoveredChanged(hovered);
 }
 
 void DecorationButton::Private::setEnabled(bool set)
@@ -166,12 +166,12 @@ void DecorationButton::Private::setEnabled(bool set)
         return;
     }
     enabled = set;
-    emit q->enabledChanged(enabled);
+    Q_EMIT q->enabledChanged(enabled);
     if (!enabled) {
         setHovered(false);
         if (isPressed()) {
             m_pressed = Qt::NoButton;
-            emit q->pressedChanged(false);
+            Q_EMIT q->pressedChanged(false);
         }
     }
 }
@@ -182,12 +182,12 @@ void DecorationButton::Private::setVisible(bool set)
         return;
     }
     visible = set;
-    emit q->visibilityChanged(set);
+    Q_EMIT q->visibilityChanged(set);
     if (!visible) {
         setHovered(false);
         if (isPressed()) {
             m_pressed = Qt::NoButton;
-            emit q->pressedChanged(false);
+            Q_EMIT q->pressedChanged(false);
         }
     }
 }
@@ -198,7 +198,7 @@ void DecorationButton::Private::setChecked(bool set)
         return;
     }
     checked = set;
-    emit q->checkedChanged(checked);
+    Q_EMIT q->checkedChanged(checked);
 }
 
 void DecorationButton::Private::setCheckable(bool set)
@@ -210,7 +210,7 @@ void DecorationButton::Private::setCheckable(bool set)
         setChecked(false);
     }
     checkable = set;
-    emit q->checkableChanged(checkable);
+    Q_EMIT q->checkableChanged(checkable);
 }
 
 void DecorationButton::Private::setPressed(Qt::MouseButton button, bool pressed)
@@ -220,7 +220,7 @@ void DecorationButton::Private::setPressed(Qt::MouseButton button, bool pressed)
     } else {
         m_pressed = m_pressed & ~button;
     }
-    emit q->pressedChanged(isPressed());
+    Q_EMIT q->pressedChanged(isPressed());
 }
 
 void DecorationButton::Private::setAcceptedButtons(Qt::MouseButtons buttons)
@@ -229,7 +229,7 @@ void DecorationButton::Private::setAcceptedButtons(Qt::MouseButtons buttons)
         return;
     }
     acceptedButtons = buttons;
-    emit q->acceptedButtonsChanged(acceptedButtons);
+    Q_EMIT q->acceptedButtonsChanged(acceptedButtons);
 }
 
 void DecorationButton::Private::startDoubleClickTimer()
@@ -358,16 +358,16 @@ DecorationButton::DecorationButton(DecorationButtonType type, const QPointer<Dec
     connect(this, &DecorationButton::visibilityChanged, this, updateSlot);
     connect(this, &DecorationButton::hoveredChanged, this, [this](bool hovered) {
         if (hovered) {
-            emit pointerEntered();
+            Q_EMIT pointerEntered();
         } else {
-            emit pointerLeft();
+            Q_EMIT pointerLeft();
         }
     });
     connect(this, &DecorationButton::pressedChanged, this, [this](bool p) {
         if (p) {
-            emit pressed();
+            Q_EMIT pressed();
         } else {
-            emit released();
+            Q_EMIT released();
         }
     });
 }
@@ -436,7 +436,7 @@ DELEGATE(setVisible, bool)
             return;                                                                                                                                            \
         }                                                                                                                                                      \
         d->variableName = a;                                                                                                                                   \
-        emit variableName##Changed(d->variableName);                                                                                                           \
+        Q_EMIT variableName##Changed(d->variableName);                                                                                                         \
     }
 
 DELEGATE(setGeometry, geometry, const QRectF &)
@@ -522,7 +522,7 @@ void DecorationButton::mousePressEvent(QMouseEvent *event)
         // check for double click
         if (d->wasDoubleClick()) {
             event->setAccepted(true);
-            emit doubleClicked();
+            Q_EMIT doubleClicked();
         }
         d->invalidateDoubleClickTimer();
     }
@@ -538,7 +538,7 @@ void DecorationButton::mouseReleaseEvent(QMouseEvent *event)
     }
     if (contains(event->localPos())) {
         if (!d->pressAndHold || event->button() != Qt::LeftButton) {
-            emit clicked(event->button());
+            Q_EMIT clicked(event->button());
         } else {
             d->stopPressAndHold();
         }

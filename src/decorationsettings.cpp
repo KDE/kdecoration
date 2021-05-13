@@ -23,12 +23,12 @@ DecorationSettings::DecorationSettings(DecorationBridge *bridge, QObject *parent
         }
         if (gridUnit != d->gridUnit()) {
             d->setGridUnit(gridUnit);
-            emit gridUnitChanged(gridUnit);
+            Q_EMIT gridUnitChanged(gridUnit);
         }
         if (gridUnit != d->largeSpacing()) {
             d->setSmallSpacing(qMax(2, (int)(gridUnit / 4))); // 1/4 of gridUnit, at least 2
             d->setLargeSpacing(gridUnit); // msize.height
-            emit spacingChanged();
+            Q_EMIT spacingChanged();
         }
     };
     updateUnits();

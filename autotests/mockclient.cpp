@@ -141,12 +141,12 @@ bool MockClient::providesContextHelp() const
 
 void MockClient::requestClose()
 {
-    emit closeRequested();
+    Q_EMIT closeRequested();
 }
 
 void MockClient::requestContextHelp()
 {
-    emit quickHelpRequested();
+    Q_EMIT quickHelpRequested();
 }
 
 void MockClient::requestToggleMaximization(Qt::MouseButtons buttons)
@@ -166,56 +166,56 @@ void MockClient::requestToggleMaximization(Qt::MouseButtons buttons)
     const bool wasMaximized = isMaximized();
     if (m_maximizedHorizontally != maximizedHorizontally) {
         m_maximizedHorizontally = maximizedHorizontally;
-        emit client()->maximizedHorizontallyChanged(m_maximizedHorizontally);
+        Q_EMIT client()->maximizedHorizontallyChanged(m_maximizedHorizontally);
     }
     if (m_maximizedVertically != maximizedVertically) {
         m_maximizedVertically = maximizedVertically;
-        emit client()->maximizedVerticallyChanged(m_maximizedVertically);
+        Q_EMIT client()->maximizedVerticallyChanged(m_maximizedVertically);
     }
     if (wasMaximized != isMaximized()) {
-        emit client()->maximizedChanged(isMaximized());
+        Q_EMIT client()->maximizedChanged(isMaximized());
     }
 }
 
 void MockClient::requestMinimize()
 {
-    emit minimizeRequested();
+    Q_EMIT minimizeRequested();
 }
 
 void MockClient::requestShowWindowMenu(const QRect &rect)
 {
-    emit menuRequested();
+    Q_EMIT menuRequested();
 }
 
 void MockClient::requestShowApplicationMenu(const QRect &rect, int actionId)
 {
     Q_UNUSED(rect);
     Q_UNUSED(actionId);
-    emit applicationMenuRequested(); // FIXME TODO pass geometry
+    Q_EMIT applicationMenuRequested(); // FIXME TODO pass geometry
 }
 
 void MockClient::requestToggleKeepAbove()
 {
     m_keepAbove = !m_keepAbove;
-    emit client()->keepAboveChanged(m_keepAbove);
+    Q_EMIT client()->keepAboveChanged(m_keepAbove);
 }
 
 void MockClient::requestToggleKeepBelow()
 {
     m_keepBelow = !m_keepBelow;
-    emit client()->keepBelowChanged(m_keepBelow);
+    Q_EMIT client()->keepBelowChanged(m_keepBelow);
 }
 
 void MockClient::requestToggleOnAllDesktops()
 {
     m_onAllDesktops = !m_onAllDesktops;
-    emit client()->onAllDesktopsChanged(m_onAllDesktops);
+    Q_EMIT client()->onAllDesktopsChanged(m_onAllDesktops);
 }
 
 void MockClient::requestToggleShade()
 {
     m_shaded = !m_shaded;
-    emit client()->shadedChanged(m_shaded);
+    Q_EMIT client()->shadedChanged(m_shaded);
 }
 
 void MockClient::requestShowToolTip(const QString &text)
@@ -245,43 +245,43 @@ WId MockClient::windowId() const
 void MockClient::setCloseable(bool set)
 {
     m_closeable = set;
-    emit client()->closeableChanged(set);
+    Q_EMIT client()->closeableChanged(set);
 }
 
 void MockClient::setMinimizable(bool set)
 {
     m_minimizable = set;
-    emit client()->minimizeableChanged(set);
+    Q_EMIT client()->minimizeableChanged(set);
 }
 
 void MockClient::setProvidesContextHelp(bool set)
 {
     m_contextHelp = set;
-    emit client()->providesContextHelpChanged(set);
+    Q_EMIT client()->providesContextHelpChanged(set);
 }
 
 void MockClient::setShadeable(bool set)
 {
     m_shadeable = set;
-    emit client()->shadeableChanged(set);
+    Q_EMIT client()->shadeableChanged(set);
 }
 
 void MockClient::setMaximizable(bool set)
 {
     m_maximizable = set;
-    emit client()->maximizeableChanged(set);
+    Q_EMIT client()->maximizeableChanged(set);
 }
 
 void MockClient::setWidth(int w)
 {
     m_width = w;
-    emit client()->widthChanged(w);
+    Q_EMIT client()->widthChanged(w);
 }
 
 void MockClient::setHeight(int h)
 {
     m_height = h;
-    emit client()->heightChanged(h);
+    Q_EMIT client()->heightChanged(h);
 }
 
 void MockClient::showApplicationMenu(int actionId)

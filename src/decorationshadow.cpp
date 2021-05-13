@@ -134,7 +134,7 @@ I(left, Left)
             return;                                                                                                                                            \
         }                                                                                                                                                      \
         d->name = arg;                                                                                                                                         \
-        emit name##Changed(d->name);                                                                                                                           \
+        Q_EMIT name##Changed(d->name);                                                                                                                         \
     }
 
 SETTER(const QImage &, setShadow, shadow)
@@ -148,7 +148,7 @@ void DecorationShadow::setPadding(const QMargins &margins)
         return;
     }
     d->padding = margins;
-    emit paddingChanged();
+    Q_EMIT paddingChanged();
 }
 
 void DecorationShadow::setInnerShadowRect(const QRect &rect)
@@ -157,7 +157,7 @@ void DecorationShadow::setInnerShadowRect(const QRect &rect)
         return;
     }
     d->innerShadowRect = rect;
-    emit innerShadowRectChanged();
+    Q_EMIT innerShadowRectChanged();
 }
 
 }
