@@ -388,7 +388,7 @@ void Decoration::wheelEvent(QWheelEvent *event)
 
 void Decoration::update(const QRect &r)
 {
-    emit damaged(r.isNull() ? rect() : r);
+    Q_EMIT damaged(r.isNull() ? rect() : r);
 }
 
 void Decoration::update()
