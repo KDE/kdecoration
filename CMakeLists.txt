@@ -46,6 +46,7 @@ find_package(KF5I18n ${KF5_MIN_VERSION} CONFIG REQUIRED)
 
 add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x050d00)
 add_definitions(-DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x054200)
+add_definitions(-DQT_NO_KEYWORDS)
 
 # Subdirectories
 add_subdirectory(src)
