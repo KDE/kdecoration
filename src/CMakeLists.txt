@@ -9,6 +9,7 @@ set(libkdecoration2_SRCS
     decorationbuttongroup.cpp
     decorationsettings.cpp
     decorationshadow.cpp
+    decorationthemeprovider.cpp
 )
 
 add_library(kdecorations2 SHARED ${libkdecoration2_SRCS})
@@ -28,6 +29,7 @@ target_link_libraries(kdecorations2
     PRIVATE
         kdecorations2private
         KF5::I18n
+        KF5::CoreAddons
 )
 
 target_include_directories(kdecorations2 INTERFACE "$<INSTALL_INTERFACE:${KDECORATION2_INCLUDEDIR}>" )
@@ -45,6 +47,7 @@ ecm_generate_headers(KDecoration2_CamelCase_HEADERS
     DecorationButtonGroup
     DecorationSettings
     DecorationShadow
+    DecorationThemeProvider
   PREFIX
     KDecoration2
   REQUIRED_HEADERS KDecoration2_HEADERS
