@@ -8,7 +8,7 @@
 
 #include <KPluginMetaData>
 
-class DecorationThemeMetaDataPrivate
+class DecorationThemeMetaDataPrivate : public QSharedData
 {
 public:
     QString visibleName;
@@ -83,3 +83,7 @@ DecorationThemeProvider::DecorationThemeProvider(QObject *parent, const KPluginM
     Q_UNUSED(data)
     Q_UNUSED(args)
 }
+
+DecorationThemeMetaData::DecorationThemeMetaData(const DecorationThemeMetaData &other) = default;
+
+DecorationThemeMetaData &DecorationThemeMetaData::operator=(const DecorationThemeMetaData &other) = default;

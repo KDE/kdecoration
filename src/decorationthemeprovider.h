@@ -9,8 +9,8 @@
 
 #include "decorationdefines.h"
 #include <QObject>
+#include <QSharedDataPointer>
 #include <kdecoration2/kdecoration2_export.h>
-#include <memory>
 
 class KPluginMetaData;
 class DecorationThemeMetaDataPrivate;
@@ -28,6 +28,8 @@ class KDECORATIONS2_EXPORT DecorationThemeMetaData
 public:
     explicit DecorationThemeMetaData();
     virtual ~DecorationThemeMetaData();
+    DecorationThemeMetaData(const DecorationThemeMetaData &other);
+    DecorationThemeMetaData &operator=(const DecorationThemeMetaData &other);
 
     /// User-visible name of the theme
     QString visibleName() const;
@@ -46,12 +48,13 @@ public:
     KDecoration2::BorderSize borderSize() const;
     void setBorderSize(KDecoration2::BorderSize size);
 
-    /// @internal
+    /// plugin id of theme provider
+    /// @see KPluginMetaData::pluginId
     QString pluginId() const;
     void setPluginId(const QString &id);
 
 private:
-    std::shared_ptr<DecorationThemeMetaDataPrivate> d;
+    QSharedDataPointer<DecorationThemeMetaDataPrivate> d;
 };
 /**
  * Class to give the KWin decorationmodel access to the plugin's themes.
