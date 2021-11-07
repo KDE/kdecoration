@@ -14,7 +14,7 @@ namespace KDecoration2
 {
 DecoratedClient::DecoratedClient(Decoration *parent, DecorationBridge *bridge)
     : QObject()
-    , d(std::move(bridge->createClient(this, parent)))
+    , d(bridge->createClient(this, parent))
 {
 }
 

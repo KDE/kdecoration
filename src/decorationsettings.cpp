@@ -13,7 +13,7 @@ namespace KDecoration2
 {
 DecorationSettings::DecorationSettings(DecorationBridge *bridge, QObject *parent)
     : QObject(parent)
-    , d(std::move(bridge->settings(this)))
+    , d(bridge->settings(this))
 {
     auto updateUnits = [this] {
         int gridUnit = QFontMetrics(font()).boundingRect(QLatin1Char('M')).height();
