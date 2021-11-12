@@ -1,7 +1,10 @@
 set(libkdecoration2Private_SRCS
     decoratedclientprivate.cpp
+    decoratedclientprivate.h
     decorationbridge.cpp
+    decorationbridge.h
     decorationsettingsprivate.cpp
+    decorationsettingsprivate.h
 )
 
 add_library(kdecorations2private SHARED ${libkdecoration2Private_SRCS})
