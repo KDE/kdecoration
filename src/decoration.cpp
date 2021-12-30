@@ -379,7 +379,7 @@ void Decoration::mouseReleaseEvent(QMouseEvent *event)
 void Decoration::wheelEvent(QWheelEvent *event)
 {
     for (DecorationButton *button : d->buttons) {
-        if (button->contains(event->posF())) {
+        if (button->contains(event->position())) {
             QCoreApplication::instance()->sendEvent(button, event);
             event->setAccepted(true);
         }

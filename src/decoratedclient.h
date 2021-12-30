@@ -6,6 +6,7 @@
 #ifndef KDECORATION2_DECORATED_CLIENT_H
 #define KDECORATION2_DECORATED_CLIENT_H
 
+#include "decoration.h"
 #include "decorationdefines.h"
 #include <kdecoration2/kdecoration2_export.h>
 
@@ -20,7 +21,6 @@
 
 namespace KDecoration2
 {
-class Decoration;
 class DecorationBridge;
 class DecoratedClientPrivate;
 
