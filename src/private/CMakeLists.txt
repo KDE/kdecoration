@@ -45,7 +45,7 @@ install(FILES ${KDecoration2Private_CamelCase_HEADERS}
         DESTINATION ${KDECORATION2_INCLUDEDIR}/KDecoration2/Private
         COMPONENT Devel)
 
-install(TARGETS kdecorations2private EXPORT KDecoration2Targets ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS kdecorations2private EXPORT KDecoration2Targets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
 
 install(
     FILES
