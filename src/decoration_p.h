@@ -40,6 +40,7 @@ public:
     void updateSectionUnderMouse(const QPoint &mousePosition);
 
     QRect titleBar;
+    QRegion blurRegion;
 
     void addButton(DecorationButton *button);
 

@@ -219,6 +219,7 @@ void Decoration::requestShowApplicationMenu(const QRect &rect, int actionId)
         Q_EMIT variableName##Changed(emitValue);                                                                                                               \
     }
 
+DELEGATE(setBlurRegion, blurRegion, const QRegion &, )
 DELEGATE(setBorders, borders, const QMargins &, )
 DELEGATE(setResizeOnlyBorders, resizeOnlyBorders, const QMargins &, )
 DELEGATE(setTitleBar, titleBar, const QRect &, )
@@ -233,6 +234,7 @@ DELEGATE(setShadow, shadow, const QSharedPointer<DecorationShadow> &, d->shadow)
         return d->name;                                                                                                                                        \
     }
 
+DELEGATE(blurRegion, QRegion)
 DELEGATE(borders, QMargins)
 DELEGATE(resizeOnlyBorders, QMargins)
 DELEGATE(titleBar, QRect)

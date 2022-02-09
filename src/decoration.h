@@ -128,6 +128,11 @@ public:
     QSize size() const;
 
     /**
+     * The decoration's blur region in local coordinates
+     */
+    QRegion blurRegion() const;
+
+    /**
      * Invoked by the framework to set the Settings for this Decoration before
      * init is invoked.
      * @internal
@@ -193,6 +198,7 @@ public Q_SLOTS:
     virtual void init();
 
 Q_SIGNALS:
+    void blurRegionChanged();
     void bordersChanged();
     void resizeOnlyBordersChanged();
     void sectionUnderMouseChanged(Qt::WindowFrameSection);
@@ -215,6 +221,7 @@ protected:
     explicit Decoration(QObject *parent, const QVariantList &args);
     void setBorders(const QMargins &borders);
     void setResizeOnlyBorders(const QMargins &borders);
+    void setBlurRegion(const QRegion &region);
     /**
      * An implementation has to invoke this method whenever the area
      * containing the controls and caption changes.
