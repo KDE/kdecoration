@@ -353,6 +353,11 @@ DecorationButton::DecorationButton(DecorationButtonType type, const QPointer<Dec
         }
     });
     connect(this, &DecorationButton::pressedChanged, this, updateSlot);
+    connect(this, &DecorationButton::pressedChanged, this, [this](bool pressed) {
+        if (pressed) {
+            this->decoration()->requestHideToolTip();
+        }
+    });
     connect(this, &DecorationButton::checkedChanged, this, updateSlot);
     connect(this, &DecorationButton::enabledChanged, this, updateSlot);
     connect(this, &DecorationButton::visibilityChanged, this, updateSlot);
