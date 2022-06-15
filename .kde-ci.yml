@@ -7,3 +7,5 @@ Dependencies:
     'frameworks/extra-cmake-modules': '@latest'
     'frameworks/kcoreaddons': '@latest'
     'frameworks/ki18n': '@latest'
+Options:
+  require-passing-tests-on: [ 'Linux', 'FreeBSD']
