@@ -245,7 +245,7 @@ void DecorationButtonTest::testReleaseIgnore_data()
     QTest::addColumn<Qt::MouseButton>("mouseButton");
     QTest::addColumn<bool>("expectedAccepted");
     QTest::addColumn<bool>("expectedPressed");
-    QTest::addColumn<qsizetype>("expectedPressedChanged");
+    QTest::addColumn<int>("expectedPressedChanged");
 
     QTest::newRow("all-disabled") << false << false << QPoint(0, 0) << Qt::LeftButton << false << false << 2;
     QTest::newRow("enabled") << true << false << QPoint(0, 0) << Qt::LeftButton << false << false << 2;
