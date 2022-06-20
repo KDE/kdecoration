@@ -293,7 +293,8 @@ void DecorationButtonTest::testReleaseIgnore()
     QTEST(releaseEvent.isAccepted(), "expectedAccepted");
     QTEST(button.isPressed(), "expectedPressed");
     QCOMPARE(pressedSpy.count(), 1);
-    QTEST(pressedChangedSpy.count(), "expectedPressedChanged");
+    QFETCH(int, expectedPressedChanged);
+    QCOMPARE(pressedChangedSpy.count(), expectedPressedChanged);
     QCOMPARE(pressedChangedSpy.last().first().toBool(), button.isPressed());
     QCOMPARE(clickedSpy.count(), 0);
 }
@@ -395,8 +396,10 @@ void DecorationButtonTest::testHoverLeaveIgnore()
     button.event(&leftEvent);
     QCOMPARE(leftEvent.isAccepted(), false);
     QCOMPARE(pointerEnteredSpy.count(), 1);
-    QTEST(pointerLeavedSpy.count(), "expectedLeaveCount");
-    QTEST(hoveredChangedSpy.count(), "expectedHoverChangedCount");
+    QFETCH(int, expectedLeaveCount);
+    QFETCH(int, expectedHoverChangedCount);
+    QCOMPARE(pointerLeavedSpy.count(), expectedLeaveCount);
+    QCOMPARE(hoveredChangedSpy.count(), expectedHoverChangedCount);
     QCOMPARE(hoveredChangedSpy.last().first().toBool(), button.isHovered());
 }
 
@@ -489,7 +492,8 @@ void DecorationButtonTest::testMouseMove()
     button.event(&mouseMoveEvent);
     QTEST(mouseMoveEvent.isAccepted(), "expectedAccepted");
     QTEST(button.isHovered(), "expectedHovered");
-    QTEST(hoveredChangedSpy.count(), "expectedChangedCount");
+    QFETCH(int, expectedChangedCount);
+    QCOMPARE(hoveredChangedSpy.count(), expectedChangedCount);
     QCOMPARE(hoveredChangedSpy.last().first().toBool(), button.isHovered());
 
     // explicit further move event outside of button
