@@ -306,7 +306,8 @@ void DecorationButtonTest::testReleaseIgnore()
     QCOMPARE(pressedSpy.count(), 1);
 
     qDebug() << "H";
-    QTEST(pressedChangedSpy.count(), "expectedPressedChanged");
+    QFETCH(int, expectedPressedChanged);
+    QCOMPARE(pressedChangedSpy.count(), expectedPressedChanged);
     qDebug() << "I";
     QCOMPARE(pressedChangedSpy.last().first().toBool(), button.isPressed());
     QCOMPARE(clickedSpy.count(), 0);
