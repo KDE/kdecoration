@@ -271,31 +271,46 @@ void DecorationButtonTest::testReleaseIgnore()
     QSignalSpy clickedSpy(&button, &KDecoration2::DecorationButton::clicked);
     QVERIFY(clickedSpy.isValid());
 
+    qDebug() << "A";
     QMouseEvent pressEvent(QEvent::MouseButtonPress, QPoint(0, 0), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
     pressEvent.setAccepted(false);
     button.event(&pressEvent);
     QCOMPARE(pressEvent.isAccepted(), true);
     QCOMPARE(button.isPressed(), true);
     QCOMPARE(pressedSpy.count(), 1);
+    qDebug() << "B";
+
     QCOMPARE(pressedChangedSpy.count(), 1);
     QCOMPARE(pressedChangedSpy.last().first().toBool(), true);
 
+    qDebug() << "C";
+
     QFETCH(bool, enabled);
     QFETCH(bool, visible);
+
+    qDebug() << "D";
     button.setEnabled(enabled);
     button.setVisible(visible);
 
     QFETCH(QPoint, clickPos);
     QFETCH(Qt::MouseButton, mouseButton);
+    qDebug() << "E";
     QMouseEvent releaseEvent(QEvent::MouseButtonRelease, clickPos, mouseButton, Qt::NoButton, Qt::NoModifier);
     releaseEvent.setAccepted(false);
     button.event(&releaseEvent);
+
+    qDebug() << "F";
     QTEST(releaseEvent.isAccepted(), "expectedAccepted");
     QTEST(button.isPressed(), "expectedPressed");
+    qDebug() << "G";
     QCOMPARE(pressedSpy.count(), 1);
+
+    qDebug() << "H";
     QTEST(pressedChangedSpy.count(), "expectedPressedChanged");
+    qDebug() << "I";
     QCOMPARE(pressedChangedSpy.last().first().toBool(), button.isPressed());
     QCOMPARE(clickedSpy.count(), 0);
+    qDebug() << "K";
 }
 
 void DecorationButtonTest::testHoverEnterIgnore_data()
