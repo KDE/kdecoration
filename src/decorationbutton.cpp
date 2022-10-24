@@ -19,6 +19,8 @@
 #include <QStyleHints>
 #include <QTimer>
 
+#include <cmath>
+
 namespace KDecoration2
 {
 #ifndef K_DOXYGEN
@@ -450,7 +452,8 @@ DELEGATE(setGeometry, geometry, const QRectF &)
 
 bool DecorationButton::contains(const QPointF &pos) const
 {
-    return d->geometry.toRect().contains(pos.toPoint());
+    auto flooredPoint = QPoint(std::floor(pos.x()), std::floor(pos.y()));
+    return d->geometry.toRect().contains(flooredPoint);
 }
 
 bool DecorationButton::event(QEvent *event)
