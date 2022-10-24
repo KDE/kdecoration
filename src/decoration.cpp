@@ -14,6 +14,8 @@
 #include <QCoreApplication>
 #include <QHoverEvent>
 
+#include <cmath>
+
 namespace KDecoration2
 {
 namespace
@@ -310,7 +312,8 @@ void Decoration::hoverEnterEvent(QHoverEvent *event)
     for (DecorationButton *button : d->buttons) {
         QCoreApplication::instance()->sendEvent(button, event);
     }
-    d->updateSectionUnderMouse(event->pos());
+    auto flooredPos = QPoint(std::floor(event->posF().x()), std::floor(event->posF().y()));
+    d->updateSectionUnderMouse(flooredPos);
 }
 
 void Decoration::hoverLeaveEvent(QHoverEvent *event)
@@ -339,7 +342,8 @@ void Decoration::hoverMoveEvent(QHoverEvent *event)
             QCoreApplication::instance()->sendEvent(button, event);
         }
     }
-    d->updateSectionUnderMouse(event->pos());
+    auto flooredPos = QPoint(std::floor(event->posF().x()), std::floor(event->posF().y()));
+    d->updateSectionUnderMouse(flooredPos);
 }
 
 void Decoration::mouseMoveEvent(QMouseEvent *event)
