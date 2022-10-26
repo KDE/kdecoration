@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdecoration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2021-05-05 00:20+0000\n"
+"POT-Creation-Date: 2022-10-26 00:47+0000\n"
 "PO-Revision-Date: 2021-07-26 19:57+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -21,77 +21,77 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 21.04.3\n"
 
-#: decorationbutton.cpp:299
+#: decorationbutton.cpp:301
 #, kde-format
 msgid "More actions for this window"
 msgstr "Leiho honetarako ekintza gehiago"
 
-#: decorationbutton.cpp:301
+#: decorationbutton.cpp:303
 #, kde-format
 msgid "Application menu"
 msgstr "Aplikazio-menua"
 
-#: decorationbutton.cpp:304
+#: decorationbutton.cpp:306
 #, kde-format
 msgid "On one desktop"
 msgstr "Mahaigain bakarrean"
 
-#: decorationbutton.cpp:306
+#: decorationbutton.cpp:308
 #, kde-format
 msgid "On all desktops"
 msgstr "Mahaigain guztietan"
 
-#: decorationbutton.cpp:308
+#: decorationbutton.cpp:310
 #, kde-format
 msgid "Minimize"
 msgstr "Minimizatu"
 
-#: decorationbutton.cpp:311
+#: decorationbutton.cpp:313
 #, kde-format
 msgid "Restore"
 msgstr "Lehengoratu"
 
-#: decorationbutton.cpp:313
+#: decorationbutton.cpp:315
 #, kde-format
 msgid "Maximize"
 msgstr "Maximizatu"
 
-#: decorationbutton.cpp:315
+#: decorationbutton.cpp:317
 #, kde-format
 msgid "Close"
 msgstr "Itxi"
 
-#: decorationbutton.cpp:317
+#: decorationbutton.cpp:319
 #, kde-format
 msgid "Context help"
 msgstr "Testuinguru-laguntza"
 
-#: decorationbutton.cpp:320
+#: decorationbutton.cpp:322
 #, kde-format
 msgid "Unshade"
 msgstr "Zabaldu"
 
-#: decorationbutton.cpp:322
+#: decorationbutton.cpp:324
 #, kde-format
 msgid "Shade"
 msgstr "Bildu"
 
-#: decorationbutton.cpp:325
+#: decorationbutton.cpp:327
 #, kde-format
 msgid "Don't keep below other windows"
 msgstr "Ez eutsi beste leihoen azpian"
 
-#: decorationbutton.cpp:327
+#: decorationbutton.cpp:329
 #, kde-format
 msgid "Keep below other windows"
 msgstr "Eutsi beste leihoen azpian"
 
-#: decorationbutton.cpp:330
+#: decorationbutton.cpp:332
 #, kde-format
 msgid "Don't keep above other windows"
 msgstr "Ez eutsi beste leihoen gainean"
 
-#: decorationbutton.cpp:332
+#: decorationbutton.cpp:334
 #, kde-format
 msgid "Keep above other windows"
 msgstr "Eutsi beste leiho batzuen gainean"
