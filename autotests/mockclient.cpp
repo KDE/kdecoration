@@ -24,11 +24,6 @@ QString MockClient::caption() const
     return QString();
 }
 
-WId MockClient::decorationId() const
-{
-    return 0;
-}
-
 int MockClient::desktop() const
 {
     return 1;
@@ -237,10 +232,17 @@ int MockClient::width() const
     return m_width;
 }
 
+#if KDECORATIONS_PRIVATE_BUILD_DEPRECATED_SINCE(5, 27)
 WId MockClient::windowId() const
 {
     return 0;
 }
+
+WId MockClient::decorationId() const
+{
+    return 0;
+}
+#endif
 
 void MockClient::setCloseable(bool set)
 {

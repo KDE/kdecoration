@@ -18,7 +18,6 @@ public:
 
     Qt::Edges adjacentScreenEdges() const override;
     QString caption() const override;
-    WId decorationId() const override;
     int desktop() const override;
     int height() const override;
     QIcon icon() const override;
@@ -55,7 +54,11 @@ public:
     void requestHideToolTip() override;
     QSize size() const override;
     int width() const override;
+
+#if KDECORATIONS_PRIVATE_BUILD_DEPRECATED_SINCE(5, 27)
     WId windowId() const override;
+    WId decorationId() const override;
+#endif
 
     void showApplicationMenu(int actionId) override;
 

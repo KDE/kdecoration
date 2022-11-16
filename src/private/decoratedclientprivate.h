@@ -53,8 +53,10 @@ public:
     virtual bool isMoveable() const = 0;
     virtual bool isResizeable() const = 0;
 
+#if KDECORATIONS_PRIVATE_BUILD_DEPRECATED_SINCE(5, 27)
     virtual WId windowId() const = 0;
     virtual WId decorationId() const = 0;
+#endif
 
     virtual int width() const = 0;
     virtual int height() const = 0;

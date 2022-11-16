@@ -168,8 +168,6 @@ class KDECORATIONS2_EXPORT DecoratedClient : public QObject
      */
     Q_PROPERTY(bool applicationMenuActive READ isApplicationMenuActive NOTIFY applicationMenuActiveChanged)
 
-    // TODO: properties for windowId and decorationId?
-
 public:
     DecoratedClient() = delete;
     ~DecoratedClient() override;
@@ -196,8 +194,12 @@ public:
 
     Qt::Edges adjacentScreenEdges() const;
 
+#if KDECORATIONS2_ENABLE_DEPRECATED_SINCE(5, 27)
+    KDECORATIONS2_DEPRECATED_VERSION(5, 27, "Obsolete, no replacement is available")
     WId windowId() const;
+    KDECORATIONS2_DEPRECATED_VERSION(5, 27, "Obsolete, no replacement is available")
     WId decorationId() const;
+#endif
 
     int width() const;
     int height() const;

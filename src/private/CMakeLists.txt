@@ -9,12 +9,17 @@ set(libkdecoration2Private_SRCS
 
 add_library(kdecorations2private SHARED ${libkdecoration2Private_SRCS})
 
-generate_export_header(
-    kdecorations2private
-BASE_NAME
-    KDECORATIONS_PRIVATE
-EXPORT_FILE_NAME
-    kdecoration2/private/kdecoration2_private_export.h
+ecm_generate_export_header(kdecorations2private
+    BASE_NAME
+        KDECORATIONS_PRIVATE
+    VERSION
+        ${PROJECT_VERSION}
+    EXPORT_FILE_NAME
+        kdecoration2/private/kdecoration2_private_export.h
+    DEPRECATION_VERSIONS
+        5.27
+    EXCLUDE_DEPRECATED_BEFORE_AND_AT
+        ${EXCLUDE_DEPRECATED_BEFORE_AND_AT}
 )
 
 add_library(KDecoration2::KDecorationPrivate ALIAS kdecorations2private)
