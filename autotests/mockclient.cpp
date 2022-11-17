@@ -232,6 +232,16 @@ int MockClient::width() const
     return m_width;
 }
 
+QString MockClient::resourceName() const
+{
+    return QString();
+}
+
+QString MockClient::resourceClass() const
+{
+    return QString();
+}
+
 #if KDECORATIONS_PRIVATE_BUILD_DEPRECATED_SINCE(5, 27)
 WId MockClient::windowId() const
 {

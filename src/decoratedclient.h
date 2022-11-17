@@ -205,6 +205,9 @@ public:
     int height() const;
     QSize size() const;
 
+    QString resourceName() const;
+    QString resourceClass() const;
+
     QPointer<Decoration> decoration() const;
     QPalette palette() const;
     /**

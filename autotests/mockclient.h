@@ -54,6 +54,8 @@ public:
     void requestHideToolTip() override;
     QSize size() const override;
     int width() const override;
+    QString resourceName() const override;
+    QString resourceClass() const override;
 
 #if KDECORATIONS_PRIVATE_BUILD_DEPRECATED_SINCE(5, 27)
     WId windowId() const override;
