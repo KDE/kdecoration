@@ -237,6 +237,11 @@ int MockClient::width() const
     return m_width;
 }
 
+QString MockClient::windowClass() const
+{
+    return QString();
+}
+
 WId MockClient::windowId() const
 {
     return 0;

@@ -78,6 +78,7 @@ public:
     Decoration *decoration() const;
 
     virtual QColor color(ColorGroup group, ColorRole role) const;
+    virtual QString windowClass() const = 0;
 
 protected:
     explicit DecoratedClientPrivate(DecoratedClient *client, Decoration *decoration);

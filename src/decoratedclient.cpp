@@ -51,6 +51,7 @@ DELEGATE(int, height)
 DELEGATE(QSize, size)
 DELEGATE(QPalette, palette)
 DELEGATE(Qt::Edges, adjacentScreenEdges)
+DELEGATE(QString, windowClass)
 
 #undef DELEGATE
 

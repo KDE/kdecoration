@@ -56,6 +56,7 @@ public:
     QSize size() const override;
     int width() const override;
     WId windowId() const override;
+    QString windowClass() const override;
 
     void showApplicationMenu(int actionId) override;
 

@@ -199,6 +199,8 @@ public:
     WId windowId() const;
     WId decorationId() const;
 
+    QString windowClass() const;
+
     int width() const;
     int height() const;
     QSize size() const;
