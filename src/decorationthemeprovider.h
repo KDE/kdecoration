@@ -4,8 +4,7 @@
  * SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
  */
 
-#ifndef KDECORATION2_DECORATION_THEME_PROVIDER
-#define KDECORATION2_DECORATION_THEME_PROVIDER
+#pragma once
 
 #include "decorationdefines.h"
 #include <QObject>
@@ -75,4 +74,3 @@ public:
     virtual QList<DecorationThemeMetaData> themes() const = 0;
 };
 }
-#endif

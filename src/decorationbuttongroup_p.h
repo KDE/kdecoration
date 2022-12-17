@@ -3,8 +3,7 @@
  *
  * SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
  */
-#ifndef KDECORATION2_DECORATIONBUTTONGROUP_P_H
-#define KDECORATION2_DECORATIONBUTTONGROUP_P_H
+#pragma once
 #include "decorationbuttongroup.h"
 
 #include <QRectF>
@@ -44,5 +43,3 @@ private:
 };
 
 } // namespace
-
-#endif

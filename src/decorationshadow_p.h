@@ -3,8 +3,7 @@
  *
  * SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
  */
-#ifndef KDECORATION2_DECORATION_SHADOW_P_H
-#define KDECORATION2_DECORATION_SHADOW_P_H
+#pragma once
 
 //
 //  W A R N I N G
@@ -37,5 +36,3 @@ private:
 };
 
 }
-
-#endif

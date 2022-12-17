@@ -3,8 +3,7 @@
  *
  * SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
  */
-#ifndef MOCK_BRIDGE_H
-#define MOCK_BRIDGE_H
+#pragma once
 
 #include "../src/private/decorationbridge.h"
 #include <QObject>
@@ -32,5 +31,3 @@ private:
     MockClient *m_lastCreatedClient = nullptr;
     MockSettings *m_lastCreatedSettings = nullptr;
 };
-
-#endif

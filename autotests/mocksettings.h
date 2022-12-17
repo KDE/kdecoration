@@ -3,8 +3,7 @@
  *
  * SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
  */
-#ifndef MOCK_SETTINGS_H
-#define MOCK_SETTINGS_H
+#pragma once
 
 #include "../src/private/decorationsettingsprivate.h"
 
@@ -27,5 +26,3 @@ private:
     bool m_onAllDesktopsAvailable = false;
     bool m_closeDoubleClickOnMenu = false;
 };
-
-#endif

@@ -3,8 +3,7 @@
  *
  * SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
  */
-#ifndef KDECORATION2_DECORATION_H
-#define KDECORATION2_DECORATION_H
+#pragma once
 
 #include "decorationshadow.h"
 #include <kdecoration2/kdecoration2_export.h>
@@ -248,5 +247,3 @@ private:
 } // namespace
 
 Q_DECLARE_METATYPE(KDecoration2::Decoration *)
-
-#endif
