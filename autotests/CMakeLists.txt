@@ -1,11 +1,11 @@
 include(ECMMarkAsTest)
 
 set(decorationButtonTest_SRCS
-    mockbridge.cpp
-    mockbutton.cpp
-    mockclient.cpp
-    mockdecoration.cpp
-    mocksettings.cpp
+    mockbridge.cpp mockbridge.h
+    mockbutton.cpp mockbutton.h
+    mockclient.cpp mockclient.h
+    mockdecoration.cpp mockdecoration.h
+    mocksettings.cpp mocksettings.h
     decorationbuttontest.cpp
     )
 add_executable(decorationButtonTest ${decorationButtonTest_SRCS})
@@ -14,11 +14,11 @@ add_test(NAME kdecoration2-decorationButtonTest COMMAND decorationButtonTest)
 ecm_mark_as_test(decorationButtonTest)
 
 set(decorationTest_SRCS
-    mockbridge.cpp
-    mockbutton.cpp
-    mockclient.cpp
-    mockdecoration.cpp
-    mocksettings.cpp
+    mockbridge.cpp mockbridge.h
+    mockbutton.cpp mockbutton.h
+    mockclient.cpp mockclient.h
+    mockdecoration.cpp mockdecoration.h
+    mocksettings.cpp mocksettings.h
     decorationtest.cpp
     )
 add_executable(decorationTest ${decorationTest_SRCS})
