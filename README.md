@@ -18,25 +18,29 @@ To provide a custom decoration one needs to create a plugin and provide an own i
 of KDecoration2::Decoration. For a framework to load and find the plugin it needs to be compiled
 with the proper json metadata. An example for such metadata (deco.json):
 
-    {
-        "KPlugin": {
-            "Id": "org.kde.myAweseomeDecoration",
-            "ServiceTypes": [
-                "org.kde.kdecoration2"
-            ]
-        },
-        "org.kde.kdecoration2": {
-            "blur": false, /* blur behind not needed */
-            "kcmodule": true /* comes with a configuration module */
-        }
+```json
+{
+    "KPlugin": {
+        "Id": "org.kde.myAweseomeDecoration",
+        "ServiceTypes": [
+            "org.kde.kdecoration2"
+        ]
+    },
+    "org.kde.kdecoration2": {
+        "blur": false, /* blur behind not needed */
+        "kcmodule": true /* comes with a configuration module */
     }
+}
+```
 
 To simplify one can use the KPluginFactory macro from the KCoreAddons framework:
 
-    K_PLUGIN_FACTORY_WITH_JSON(
-        MyAwesomeDecorationFactory,
-        "deco.json",
-        registerPlugin<MyAwesomeDecoration::Decoration>();
-    )
+```cpp
+K_PLUGIN_FACTORY_WITH_JSON(
+    MyAwesomeDecorationFactory,
+    "deco.json",
+    registerPlugin<MyAwesomeDecoration::Decoration>();
+)
+```
 
 The plugin needs to get installed to `${KDE_INSTALL_PLUGINDIR}/org.kde.kdecoration2`.
