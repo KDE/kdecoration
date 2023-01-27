@@ -27,10 +27,10 @@ set(libkdecoration2_SRCS
 
 add_library(kdecorations2 SHARED ${libkdecoration2_SRCS})
 ecm_generate_export_header(kdecorations2
-                                                VERSION ${PROJECT_VERSION}
-                                                EXPORT_FILE_NAME kdecoration2/kdecoration2_export.h
-                                                DEPRECATION_VERSIONS 5.21
-                                                EXCLUDE_DEPRECATED_BEFORE_AND_AT ${EXCLUDE_DEPRECATED_BEFORE_AND_AT}
+    VERSION ${PROJECT_VERSION}
+    EXPORT_FILE_NAME kdecoration2/kdecoration2_export.h
+    DEPRECATION_VERSIONS 5.21
+    EXCLUDE_DEPRECATED_BEFORE_AND_AT ${EXCLUDE_DEPRECATED_BEFORE_AND_AT}
 )
 
 add_library(KDecoration2::KDecoration ALIAS kdecorations2)
@@ -41,8 +41,8 @@ target_link_libraries(kdecorations2
         Qt::Gui
     PRIVATE
         kdecorations2private
-        KF5::I18n
-        KF5::CoreAddons
+        KF6::I18n
+        KF6::CoreAddons
 )
 
 target_include_directories(kdecorations2 INTERFACE "$<INSTALL_INTERFACE:${KDECORATION2_INCLUDEDIR}>" )

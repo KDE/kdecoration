@@ -3,11 +3,11 @@ cmake_minimum_required(VERSION 3.16)
 project(decoration-api)
 set(PROJECT_VERSION "5.27.80")
 
-set(QT_MIN_VERSION "5.15.2")
-set(KF5_MIN_VERSION "5.102.0")
+set(QT_MIN_VERSION "6.4.0")
+set(KF6_MIN_VERSION "5.240.0")
 set(KDE_COMPILERSETTINGS_LEVEL "5.82")
 
-find_package(ECM ${KF5_MIN_VERSION} REQUIRED NO_MODULE)
+find_package(ECM ${KF6_MIN_VERSION} REQUIRED NO_MODULE)
 # where to look first for cmake modules, before ${CMAKE_ROOT}/Modules/ is checked
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} )
 
@@ -43,8 +43,8 @@ if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
 endif()
 
 set(KDECORATION2_INCLUDEDIR "${KDE_INSTALL_INCLUDEDIR}/KDecoration2")
-find_package(KF5I18n ${KF5_MIN_VERSION} CONFIG REQUIRED)
-find_package(KF5CoreAddons ${KF5_MIN_VERSION} CONFIG REQUIRED)
+find_package(KF6I18n ${KF6_MIN_VERSION} CONFIG REQUIRED)
+find_package(KF6CoreAddons ${KF6_MIN_VERSION} CONFIG REQUIRED)
 
 add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x050d00)
 add_definitions(-DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x054200)
