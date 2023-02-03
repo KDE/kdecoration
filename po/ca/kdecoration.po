@@ -96,12 +96,3 @@ msgstr "No mantinguis al damunt de les altres finestres"
 #, kde-format
 msgid "Keep above other windows"
 msgstr "Mantén al damunt de les altres finestres"
-
-#~ msgid "Menu"
-#~ msgstr "Menú"
-
-#~ msgid "Keep below"
-#~ msgstr "Mantén per sota"
-
-#~ msgid "Keep above"
-#~ msgstr "Mantén al damunt"
