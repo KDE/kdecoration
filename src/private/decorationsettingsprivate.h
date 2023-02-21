@@ -8,6 +8,7 @@
 #include "../decorationdefines.h"
 #include <QFont>
 #include <QFontMetricsF>
+#include <QScopedPointer>
 #include <QVector>
 #include <kdecoration2/private/kdecoration2_private_export.h>
 
