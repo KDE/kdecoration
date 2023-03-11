@@ -69,7 +69,7 @@ public:
      **/
     virtual void paint(QPainter *painter, const QRect &repaintArea);
 
-    QPointer<Decoration> decoration() const;
+    Decoration *decoration() const;
 
     qreal spacing() const;
     void setSpacing(qreal spacing);
@@ -82,12 +82,12 @@ public:
      * Adds @p button to the DecorationButtonGroup and triggers a re-layout of all
      * DecorationButtons.
      **/
-    void addButton(const QPointer<DecorationButton> &button);
+    void addButton(DecorationButton *button);
     /**
      * Removes @p button from the DecorationButtonGroup and triggers a re-layout of all
      * DecorationButtons.
      **/
-    void removeButton(const QPointer<DecorationButton> &button);
+    void removeButton(DecorationButton *button);
     /**
      * Removes all DecorationButtons with @p type from the DecorationButtonGroup and
      * triggers a re-layout of all DecorationButtons.
@@ -100,7 +100,7 @@ public:
     /**
      * @returns All DecorationButtons in this DecorationButtonGroup
      **/
-    QVector<QPointer<DecorationButton>> buttons() const;
+    QVector<DecorationButton *> buttons() const;
 
 Q_SIGNALS:
     void spacingChanged(qreal);

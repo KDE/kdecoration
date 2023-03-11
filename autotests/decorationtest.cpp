@@ -45,7 +45,7 @@ void DecorationTest::testCreate()
                              QVariantMap({{bridgeKey, QVariant::fromValue(&bridge)}})
 #endif
                          }));
-    QVERIFY(!deco1.client().isNull());
+    QVERIFY(deco1.client());
 }
 
 void DecorationTest::testOpaque()

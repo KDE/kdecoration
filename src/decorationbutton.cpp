@@ -51,9 +51,7 @@ DecorationButton::Private::~Private() = default;
 
 void DecorationButton::Private::init()
 {
-    auto clientPtr = decoration->client().toStrongRef();
-    Q_ASSERT(clientPtr);
-    auto c = clientPtr.data();
+    auto c = decoration->client();
     auto settings = decoration->settings();
     switch (type) {
     case DecorationButtonType::Menu:
@@ -337,7 +335,7 @@ QString DecorationButton::Private::typeToString(DecorationButtonType type)
     }
 }
 
-DecorationButton::DecorationButton(DecorationButtonType type, const QPointer<Decoration> &decoration, QObject *parent)
+DecorationButton::DecorationButton(DecorationButtonType type, Decoration *decoration, QObject *parent)
     : QObject(parent)
     , d(new Private(type, decoration, this))
 {
@@ -415,7 +413,7 @@ DELEGATE(isVisible, visible, bool)
 
 #define DELEGATE2(name, type) DELEGATE(name, name, type)
 DELEGATE2(geometry, QRectF)
-DELEGATE2(decoration, QPointer<Decoration>)
+DELEGATE2(decoration, Decoration *)
 DELEGATE2(acceptedButtons, Qt::MouseButtons)
 DELEGATE2(type, DecorationButtonType)
 

@@ -71,9 +71,9 @@ bool DecoratedClient::isApplicationMenuActive() const
     return false;
 }
 
-QPointer<Decoration> DecoratedClient::decoration() const
+Decoration *DecoratedClient::decoration() const
 {
-    return QPointer<Decoration>(d->decoration());
+    return d->decoration();
 }
 
 QColor DecoratedClient::color(QPalette::ColorGroup group, QPalette::ColorRole role) const

@@ -204,7 +204,7 @@ public:
     int height() const;
     QSize size() const;
 
-    QPointer<Decoration> decoration() const;
+    Decoration *decoration() const;
     QPalette palette() const;
     /**
      * Used to get colors in QPalette.

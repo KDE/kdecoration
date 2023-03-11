@@ -145,9 +145,9 @@ void Decoration::init()
     Q_ASSERT(!d->settings.isNull());
 }
 
-QWeakPointer<DecoratedClient> Decoration::client() const
+DecoratedClient *Decoration::client() const
 {
-    return d->client.toWeakRef();
+    return d->client.get();
 }
 
 #define DELEGATE(name)                                                                                                                                         \

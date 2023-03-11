@@ -35,7 +35,7 @@ public:
 
     Decoration *decoration;
     QRectF geometry;
-    QVector<QPointer<DecorationButton>> buttons;
+    QVector<DecorationButton *> buttons;
     qreal spacing;
 
 private:

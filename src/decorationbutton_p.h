@@ -7,6 +7,8 @@
 
 #include "decorationbutton.h"
 
+#include <QPointer>
+
 class QElapsedTimer;
 class QTimer;
 

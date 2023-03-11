@@ -10,7 +10,6 @@
 
 #include <QMargins>
 #include <QObject>
-#include <QPointer>
 #include <QRect>
 
 class QHoverEvent;
@@ -91,11 +90,8 @@ public:
 
     /**
      * The DecoratedClient for this Decoration.
-     * As long as the Decoration is alive it is guaranteed that the object is not
-     * deleted. Thus it is save to access using QWeakPointer::data in e.g. a sublcass
-     * of Decoration without promoting to QSharedPointer.
      **/
-    QWeakPointer<DecoratedClient> client() const;
+    DecoratedClient *client() const;
 
     QMargins borders() const;
     int borderLeft() const;
