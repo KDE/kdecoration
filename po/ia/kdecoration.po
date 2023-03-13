@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdecoration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-26 00:47+0000\n"
+"POT-Creation-Date: 2023-03-13 02:33+0000\n"
 "PO-Revision-Date: 2021-05-11 23:13+0100\n"
 "Last-Translator: Giovanni Sora <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -17,77 +17,77 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 2.0\n"
 
-#: decorationbutton.cpp:301
+#: decorationbutton.cpp:299
 #, kde-format
 msgid "More actions for this window"
 msgstr "Altere actiones per iste fenestra"
 
-#: decorationbutton.cpp:303
+#: decorationbutton.cpp:301
 #, kde-format
 msgid "Application menu"
 msgstr "Menu de application"
 
-#: decorationbutton.cpp:306
+#: decorationbutton.cpp:304
 #, kde-format
 msgid "On one desktop"
 msgstr "Sur un scriptorio"
 
-#: decorationbutton.cpp:308
+#: decorationbutton.cpp:306
 #, kde-format
 msgid "On all desktops"
 msgstr "Super omne scriptorios"
 
-#: decorationbutton.cpp:310
+#: decorationbutton.cpp:308
 #, kde-format
 msgid "Minimize"
 msgstr "Minimisa"
 
-#: decorationbutton.cpp:313
+#: decorationbutton.cpp:311
 #, kde-format
 msgid "Restore"
 msgstr "Restabili"
 
-#: decorationbutton.cpp:315
+#: decorationbutton.cpp:313
 #, kde-format
 msgid "Maximize"
 msgstr "Maximiza"
 
-#: decorationbutton.cpp:317
+#: decorationbutton.cpp:315
 #, kde-format
 msgid "Close"
 msgstr "Claude"
 
-#: decorationbutton.cpp:319
+#: decorationbutton.cpp:317
 #, kde-format
 msgid "Context help"
 msgstr "Adjuta de contexto"
 
-#: decorationbutton.cpp:322
+#: decorationbutton.cpp:320
 #, kde-format
 msgid "Unshade"
 msgstr "De-Umbra"
 
-#: decorationbutton.cpp:324
+#: decorationbutton.cpp:322
 #, kde-format
 msgid "Shade"
 msgstr "Umbra"
 
-#: decorationbutton.cpp:327
+#: decorationbutton.cpp:325
 #, kde-format
 msgid "Don't keep below other windows"
 msgstr "Non mantene infra altere fenestras"
 
-#: decorationbutton.cpp:329
+#: decorationbutton.cpp:327
 #, kde-format
 msgid "Keep below other windows"
 msgstr "Mantene infra altere fenestras"
 
-#: decorationbutton.cpp:332
+#: decorationbutton.cpp:330
 #, kde-format
 msgid "Don't keep above other windows"
 msgstr "Non mantene supra altere fenestras"
 
-#: decorationbutton.cpp:334
+#: decorationbutton.cpp:332
 #, kde-format
 msgid "Keep above other windows"
 msgstr "Mantene supra altere fenestras"

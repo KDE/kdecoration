@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdecoration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-26 00:47+0000\n"
+"POT-Creation-Date: 2023-03-13 02:33+0000\n"
 "PO-Revision-Date: 2021-06-02 20:19+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian\n"
@@ -18,77 +18,77 @@ msgstr ""
 "20)) ? 1 : 2;\n"
 "X-Generator: Lokalize 19.12.3\n"
 
-#: decorationbutton.cpp:301
+#: decorationbutton.cpp:299
 #, kde-format
 msgid "More actions for this window"
 msgstr "Acțiuni suplimentare pentru această fereastră"
 
-#: decorationbutton.cpp:303
+#: decorationbutton.cpp:301
 #, kde-format
 msgid "Application menu"
 msgstr "Meniul aplicației"
 
-#: decorationbutton.cpp:306
+#: decorationbutton.cpp:304
 #, kde-format
 msgid "On one desktop"
 msgstr "Pe un birou"
 
-#: decorationbutton.cpp:308
+#: decorationbutton.cpp:306
 #, kde-format
 msgid "On all desktops"
 msgstr "Pe toate birourile"
 
-#: decorationbutton.cpp:310
+#: decorationbutton.cpp:308
 #, kde-format
 msgid "Minimize"
 msgstr "Minimizează"
 
-#: decorationbutton.cpp:313
+#: decorationbutton.cpp:311
 #, kde-format
 msgid "Restore"
 msgstr "Restabilește"
 
-#: decorationbutton.cpp:315
+#: decorationbutton.cpp:313
 #, kde-format
 msgid "Maximize"
 msgstr "Maximizează"
 
-#: decorationbutton.cpp:317
+#: decorationbutton.cpp:315
 #, kde-format
 msgid "Close"
 msgstr "Închide"
 
-#: decorationbutton.cpp:319
+#: decorationbutton.cpp:317
 #, kde-format
 msgid "Context help"
 msgstr "Ajutor contextual"
 
-#: decorationbutton.cpp:322
+#: decorationbutton.cpp:320
 #, kde-format
 msgid "Unshade"
 msgstr "Desfășoară"
 
-#: decorationbutton.cpp:324
+#: decorationbutton.cpp:322
 #, kde-format
 msgid "Shade"
 msgstr "Strânge"
 
-#: decorationbutton.cpp:327
+#: decorationbutton.cpp:325
 #, kde-format
 msgid "Don't keep below other windows"
 msgstr "Nu ține sub alte ferestre"
 
-#: decorationbutton.cpp:329
+#: decorationbutton.cpp:327
 #, kde-format
 msgid "Keep below other windows"
 msgstr "Ține sub alte ferestre"
 
-#: decorationbutton.cpp:332
+#: decorationbutton.cpp:330
 #, kde-format
 msgid "Don't keep above other windows"
 msgstr "Nu ține deasupra altor ferestre"
 
-#: decorationbutton.cpp:334
+#: decorationbutton.cpp:332
 #, kde-format
 msgid "Keep above other windows"
 msgstr "Ține deasupra altor ferestre"
