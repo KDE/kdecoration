@@ -72,8 +72,8 @@ private:
     void init();
     DecorationButton *q;
     Qt::MouseButtons m_pressed;
-    QScopedPointer<QElapsedTimer> m_doubleClickTimer;
-    QScopedPointer<QTimer> m_pressAndHoldTimer;
+    std::unique_ptr<QElapsedTimer> m_doubleClickTimer;
+    std::unique_ptr<QTimer> m_pressAndHoldTimer;
 };
 
 }

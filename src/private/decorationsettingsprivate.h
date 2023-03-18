@@ -8,9 +8,9 @@
 #include "../decorationdefines.h"
 #include <QFont>
 #include <QFontMetricsF>
-#include <QScopedPointer>
 #include <QVector>
 #include <kdecoration2/private/kdecoration2_private_export.h>
+#include <memory>
 
 //
 //  W A R N I N G
@@ -55,6 +55,6 @@ protected:
 
 private:
     class Private;
-    const QScopedPointer<Private> d;
+    const std::unique_ptr<Private> d;
 };
 }

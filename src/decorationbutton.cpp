@@ -66,7 +66,7 @@ void DecorationButton::Private::init()
             Qt::QueuedConnection);
         QObject::connect(q, &DecorationButton::doubleClicked, decoration.data(), &Decoration::requestClose, Qt::QueuedConnection);
         QObject::connect(
-            settings.data(),
+            settings.get(),
             &DecorationSettings::closeOnDoubleClickOnMenuChanged,
             q,
             [this](bool enabled) {
@@ -98,7 +98,7 @@ void DecorationButton::Private::init()
         setCheckable(true);
         setChecked(c->isOnAllDesktops());
         QObject::connect(q, &DecorationButton::clicked, decoration.data(), &Decoration::requestToggleOnAllDesktops, Qt::QueuedConnection);
-        QObject::connect(settings.data(), &DecorationSettings::onAllDesktopsAvailableChanged, q, &DecorationButton::setVisible);
+        QObject::connect(settings.get(), &DecorationSettings::onAllDesktopsAvailableChanged, q, &DecorationButton::setVisible);
         QObject::connect(c, &DecoratedClient::onAllDesktopsChanged, q, &DecorationButton::setChecked);
         break;
     case DecorationButtonType::Minimize:
@@ -237,15 +237,15 @@ void DecorationButton::Private::startDoubleClickTimer()
     if (!doubleClickEnabled) {
         return;
     }
-    if (m_doubleClickTimer.isNull()) {
-        m_doubleClickTimer.reset(new QElapsedTimer());
+    if (!m_doubleClickTimer) {
+        m_doubleClickTimer = std::make_unique<QElapsedTimer>();
     }
     m_doubleClickTimer->start();
 }
 
 void DecorationButton::Private::invalidateDoubleClickTimer()
 {
-    if (m_doubleClickTimer.isNull()) {
+    if (!m_doubleClickTimer) {
         return;
     }
     m_doubleClickTimer->invalidate();
@@ -253,7 +253,7 @@ void DecorationButton::Private::invalidateDoubleClickTimer()
 
 bool DecorationButton::Private::wasDoubleClick() const
 {
-    if (m_doubleClickTimer.isNull() || !m_doubleClickTimer->isValid()) {
+    if (!m_doubleClickTimer || !m_doubleClickTimer->isValid()) {
         return false;
     }
     return !m_doubleClickTimer->hasExpired(QGuiApplication::styleHints()->mouseDoubleClickInterval());
@@ -275,10 +275,10 @@ void DecorationButton::Private::startPressAndHold()
     if (!pressAndHold) {
         return;
     }
-    if (m_pressAndHoldTimer.isNull()) {
+    if (!m_pressAndHoldTimer) {
         m_pressAndHoldTimer.reset(new QTimer());
         m_pressAndHoldTimer->setSingleShot(true);
-        QObject::connect(m_pressAndHoldTimer.data(), &QTimer::timeout, q, [this]() {
+        QObject::connect(m_pressAndHoldTimer.get(), &QTimer::timeout, q, [this]() {
             q->clicked(Qt::LeftButton);
         });
     }
@@ -287,7 +287,7 @@ void DecorationButton::Private::startPressAndHold()
 
 void DecorationButton::Private::stopPressAndHold()
 {
-    if (!m_pressAndHoldTimer.isNull()) {
+    if (m_pressAndHoldTimer) {
         m_pressAndHoldTimer->stop();
     }
 }

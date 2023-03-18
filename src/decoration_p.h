@@ -43,12 +43,12 @@ public:
 
     void addButton(DecorationButton *button);
 
-    QSharedPointer<DecorationSettings> settings;
+    std::shared_ptr<DecorationSettings> settings;
     DecorationBridge *bridge;
-    QSharedPointer<DecoratedClient> client;
+    std::shared_ptr<DecoratedClient> client;
     bool opaque;
     QVector<DecorationButton *> buttons;
-    QSharedPointer<DecorationShadow> shadow;
+    std::shared_ptr<DecorationShadow> shadow;
 
 private:
     Decoration *q;

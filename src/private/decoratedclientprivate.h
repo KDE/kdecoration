@@ -85,7 +85,7 @@ protected:
 
 private:
     class Private;
-    const QScopedPointer<Private> d;
+    const std::unique_ptr<Private> d;
 };
 
 class KDECORATIONS_PRIVATE_EXPORT ApplicationMenuEnabledDecoratedClientPrivate : public DecoratedClientPrivate

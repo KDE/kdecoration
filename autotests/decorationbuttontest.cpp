@@ -1001,7 +1001,7 @@ void DecorationButtonTest::testMaximize()
 void DecorationButtonTest::testOnAllDesktops()
 {
     MockBridge bridge;
-    auto decoSettings = QSharedPointer<KDecoration2::DecorationSettings>::create(&bridge);
+    auto decoSettings = std::make_shared<KDecoration2::DecorationSettings>(&bridge);
     MockDecoration mockDecoration(&bridge);
     mockDecoration.setSettings(decoSettings);
     MockButton button(KDecoration2::DecorationButtonType::OnAllDesktops, &mockDecoration);
@@ -1018,7 +1018,7 @@ void DecorationButtonTest::testOnAllDesktops()
     MockSettings *settings = bridge.lastCreatedSettings();
     QVERIFY(settings);
 
-    QSignalSpy onAllDesktopsAvailableChangedSpy(decoSettings.data(), &KDecoration2::DecorationSettings::onAllDesktopsAvailableChanged);
+    QSignalSpy onAllDesktopsAvailableChangedSpy(decoSettings.get(), &KDecoration2::DecorationSettings::onAllDesktopsAvailableChanged);
     QVERIFY(onAllDesktopsAvailableChangedSpy.isValid());
     QSignalSpy visibleChangedSpy(&button, &KDecoration2::DecorationButton::visibilityChanged);
     QVERIFY(visibleChangedSpy.isValid());
@@ -1073,7 +1073,7 @@ void DecorationButtonTest::testOnAllDesktops()
 void DecorationButtonTest::testMenu()
 {
     MockBridge bridge;
-    auto decoSettings = QSharedPointer<KDecoration2::DecorationSettings>::create(&bridge);
+    auto decoSettings = std::make_shared<KDecoration2::DecorationSettings>(&bridge);
     MockDecoration mockDecoration(&bridge);
     mockDecoration.setSettings(decoSettings);
     MockClient *client = bridge.lastCreatedClient();
@@ -1128,7 +1128,7 @@ void DecorationButtonTest::testMenu()
 void DecorationButtonTest::testMenuDoubleClick()
 {
     MockBridge bridge;
-    auto decoSettings = QSharedPointer<KDecoration2::DecorationSettings>::create(&bridge);
+    auto decoSettings = std::make_shared<KDecoration2::DecorationSettings>(&bridge);
     MockDecoration mockDecoration(&bridge);
     mockDecoration.setSettings(decoSettings);
     MockClient *client = bridge.lastCreatedClient();
@@ -1137,7 +1137,7 @@ void DecorationButtonTest::testMenuDoubleClick()
 
     MockSettings *settings = bridge.lastCreatedSettings();
     QVERIFY(settings);
-    QSignalSpy closeOnDoubleClickOnMenuChangedSpy(decoSettings.data(), &KDecoration2::DecorationSettings::closeOnDoubleClickOnMenuChanged);
+    QSignalSpy closeOnDoubleClickOnMenuChangedSpy(decoSettings.get(), &KDecoration2::DecorationSettings::closeOnDoubleClickOnMenuChanged);
     QVERIFY(closeOnDoubleClickOnMenuChangedSpy.isValid());
     settings->setCloseOnDoubleClickOnMenu(true);
     QCOMPARE(closeOnDoubleClickOnMenuChangedSpy.count(), 1);
@@ -1212,7 +1212,7 @@ void DecorationButtonTest::testMenuDoubleClick()
 void DecorationButtonTest::testMenuPressAndHold()
 {
     MockBridge bridge;
-    auto decoSettings = QSharedPointer<KDecoration2::DecorationSettings>::create(&bridge);
+    auto decoSettings = std::make_shared<KDecoration2::DecorationSettings>(&bridge);
     MockDecoration mockDecoration(&bridge);
     mockDecoration.setSettings(decoSettings);
     MockClient *client = bridge.lastCreatedClient();
@@ -1221,7 +1221,7 @@ void DecorationButtonTest::testMenuPressAndHold()
 
     MockSettings *settings = bridge.lastCreatedSettings();
     QVERIFY(settings);
-    QSignalSpy closeOnDoubleClickOnMenuChangedSpy(decoSettings.data(), &KDecoration2::DecorationSettings::closeOnDoubleClickOnMenuChanged);
+    QSignalSpy closeOnDoubleClickOnMenuChangedSpy(decoSettings.get(), &KDecoration2::DecorationSettings::closeOnDoubleClickOnMenuChanged);
     QVERIFY(closeOnDoubleClickOnMenuChangedSpy.isValid());
     settings->setCloseOnDoubleClickOnMenu(true);
     QCOMPARE(closeOnDoubleClickOnMenuChangedSpy.count(), 1);
@@ -1285,7 +1285,7 @@ void DecorationButtonTest::testMenuPressAndHold()
 void DecorationButtonTest::testApplicationMenu()
 {
     MockBridge bridge;
-    auto decoSettings = QSharedPointer<KDecoration2::DecorationSettings>::create(&bridge);
+    auto decoSettings = std::make_shared<KDecoration2::DecorationSettings>(&bridge);
     MockDecoration mockDecoration(&bridge);
     mockDecoration.setSettings(decoSettings);
     MockClient *client = bridge.lastCreatedClient();

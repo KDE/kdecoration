@@ -34,7 +34,7 @@ DecorationBridge *findBridge(const QVariantList &args)
 Decoration::Private::Private(Decoration *deco, const QVariantList &args)
     : sectionUnderMouse(Qt::NoSection)
     , bridge(findBridge(args))
-    , client(QSharedPointer<DecoratedClient>(new DecoratedClient(deco, bridge)))
+    , client(std::shared_ptr<DecoratedClient>(new DecoratedClient(deco, bridge)))
     , opaque(false)
     , q(deco)
 {
@@ -142,7 +142,7 @@ Decoration::~Decoration() = default;
 
 void Decoration::init()
 {
-    Q_ASSERT(!d->settings.isNull());
+    Q_ASSERT(d->settings);
 }
 
 DecoratedClient *Decoration::client() const
@@ -226,7 +226,7 @@ DELEGATE(setBorders, borders, const QMargins &, )
 DELEGATE(setResizeOnlyBorders, resizeOnlyBorders, const QMargins &, )
 DELEGATE(setTitleBar, titleBar, const QRect &, )
 DELEGATE(setOpaque, opaque, bool, d->opaque)
-DELEGATE(setShadow, shadow, const QSharedPointer<DecorationShadow> &, d->shadow)
+DELEGATE(setShadow, shadow, const std::shared_ptr<DecorationShadow> &, d->shadow)
 
 #undef DELEGATE
 
@@ -241,7 +241,7 @@ DELEGATE(borders, QMargins)
 DELEGATE(resizeOnlyBorders, QMargins)
 DELEGATE(titleBar, QRect)
 DELEGATE(sectionUnderMouse, Qt::WindowFrameSection)
-DELEGATE(shadow, QSharedPointer<DecorationShadow>)
+DELEGATE(shadow, std::shared_ptr<DecorationShadow>)
 
 #undef DELEGATE
 
@@ -402,12 +402,12 @@ void Decoration::update()
     update(QRect());
 }
 
-void Decoration::setSettings(const QSharedPointer<DecorationSettings> &settings)
+void Decoration::setSettings(const std::shared_ptr<DecorationSettings> &settings)
 {
     d->settings = settings;
 }
 
-QSharedPointer<DecorationSettings> Decoration::settings() const
+std::shared_ptr<DecorationSettings> Decoration::settings() const
 {
     return d->settings;
 }

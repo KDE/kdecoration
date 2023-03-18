@@ -100,7 +100,7 @@ void DecorationTest::testSection_data()
 void DecorationTest::testSection()
 {
     MockBridge bridge;
-    auto decoSettings = QSharedPointer<KDecoration2::DecorationSettings>::create(&bridge);
+    auto decoSettings = std::make_shared<KDecoration2::DecorationSettings>(&bridge);
     MockDecoration deco(&bridge);
     deco.setSettings(decoSettings);
 

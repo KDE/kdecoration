@@ -112,7 +112,7 @@ public:
      * the same DecorationShadow. E.g one DecorationShadow for all inactive Decorations and one
      * for the active Decoration.
      **/
-    QSharedPointer<DecorationShadow> shadow() const;
+    std::shared_ptr<DecorationShadow> shadow() const;
 
     /**
      * The decoration's geometry in local coordinates.
@@ -132,11 +132,11 @@ public:
      * init is invoked.
      * @internal
      **/
-    void setSettings(const QSharedPointer<DecorationSettings> &settings);
+    void setSettings(const std::shared_ptr<DecorationSettings> &settings);
     /**
      * @returns The DecorationSettings used for this Decoration.
      **/
-    QSharedPointer<DecorationSettings> settings() const;
+    std::shared_ptr<DecorationSettings> settings() const;
 
     /**
      * Implement this method in inheriting classes to provide the rendering.
@@ -199,7 +199,7 @@ Q_SIGNALS:
     void sectionUnderMouseChanged(Qt::WindowFrameSection);
     void titleBarChanged();
     void opaqueChanged(bool);
-    void shadowChanged(const QSharedPointer<DecorationShadow> &shadow);
+    void shadowChanged(const std::shared_ptr<DecorationShadow> &shadow);
     void damaged(const QRegion &region);
 
 protected:
@@ -224,7 +224,7 @@ protected:
      **/
     void setTitleBar(const QRect &rect);
     void setOpaque(bool opaque);
-    void setShadow(const QSharedPointer<DecorationShadow> &shadow);
+    void setShadow(const std::shared_ptr<DecorationShadow> &shadow);
 
     virtual void hoverEnterEvent(QHoverEvent *event);
     virtual void hoverLeaveEvent(QHoverEvent *event);
@@ -237,7 +237,7 @@ protected:
 private:
     friend class DecorationButton;
     class Private;
-    QScopedPointer<Private> d;
+    std::unique_ptr<Private> d;
 };
 
 } // namespace
