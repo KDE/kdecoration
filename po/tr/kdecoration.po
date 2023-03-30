@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdecoration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-26 00:47+0000\n"
-"PO-Revision-Date: 2023-03-28 22:09+0300\n"
+"PO-Revision-Date: 2023-03-29 15:49+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -85,9 +85,9 @@ msgstr "Diğer pencerelerin altında tut"
 #: decorationbutton.cpp:332
 #, kde-format
 msgid "Don't keep above other windows"
-msgstr "Diğer pencerelerin üstünde tutma"
+msgstr "Diğer pencerelerin üzerinde tutma"
 
 #: decorationbutton.cpp:334
 #, kde-format
 msgid "Keep above other windows"
-msgstr "Diğer pencerelerin üstünde tut"
+msgstr "Diğer pencerelerin üzerinde tut"
