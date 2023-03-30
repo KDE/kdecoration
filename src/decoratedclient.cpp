@@ -27,7 +27,6 @@ DecoratedClient::~DecoratedClient() = default;
 
 DELEGATE(bool, isActive)
 DELEGATE(QString, caption)
-DELEGATE(int, desktop)
 DELEGATE(bool, isOnAllDesktops)
 DELEGATE(bool, isShaded)
 DELEGATE(QIcon, icon)

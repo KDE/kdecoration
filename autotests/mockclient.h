@@ -18,7 +18,6 @@ public:
     Qt::Edges adjacentScreenEdges() const override;
     QString caption() const override;
     WId decorationId() const override;
-    int desktop() const override;
     int height() const override;
     QIcon icon() const override;
     bool isActive() const override;

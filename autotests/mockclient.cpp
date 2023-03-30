@@ -29,11 +29,6 @@ WId MockClient::decorationId() const
     return 0;
 }
 
-int MockClient::desktop() const
-{
-    return 1;
-}
-
 int MockClient::height() const
 {
     return m_height;

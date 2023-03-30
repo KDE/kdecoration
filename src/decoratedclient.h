@@ -51,11 +51,6 @@ class KDECORATIONS2_EXPORT DecoratedClient : public QObject
      **/
     Q_PROPERTY(QString caption READ caption NOTIFY captionChanged)
     /**
-     * The virtual desktop of the DecoratedClient. The special value @c -1 means on all
-     * desktops. For this prefer using the property onAllDesktops.
-     **/
-    Q_PROPERTY(int desktop READ desktop NOTIFY desktopChanged)
-    /**
      * Whether the DecoratedClient is on all desktops or on just one.
      **/
     Q_PROPERTY(bool onAllDesktops READ isOnAllDesktops NOTIFY onAllDesktopsChanged)
@@ -174,7 +169,6 @@ public:
     ~DecoratedClient() override;
     bool isActive() const;
     QString caption() const;
-    int desktop() const;
     bool isOnAllDesktops() const;
     bool isShaded() const;
     QIcon icon() const;
@@ -244,7 +238,6 @@ public:
 Q_SIGNALS:
     void activeChanged(bool);
     void captionChanged(QString);
-    void desktopChanged(int);
     void onAllDesktopsChanged(bool);
     void shadedChanged(bool);
     void iconChanged(QIcon);

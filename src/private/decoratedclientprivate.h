@@ -33,7 +33,6 @@ public:
     virtual ~DecoratedClientPrivate();
     virtual bool isActive() const = 0;
     virtual QString caption() const = 0;
-    virtual int desktop() const = 0;
     virtual bool isOnAllDesktops() const = 0;
     virtual bool isShaded() const = 0;
     virtual QIcon icon() const = 0;
