@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-# Adrián Chaves (Gallaecio) <adrian@chaves.io>, 2018, 2019.
+# Adrián Chaves (Gallaecio) <adrian@chaves.io>, 2018, 2019, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-26 00:47+0000\n"
-"PO-Revision-Date: 2019-10-19 22:00+0200\n"
+"PO-Revision-Date: 2023-04-28 17:26+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -15,12 +15,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 19.11.70\n"
+"X-Generator: Lokalize 23.04.0\n"
 
 #: decorationbutton.cpp:301
 #, kde-format
 msgid "More actions for this window"
-msgstr ""
+msgstr "Máis accións para esta xanela"
 
 #: decorationbutton.cpp:303
 #, kde-format
@@ -73,26 +73,24 @@ msgid "Shade"
 msgstr "Enrolar"
 
 #: decorationbutton.cpp:327
-#, fuzzy, kde-format
-#| msgid "Don't keep below"
+#, kde-format
 msgid "Don't keep below other windows"
-msgstr "Non manter debaixo"
+msgstr "Non manter debaixo doutras xanelas"
 
 #: decorationbutton.cpp:329
 #, kde-format
 msgid "Keep below other windows"
-msgstr ""
+msgstr "Manter debaixo doutras xanelas"
 
 #: decorationbutton.cpp:332
-#, fuzzy, kde-format
-#| msgid "Don't keep above"
+#, kde-format
 msgid "Don't keep above other windows"
-msgstr "Non manter enriba"
+msgstr "Non manter enriba doutras xanelas"
 
 #: decorationbutton.cpp:334
 #, kde-format
 msgid "Keep above other windows"
-msgstr ""
+msgstr "Manter enriba doutras xanelas"
 
 #~ msgid "Menu"
 #~ msgstr "Menú"
