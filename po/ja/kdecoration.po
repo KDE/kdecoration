@@ -1,11 +1,12 @@
 # Tomohiro Hyakutake <tomhioo@outlook.jp>, 2019.
+# Ryuichi Yamada <ryuichi_ya220@outlook.jp>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdecoration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-26 00:47+0000\n"
-"PO-Revision-Date: 2019-05-22 14:12+0900\n"
-"Last-Translator: Tomohiro Hyakutake <tomhioo@outlook.jp>\n"
+"PO-Revision-Date: 2023-05-18 00:36+0900\n"
+"Last-Translator: Ryuichi Yamada <ryuichi_ya220@outlook.jp>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
@@ -14,12 +15,12 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
-"X-Generator: Lokalize 19.04.1\n"
+"X-Generator: Lokalize 23.04.0\n"
 
 #: decorationbutton.cpp:301
 #, kde-format
 msgid "More actions for this window"
-msgstr ""
+msgstr "このウィンドウに対するその他のアクション"
 
 #: decorationbutton.cpp:303
 #, kde-format
@@ -44,7 +45,7 @@ msgstr "最小化"
 #: decorationbutton.cpp:313
 #, kde-format
 msgid "Restore"
-msgstr "元に戻す"
+msgstr "復元"
 
 #: decorationbutton.cpp:315
 #, kde-format
@@ -72,23 +73,21 @@ msgid "Shade"
 msgstr "シェード"
 
 #: decorationbutton.cpp:327
-#, fuzzy, kde-format
-#| msgid "Don't keep below"
+#, kde-format
 msgid "Don't keep below other windows"
-msgstr "最背面に表示しない"
+msgstr "他のウィンドウの下に保持しない"
 
 #: decorationbutton.cpp:329
 #, kde-format
 msgid "Keep below other windows"
-msgstr ""
+msgstr "他のウィンドウより下に表示"
 
 #: decorationbutton.cpp:332
-#, fuzzy, kde-format
-#| msgid "Don't keep above"
+#, kde-format
 msgid "Don't keep above other windows"
-msgstr "最前面に表示しない"
+msgstr "他のウィンドウの上に保持しない"
 
 #: decorationbutton.cpp:334
 #, kde-format
 msgid "Keep above other windows"
-msgstr ""
+msgstr "他のウィンドウより上に表示"
