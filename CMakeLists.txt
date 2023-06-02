@@ -32,7 +32,7 @@ ecm_setup_version(${PROJECT_VERSION} VARIABLE_PREFIX KDECORATION2
                         SOVERSION 5)
 
 #dependencies
-find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS
+find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS
     Core
     Gui
     Test
