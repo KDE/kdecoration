@@ -13,8 +13,8 @@ class DecorationThemeMetaDataPrivate : public QSharedData
 public:
     QString visibleName;
     QString themeName;
+    QString configurationName;
     QString pluginId;
-    bool hasConfig = false;
     KDecoration2::BorderSize borderSize = KDecoration2::BorderSize::Normal;
 };
 
@@ -37,16 +37,6 @@ void DecorationThemeMetaData::setVisibleName(const QString &name)
     d->visibleName = name;
 }
 
-bool DecorationThemeMetaData::hasConfiguration() const
-{
-    return d->hasConfig;
-}
-
-void DecorationThemeMetaData::setHasConfiguration(bool hasConfig)
-{
-    d->hasConfig = hasConfig;
-}
-
 QString DecorationThemeMetaData::themeName() const
 {
     return d->themeName;
@@ -55,6 +45,16 @@ QString DecorationThemeMetaData::themeName() const
 void DecorationThemeMetaData::setThemeName(const QString &name)
 {
     d->themeName = name;
+}
+
+QString DecorationThemeMetaData::configurationName() const
+{
+    return d->configurationName;
+}
+
+void DecorationThemeMetaData::setConfigurationName(const QString &name)
+{
+    d->configurationName = name;
 }
 
 void DecorationThemeMetaData::setBorderSize(KDecoration2::BorderSize size)

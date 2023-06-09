@@ -38,9 +38,9 @@ public:
     QString themeName() const;
     void setThemeName(const QString &name);
 
-    /// Indicates that the theme has KCMs
-    bool hasConfiguration() const;
-    void setHasConfiguration(bool hasConfig);
+    /// Name of the kcm to configure the decoration theme
+    QString configurationName() const;
+    void setConfigurationName(const QString &name);
 
     /// Border size of the decoration, this gets set based on the "recommendedBorderSize" key in the json metadata
     /// @internal
