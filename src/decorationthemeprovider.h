@@ -66,7 +66,7 @@ class KDECORATIONS2_EXPORT DecorationThemeProvider : public QObject
     Q_OBJECT
 
 public:
-    explicit DecorationThemeProvider(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
+    explicit DecorationThemeProvider(QObject *parent);
 
     /**
      * List containing information of supported themes

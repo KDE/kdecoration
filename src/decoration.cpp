@@ -38,7 +38,6 @@ Decoration::Private::Private(Decoration *deco, const QVariantList &args)
     , opaque(false)
     , q(deco)
 {
-    Q_UNUSED(args)
 }
 
 void Decoration::Private::setSectionUnderMouse(Qt::WindowFrameSection section)

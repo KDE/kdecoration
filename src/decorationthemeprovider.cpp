@@ -77,11 +77,9 @@ void DecorationThemeMetaData::setPluginId(const QString &id)
     d->pluginId = id;
 }
 
-DecorationThemeProvider::DecorationThemeProvider(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
+DecorationThemeProvider::DecorationThemeProvider(QObject *parent)
     : QObject(parent)
 {
-    Q_UNUSED(data)
-    Q_UNUSED(args)
 }
 
 DecorationThemeMetaData::DecorationThemeMetaData(const DecorationThemeMetaData &other) = default;
