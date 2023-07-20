@@ -25,6 +25,7 @@ include(GenerateExportHeader)
 include(CMakePackageConfigHelpers)
 include(KDEClangFormat)
 include(KDEGitCommitHooks)
+include(ECMDeprecationSettings)
 
 ecm_setup_version(${PROJECT_VERSION} VARIABLE_PREFIX KDECORATION2
                         VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kdecoration2_version.h"
@@ -49,8 +50,10 @@ set(KDECORATION2_INCLUDEDIR "${KDE_INSTALL_INCLUDEDIR}/KDecoration2")
 find_package(KF6I18n ${KF6_MIN_VERSION} CONFIG REQUIRED)
 find_package(KF6CoreAddons ${KF6_MIN_VERSION} CONFIG REQUIRED)
 
-add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x050d00)
-add_definitions(-DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x054200)
+ecm_set_disabled_deprecation_versions(QT 5.15.2
+    KF 5.240.0
+    )
+
 add_definitions(-DQT_NO_KEYWORDS)
 
 # Subdirectories
