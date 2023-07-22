@@ -165,13 +165,6 @@ DELEGATE(requestToggleKeepBelow)
 
 #undef DELEGATE
 
-#if KDECORATIONS2_ENABLE_DEPRECATED_SINCE(5, 21)
-void Decoration::requestShowWindowMenu()
-{
-    requestShowWindowMenu(QRect());
-}
-#endif
-
 void Decoration::requestShowWindowMenu(const QRect &rect)
 {
     d->client->d->requestShowWindowMenu(rect);

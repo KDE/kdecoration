@@ -29,7 +29,7 @@ add_library(kdecorations2 SHARED ${libkdecoration2_SRCS})
 ecm_generate_export_header(kdecorations2
     VERSION ${PROJECT_VERSION}
     EXPORT_FILE_NAME kdecoration2/kdecoration2_export.h
-    DEPRECATION_VERSIONS 5.21
+    DEPRECATION_VERSIONS
     EXCLUDE_DEPRECATED_BEFORE_AND_AT ${EXCLUDE_DEPRECATED_BEFORE_AND_AT}
 )
 
