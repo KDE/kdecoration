@@ -563,3 +563,5 @@ void DecorationButton::wheelEvent(QWheelEvent *event)
 }
 
 }
+
+#include "moc_decorationbutton.cpp"

@@ -58,3 +58,5 @@ DELEGATE(int, largeSpacing)
 #undef DELEGATE
 
 }
+
+#include "moc_decorationsettings.cpp"

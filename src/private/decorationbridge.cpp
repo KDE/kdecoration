@@ -18,3 +18,5 @@ DecorationBridge::DecorationBridge(QObject *parent)
 DecorationBridge::~DecorationBridge() = default;
 
 }
+
+#include "moc_decorationbridge.cpp"

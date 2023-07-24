@@ -15,3 +15,5 @@ void MockButton::paint(QPainter *painter, const QRect &repaintRegion)
     Q_UNUSED(painter)
     Q_UNUSED(repaintRegion)
 }
+
+#include "moc_mockbutton.cpp"

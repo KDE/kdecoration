@@ -51,3 +51,5 @@ void MockDecoration::setTitleBar(const QRect &rect)
 {
     Decoration::setTitleBar(rect);
 }
+
+#include "moc_mockdecoration.cpp"

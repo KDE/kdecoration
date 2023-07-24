@@ -85,3 +85,5 @@ DecorationThemeProvider::DecorationThemeProvider(QObject *parent)
 DecorationThemeMetaData::DecorationThemeMetaData(const DecorationThemeMetaData &other) = default;
 
 DecorationThemeMetaData &DecorationThemeMetaData::operator=(const DecorationThemeMetaData &other) = default;
+
+#include "moc_decorationthemeprovider.cpp"

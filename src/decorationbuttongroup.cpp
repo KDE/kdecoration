@@ -237,3 +237,5 @@ void DecorationButtonGroup::paint(QPainter *painter, const QRect &repaintArea)
 }
 
 } // namespace
+
+#include "moc_decorationbuttongroup.cpp"

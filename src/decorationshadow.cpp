@@ -161,3 +161,5 @@ void DecorationShadow::setInnerShadowRect(const QRect &rect)
 }
 
 }
+
+#include "moc_decorationshadow.cpp"

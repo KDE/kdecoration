@@ -288,3 +288,5 @@ void MockClient::showApplicationMenu(int actionId)
 {
     Q_UNUSED(actionId)
 }
+
+#include "moc_mockclient.cpp"

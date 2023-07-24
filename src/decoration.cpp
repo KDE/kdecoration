@@ -412,3 +412,5 @@ std::shared_ptr<DecorationSettings> Decoration::settings() const
 }
 
 } // namespace
+
+#include "moc_decoration.cpp"

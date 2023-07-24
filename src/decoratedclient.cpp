@@ -93,3 +93,5 @@ void DecoratedClient::showApplicationMenu(int actionId)
 }
 
 } // namespace
+
+#include "moc_decoratedclient.cpp"

@@ -21,3 +21,5 @@ std::unique_ptr<KDecoration2::DecorationSettingsPrivate> MockBridge::settings(KD
     m_lastCreatedSettings = ptr.get();
     return ptr;
 }
+
+#include "moc_mockbridge.cpp"
