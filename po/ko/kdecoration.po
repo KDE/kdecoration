@@ -25,7 +25,7 @@ msgstr "이 창의 더 많은 동작"
 #: decorationbutton.cpp:301
 #, kde-format
 msgid "Application menu"
-msgstr "프로그램 메뉴"
+msgstr "앱 메뉴"
 
 #: decorationbutton.cpp:304
 #, kde-format
