@@ -42,7 +42,6 @@ target_link_libraries(kdecorations2
     PRIVATE
         kdecorations2private
         KF6::I18n
-        KF6::CoreAddons
 )
 
 target_include_directories(kdecorations2 INTERFACE "$<INSTALL_INTERFACE:${KDECORATION2_INCLUDEDIR}>" )

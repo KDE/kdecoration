@@ -6,8 +6,6 @@
 
 #include "decorationthemeprovider.h"
 
-#include <KPluginMetaData>
-
 class DecorationThemeMetaDataPrivate : public QSharedData
 {
 public:
