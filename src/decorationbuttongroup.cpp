@@ -64,25 +64,29 @@ void DecorationButtonGroup::Private::updateLayout()
     qreal leftPosition = pos.x();
     qreal rightPosition = pos.x() + width;
 
-    if (layoutDirection == Qt::LeftToRight) for (auto button : qAsConst(buttons)) {
-        if (!button->isVisible()) {
-            continue;
+    if (layoutDirection == Qt::LeftToRight)
+        for (auto button : std::as_const(buttons)) {
+            if (!button->isVisible()) {
+                continue;
+            }
+            const auto size = button->size();
+            const auto buttonPos = QPointF(leftPosition, pos.y());
+            button->setGeometry(QRectF(buttonPos, size));
+            leftPosition += size.width() + spacing;
         }
-        const auto size = button->size();
-        const auto buttonPos = QPointF(leftPosition, pos.y());
-        button->setGeometry(QRectF(buttonPos, size));
-        leftPosition += size.width() + spacing;
-    } else if (layoutDirection == Qt::RightToLeft) for (auto button : qAsConst(buttons)) {
-        if (!button->isVisible()) {
-            continue;
+    else if (layoutDirection == Qt::RightToLeft)
+        for (auto button : std::as_const(buttons)) {
+            if (!button->isVisible()) {
+                continue;
+            }
+            const auto size = button->size();
+            const auto buttonPos = QPointF(rightPosition - size.width(), pos.y());
+            button->setGeometry(QRectF(buttonPos, size));
+            rightPosition -= size.width() + spacing;
         }
-        const auto size = button->size();
-        const auto buttonPos = QPointF(rightPosition - size.width(), pos.y());
-        button->setGeometry(QRectF(buttonPos, size));
-        rightPosition -= size.width() + spacing;
-    } else {
-    	qCritical() << "There's an unhandled layout direction! This is likely an issue of KDecoration2 not being updated to handle it\n"
-    	            << "or the application having an invalid layout direction set. Either way, this is a critical bug.";
+    else {
+        qCritical() << "There's an unhandled layout direction! This is likely an issue of KDecoration2 not being updated to handle it\n"
+                    << "or the application having an invalid layout direction set. Either way, this is a critical bug.";
     }
 
     s_layoutRecursion = false;
