@@ -190,7 +190,7 @@ void DecorationButtonGroup::addButton(DecorationButton *button)
     d->updateLayout();
 }
 
-QVector<DecorationButton *> DecorationButtonGroup::buttons() const
+QList<DecorationButton *> DecorationButtonGroup::buttons() const
 {
     return d->buttons;
 }

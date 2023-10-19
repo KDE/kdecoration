@@ -6,8 +6,8 @@
 #pragma once
 #include "decorationbuttongroup.h"
 
+#include <QList>
 #include <QRectF>
-#include <QVector>
 
 //
 //  W A R N I N G
@@ -35,7 +35,7 @@ public:
 
     Decoration *decoration;
     QRectF geometry;
-    QVector<DecorationButton *> buttons;
+    QList<DecorationButton *> buttons;
     qreal spacing;
 
 private:

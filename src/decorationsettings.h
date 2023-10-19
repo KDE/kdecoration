@@ -51,11 +51,11 @@ class KDECORATIONS2_EXPORT DecorationSettings : public QObject
     /**
      * The suggested ordering of the decoration buttons on the left.
      **/
-    Q_PROPERTY(QVector<KDecoration2::DecorationButtonType> decorationButtonsLeft READ decorationButtonsLeft NOTIFY decorationButtonsLeftChanged)
+    Q_PROPERTY(QList<KDecoration2::DecorationButtonType> decorationButtonsLeft READ decorationButtonsLeft NOTIFY decorationButtonsLeftChanged)
     /**
      * The suggested ordering of the decoration buttons on the right.
      **/
-    Q_PROPERTY(QVector<KDecoration2::DecorationButtonType> decorationButtonsRight READ decorationButtonsRight NOTIFY decorationButtonsRightChanged)
+    Q_PROPERTY(QList<KDecoration2::DecorationButtonType> decorationButtonsRight READ decorationButtonsRight NOTIFY decorationButtonsRightChanged)
     /**
      * The suggested border size.
      **/
@@ -90,8 +90,8 @@ public:
     bool isOnAllDesktopsAvailable() const;
     bool isAlphaChannelSupported() const;
     bool isCloseOnDoubleClickOnMenu() const;
-    QVector<DecorationButtonType> decorationButtonsLeft() const;
-    QVector<DecorationButtonType> decorationButtonsRight() const;
+    QList<DecorationButtonType> decorationButtonsLeft() const;
+    QList<DecorationButtonType> decorationButtonsRight() const;
     BorderSize borderSize() const;
 
     QFont font() const;
@@ -109,8 +109,8 @@ Q_SIGNALS:
     void onAllDesktopsAvailableChanged(bool);
     void alphaChannelSupportedChanged(bool);
     void closeOnDoubleClickOnMenuChanged(bool);
-    void decorationButtonsLeftChanged(const QVector<KDecoration2::DecorationButtonType> &);
-    void decorationButtonsRightChanged(const QVector<KDecoration2::DecorationButtonType> &);
+    void decorationButtonsLeftChanged(const QList<KDecoration2::DecorationButtonType> &);
+    void decorationButtonsRightChanged(const QList<KDecoration2::DecorationButtonType> &);
     void borderSizeChanged(KDecoration2::BorderSize size);
     void fontChanged(const QFont &font);
     void gridUnitChanged(int);

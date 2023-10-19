@@ -100,7 +100,7 @@ public:
     /**
      * @returns All DecorationButtons in this DecorationButtonGroup
      **/
-    QVector<DecorationButton *> buttons() const;
+    QList<DecorationButton *> buttons() const;
 
 Q_SIGNALS:
     void spacingChanged(qreal);

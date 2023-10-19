@@ -16,14 +16,14 @@ KDecoration2::BorderSize MockSettings::borderSize() const
     return KDecoration2::BorderSize::Normal;
 }
 
-QVector<KDecoration2::DecorationButtonType> MockSettings::decorationButtonsLeft() const
+QList<KDecoration2::DecorationButtonType> MockSettings::decorationButtonsLeft() const
 {
-    return QVector<KDecoration2::DecorationButtonType>();
+    return QList<KDecoration2::DecorationButtonType>();
 }
 
-QVector<KDecoration2::DecorationButtonType> MockSettings::decorationButtonsRight() const
+QList<KDecoration2::DecorationButtonType> MockSettings::decorationButtonsRight() const
 {
-    return QVector<KDecoration2::DecorationButtonType>();
+    return QList<KDecoration2::DecorationButtonType>();
 }
 
 bool MockSettings::isAlphaChannelSupported() const
