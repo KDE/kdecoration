@@ -189,8 +189,11 @@ public Q_SLOTS:
      *
      * An inheriting class should override this method and perform all initialization in
      * this method instead of the constructor.
+     *
+     * @return true if initialization has been successful,
+     * false otherwise (for example, a QML component could not be loaded)
      **/
-    virtual void init();
+    virtual bool init() = 0;
 
 Q_SIGNALS:
     void blurRegionChanged();

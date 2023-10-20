@@ -139,11 +139,6 @@ Decoration::Decoration(QObject *parent, const QVariantList &args)
 
 Decoration::~Decoration() = default;
 
-void Decoration::init()
-{
-    Q_ASSERT(d->settings);
-}
-
 DecoratedClient *Decoration::client() const
 {
     return d->client.get();
