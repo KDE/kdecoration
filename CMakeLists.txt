@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 
 project(decoration-api)
 set(PROJECT_VERSION "5.27.80")
+set(PROJECT_VERSION_MAJOR 6)
 
 set(QT_MIN_VERSION "6.4.0")
 set(KF6_MIN_VERSION "5.240.0")
@@ -30,7 +31,7 @@ include(ECMDeprecationSettings)
 ecm_setup_version(${PROJECT_VERSION} VARIABLE_PREFIX KDECORATION2
                         VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kdecoration2_version.h"
                         PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KDecoration2ConfigVersion.cmake"
-                        SOVERSION 5)
+                        SOVERSION ${PROJECT_VERSION_MAJOR})
 
 #dependencies
 find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS
