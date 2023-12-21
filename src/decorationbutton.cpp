@@ -24,9 +24,9 @@
 namespace KDecoration2
 {
 #ifndef K_DOXYGEN
-uint qHash(const DecorationButtonType &type)
+size_t qHash(const DecorationButtonType &type, size_t seed)
 {
-    return static_cast<uint>(type);
+    return qHash(type, seed);
 }
 #endif
 

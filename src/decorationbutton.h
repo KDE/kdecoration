@@ -21,7 +21,7 @@ namespace KDecoration2
 class DecorationButtonPrivate;
 class Decoration;
 #ifndef K_DOXYGEN
-uint KDECORATIONS2_EXPORT qHash(const DecorationButtonType &type);
+size_t KDECORATIONS2_EXPORT qHash(const DecorationButtonType &type, size_t seed = 0);
 #endif
 
 /**
