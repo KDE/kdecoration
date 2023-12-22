@@ -20,9 +20,6 @@ namespace KDecoration2
 {
 class DecorationButtonPrivate;
 class Decoration;
-#ifndef K_DOXYGEN
-size_t KDECORATIONS2_EXPORT qHash(const DecorationButtonType &type, size_t seed = 0);
-#endif
 
 /**
  * @brief A button to be used in a Decoration.
@@ -174,4 +171,9 @@ private:
 };
 
 } // namespace
+
+#ifndef K_DOXYGEN
+size_t KDECORATIONS2_EXPORT qHash(const KDecoration2::DecorationButtonType &type, size_t seed = 0);
+#endif
+
 Q_DECLARE_METATYPE(KDecoration2::DecorationButtonType)

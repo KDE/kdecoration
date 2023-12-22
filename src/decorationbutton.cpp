@@ -21,14 +21,15 @@
 
 #include <cmath>
 
-namespace KDecoration2
-{
 #ifndef K_DOXYGEN
-size_t qHash(const DecorationButtonType &type, size_t seed)
+size_t qHash(const KDecoration2::DecorationButtonType &type, size_t seed)
 {
-    return qHash(type, seed);
+    return qHash(uint(type), seed);
 }
 #endif
+
+namespace KDecoration2
+{
 
 DecorationButton::Private::Private(DecorationButtonType type, const QPointer<Decoration> &decoration, DecorationButton *parent)
     : decoration(decoration)
