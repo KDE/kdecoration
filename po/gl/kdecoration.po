@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-13 02:33+0000\n"
+"POT-Creation-Date: 2023-12-23 01:46+0000\n"
 "PO-Revision-Date: 2023-04-28 17:26+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
@@ -17,77 +17,77 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 23.04.0\n"
 
-#: decorationbutton.cpp:299
+#: decorationbutton.cpp:300
 #, kde-format
 msgid "More actions for this window"
 msgstr "Máis accións para esta xanela"
 
-#: decorationbutton.cpp:301
+#: decorationbutton.cpp:302
 #, kde-format
 msgid "Application menu"
 msgstr "Menú das aplicacións"
 
-#: decorationbutton.cpp:304
+#: decorationbutton.cpp:305
 #, kde-format
 msgid "On one desktop"
 msgstr "Nun escritorio"
 
-#: decorationbutton.cpp:306
+#: decorationbutton.cpp:307
 #, kde-format
 msgid "On all desktops"
 msgstr "En todos os escritorios"
 
-#: decorationbutton.cpp:308
+#: decorationbutton.cpp:309
 #, kde-format
 msgid "Minimize"
 msgstr "Minimizar"
 
-#: decorationbutton.cpp:311
+#: decorationbutton.cpp:312
 #, kde-format
 msgid "Restore"
 msgstr "Restaurar"
 
-#: decorationbutton.cpp:313
+#: decorationbutton.cpp:314
 #, kde-format
 msgid "Maximize"
 msgstr "Maximizar"
 
-#: decorationbutton.cpp:315
+#: decorationbutton.cpp:316
 #, kde-format
 msgid "Close"
 msgstr "Pechar"
 
-#: decorationbutton.cpp:317
+#: decorationbutton.cpp:318
 #, kde-format
 msgid "Context help"
 msgstr "Axuda contextual"
 
-#: decorationbutton.cpp:320
+#: decorationbutton.cpp:321
 #, kde-format
 msgid "Unshade"
 msgstr "Desenrolar"
 
-#: decorationbutton.cpp:322
+#: decorationbutton.cpp:323
 #, kde-format
 msgid "Shade"
 msgstr "Enrolar"
 
-#: decorationbutton.cpp:325
+#: decorationbutton.cpp:326
 #, kde-format
 msgid "Don't keep below other windows"
 msgstr "Non manter debaixo doutras xanelas"
 
-#: decorationbutton.cpp:327
+#: decorationbutton.cpp:328
 #, kde-format
 msgid "Keep below other windows"
 msgstr "Manter debaixo doutras xanelas"
 
-#: decorationbutton.cpp:330
+#: decorationbutton.cpp:331
 #, kde-format
 msgid "Don't keep above other windows"
 msgstr "Non manter enriba doutras xanelas"
 
-#: decorationbutton.cpp:332
+#: decorationbutton.cpp:333
 #, kde-format
 msgid "Keep above other windows"
 msgstr "Manter enriba doutras xanelas"

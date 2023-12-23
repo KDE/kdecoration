@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdecoration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-13 02:33+0000\n"
+"POT-Creation-Date: 2023-12-23 01:46+0000\n"
 "PO-Revision-Date: 2023-04-28 23:02+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
@@ -16,77 +16,77 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: decorationbutton.cpp:299
+#: decorationbutton.cpp:300
 #, kde-format
 msgid "More actions for this window"
 msgstr "Pliaj agoj por ĉi tiu fenestro"
 
-#: decorationbutton.cpp:301
+#: decorationbutton.cpp:302
 #, kde-format
 msgid "Application menu"
 msgstr "Aplikaĵa menuo"
 
-#: decorationbutton.cpp:304
+#: decorationbutton.cpp:305
 #, kde-format
 msgid "On one desktop"
 msgstr "Sur unu labortablo"
 
-#: decorationbutton.cpp:306
+#: decorationbutton.cpp:307
 #, kde-format
 msgid "On all desktops"
 msgstr "Sur ĉiuj labortabloj"
 
-#: decorationbutton.cpp:308
+#: decorationbutton.cpp:309
 #, kde-format
 msgid "Minimize"
 msgstr "Minimumigi"
 
-#: decorationbutton.cpp:311
+#: decorationbutton.cpp:312
 #, kde-format
 msgid "Restore"
 msgstr "Restaŭri"
 
-#: decorationbutton.cpp:313
+#: decorationbutton.cpp:314
 #, kde-format
 msgid "Maximize"
 msgstr "Maksimumigi"
 
-#: decorationbutton.cpp:315
+#: decorationbutton.cpp:316
 #, kde-format
 msgid "Close"
 msgstr "Fermi"
 
-#: decorationbutton.cpp:317
+#: decorationbutton.cpp:318
 #, kde-format
 msgid "Context help"
 msgstr "Kunteksta helpo"
 
-#: decorationbutton.cpp:320
+#: decorationbutton.cpp:321
 #, kde-format
 msgid "Unshade"
 msgstr "Malombrigi"
 
-#: decorationbutton.cpp:322
+#: decorationbutton.cpp:323
 #, kde-format
 msgid "Shade"
 msgstr "Ombrigi"
 
-#: decorationbutton.cpp:325
+#: decorationbutton.cpp:326
 #, kde-format
 msgid "Don't keep below other windows"
 msgstr "Ne teni sub aliaj fenestroj"
 
-#: decorationbutton.cpp:327
+#: decorationbutton.cpp:328
 #, kde-format
 msgid "Keep below other windows"
 msgstr "Teni sub aliaj fenestroj"
 
-#: decorationbutton.cpp:330
+#: decorationbutton.cpp:331
 #, kde-format
 msgid "Don't keep above other windows"
 msgstr "Ne teni super aliaj fenestroj"
 
-#: decorationbutton.cpp:332
+#: decorationbutton.cpp:333
 #, kde-format
 msgid "Keep above other windows"
 msgstr "Teni super aliaj fenestroj"

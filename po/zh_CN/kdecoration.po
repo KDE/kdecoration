@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-13 02:33+0000\n"
+"POT-Creation-Date: 2023-12-23 01:46+0000\n"
 "PO-Revision-Date: 2023-12-20 11:22\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -17,77 +17,77 @@ msgstr ""
 "X-Crowdin-File: /kf6-trunk/messages/kdecoration/kdecoration.pot\n"
 "X-Crowdin-File-ID: 42939\n"
 
-#: decorationbutton.cpp:299
+#: decorationbutton.cpp:300
 #, kde-format
 msgid "More actions for this window"
 msgstr "此窗口的更多操作"
 
-#: decorationbutton.cpp:301
+#: decorationbutton.cpp:302
 #, kde-format
 msgid "Application menu"
 msgstr "应用程序菜单"
 
-#: decorationbutton.cpp:304
+#: decorationbutton.cpp:305
 #, kde-format
 msgid "On one desktop"
 msgstr "在一个桌面"
 
-#: decorationbutton.cpp:306
+#: decorationbutton.cpp:307
 #, kde-format
 msgid "On all desktops"
 msgstr "在全部桌面"
 
-#: decorationbutton.cpp:308
+#: decorationbutton.cpp:309
 #, kde-format
 msgid "Minimize"
 msgstr "最小化"
 
-#: decorationbutton.cpp:311
+#: decorationbutton.cpp:312
 #, kde-format
 msgid "Restore"
 msgstr "还原"
 
-#: decorationbutton.cpp:313
+#: decorationbutton.cpp:314
 #, kde-format
 msgid "Maximize"
 msgstr "最大化"
 
-#: decorationbutton.cpp:315
+#: decorationbutton.cpp:316
 #, kde-format
 msgid "Close"
 msgstr "关闭"
 
-#: decorationbutton.cpp:317
+#: decorationbutton.cpp:318
 #, kde-format
 msgid "Context help"
 msgstr "相关帮助"
 
-#: decorationbutton.cpp:320
+#: decorationbutton.cpp:321
 #, kde-format
 msgid "Unshade"
 msgstr "展开"
 
-#: decorationbutton.cpp:322
+#: decorationbutton.cpp:323
 #, kde-format
 msgid "Shade"
 msgstr "折叠"
 
-#: decorationbutton.cpp:325
+#: decorationbutton.cpp:326
 #, kde-format
 msgid "Don't keep below other windows"
 msgstr "不要保持在其他窗口之下"
 
-#: decorationbutton.cpp:327
+#: decorationbutton.cpp:328
 #, kde-format
 msgid "Keep below other windows"
 msgstr "保持在其他窗口之下"
 
-#: decorationbutton.cpp:330
+#: decorationbutton.cpp:331
 #, kde-format
 msgid "Don't keep above other windows"
 msgstr "不要保持在其他窗口之上"
 
-#: decorationbutton.cpp:332
+#: decorationbutton.cpp:333
 #, kde-format
 msgid "Keep above other windows"
 msgstr "保持在其他窗口之上"
