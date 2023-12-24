@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdecoration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-13 02:33+0000\n"
+"POT-Creation-Date: 2023-12-23 01:46+0000\n"
 "PO-Revision-Date: 2023-05-19 20:09-0700\n"
 "Last-Translator: A S Alam <aalam@satluj.org>\n"
 "Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
@@ -17,77 +17,77 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 23.04.1\n"
 
-#: decorationbutton.cpp:299
+#: decorationbutton.cpp:300
 #, kde-format
 msgid "More actions for this window"
 msgstr "ਇਸ ਵਿੰਡੋ ਲਈ ਹੋਰ ਕਾਰਵਾਈਆਂ"
 
-#: decorationbutton.cpp:301
+#: decorationbutton.cpp:302
 #, kde-format
 msgid "Application menu"
 msgstr "ਐਪਲੀਕੇਸ਼ਨ ਮੇਨੂ"
 
-#: decorationbutton.cpp:304
+#: decorationbutton.cpp:305
 #, kde-format
 msgid "On one desktop"
 msgstr "ਇੱਕ ਡੈਸਕਟਾਪ ਉੱਤੇ"
 
-#: decorationbutton.cpp:306
+#: decorationbutton.cpp:307
 #, kde-format
 msgid "On all desktops"
 msgstr "ਸਾਰੇ ਡੈਸਕਟਾਪਾਂ ਉੱਤੇ"
 
-#: decorationbutton.cpp:308
+#: decorationbutton.cpp:309
 #, kde-format
 msgid "Minimize"
 msgstr "ਘੱਟੋ-ਘੱਟ"
 
-#: decorationbutton.cpp:311
+#: decorationbutton.cpp:312
 #, kde-format
 msgid "Restore"
 msgstr "ਬਹਾਲ ਕਰੋ"
 
-#: decorationbutton.cpp:313
+#: decorationbutton.cpp:314
 #, kde-format
 msgid "Maximize"
 msgstr "ਵੱਧੋ-ਵੱਧ"
 
-#: decorationbutton.cpp:315
+#: decorationbutton.cpp:316
 #, kde-format
 msgid "Close"
 msgstr "ਬੰਦ ਕਰੋ"
 
-#: decorationbutton.cpp:317
+#: decorationbutton.cpp:318
 #, kde-format
 msgid "Context help"
 msgstr "ਪ੍ਰਸੰਗ ਮਦਦ"
 
-#: decorationbutton.cpp:320
+#: decorationbutton.cpp:321
 #, kde-format
 msgid "Unshade"
 msgstr "ਬਿਨਾਂ-ਸ਼ੇਡ"
 
-#: decorationbutton.cpp:322
+#: decorationbutton.cpp:323
 #, kde-format
 msgid "Shade"
 msgstr "ਸ਼ੇਡ"
 
-#: decorationbutton.cpp:325
+#: decorationbutton.cpp:326
 #, kde-format
 msgid "Don't keep below other windows"
 msgstr "ਹੋਰ ਵਿੰਡੋਆਂ ਦੇ ਹੇਠਾਂ ਨਾ ਰੱਖੋ"
 
-#: decorationbutton.cpp:327
+#: decorationbutton.cpp:328
 #, kde-format
 msgid "Keep below other windows"
 msgstr "ਹੋਰ ਵਿੰਡੋਆਂ ਦੇ ਹੇਠਾਂ ਰੱਖੋ"
 
-#: decorationbutton.cpp:330
+#: decorationbutton.cpp:331
 #, kde-format
 msgid "Don't keep above other windows"
 msgstr "ਹੋਰ ਵਿੰਡੋਆਂ ਦੇ ਉੱਤੇ ਨਾ ਰੱਖੋ"
 
-#: decorationbutton.cpp:332
+#: decorationbutton.cpp:333
 #, kde-format
 msgid "Keep above other windows"
 msgstr "ਹੋਰ ਵਿੰਡੋਆਂ ਦੇ ਉੱਤੇ ਰੱਖੋ"
