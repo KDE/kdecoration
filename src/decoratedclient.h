@@ -131,15 +131,15 @@ class KDECORATIONS2_EXPORT DecoratedClient : public QObject
     /**
      * The width of the DecoratedClient.
      **/
-    Q_PROPERTY(int width READ width NOTIFY widthChanged)
+    Q_PROPERTY(qreal width READ width NOTIFY widthChanged)
     /**
      * The height of the DecoratedClient.
      **/
-    Q_PROPERTY(int height READ height NOTIFY heightChanged)
+    Q_PROPERTY(qreal height READ height NOTIFY heightChanged)
     /**
      * The size of the DecoratedClient.
      **/
-    Q_PROPERTY(QSize size READ size NOTIFY sizeChanged)
+    Q_PROPERTY(QSizeF size READ size NOTIFY sizeChanged)
     /**
      * The palette this DecoratedClient uses. The palette might be different for each
      * DecoratedClient and the Decoration should honor the palette.
@@ -194,9 +194,9 @@ public:
 
     QString windowClass() const;
 
-    int width() const;
-    int height() const;
-    QSize size() const;
+    qreal width() const;
+    qreal height() const;
+    QSizeF size() const;
 
     Decoration *decoration() const;
     QPalette palette() const;
@@ -255,9 +255,9 @@ Q_SIGNALS:
     void moveableChanged(bool);
     void resizeableChanged(bool);
 
-    void widthChanged(int);
-    void heightChanged(int);
-    void sizeChanged(const QSize &size);
+    void widthChanged(qreal);
+    void heightChanged(qreal);
+    void sizeChanged(const QSizeF &size);
     void paletteChanged(const QPalette &palette);
     void adjacentScreenEdgesChanged(Qt::Edges edges);
 

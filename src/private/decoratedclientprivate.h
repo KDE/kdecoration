@@ -54,9 +54,9 @@ public:
     virtual WId windowId() const = 0;
     virtual WId decorationId() const = 0;
 
-    virtual int width() const = 0;
-    virtual int height() const = 0;
-    virtual QSize size() const = 0;
+    virtual qreal width() const = 0;
+    virtual qreal height() const = 0;
+    virtual QSizeF size() const = 0;
     virtual QPalette palette() const = 0;
     virtual Qt::Edges adjacentScreenEdges() const = 0;
 
