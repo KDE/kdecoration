@@ -55,6 +55,7 @@ public:
     int width() const override;
     WId windowId() const override;
     QString windowClass() const override;
+    qreal devicePixelRatio() const override;
 
     void showApplicationMenu(int actionId) override;
 
