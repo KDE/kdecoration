@@ -140,6 +140,13 @@ class KDECORATIONS2_EXPORT DecoratedClient : public QObject
      * The size of the DecoratedClient.
      **/
     Q_PROPERTY(QSize size READ size NOTIFY sizeChanged)
+
+    /**
+     * The device pixel ratio of the current client.
+     * Useful for updating any cached pixmaps.
+     */
+    Q_PROPERTY(qreal devicePixelRatio READ devicePixelRatio NOTIFY devicePixelRatioChanged)
+
     /**
      * The palette this DecoratedClient uses. The palette might be different for each
      * DecoratedClient and the Decoration should honor the palette.
@@ -197,6 +204,8 @@ public:
     int width() const;
     int height() const;
     QSize size() const;
+
+    qreal devicePixelRatio() const;
 
     Decoration *decoration() const;
     QPalette palette() const;
@@ -258,6 +267,8 @@ Q_SIGNALS:
     void widthChanged(int);
     void heightChanged(int);
     void sizeChanged(const QSize &size);
+    void devicePixelRatioChanged();
+
     void paletteChanged(const QPalette &palette);
     void adjacentScreenEdgesChanged(Qt::Edges edges);
 

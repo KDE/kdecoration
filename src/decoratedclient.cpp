@@ -29,6 +29,7 @@ QString DecoratedClient::caption() const
     return d->caption();
 }
 
+
 bool DecoratedClient::isOnAllDesktops() const
 {
     return d->isOnAllDesktops();
@@ -132,6 +133,11 @@ int DecoratedClient::height() const
 QSize DecoratedClient::size() const
 {
     return d->size();
+}
+
+qreal DecoratedClient::devicePixelRatio() const
+{
+    return d->devicePixelRatio();
 }
 
 QPalette DecoratedClient::palette() const
