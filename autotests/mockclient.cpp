@@ -237,6 +237,11 @@ QString MockClient::windowClass() const
     return QString();
 }
 
+qreal MockClient::devicePixelRatio() const
+{
+    return 1.0;
+}
+
 WId MockClient::windowId() const
 {
     return 0;
