@@ -119,8 +119,8 @@ public:
      *
      * Basically the size of the DecoratedClient combined with the borders.
      **/
-    QRect rect() const;
-    QSize size() const;
+    QRectF rect() const;
+    QSizeF size() const;
 
     /**
      * The decoration's blur region in local coordinates

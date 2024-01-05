@@ -55,7 +55,7 @@ void Decoration::Private::updateSectionUnderMouse(const QPoint &mousePosition)
         setSectionUnderMouse(Qt::TitleBarArea);
         return;
     }
-    const QSize size = q->size();
+    const QSize size = q->size().toSize();
     const int corner = 2 * settings->largeSpacing();
     const bool left = mousePosition.x() < borders.left();
     const bool top = mousePosition.y() < borders.top();
@@ -260,16 +260,16 @@ BORDER(top, Top)
 BORDER(bottom, Bottom)
 #undef BORDER
 
-QSize Decoration::size() const
+QSizeF Decoration::size() const
 {
     const QMargins &b = d->borders;
-    return QSize(d->client->width() + b.left() + b.right(), //
-                 (d->client->isShaded() ? 0 : d->client->height()) + b.top() + b.bottom());
+    return QSizeF(d->client->width() + b.left() + b.right(), //
+                  (d->client->isShaded() ? 0 : d->client->height()) + b.top() + b.bottom());
 }
 
-QRect Decoration::rect() const
+QRectF Decoration::rect() const
 {
-    return QRect(QPoint(0, 0), size());
+    return QRectF(QPointF(0, 0), size());
 }
 
 bool Decoration::event(QEvent *event)
@@ -388,7 +388,7 @@ void Decoration::wheelEvent(QWheelEvent *event)
 
 void Decoration::update(const QRect &r)
 {
-    Q_EMIT damaged(r.isNull() ? rect() : r);
+    Q_EMIT damaged(r.isNull() ? rect().toAlignedRect() : r);
 }
 
 void Decoration::update()
