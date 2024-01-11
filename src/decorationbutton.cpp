@@ -146,6 +146,9 @@ void DecorationButton::Private::init()
         QObject::connect(c, &DecoratedClient::shadedChanged, q, &DecorationButton::setChecked);
         QObject::connect(c, &DecoratedClient::shadeableChanged, q, &DecorationButton::setEnabled);
         break;
+    case DecorationButtonType::Spacer:
+        setEnabled(false);
+        break;
     default:
         // nothing
         break;

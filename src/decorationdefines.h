@@ -68,6 +68,10 @@ enum class DecorationButtonType {
      * The Custom type allows a Decoration to provide custom DecorationButtons.
      **/
     Custom,
+    /**
+     * The Spacer button provides some space between buttons.
+     */
+    Spacer,
 };
 
 /**
