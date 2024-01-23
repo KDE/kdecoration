@@ -31,7 +31,7 @@ class Q_DECL_HIDDEN Decoration::Private
 public:
     Private(Decoration *decoration, const QVariantList &args);
 
-    QMargins borders;
+    QMarginsF borders;
     QMargins resizeOnlyBorders;
 
     Qt::WindowFrameSection sectionUnderMouse;

@@ -57,7 +57,7 @@ class DecorationSettings;
 class KDECORATIONS2_EXPORT Decoration : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QMargins borders READ borders NOTIFY bordersChanged)
+    Q_PROPERTY(QMarginsF borders READ borders NOTIFY bordersChanged)
     Q_PROPERTY(int borderLeft READ borderLeft NOTIFY bordersChanged)
     Q_PROPERTY(int borderRight READ borderRight NOTIFY bordersChanged)
     Q_PROPERTY(int borderTop READ borderTop NOTIFY bordersChanged)
@@ -93,7 +93,7 @@ public:
      **/
     DecoratedClient *client() const;
 
-    QMargins borders() const;
+    QMarginsF borders() const;
     int borderLeft() const;
     int borderRight() const;
     int borderTop() const;
@@ -217,7 +217,7 @@ protected:
      * @param args Additional arguments passed in from the framework
      **/
     explicit Decoration(QObject *parent, const QVariantList &args);
-    void setBorders(const QMargins &borders);
+    void setBorders(const QMarginsF &borders);
     void setResizeOnlyBorders(const QMargins &borders);
     void setBlurRegion(const QRegion &region);
     /**

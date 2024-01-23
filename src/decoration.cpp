@@ -216,7 +216,7 @@ void Decoration::requestShowApplicationMenu(const QRect &rect, int actionId)
     }
 
 DELEGATE(setBlurRegion, blurRegion, const QRegion &, )
-DELEGATE(setBorders, borders, const QMargins &, )
+DELEGATE(setBorders, borders, const QMarginsF &, )
 DELEGATE(setResizeOnlyBorders, resizeOnlyBorders, const QMargins &, )
 DELEGATE(setTitleBar, titleBar, const QRect &, )
 DELEGATE(setOpaque, opaque, bool, d->opaque)
@@ -231,7 +231,7 @@ DELEGATE(setShadow, shadow, const std::shared_ptr<DecorationShadow> &, d->shadow
     }
 
 DELEGATE(blurRegion, QRegion)
-DELEGATE(borders, QMargins)
+DELEGATE(borders, QMarginsF)
 DELEGATE(resizeOnlyBorders, QMargins)
 DELEGATE(titleBar, QRect)
 DELEGATE(sectionUnderMouse, Qt::WindowFrameSection)
@@ -262,7 +262,7 @@ BORDER(bottom, Bottom)
 
 QSize Decoration::size() const
 {
-    const QMargins &b = d->borders;
+    const QMarginsF &b = d->borders;
     return QSize(d->client->width() + b.left() + b.right(), //
                  (d->client->isShaded() ? 0 : d->client->height()) + b.top() + b.bottom());
 }
