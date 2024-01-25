@@ -147,7 +147,7 @@ public:
      * @param painter The painter which needs to be used for rendering
      * @param repaintArea The region which needs to be repainted.
      **/
-    virtual void paint(QPainter *painter, const QRect &repaintArea) = 0;
+    virtual void paint(QPainter *painter, const QRectF &repaintArea) = 0;
 
     bool event(QEvent *event) override;
 

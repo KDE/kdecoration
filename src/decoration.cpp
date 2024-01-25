@@ -263,8 +263,11 @@ BORDER(bottom, Bottom)
 QSizeF Decoration::size() const
 {
     const QMargins &b = d->borders;
-    return QSizeF(d->client->width() + b.left() + b.right(), //
-                  (d->client->isShaded() ? 0 : d->client->height()) + b.top() + b.bottom());
+    const double width = std::round(d->client->width() * d->client->devicePixelRatio()) + std::round(b.left() * d->client->devicePixelRatio())
+        + std::round(b.right() * d->client->devicePixelRatio());
+    const double height = std::round((d->client->isShaded() ? 0 : d->client->height()) * d->client->devicePixelRatio())
+        + std::round(b.top() * d->client->devicePixelRatio()) + std::round(b.bottom() * d->client->devicePixelRatio());
+    return QSizeF(width, height) / d->client->devicePixelRatio();
 }
 
 QRectF Decoration::rect() const
