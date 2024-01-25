@@ -263,8 +263,10 @@ BORDER(bottom, Bottom)
 QSize Decoration::size() const
 {
     const QMargins &b = d->borders;
-    return QSize(d->client->width() + b.left() + b.right(), //
-                 (d->client->isShaded() ? 0 : d->client->height()) + b.top() + b.bottom());
+    // HACK -1 for fractional scaling issues, this pushes the border under the
+    // window slightly and avoids the fractional scaling gap
+    return QSize(d->client->width() + b.left() + b.right() - 1, //
+                 (d->client->isShaded() ? 0 : d->client->height()) + b.top() + b.bottom() - 1);
 }
 
 QRect Decoration::rect() const
