@@ -216,9 +216,9 @@ void Decoration::requestShowApplicationMenu(const QRect &rect, int actionId)
     }
 
 DELEGATE(setBlurRegion, blurRegion, const QRegion &, )
-DELEGATE(setBorders, borders, const QMargins &, )
-DELEGATE(setResizeOnlyBorders, resizeOnlyBorders, const QMargins &, )
-DELEGATE(setTitleBar, titleBar, const QRect &, )
+DELEGATE(setBorders, borders, const QMarginsF &, )
+DELEGATE(setResizeOnlyBorders, resizeOnlyBorders, const QMarginsF &, )
+DELEGATE(setTitleBar, titleBar, const QRectF &, )
 DELEGATE(setOpaque, opaque, bool, d->opaque)
 DELEGATE(setShadow, shadow, const std::shared_ptr<DecorationShadow> &, d->shadow)
 
@@ -231,9 +231,9 @@ DELEGATE(setShadow, shadow, const std::shared_ptr<DecorationShadow> &, d->shadow
     }
 
 DELEGATE(blurRegion, QRegion)
-DELEGATE(borders, QMargins)
-DELEGATE(resizeOnlyBorders, QMargins)
-DELEGATE(titleBar, QRect)
+DELEGATE(borders, QMarginsF)
+DELEGATE(resizeOnlyBorders, QMarginsF)
+DELEGATE(titleBar, QRectF)
 DELEGATE(sectionUnderMouse, Qt::WindowFrameSection)
 DELEGATE(shadow, std::shared_ptr<DecorationShadow>)
 
@@ -245,11 +245,11 @@ bool Decoration::isOpaque() const
 }
 
 #define BORDER(name, Name)                                                                                                                                     \
-    int Decoration::border##Name() const                                                                                                                       \
+    qreal Decoration::border##Name() const                                                                                                                     \
     {                                                                                                                                                          \
         return d->borders.name();                                                                                                                              \
     }                                                                                                                                                          \
-    int Decoration::resizeOnlyBorder##Name() const                                                                                                             \
+    qreal Decoration::resizeOnlyBorder##Name() const                                                                                                           \
     {                                                                                                                                                          \
         return d->resizeOnlyBorders.name();                                                                                                                    \
     }
@@ -262,7 +262,7 @@ BORDER(bottom, Bottom)
 
 QSizeF Decoration::size() const
 {
-    const QMargins &b = d->borders;
+    const QMarginsF &b = d->borders;
     return QSizeF(d->client->width() + b.left() + b.right(), //
                   (d->client->isShaded() ? 0 : d->client->height()) + b.top() + b.bottom());
 }
@@ -386,14 +386,14 @@ void Decoration::wheelEvent(QWheelEvent *event)
     }
 }
 
-void Decoration::update(const QRect &r)
+void Decoration::update(const QRectF &r)
 {
-    Q_EMIT damaged(r.isNull() ? rect().toAlignedRect() : r);
+    Q_EMIT damaged(r.isNull() ? rect().toAlignedRect() : r.toAlignedRect());
 }
 
 void Decoration::update()
 {
-    update(QRect());
+    update(QRectF());
 }
 
 void Decoration::setSettings(const std::shared_ptr<DecorationSettings> &settings)

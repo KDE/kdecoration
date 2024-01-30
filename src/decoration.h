@@ -57,16 +57,16 @@ class DecorationSettings;
 class KDECORATIONS2_EXPORT Decoration : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QMargins borders READ borders NOTIFY bordersChanged)
-    Q_PROPERTY(int borderLeft READ borderLeft NOTIFY bordersChanged)
-    Q_PROPERTY(int borderRight READ borderRight NOTIFY bordersChanged)
-    Q_PROPERTY(int borderTop READ borderTop NOTIFY bordersChanged)
-    Q_PROPERTY(int borderBottom READ borderBottom NOTIFY bordersChanged)
-    Q_PROPERTY(QMargins resizeOnlyBorders READ resizeOnlyBorders NOTIFY resizeOnlyBordersChanged)
-    Q_PROPERTY(int resizeOnlyBorderLeft READ resizeOnlyBorderLeft NOTIFY resizeOnlyBordersChanged)
-    Q_PROPERTY(int resizeOnlyBorderRight READ resizeOnlyBorderRight NOTIFY resizeOnlyBordersChanged)
-    Q_PROPERTY(int resizeOnlyBorderTop READ resizeOnlyBorderTop NOTIFY resizeOnlyBordersChanged)
-    Q_PROPERTY(int resizeOnlyBorderBottom READ resizeOnlyBorderBottom NOTIFY resizeOnlyBordersChanged)
+    Q_PROPERTY(QMarginsF borders READ borders NOTIFY bordersChanged)
+    Q_PROPERTY(qreal borderLeft READ borderLeft NOTIFY bordersChanged)
+    Q_PROPERTY(qreal borderRight READ borderRight NOTIFY bordersChanged)
+    Q_PROPERTY(qreal borderTop READ borderTop NOTIFY bordersChanged)
+    Q_PROPERTY(qreal borderBottom READ borderBottom NOTIFY bordersChanged)
+    Q_PROPERTY(QMarginsF resizeOnlyBorders READ resizeOnlyBorders NOTIFY resizeOnlyBordersChanged)
+    Q_PROPERTY(qreal resizeOnlyBorderLeft READ resizeOnlyBorderLeft NOTIFY resizeOnlyBordersChanged)
+    Q_PROPERTY(qreal resizeOnlyBorderRight READ resizeOnlyBorderRight NOTIFY resizeOnlyBordersChanged)
+    Q_PROPERTY(qreal resizeOnlyBorderTop READ resizeOnlyBorderTop NOTIFY resizeOnlyBordersChanged)
+    Q_PROPERTY(qreal resizeOnlyBorderBottom READ resizeOnlyBorderBottom NOTIFY resizeOnlyBordersChanged)
     /**
      * This property denotes the part of the Decoration which is currently under the mouse pointer.
      * It gets automatically updated whenever a QMouseEvent or QHoverEvent gets processed.
@@ -77,7 +77,7 @@ class KDECORATIONS2_EXPORT Decoration : public QObject
      * and the caption. The titleBar is the main interaction area, while all other areas of the
      * Decoration are normally used as resize areas.
      **/
-    Q_PROPERTY(QRect titleBar READ titleBar NOTIFY titleBarChanged)
+    Q_PROPERTY(QRectF titleBar READ titleBar NOTIFY titleBarChanged)
     /**
      * Whether the Decoration is fully opaque. By default a Decoration is considered to
      * use the alpha channel and this property has the value @c false. But for e.g. a maximized
@@ -93,18 +93,18 @@ public:
      **/
     DecoratedClient *client() const;
 
-    QMargins borders() const;
-    int borderLeft() const;
-    int borderRight() const;
-    int borderTop() const;
-    int borderBottom() const;
-    QMargins resizeOnlyBorders() const;
-    int resizeOnlyBorderLeft() const;
-    int resizeOnlyBorderRight() const;
-    int resizeOnlyBorderTop() const;
-    int resizeOnlyBorderBottom() const;
+    QMarginsF borders() const;
+    qreal borderLeft() const;
+    qreal borderRight() const;
+    qreal borderTop() const;
+    qreal borderBottom() const;
+    QMarginsF resizeOnlyBorders() const;
+    qreal resizeOnlyBorderLeft() const;
+    qreal resizeOnlyBorderRight() const;
+    qreal resizeOnlyBorderTop() const;
+    qreal resizeOnlyBorderBottom() const;
     Qt::WindowFrameSection sectionUnderMouse() const;
-    QRect titleBar() const;
+    QRectF titleBar() const;
     bool isOpaque() const;
 
     /**
@@ -147,7 +147,7 @@ public:
      * @param painter The painter which needs to be used for rendering
      * @param repaintArea The region which needs to be repainted.
      **/
-    virtual void paint(QPainter *painter, const QRect &repaintArea) = 0;
+    virtual void paint(QPainter *painter, const QRectF &repaintArea) = 0;
 
     bool event(QEvent *event) override;
 
@@ -180,7 +180,7 @@ public Q_SLOTS:
     void showApplicationMenu(int actionId);
     void requestShowApplicationMenu(const QRect &rect, int actionId);
 
-    void update(const QRect &rect);
+    void update(const QRectF &rect);
     void update();
 
     /**
@@ -217,15 +217,15 @@ protected:
      * @param args Additional arguments passed in from the framework
      **/
     explicit Decoration(QObject *parent, const QVariantList &args);
-    void setBorders(const QMargins &borders);
-    void setResizeOnlyBorders(const QMargins &borders);
+    void setBorders(const QMarginsF &borders);
+    void setResizeOnlyBorders(const QMarginsF &borders);
     void setBlurRegion(const QRegion &region);
     /**
      * An implementation has to invoke this method whenever the area
      * containing the controls and caption changes.
      * @param rect The new geometry of the titleBar in Decoration coordinates
      **/
-    void setTitleBar(const QRect &rect);
+    void setTitleBar(const QRectF &rect);
     void setOpaque(bool opaque);
     void setShadow(const std::shared_ptr<DecorationShadow> &shadow);
 
