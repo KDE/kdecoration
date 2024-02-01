@@ -144,21 +144,40 @@ DecoratedClient *Decoration::client() const
     return d->client.get();
 }
 
-#define DELEGATE(name)                                                                                                                                         \
-    void Decoration::name()                                                                                                                                    \
-    {                                                                                                                                                          \
-        d->client->d->name();                                                                                                                                  \
-    }
+void Decoration::requestClose()
+{
+    d->client->d->requestClose();
+}
 
-DELEGATE(requestClose)
-DELEGATE(requestContextHelp)
-DELEGATE(requestMinimize)
-DELEGATE(requestToggleOnAllDesktops)
-DELEGATE(requestToggleShade)
-DELEGATE(requestToggleKeepAbove)
-DELEGATE(requestToggleKeepBelow)
+void Decoration::requestContextHelp()
+{
+    d->client->d->requestContextHelp();
+}
 
-#undef DELEGATE
+void Decoration::requestMinimize()
+{
+    d->client->d->requestMinimize();
+}
+
+void Decoration::requestToggleOnAllDesktops()
+{
+    d->client->d->requestToggleOnAllDesktops();
+}
+
+void Decoration::requestToggleShade()
+{
+    d->client->d->requestToggleShade();
+}
+
+void Decoration::requestToggleKeepAbove()
+{
+    d->client->d->requestToggleKeepAbove();
+}
+
+void Decoration::requestToggleKeepBelow()
+{
+    d->client->d->requestToggleKeepBelow();
+}
 
 #if KDECORATIONS2_ENABLE_DEPRECATED_SINCE(5, 21)
 void Decoration::requestShowWindowMenu()
@@ -189,10 +208,9 @@ void Decoration::requestToggleMaximization(Qt::MouseButtons buttons)
 
 void Decoration::showApplicationMenu(int actionId)
 {
-    auto it = std::find_if(d->buttons.constBegin(), d->buttons.constEnd(), [](DecorationButton *button) {
+    const auto it = std::find_if(d->buttons.constBegin(), d->buttons.constEnd(), [](DecorationButton *button) {
         return button->type() == DecorationButtonType::ApplicationMenu;
     });
-
     if (it != d->buttons.constEnd()) {
         requestShowApplicationMenu((*it)->geometry().toRect(), actionId);
     }
@@ -205,60 +223,128 @@ void Decoration::requestShowApplicationMenu(const QRect &rect, int actionId)
     }
 }
 
-#define DELEGATE(name, variableName, type, emitValue)                                                                                                          \
-    void Decoration::name(type a)                                                                                                                              \
-    {                                                                                                                                                          \
-        if (d->variableName == a) {                                                                                                                            \
-            return;                                                                                                                                            \
-        }                                                                                                                                                      \
-        d->variableName = a;                                                                                                                                   \
-        Q_EMIT variableName##Changed(emitValue);                                                                                                               \
+void Decoration::setBlurRegion(const QRegion &region)
+{
+    if (d->blurRegion != region) {
+        d->blurRegion = region;
+        Q_EMIT blurRegionChanged();
     }
+}
 
-DELEGATE(setBlurRegion, blurRegion, const QRegion &, )
-DELEGATE(setBorders, borders, const QMargins &, )
-DELEGATE(setResizeOnlyBorders, resizeOnlyBorders, const QMargins &, )
-DELEGATE(setTitleBar, titleBar, const QRect &, )
-DELEGATE(setOpaque, opaque, bool, d->opaque)
-DELEGATE(setShadow, shadow, const std::shared_ptr<DecorationShadow> &, d->shadow)
-
-#undef DELEGATE
-
-#define DELEGATE(name, type)                                                                                                                                   \
-    type Decoration::name() const                                                                                                                              \
-    {                                                                                                                                                          \
-        return d->name;                                                                                                                                        \
+void Decoration::setBorders(const QMargins &borders)
+{
+    if (d->borders != borders) {
+        d->borders = borders;
+        Q_EMIT bordersChanged();
     }
+}
 
-DELEGATE(blurRegion, QRegion)
-DELEGATE(borders, QMargins)
-DELEGATE(resizeOnlyBorders, QMargins)
-DELEGATE(titleBar, QRect)
-DELEGATE(sectionUnderMouse, Qt::WindowFrameSection)
-DELEGATE(shadow, std::shared_ptr<DecorationShadow>)
+void Decoration::setResizeOnlyBorders(const QMargins &borders)
+{
+    if (d->resizeOnlyBorders != borders) {
+        d->resizeOnlyBorders = borders;
+        Q_EMIT resizeOnlyBordersChanged();
+    }
+}
 
-#undef DELEGATE
+void Decoration::setTitleBar(const QRect &rect)
+{
+    if (d->titleBar != rect) {
+        d->titleBar = rect;
+        Q_EMIT titleBarChanged();
+    }
+}
+
+void Decoration::setOpaque(bool opaque)
+{
+    if (d->opaque != opaque) {
+        d->opaque = opaque;
+        Q_EMIT opaqueChanged(opaque);
+    }
+}
+
+void Decoration::setShadow(const std::shared_ptr<DecorationShadow> &shadow)
+{
+    if (d->shadow != shadow) {
+        d->shadow = shadow;
+        Q_EMIT shadowChanged(shadow);
+    }
+}
+
+QRegion Decoration::blurRegion() const
+{
+    return d->blurRegion;
+}
+
+QMargins Decoration::borders() const
+{
+    return d->borders;
+}
+
+QMargins Decoration::resizeOnlyBorders() const
+{
+    return d->resizeOnlyBorders;
+}
+
+QRect Decoration::titleBar() const
+{
+    return d->titleBar;
+}
+
+Qt::WindowFrameSection Decoration::sectionUnderMouse() const
+{
+    return d->sectionUnderMouse;
+}
+
+std::shared_ptr<DecorationShadow> Decoration::shadow() const
+{
+    return d->shadow;
+}
 
 bool Decoration::isOpaque() const
 {
     return d->opaque;
 }
 
-#define BORDER(name, Name)                                                                                                                                     \
-    int Decoration::border##Name() const                                                                                                                       \
-    {                                                                                                                                                          \
-        return d->borders.name();                                                                                                                              \
-    }                                                                                                                                                          \
-    int Decoration::resizeOnlyBorder##Name() const                                                                                                             \
-    {                                                                                                                                                          \
-        return d->resizeOnlyBorders.name();                                                                                                                    \
-    }
+int Decoration::borderLeft() const
+{
+    return d->borders.left();
+}
 
-BORDER(left, Left)
-BORDER(right, Right)
-BORDER(top, Top)
-BORDER(bottom, Bottom)
-#undef BORDER
+int Decoration::resizeOnlyBorderLeft() const
+{
+    return d->resizeOnlyBorders.left();
+}
+
+int Decoration::borderRight() const
+{
+    return d->borders.right();
+}
+
+int Decoration::resizeOnlyBorderRight() const
+{
+    return d->resizeOnlyBorders.right();
+}
+
+int Decoration::borderTop() const
+{
+    return d->borders.top();
+}
+
+int Decoration::resizeOnlyBorderTop() const
+{
+    return d->resizeOnlyBorders.top();
+}
+
+int Decoration::borderBottom() const
+{
+    return d->borders.bottom();
+}
+
+int Decoration::resizeOnlyBorderBottom() const
+{
+    return d->resizeOnlyBorders.bottom();
+}
 
 QSize Decoration::size() const
 {

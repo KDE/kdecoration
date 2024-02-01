@@ -104,42 +104,50 @@ QRect DecorationShadow::leftGeometry() const
 
 #ifndef K_DOXYGEN
 
-#define DELEGATE(type, name)                                                                                                                                   \
-    type DecorationShadow::name() const                                                                                                                        \
-    {                                                                                                                                                          \
-        return d->name;                                                                                                                                        \
+QImage DecorationShadow::shadow() const
+{
+    return d->shadow;
+}
+
+QMargins DecorationShadow::padding() const
+{
+    return d->padding;
+}
+
+QRect DecorationShadow::innerShadowRect() const
+{
+    return d->innerShadowRect;
+}
+
+int DecorationShadow::paddingTop() const
+{
+    return d->padding.top();
+}
+
+int DecorationShadow::paddingBottom() const
+{
+    return d->padding.bottom();
+}
+
+int DecorationShadow::paddingRight() const
+{
+    return d->padding.right();
+}
+
+int DecorationShadow::paddingLeft() const
+{
+    return d->padding.left();
+}
+
+void DecorationShadow::setShadow(const QImage &shadow)
+{
+    if (d->shadow == shadow) {
+        return;
     }
+    d->shadow = shadow;
+    Q_EMIT shadowChanged(d->shadow);
+}
 
-DELEGATE(QImage, shadow)
-DELEGATE(QMargins, padding)
-DELEGATE(QRect, innerShadowRect)
-
-#define I(name, Name)                                                                                                                                          \
-    int DecorationShadow::padding##Name() const                                                                                                                \
-    {                                                                                                                                                          \
-        return d->padding.name();                                                                                                                              \
-    }
-I(top, Top)
-I(bottom, Bottom)
-I(right, Right)
-I(left, Left)
-#undef I
-
-#undef DELEGATE
-
-#define SETTER(type, setName, name)                                                                                                                            \
-    void DecorationShadow::setName(type arg)                                                                                                                   \
-    {                                                                                                                                                          \
-        if (d->name == arg) {                                                                                                                                  \
-            return;                                                                                                                                            \
-        }                                                                                                                                                      \
-        d->name = arg;                                                                                                                                         \
-        Q_EMIT name##Changed(d->name);                                                                                                                         \
-    }
-
-SETTER(const QImage &, setShadow, shadow)
-
-#undef SETTER
 #endif
 
 void DecorationShadow::setPadding(const QMargins &margins)

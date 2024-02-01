@@ -400,54 +400,84 @@ bool DecorationButton::isPressed() const
     return d->isPressed();
 }
 
-#define DELEGATE(name, variableName, type)                                                                                                                     \
-    type DecorationButton::name() const                                                                                                                        \
-    {                                                                                                                                                          \
-        return d->variableName;                                                                                                                                \
+bool DecorationButton::isHovered() const
+{
+    return d->hovered;
+}
+
+bool DecorationButton::isEnabled() const
+{
+    return d->enabled;
+}
+
+bool DecorationButton::isChecked() const
+{
+    return d->checked;
+}
+
+bool DecorationButton::isCheckable() const
+{
+    return d->checkable;
+}
+
+bool DecorationButton::isVisible() const
+{
+    return d->visible;
+}
+
+QRectF DecorationButton::geometry() const
+{
+    return d->geometry;
+}
+
+Decoration *DecorationButton::decoration() const
+{
+    return d->decoration;
+}
+
+Qt::MouseButtons DecorationButton::acceptedButtons() const
+{
+    return d->acceptedButtons;
+}
+
+DecorationButtonType DecorationButton::type() const
+{
+    return d->type;
+}
+
+void DecorationButton::setAcceptedButtons(Qt::MouseButtons value)
+{
+    d->setAcceptedButtons(value);
+}
+
+void DecorationButton::setEnabled(bool value)
+{
+    d->setEnabled(value);
+}
+
+void DecorationButton::setChecked(bool value)
+{
+    d->setChecked(value);
+}
+
+void DecorationButton::setCheckable(bool value)
+{
+    d->setCheckable(value);
+}
+
+void DecorationButton::setVisible(bool value)
+{
+    d->setVisible(value);
+}
+
+void DecorationButton::setGeometry(const QRectF &geometry)
+{
+    if (d->geometry == geometry) {
+        return;
     }
-
-DELEGATE(isHovered, hovered, bool)
-DELEGATE(isEnabled, enabled, bool)
-DELEGATE(isChecked, checked, bool)
-DELEGATE(isCheckable, checkable, bool)
-DELEGATE(isVisible, visible, bool)
-
-#define DELEGATE2(name, type) DELEGATE(name, name, type)
-DELEGATE2(geometry, QRectF)
-DELEGATE2(decoration, Decoration *)
-DELEGATE2(acceptedButtons, Qt::MouseButtons)
-DELEGATE2(type, DecorationButtonType)
-
-#undef DELEGATE2
-#undef DELEGATE
-
-#define DELEGATE(name, type)                                                                                                                                   \
-    void DecorationButton::name(type a)                                                                                                                        \
-    {                                                                                                                                                          \
-        d->name(a);                                                                                                                                            \
-    }
-
-DELEGATE(setAcceptedButtons, Qt::MouseButtons)
-DELEGATE(setEnabled, bool)
-DELEGATE(setChecked, bool)
-DELEGATE(setCheckable, bool)
-DELEGATE(setVisible, bool)
-
-#undef DELEGATE
-
-#define DELEGATE(name, variableName, type)                                                                                                                     \
-    void DecorationButton::name(type a)                                                                                                                        \
-    {                                                                                                                                                          \
-        if (d->variableName == a) {                                                                                                                            \
-            return;                                                                                                                                            \
-        }                                                                                                                                                      \
-        d->variableName = a;                                                                                                                                   \
-        Q_EMIT variableName##Changed(d->variableName);                                                                                                         \
-    }
-
-DELEGATE(setGeometry, geometry, const QRectF &)
-
-#undef DELEGATE
+    d->geometry = geometry;
+    Q_EMIT geometryChanged(d->geometry);
+}
 
 bool DecorationButton::contains(const QPointF &pos) const
 {

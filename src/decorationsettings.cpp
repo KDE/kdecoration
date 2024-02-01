@@ -37,26 +37,60 @@ DecorationSettings::DecorationSettings(DecorationBridge *bridge, QObject *parent
 
 DecorationSettings::~DecorationSettings() = default;
 
-#define DELEGATE(type, method)                                                                                                                                 \
-    type DecorationSettings::method() const                                                                                                                    \
-    {                                                                                                                                                          \
-        return d->method();                                                                                                                                    \
-    }
+bool DecorationSettings::isOnAllDesktopsAvailable() const
+{
+    return d->isOnAllDesktopsAvailable();
+}
 
-DELEGATE(bool, isOnAllDesktopsAvailable)
-DELEGATE(bool, isAlphaChannelSupported)
-DELEGATE(bool, isCloseOnDoubleClickOnMenu)
-DELEGATE(QList<DecorationButtonType>, decorationButtonsLeft)
-DELEGATE(QList<DecorationButtonType>, decorationButtonsRight)
-DELEGATE(BorderSize, borderSize)
-DELEGATE(QFont, font)
-DELEGATE(QFontMetricsF, fontMetrics)
-DELEGATE(int, gridUnit)
-DELEGATE(int, smallSpacing)
-DELEGATE(int, largeSpacing)
+bool DecorationSettings::isAlphaChannelSupported() const
+{
+    return d->isAlphaChannelSupported();
+}
 
-#undef DELEGATE
+bool DecorationSettings::isCloseOnDoubleClickOnMenu() const
+{
+    return d->isCloseOnDoubleClickOnMenu();
+}
 
+QList<DecorationButtonType> DecorationSettings::decorationButtonsLeft() const
+{
+    return d->decorationButtonsLeft();
+}
+
+QList<DecorationButtonType> DecorationSettings::decorationButtonsRight() const
+{
+    return d->decorationButtonsRight();
+}
+
+BorderSize DecorationSettings::borderSize() const
+{
+    return d->borderSize();
+}
+
+QFont DecorationSettings::font() const
+{
+    return d->font();
+}
+
+QFontMetricsF DecorationSettings::fontMetrics() const
+{
+    return d->fontMetrics();
+}
+
+int DecorationSettings::gridUnit() const
+{
+    return d->gridUnit();
+}
+
+int DecorationSettings::smallSpacing() const
+{
+    return d->smallSpacing();
+}
+
+int DecorationSettings::largeSpacing() const
+{
+    return d->largeSpacing();
+}
 }
 
 #include "moc_decorationsettings.cpp"
