@@ -392,7 +392,7 @@ void Decoration::hoverEnterEvent(QHoverEvent *event)
     for (DecorationButton *button : d->buttons) {
         QCoreApplication::instance()->sendEvent(button, event);
     }
-    auto flooredPos = QPoint(std::floor(event->posF().x()), std::floor(event->posF().y()));
+    auto flooredPos = QPoint(std::floor(event->position().x()), std::floor(event->position().y()));
     d->updateSectionUnderMouse(flooredPos);
 }
 
@@ -411,18 +411,18 @@ void Decoration::hoverMoveEvent(QHoverEvent *event)
             continue;
         }
         const bool hovered = button->isHovered();
-        const bool contains = button->contains(event->posF());
+        const bool contains = button->contains(event->position());
         if (!hovered && contains) {
-            QHoverEvent e(QEvent::HoverEnter, event->posF(), event->oldPosF(), event->modifiers());
+            QHoverEvent e(QEvent::HoverEnter, event->position(), event->oldPosF(), event->modifiers());
             QCoreApplication::instance()->sendEvent(button, &e);
         } else if (hovered && !contains) {
-            QHoverEvent e(QEvent::HoverLeave, event->posF(), event->oldPosF(), event->modifiers());
+            QHoverEvent e(QEvent::HoverLeave, event->position(), event->oldPosF(), event->modifiers());
             QCoreApplication::instance()->sendEvent(button, &e);
         } else if (hovered && contains) {
             QCoreApplication::instance()->sendEvent(button, event);
         }
     }
-    auto flooredPos = QPoint(std::floor(event->posF().x()), std::floor(event->posF().y()));
+    auto flooredPos = QPoint(std::floor(event->position().x()), std::floor(event->position().y()));
     d->updateSectionUnderMouse(flooredPos);
 }
 

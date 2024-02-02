@@ -516,7 +516,7 @@ bool DecorationButton::event(QEvent *event)
 
 void DecorationButton::hoverEnterEvent(QHoverEvent *event)
 {
-    if (!d->enabled || !d->visible || !contains(event->posF())) {
+    if (!d->enabled || !d->visible || !contains(event->position())) {
         return;
     }
     d->setHovered(true);
@@ -525,7 +525,7 @@ void DecorationButton::hoverEnterEvent(QHoverEvent *event)
 
 void DecorationButton::hoverLeaveEvent(QHoverEvent *event)
 {
-    if (!d->enabled || !d->visible || !d->hovered || contains(event->posF())) {
+    if (!d->enabled || !d->visible || !d->hovered || contains(event->position())) {
         return;
     }
     d->setHovered(false);
@@ -542,7 +542,7 @@ void DecorationButton::mouseMoveEvent(QMouseEvent *event)
     if (!d->enabled || !d->visible || !d->hovered) {
         return;
     }
-    if (!contains(event->localPos())) {
+    if (!contains(event->position())) {
         d->setHovered(false);
         event->setAccepted(true);
     }
@@ -550,7 +550,7 @@ void DecorationButton::mouseMoveEvent(QMouseEvent *event)
 
 void DecorationButton::mousePressEvent(QMouseEvent *event)
 {
-    if (!d->enabled || !d->visible || !contains(event->localPos()) || !d->acceptedButtons.testFlag(event->button())) {
+    if (!d->enabled || !d->visible || !contains(event->position()) || !d->acceptedButtons.testFlag(event->button())) {
         return;
     }
     d->setPressed(event->button(), true);
@@ -573,7 +573,7 @@ void DecorationButton::mouseReleaseEvent(QMouseEvent *event)
     if (!d->enabled || !d->visible || !d->isPressed(event->button())) {
         return;
     }
-    if (contains(event->localPos())) {
+    if (contains(event->position())) {
         if (!d->pressAndHold || event->button() != Qt::LeftButton) {
             Q_EMIT clicked(event->button());
         } else {

@@ -107,7 +107,7 @@ DecorationButtonGroup::DecorationButtonGroup(DecorationButtonGroup::Position typ
     QGuiApplication* app = qobject_cast<QGuiApplication*>(QCoreApplication::instance());
     const auto layoutDirection = app ? app->layoutDirection() : Qt::LeftToRight;
     auto settings = parent->settings();
-    auto createButtons = [=] {
+    auto createButtons = [&] {
         const auto &buttons =
             (type == Position::Left) ?
                 (layoutDirection == Qt::LeftToRight ? settings->decorationButtonsLeft() : settings->decorationButtonsRight()) :
