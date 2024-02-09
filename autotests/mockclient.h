@@ -51,6 +51,7 @@ public:
     void requestToggleShade() override;
     void requestShowToolTip(const QString &text) override;
     void requestHideToolTip() override;
+    void requestShowMaximizeBubble(const QRectF &rect) override;
     QSize size() const override;
     int width() const override;
     WId windowId() const override;

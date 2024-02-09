@@ -47,6 +47,7 @@ public:
     void setChecked(bool checked);
     void setCheckable(bool checkable);
     void setVisible(bool visible);
+    void setLongPress(bool enable);
     void startDoubleClickTimer();
     void invalidateDoubleClickTimer();
     bool wasDoubleClick() const;
@@ -67,6 +68,9 @@ public:
     Qt::MouseButtons acceptedButtons;
     bool doubleClickEnabled;
     bool pressAndHold;
+    bool longPress = false;
+
+    std::unique_ptr<QTimer> longPressTimer;
 
 private:
     void init();

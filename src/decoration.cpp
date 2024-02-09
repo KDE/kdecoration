@@ -206,6 +206,11 @@ void Decoration::requestToggleMaximization(Qt::MouseButtons buttons)
     d->client->d->requestToggleMaximization(buttons);
 }
 
+void Decoration::requestShowMaximizeBubble(const QRectF &rect)
+{
+    d->client->d->requestShowMaximizeBubble(rect);
+}
+
 void Decoration::showApplicationMenu(int actionId)
 {
     const auto it = std::find_if(d->buttons.constBegin(), d->buttons.constEnd(), [](DecorationButton *button) {

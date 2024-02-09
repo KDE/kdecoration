@@ -110,9 +110,13 @@ void DecorationButton::Private::init()
     case DecorationButtonType::Maximize:
         setEnabled(c->isMaximizeable());
         setCheckable(true);
+        setLongPress(true);
         setChecked(c->isMaximized());
         setAcceptedButtons(Qt::LeftButton | Qt::MiddleButton | Qt::RightButton);
         QObject::connect(q, &DecorationButton::clicked, decoration.data(), &Decoration::requestToggleMaximization, Qt::QueuedConnection);
+        QObject::connect(q, &DecorationButton::longPressed, decoration.data(), [this]() {
+            q->decoration()->requestShowMaximizeBubble(q->geometry());
+        });
         QObject::connect(c, &DecoratedClient::maximizeableChanged, q, &DecorationButton::setEnabled);
         QObject::connect(c, &DecoratedClient::maximizedChanged, q, &DecorationButton::setChecked);
         break;
@@ -293,6 +297,23 @@ void DecorationButton::Private::stopPressAndHold()
 {
     if (m_pressAndHoldTimer) {
         m_pressAndHoldTimer->stop();
+    }
+}
+
+void DecorationButton::Private::setLongPress(bool enable)
+{
+    if (longPress == enable) {
+        return;
+    }
+    longPress = enable;
+    if (enable) {
+        longPressTimer = std::make_unique<QTimer>();
+        longPressTimer->setSingleShot(true);
+        QObject::connect(longPressTimer.get(), &QTimer::timeout, q, [this]() {
+            Q_EMIT q->longPressed(Qt::LeftButton);
+        });
+    } else {
+        longPressTimer.reset();
     }
 }
 
@@ -566,8 +587,12 @@ void DecorationButton::mousePressEvent(QMouseEvent *event)
         }
         d->invalidateDoubleClickTimer();
     }
-    if (d->pressAndHold && event->button() == Qt::LeftButton) {
-        d->startPressAndHold();
+    if (event->button() == Qt::LeftButton) {
+        if (d->longPress) {
+            d->longPressTimer->start(QGuiApplication::styleHints()->mousePressAndHoldInterval());
+        } else if (d->pressAndHold) {
+            d->startPressAndHold();
+        }
     }
 }
 
@@ -577,7 +602,10 @@ void DecorationButton::mouseReleaseEvent(QMouseEvent *event)
         return;
     }
     if (contains(event->position())) {
-        if (!d->pressAndHold || event->button() != Qt::LeftButton) {
+        if (event->button() != Qt::LeftButton || ((!d->longPressTimer || d->longPressTimer->isActive()) && !d->pressAndHold)) {
+            if (d->longPressTimer) {
+                d->longPressTimer->stop();
+            }
             Q_EMIT clicked(event->button());
         } else {
             d->stopPressAndHold();

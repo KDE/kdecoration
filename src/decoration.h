@@ -183,6 +183,8 @@ public Q_SLOTS:
     void update(const QRect &rect);
     void update();
 
+    void requestShowMaximizeBubble(const QRectF &rect);
+
     /**
      * This method gets invoked from the framework once the Decoration is created and
      * completely setup.

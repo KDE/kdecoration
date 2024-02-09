@@ -222,6 +222,11 @@ void MockClient::requestHideToolTip()
 {
 }
 
+void MockClient::requestShowMaximizeBubble(const QRectF &rect)
+{
+    Q_UNUSED(rect)
+}
+
 QSize MockClient::size() const
 {
     return QSize(m_width, m_height);

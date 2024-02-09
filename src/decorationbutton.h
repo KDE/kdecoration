@@ -144,6 +144,7 @@ Q_SIGNALS:
     void pointerEntered();
     void pointerLeft();
     void doubleClicked();
+    void longPressed(Qt::MouseButton);
 
     void pressedChanged(bool);
     void hoveredChanged(bool);

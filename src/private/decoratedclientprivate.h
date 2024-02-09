@@ -71,6 +71,7 @@ public:
     virtual void requestToggleKeepAbove() = 0;
     virtual void requestToggleKeepBelow() = 0;
     virtual void requestShowWindowMenu(const QRect &rect) = 0;
+    virtual void requestShowMaximizeBubble(const QRectF &rect) = 0;
 
     Decoration *decoration();
     Decoration *decoration() const;
