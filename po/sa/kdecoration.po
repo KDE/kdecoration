@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdecoration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-23 01:46+0000\n"
+"POT-Creation-Date: 2024-02-10 00:40+0000\n"
 "PO-Revision-Date: 2023-09-27 19:49+0530\n"
 "Last-Translator: \n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -18,77 +18,77 @@ msgstr ""
 "X-Generator: Poedit 3.3.2\n"
 "Plural-Forms: nplurals=2; plural=(n>2);\n"
 
-#: decorationbutton.cpp:300
+#: decorationbutton.cpp:303
 #, kde-format
 msgid "More actions for this window"
 msgstr "अस्य गवाक्ष कृते अधिकानि क्रियाणि"
 
-#: decorationbutton.cpp:302
+#: decorationbutton.cpp:305
 #, kde-format
 msgid "Application menu"
 msgstr "अनुप्रयोग सूचि"
 
-#: decorationbutton.cpp:305
+#: decorationbutton.cpp:308
 #, kde-format
 msgid "On one desktop"
 msgstr "एकस्मिन् कार्यमुखे"
 
-#: decorationbutton.cpp:307
+#: decorationbutton.cpp:310
 #, kde-format
 msgid "On all desktops"
 msgstr "सर्वेषु कार्यमुखेषु"
 
-#: decorationbutton.cpp:309
+#: decorationbutton.cpp:312
 #, kde-format
 msgid "Minimize"
 msgstr "न्यूनतमं करोतु"
 
-#: decorationbutton.cpp:312
+#: decorationbutton.cpp:315
 #, kde-format
 msgid "Restore"
 msgstr "निर्यत्"
 
-#: decorationbutton.cpp:314
+#: decorationbutton.cpp:317
 #, kde-format
 msgid "Maximize"
 msgstr "अधिकतमं कुर्वन्तु"
 
-#: decorationbutton.cpp:316
+#: decorationbutton.cpp:319
 #, kde-format
 msgid "Close"
 msgstr "निमील्यताम्"
 
-#: decorationbutton.cpp:318
+#: decorationbutton.cpp:321
 #, kde-format
 msgid "Context help"
 msgstr "सन्दर्भ सहाय्यम्"
 
-#: decorationbutton.cpp:321
+#: decorationbutton.cpp:324
 #, kde-format
 msgid "Unshade"
 msgstr "अनच्छाया"
 
-#: decorationbutton.cpp:323
+#: decorationbutton.cpp:326
 #, kde-format
 msgid "Shade"
 msgstr "छाया"
 
-#: decorationbutton.cpp:326
+#: decorationbutton.cpp:329
 #, kde-format
 msgid "Don't keep below other windows"
 msgstr "अन्येषां गवाक्षानां अधः न स्थापयन्तु"
 
-#: decorationbutton.cpp:328
+#: decorationbutton.cpp:331
 #, kde-format
 msgid "Keep below other windows"
 msgstr "अन्येषां गवाक्षानां अधः स्थापयन्तु"
 
-#: decorationbutton.cpp:331
+#: decorationbutton.cpp:334
 #, kde-format
 msgid "Don't keep above other windows"
 msgstr "अन्येषां गवाक्षानां उपरि न स्थापयन्तु"
 
-#: decorationbutton.cpp:333
+#: decorationbutton.cpp:336
 #, kde-format
 msgid "Keep above other windows"
 msgstr "अन्येषां गवाक्षानां उपरि स्थापयन्तु"
