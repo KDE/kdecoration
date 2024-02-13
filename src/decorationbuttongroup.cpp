@@ -104,23 +104,22 @@ DecorationButtonGroup::DecorationButtonGroup(DecorationButtonGroup::Position typ
     : QObject(parent)
     , d(new Private(parent, this))
 {
-    QGuiApplication* app = qobject_cast<QGuiApplication*>(QCoreApplication::instance());
-    const auto layoutDirection = app ? app->layoutDirection() : Qt::LeftToRight;
-    auto settings = parent->settings();
-    auto createButtons = [&] {
+    auto createButtons = [this, buttonCreator, type] {
+        const Qt::LayoutDirection layoutDirection = QGuiApplication::layoutDirection();
+        const DecorationSettings *settings = d->decoration->settings().get();
         const auto &buttons =
             (type == Position::Left) ?
                 (layoutDirection == Qt::LeftToRight ? settings->decorationButtonsLeft() : settings->decorationButtonsRight()) :
                 (layoutDirection == Qt::LeftToRight ? settings->decorationButtonsRight() : settings->decorationButtonsLeft());
         for (DecorationButtonType type : buttons) {
-            if (DecorationButton *b = buttonCreator(type, parent, this)) {
+            if (DecorationButton *b = buttonCreator(type, d->decoration, this)) {
                 addButton(b);
             }
         }
     };
     createButtons();
     auto changed = type == Position::Left ? &DecorationSettings::decorationButtonsLeftChanged : &DecorationSettings::decorationButtonsRightChanged;
-    connect(settings.get(), changed, this, [this, createButtons] {
+    connect(parent->settings().get(), changed, this, [this, createButtons] {
         qDeleteAll(d->buttons);
         d->buttons.clear();
         createButtons();
