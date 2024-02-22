@@ -260,11 +260,25 @@ BORDER(top, Top)
 BORDER(bottom, Bottom)
 #undef BORDER
 
+QString Decoration::decorationName() const
+{
+    return d->decorationName;
+}
+
+void Decoration::setDecorationName(QString name)
+{
+    d->decorationName = name;
+}
+
 QSize Decoration::size() const
 {
     const QMargins &b = d->borders;
-    return QSize(d->client->width() + b.left() + b.right(), //
-                 (d->client->isShaded() ? 0 : d->client->height()) + b.top() + b.bottom());
+
+    const int usingBreeze = decorationName() == "breeze" ? 1 : 0;
+    // HACK -1 for fractional scaling issues when using breeze, this pushes the border under the
+    // window slightly and avoids the fractional scaling gap
+    return QSize(d->client->width() + b.left() + b.right() - usingBreeze, //
+                 (d->client->isShaded() ? 0 : d->client->height()) + b.top() + b.bottom() - usingBreeze);
 }
 
 QRect Decoration::rect() const
