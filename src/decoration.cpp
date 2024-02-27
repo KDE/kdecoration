@@ -274,11 +274,18 @@ QSize Decoration::size() const
 {
     const QMargins &b = d->borders;
 
-    const int usingBreeze = decorationName() == "breeze" ? 1 : 0;
+    const qreal width = d->client->width() + b.left() + b.right();
+    const qreal height = (d->client->isShaded() ? 0 : d->client->height()) + b.top() + b.bottom();
     // HACK -1 for fractional scaling issues when using breeze, this pushes the border under the
     // window slightly and avoids the fractional scaling gap
-    return QSize(d->client->width() + b.left() + b.right() - usingBreeze, //
-                 (d->client->isShaded() ? 0 : d->client->height()) + b.top() + b.bottom() - usingBreeze);
+    if (decorationName() == "breeze") {
+        const bool outlineEnabled = b.right() > b.left();
+        if (outlineEnabled) {
+            return QSize(width - 1, height - 1);
+        }
+    }
+    // For all non-breeze themes
+    return QSize(width, height);
 }
 
 QRect Decoration::rect() const
