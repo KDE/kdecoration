@@ -29,7 +29,6 @@ QString DecoratedClient::caption() const
     return d->caption();
 }
 
-
 bool DecoratedClient::isOnAllDesktops() const
 {
     return d->isOnAllDesktops();
