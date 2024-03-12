@@ -50,43 +50,63 @@ void DecorationButtonGroup::Private::updateLayout()
         if (!(*it)->isVisible()) {
             continue;
         }
-        height = qMax(height, qreal((*it)->size().height()));
-        width += (*it)->size().width();
-        if (it + 1 != buttons.constEnd()) {
-            width += spacing;
+        if (orientation == Qt::Horizontal) {
+            height = qMax(height, qreal((*it)->size().height()));
+            width += (*it)->size().width();
+            if (it + 1 != buttons.constEnd()) {
+                width += spacing;
+            }
+        } else {
+            width = qMax(width, qreal((*it)->size().width()));
+            height += (*it)->size().height();
+            if (it + 1 != buttons.constEnd()) {
+                height += spacing;
+            }
         }
     }
     setGeometry(QRectF(pos, QSizeF(width, height)));
 
-    QGuiApplication* app = qobject_cast<QGuiApplication*>(QCoreApplication::instance());
-    const auto layoutDirection = app ? app->layoutDirection() : Qt::LeftToRight;
+    if (orientation == Qt::Horizontal) {
+        Qt::LayoutDirection layoutDirection = QGuiApplication::layoutDirection();
+        qreal leftPosition = pos.x();
+        qreal rightPosition = pos.x() + width;
 
-    qreal leftPosition = pos.x();
-    qreal rightPosition = pos.x() + width;
+        if (layoutDirection == Qt::LeftToRight)
+            for (auto button : std::as_const(buttons)) {
+                if (!button->isVisible()) {
+                    continue;
+                }
+                const auto size = button->size();
+                const auto buttonPos = QPointF(leftPosition, pos.y());
+                button->setGeometry(QRectF(buttonPos, size));
+                leftPosition += size.width() + spacing;
+            }
+        else if (layoutDirection == Qt::RightToLeft)
+            for (auto button : std::as_const(buttons)) {
+                if (!button->isVisible()) {
+                    continue;
+                }
+                const auto size = button->size();
+                const auto buttonPos = QPointF(rightPosition - size.width(), pos.y());
+                button->setGeometry(QRectF(buttonPos, size));
+                rightPosition -= size.width() + spacing;
+            }
+        else {
+            qCritical() << "There's an unhandled layout direction! This is likely an issue of KDecoration2 not being updated to handle it\n"
+                        << "or the application having an invalid layout direction set. Either way, this is a critical bug.";
+        }
+    } else {
+        qreal topPosition = pos.y();
 
-    if (layoutDirection == Qt::LeftToRight)
         for (auto button : std::as_const(buttons)) {
             if (!button->isVisible()) {
                 continue;
             }
             const auto size = button->size();
-            const auto buttonPos = QPointF(leftPosition, pos.y());
+            const auto buttonPos = QPointF(pos.x(), topPosition);
             button->setGeometry(QRectF(buttonPos, size));
-            leftPosition += size.width() + spacing;
+            topPosition += size.height() + spacing;
         }
-    else if (layoutDirection == Qt::RightToLeft)
-        for (auto button : std::as_const(buttons)) {
-            if (!button->isVisible()) {
-                continue;
-            }
-            const auto size = button->size();
-            const auto buttonPos = QPointF(rightPosition - size.width(), pos.y());
-            button->setGeometry(QRectF(buttonPos, size));
-            rightPosition -= size.width() + spacing;
-        }
-    else {
-        qCritical() << "There's an unhandled layout direction! This is likely an issue of KDecoration2 not being updated to handle it\n"
-                    << "or the application having an invalid layout direction set. Either way, this is a critical bug.";
     }
 
     s_layoutRecursion = false;
@@ -173,6 +193,21 @@ void DecorationButtonGroup::setSpacing(qreal spacing)
     }
     d->spacing = spacing;
     Q_EMIT spacingChanged(d->spacing);
+    d->updateLayout();
+}
+
+Qt::Orientation DecorationButtonGroup::orientation() const
+{
+    return d->orientation;
+}
+
+void DecorationButtonGroup::setOrientation(Qt::Orientation orientation)
+{
+    if (d->orientation == orientation) {
+        return;
+    }
+    d->orientation = orientation;
+    Q_EMIT orientationChanged(d->orientation);
     d->updateLayout();
 }
 

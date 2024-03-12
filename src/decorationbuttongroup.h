@@ -47,6 +47,10 @@ class KDECORATIONS2_EXPORT DecorationButtonGroup : public QObject
      * triggered after e.g. a state change like maximization.
      **/
     Q_PROPERTY(QPointF pos READ pos WRITE setPos NOTIFY posChanged)
+    /**
+     * Whether the buttons are placed horizontally or vertically.
+     **/
+    Q_PROPERTY(Qt::Orientation orientation READ orientation WRITE setOrientation NOTIFY orientationChanged)
 public:
     enum class Position {
         Left,
@@ -73,6 +77,9 @@ public:
 
     qreal spacing() const;
     void setSpacing(qreal spacing);
+
+    Qt::Orientation orientation() const;
+    void setOrientation(Qt::Orientation orientation);
 
     QRectF geometry() const;
     QPointF pos() const;
@@ -106,6 +113,7 @@ Q_SIGNALS:
     void spacingChanged(qreal);
     void geometryChanged(const QRectF &);
     void posChanged(const QPointF &);
+    void orientationChanged(Qt::Orientation &);
 
 private:
     class Private;

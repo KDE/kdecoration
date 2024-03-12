@@ -37,6 +37,7 @@ public:
     QRectF geometry;
     QList<DecorationButton *> buttons;
     qreal spacing;
+    Qt::Orientation orientation = Qt::Horizontal;
 
 private:
     DecorationButtonGroup *q;
