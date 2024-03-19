@@ -53,6 +53,7 @@ public:
     QSizeF size() const override;
     qreal width() const override;
     QString windowClass() const override;
+    qreal scale() const override;
 
     void showApplicationMenu(int actionId) override;
 
