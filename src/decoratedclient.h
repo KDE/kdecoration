@@ -162,6 +162,8 @@ class KDECORATIONS2_EXPORT DecoratedClient : public QObject
      */
     Q_PROPERTY(bool applicationMenuActive READ isApplicationMenuActive NOTIFY applicationMenuActiveChanged)
 
+    Q_PROPERTY(double scale READ scale NOTIFY scaleChanged);
+
     // TODO: properties for windowId and decorationId?
 
 public:
@@ -235,6 +237,8 @@ public:
      */
     void showApplicationMenu(int actionId);
 
+    double scale() const;
+
 Q_SIGNALS:
     void activeChanged(bool);
     void captionChanged(QString);
@@ -263,6 +267,7 @@ Q_SIGNALS:
 
     void hasApplicationMenuChanged(bool);
     void applicationMenuActiveChanged(bool);
+    void scaleChanged();
 
 private:
     friend class Decoration;

@@ -187,6 +187,11 @@ void DecoratedClient::showApplicationMenu(int actionId)
     }
 }
 
+double DecoratedClient::scale() const
+{
+    return d->scale();
+}
+
 } // namespace
 
 #include "moc_decoratedclient.cpp"
