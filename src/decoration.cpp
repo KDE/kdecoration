@@ -349,8 +349,7 @@ double Decoration::resizeOnlyBorderBottom() const
 QSizeF Decoration::size() const
 {
     const QMarginsF &b = d->borders;
-    return QSize(d->client->width() + b.left() + b.right(), //
-                 (d->client->isShaded() ? 0 : d->client->height()) + b.top() + b.bottom());
+    return QSizeF(d->client->width() + b.left() + b.right(), (d->client->isShaded() ? 0 : d->client->height()) + b.top() + b.bottom());
 }
 
 QRectF Decoration::rect() const
