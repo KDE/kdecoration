@@ -59,6 +59,7 @@ public:
     virtual QSizeF size() const = 0;
     virtual QPalette palette() const = 0;
     virtual Qt::Edges adjacentScreenEdges() const = 0;
+    virtual double scale() const = 0;
 
     virtual void requestShowToolTip(const QString &text) = 0;
     virtual void requestHideToolTip() = 0;
