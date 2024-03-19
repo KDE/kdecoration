@@ -237,6 +237,11 @@ QString MockClient::windowClass() const
     return QString();
 }
 
+double MockClient::scale() const
+{
+    return 1;
+}
+
 WId MockClient::windowId() const
 {
     return 0;
