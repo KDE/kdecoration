@@ -162,6 +162,18 @@ class KDECORATIONS3_EXPORT DecoratedWindow : public QObject
      */
     Q_PROPERTY(bool applicationMenuActive READ isApplicationMenuActive NOTIFY applicationMenuActiveChanged)
 
+    /**
+     * The current scale this decorated window is targeting.
+     * @since 6.3
+     */
+    Q_PROPERTY(qreal scale READ scale NOTIFY scaleChanged);
+
+    /**
+     * The next scale this decorated window is going to target.
+     * @since 6.3
+     */
+    Q_PROPERTY(qreal nextScale READ nextScale NOTIFY nextScaleChanged)
+
 public:
     DecoratedWindow() = delete;
     ~DecoratedWindow() override;
@@ -230,6 +242,45 @@ public:
      */
     void showApplicationMenu(int actionId);
 
+    /**
+     * Returns the current scale this decorated window is targeting
+     * @since 6.3
+     */
+    qreal scale() const;
+    /**
+     * Returns the next scale this decorated window is going to target.
+     */
+    qreal nextScale() const;
+    /**
+     * @returns the logical size of a device pixel with the current scale
+     * @since 6.3
+     */
+    qreal pixelSize() const;
+    /**
+     * snaps the logical geometry value to a fractional logical geometry value
+     * that aligns to the pixel grid with the current scale factor
+     * @since 6.3
+     */
+    qreal snapToPixelGrid(qreal value) const;
+    /**
+     * snaps the logical geometry value to a fractional logical geometry value
+     * that aligns to the pixel grid with the current scale factor
+     * @since 6.3
+     */
+    QPointF snapToPixelGrid(const QPointF &value) const;
+    /**
+     * snaps the logical geometry value to a fractional logical geometry value
+     * that aligns to the pixel grid with the current scale factor
+     * @since 6.3
+     */
+    QSizeF snapToPixelGrid(const QSizeF &value) const;
+    /**
+     * snaps the logical geometry value to a fractional logical geometry value
+     * that aligns to the pixel grid with the current scale factor
+     * @since 6.3
+     */
+    QRectF snapToPixelGrid(const QRectF &value) const;
+
 Q_SIGNALS:
     void activeChanged(bool);
     void captionChanged(QString);
@@ -258,6 +309,8 @@ Q_SIGNALS:
 
     void hasApplicationMenuChanged(bool);
     void applicationMenuActiveChanged(bool);
+    void scaleChanged();
+    void nextScaleChanged();
 
 private:
     friend class Decoration;

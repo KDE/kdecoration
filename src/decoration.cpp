@@ -31,6 +31,41 @@ DecorationBridge *findBridge(const QVariantList &args)
 }
 }
 
+class DecorationStateData : public QSharedData
+{
+public:
+    QMarginsF borders;
+};
+
+DecorationState::DecorationState()
+    : d(new DecorationStateData)
+{
+}
+
+DecorationState::DecorationState(const DecorationState &other)
+    : d(other.d)
+{
+}
+
+DecorationState::~DecorationState()
+{
+}
+
+std::shared_ptr<DecorationState> DecorationState::clone() const
+{
+    return std::make_shared<DecorationState>(*this);
+}
+
+QMarginsF DecorationState::borders() const
+{
+    return d->borders;
+}
+
+void DecorationState::setBorders(const QMarginsF &borders)
+{
+    d->borders = borders;
+}
+
 Decoration::Private::Private(Decoration *deco, const QVariantList &args)
     : sectionUnderMouse(Qt::NoSection)
     , bridge(findBridge(args))
@@ -56,6 +91,7 @@ void Decoration::Private::updateSectionUnderMouse(const QPoint &mousePosition)
         return;
     }
     const QSizeF size = q->size();
+    const QMarginsF borders = current->borders();
     const int corner = 2 * settings->largeSpacing();
     const bool left = mousePosition.x() < borders.left();
     const bool top = mousePosition.y() < borders.top();
@@ -132,9 +168,6 @@ Decoration::Decoration(QObject *parent, const QVariantList &args)
     : QObject(parent)
     , d(new Private(this, args))
 {
-    connect(this, &Decoration::bordersChanged, this, [this] {
-        update();
-    });
 }
 
 Decoration::~Decoration() = default;
@@ -231,9 +264,10 @@ void Decoration::setBlurRegion(const QRegion &region)
 
 void Decoration::setBorders(const QMarginsF &borders)
 {
-    if (d->borders != borders) {
-        d->borders = borders;
-        Q_EMIT bordersChanged();
+    if (d->next->borders() != borders) {
+        setState([borders](DecorationState *state) {
+            state->setBorders(borders);
+        });
     }
 }
 
@@ -276,7 +310,7 @@ QRegion Decoration::blurRegion() const
 
 QMarginsF Decoration::borders() const
 {
-    return d->borders;
+    return d->current->borders();
 }
 
 QMarginsF Decoration::resizeOnlyBorders() const
@@ -306,7 +340,7 @@ bool Decoration::isOpaque() const
 
 qreal Decoration::borderLeft() const
 {
-    return d->borders.left();
+    return d->current->borders().left();
 }
 
 qreal Decoration::resizeOnlyBorderLeft() const
@@ -316,7 +350,7 @@ qreal Decoration::resizeOnlyBorderLeft() const
 
 qreal Decoration::borderRight() const
 {
-    return d->borders.right();
+    return d->current->borders().right();
 }
 
 qreal Decoration::resizeOnlyBorderRight() const
@@ -326,7 +360,7 @@ qreal Decoration::resizeOnlyBorderRight() const
 
 qreal Decoration::borderTop() const
 {
-    return d->borders.top();
+    return d->current->borders().top();
 }
 
 qreal Decoration::resizeOnlyBorderTop() const
@@ -336,7 +370,7 @@ qreal Decoration::resizeOnlyBorderTop() const
 
 qreal Decoration::borderBottom() const
 {
-    return d->borders.bottom();
+    return d->current->borders().bottom();
 }
 
 qreal Decoration::resizeOnlyBorderBottom() const
@@ -346,7 +380,7 @@ qreal Decoration::resizeOnlyBorderBottom() const
 
 QSizeF Decoration::size() const
 {
-    const QMarginsF &b = d->borders;
+    const QMarginsF b = d->current->borders();
     return QSizeF(d->client->width() + b.left() + b.right(), (d->client->isShaded() ? 0 : d->client->height()) + b.top() + b.bottom());
 }
 
@@ -487,6 +521,50 @@ void Decoration::setSettings(const std::shared_ptr<DecorationSettings> &settings
 std::shared_ptr<DecorationSettings> Decoration::settings() const
 {
     return d->settings;
+}
+
+std::shared_ptr<DecorationState> Decoration::createState()
+{
+    return std::make_shared<DecorationState>();
+}
+
+std::shared_ptr<DecorationState> Decoration::currentState() const
+{
+    return d->current;
+}
+
+std::shared_ptr<DecorationState> Decoration::nextState() const
+{
+    return d->next;
+}
+
+void Decoration::create()
+{
+    d->next = createState();
+    d->current = createState();
+}
+
+void Decoration::setState(std::function<void(DecorationState *state)> callback)
+{
+    callback(d->next.get());
+    Q_EMIT nextStateChanged(d->next);
+}
+
+void Decoration::apply(std::shared_ptr<DecorationState> state)
+{
+    if (d->current == state) {
+        return;
+    }
+
+    const auto previous = d->current;
+    d->current = state;
+    update();
+
+    if (previous->borders() != state->borders()) {
+        Q_EMIT bordersChanged();
+    }
+
+    Q_EMIT currentStateChanged(state);
 }
 
 } // namespace

@@ -11,6 +11,7 @@
 #include <QMarginsF>
 #include <QObject>
 #include <QRectF>
+#include <QSharedDataPointer>
 
 class QHoverEvent;
 class QMouseEvent;
@@ -27,6 +28,30 @@ class DecorationPrivate;
 class DecoratedWindow;
 class DecorationButton;
 class DecorationSettings;
+class DecorationStateData;
+
+/**
+ * \brief Decoration state.
+ *
+ * The DecorationState type represents double bufferred state associated with a decoration.
+ *
+ * \note Sub-classes of DecorationState must override the clone() function.
+ */
+class KDECORATIONS3_EXPORT DecorationState
+{
+public:
+    DecorationState();
+    DecorationState(const DecorationState &other);
+    virtual ~DecorationState();
+
+    virtual std::shared_ptr<DecorationState> clone() const;
+
+    QMarginsF borders() const;
+    void setBorders(const QMarginsF &margins);
+
+private:
+    QSharedDataPointer<DecorationStateData> d;
+};
 
 /**
  * @brief Base class for the Decoration.
@@ -151,6 +176,54 @@ public:
 
     bool event(QEvent *event) override;
 
+    /**
+     * \internal
+     *
+     * Allocates the resources associated with the decoration, for example state containers.
+     *
+     * \note This method gets invoked by the compositor before init(), the decoration implementation
+     * must not call it.
+     */
+    void create();
+
+    /**
+     * \internal
+     *
+     * Make the specified \a state current.
+     *
+     * The decoration maintains a double-buffered state. If a double-buffered property needs
+     * to be changed, the next state will be updated and the nextStateChanged() signal will be
+     * emitted to notify the compositor about it.
+     *
+     * When the next state gets applied is subject to compositor policies. For example, the
+     * compositor may apply the new state immediately, or it can synchronize double-buffered
+     * decoration state with double-buffered toplevel state.
+     *
+     * \sa currentState(), nextState(), createState()
+     */
+    void apply(std::shared_ptr<DecorationState> state);
+
+    /**
+     * Returns the currently applied state.
+     *
+     * \sa apply()
+     */
+    std::shared_ptr<DecorationState> currentState() const;
+
+    /**
+     * Returns the next state, i.e. the state that the decoration implementation wants to be current.
+     *
+     * \sa apply()
+     */
+    std::shared_ptr<DecorationState> nextState() const;
+
+    /**
+     * Notifies the framework that the decoration state has changed. When the new state is applied
+     * is subject to compositor policies. For example, the compositor may re-configure the window
+     * and apply the new state when the window is repainted.
+     */
+    void setState(std::function<void(DecorationState *state)> callback);
+
 public Q_SLOTS:
     void requestClose();
     void requestToggleMaximization(Qt::MouseButtons buttons);
@@ -204,6 +277,8 @@ Q_SIGNALS:
     void opaqueChanged(bool);
     void shadowChanged(const std::shared_ptr<DecorationShadow> &shadow);
     void damaged(const QRegion &region);
+    void currentStateChanged(std::shared_ptr<DecorationState> state);
+    void nextStateChanged(std::shared_ptr<DecorationState> state);
 
 protected:
     /**
@@ -236,6 +311,16 @@ protected:
     virtual void mousePressEvent(QMouseEvent *event);
     virtual void mouseReleaseEvent(QMouseEvent *event);
     virtual void wheelEvent(QWheelEvent *event);
+
+    /**
+     * Create a state container. The decoration implementation can override this method to attach
+     * its own properties to the decoration state.
+     *
+     * The default implementation simply creates an instance of the DecorationState type.
+     *
+     * \sa currentState(), nextState()
+     */
+    virtual std::shared_ptr<DecorationState> createState();
 
 private:
     friend class DecorationButton;

@@ -31,7 +31,6 @@ class Q_DECL_HIDDEN Decoration::Private
 public:
     Private(Decoration *decoration, const QVariantList &args);
 
-    QMarginsF borders;
     QMarginsF resizeOnlyBorders;
 
     Qt::WindowFrameSection sectionUnderMouse;
@@ -49,6 +48,8 @@ public:
     bool opaque;
     QList<DecorationButton *> buttons;
     std::shared_ptr<DecorationShadow> shadow;
+    std::shared_ptr<DecorationState> next;
+    std::shared_ptr<DecorationState> current;
 
 private:
     Decoration *q;

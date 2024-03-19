@@ -60,6 +60,7 @@ ecm_generate_headers(KDecoration3_CamelCase_HEADERS
     DecorationSettings
     DecorationShadow
     DecorationThemeProvider
+    ScaleHelpers
   PREFIX
     KDecoration3
   REQUIRED_HEADERS KDecoration3_HEADERS

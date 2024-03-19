@@ -29,6 +29,13 @@ MockDecoration::MockDecoration(MockBridge *bridge)
     : MockDecoration(nullptr, QVariantList({QVariantMap({{QStringLiteral("bridge"), QVariant::fromValue(bridge)}})}))
 #endif
 {
+    create();
+    init();
+
+    apply(nextState()->clone());
+    connect(this, &MockDecoration::nextStateChanged, this, [this]() {
+        apply(nextState()->clone());
+    });
 }
 
 bool MockDecoration::init()
