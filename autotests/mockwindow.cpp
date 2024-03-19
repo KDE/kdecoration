@@ -279,4 +279,9 @@ void MockWindow::showApplicationMenu(int actionId)
     Q_UNUSED(actionId)
 }
 
+qreal MockWindow::scale() const
+{
+    return 1;
+}
+
 #include "moc_mockwindow.cpp"
