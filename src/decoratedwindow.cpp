@@ -169,6 +169,11 @@ void DecoratedWindow::showApplicationMenu(int actionId)
     d->showApplicationMenu(actionId);
 }
 
+qreal DecoratedWindow::scale() const
+{
+    return d->scale();
+}
+
 } // namespace
 
 #include "moc_decoratedwindow.cpp"
