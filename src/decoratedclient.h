@@ -238,6 +238,10 @@ public:
     void showApplicationMenu(int actionId);
 
     double scale() const;
+    double snapToPixelGrid(double value);
+    QPointF snapToPixelGrid(const QPointF &value);
+    QSizeF snapToPixelGrid(const QSizeF &value);
+    QRectF snapToPixelGrid(const QRectF &value);
 
 Q_SIGNALS:
     void activeChanged(bool);
