@@ -29,7 +29,7 @@ WId MockClient::decorationId() const
     return 0;
 }
 
-int MockClient::height() const
+double MockClient::height() const
 {
     return m_height;
 }
@@ -222,12 +222,12 @@ void MockClient::requestHideToolTip()
 {
 }
 
-QSize MockClient::size() const
+QSizeF MockClient::size() const
 {
     return QSize(m_width, m_height);
 }
 
-int MockClient::width() const
+double MockClient::width() const
 {
     return m_width;
 }
