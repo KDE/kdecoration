@@ -192,6 +192,26 @@ double DecoratedClient::scale() const
     return d->scale();
 }
 
+double DecoratedClient::snapToPixelGrid(double value)
+{
+    return std::round(value * d->scale()) / d->scale();
+}
+
+QPointF DecoratedClient::snapToPixelGrid(const QPointF &value)
+{
+    return QPointF(snapToPixelGrid(value.x()), snapToPixelGrid(value.y()));
+}
+
+QSizeF DecoratedClient::snapToPixelGrid(const QSizeF &value)
+{
+    return QSizeF(snapToPixelGrid(value.width()), snapToPixelGrid(value.height()));
+}
+
+QRectF DecoratedClient::snapToPixelGrid(const QRectF &value)
+{
+    return QRectF(snapToPixelGrid(value.topLeft()), snapToPixelGrid(value.size()));
+}
+
 } // namespace
 
 #include "moc_decoratedclient.cpp"
