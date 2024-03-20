@@ -36,7 +36,7 @@ bool MockDecoration::init()
     return true;
 }
 
-void MockDecoration::paint(QPainter *painter, const QRect &repaintRegion)
+void MockDecoration::paint(QPainter *painter, const QRectF &repaintRegion)
 {
     Q_UNUSED(painter)
     Q_UNUSED(repaintRegion)

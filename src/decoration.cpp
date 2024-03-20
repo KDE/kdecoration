@@ -51,20 +51,20 @@ void Decoration::Private::setSectionUnderMouse(Qt::WindowFrameSection section)
 
 void Decoration::Private::updateSectionUnderMouse(const QPoint &mousePosition)
 {
-    if (titleBar.contains(mousePosition)) {
+    if (titleBar.toRect().contains(mousePosition)) {
         setSectionUnderMouse(Qt::TitleBarArea);
         return;
     }
-    const QSize size = q->size();
+    const QSizeF size = q->size();
     const int corner = 2 * settings->largeSpacing();
     const bool left = mousePosition.x() < borders.left();
     const bool top = mousePosition.y() < borders.top();
-    const bool bottom = size.height() - mousePosition.y() <= borders.bottom();
-    const bool right = size.width() - mousePosition.x() <= borders.right();
+    const bool bottom = mousePosition.y() >= size.height() - borders.bottom();
+    const bool right = mousePosition.x() >= size.width() - borders.right();
     if (left) {
         if (top && mousePosition.y() < titleBar.top() + corner) {
             setSectionUnderMouse(Qt::TopLeftSection);
-        } else if (size.height() - mousePosition.y() <= borders.bottom() + corner && mousePosition.y() > titleBar.bottom()) {
+        } else if (mousePosition.y() >= size.height() - borders.bottom() - corner && mousePosition.y() >= titleBar.bottom()) {
             setSectionUnderMouse(Qt::BottomLeftSection);
         } else {
             setSectionUnderMouse(Qt::LeftSection);
@@ -74,7 +74,7 @@ void Decoration::Private::updateSectionUnderMouse(const QPoint &mousePosition)
     if (right) {
         if (top && mousePosition.y() < titleBar.top() + corner) {
             setSectionUnderMouse(Qt::TopRightSection);
-        } else if (size.height() - mousePosition.y() <= borders.bottom() + corner && mousePosition.y() > titleBar.bottom()) {
+        } else if (mousePosition.y() >= size.height() - borders.bottom() - corner && mousePosition.y() >= titleBar.bottom()) {
             setSectionUnderMouse(Qt::BottomRightSection);
         } else {
             setSectionUnderMouse(Qt::RightSection);
@@ -82,10 +82,10 @@ void Decoration::Private::updateSectionUnderMouse(const QPoint &mousePosition)
         return;
     }
     if (bottom) {
-        if (mousePosition.y() > titleBar.bottom()) {
+        if (mousePosition.y() >= titleBar.bottom()) {
             if (mousePosition.x() < borders.left() + corner) {
                 setSectionUnderMouse(Qt::BottomLeftSection);
-            } else if (size.width() - mousePosition.x() <= borders.right() + corner) {
+            } else if (mousePosition.x() >= size.width() - borders.right() - corner) {
                 setSectionUnderMouse(Qt::BottomRightSection);
             } else {
                 setSectionUnderMouse(Qt::BottomSection);
@@ -99,7 +99,7 @@ void Decoration::Private::updateSectionUnderMouse(const QPoint &mousePosition)
         if (mousePosition.y() < titleBar.top()) {
             if (mousePosition.x() < borders.left() + corner) {
                 setSectionUnderMouse(Qt::TopLeftSection);
-            } else if (size.width() - mousePosition.x() <= borders.right() + corner) {
+            } else if (mousePosition.x() >= size.width() - borders.right() - corner) {
                 setSectionUnderMouse(Qt::TopRightSection);
             } else {
                 setSectionUnderMouse(Qt::TopSection);
@@ -229,7 +229,7 @@ void Decoration::setBlurRegion(const QRegion &region)
     }
 }
 
-void Decoration::setBorders(const QMargins &borders)
+void Decoration::setBorders(const QMarginsF &borders)
 {
     if (d->borders != borders) {
         d->borders = borders;
@@ -237,7 +237,7 @@ void Decoration::setBorders(const QMargins &borders)
     }
 }
 
-void Decoration::setResizeOnlyBorders(const QMargins &borders)
+void Decoration::setResizeOnlyBorders(const QMarginsF &borders)
 {
     if (d->resizeOnlyBorders != borders) {
         d->resizeOnlyBorders = borders;
@@ -245,7 +245,7 @@ void Decoration::setResizeOnlyBorders(const QMargins &borders)
     }
 }
 
-void Decoration::setTitleBar(const QRect &rect)
+void Decoration::setTitleBar(const QRectF &rect)
 {
     if (d->titleBar != rect) {
         d->titleBar = rect;
@@ -274,17 +274,17 @@ QRegion Decoration::blurRegion() const
     return d->blurRegion;
 }
 
-QMargins Decoration::borders() const
+QMarginsF Decoration::borders() const
 {
     return d->borders;
 }
 
-QMargins Decoration::resizeOnlyBorders() const
+QMarginsF Decoration::resizeOnlyBorders() const
 {
     return d->resizeOnlyBorders;
 }
 
-QRect Decoration::titleBar() const
+QRectF Decoration::titleBar() const
 {
     return d->titleBar;
 }
@@ -304,56 +304,55 @@ bool Decoration::isOpaque() const
     return d->opaque;
 }
 
-int Decoration::borderLeft() const
+qreal Decoration::borderLeft() const
 {
     return d->borders.left();
 }
 
-int Decoration::resizeOnlyBorderLeft() const
+qreal Decoration::resizeOnlyBorderLeft() const
 {
     return d->resizeOnlyBorders.left();
 }
 
-int Decoration::borderRight() const
+qreal Decoration::borderRight() const
 {
     return d->borders.right();
 }
 
-int Decoration::resizeOnlyBorderRight() const
+qreal Decoration::resizeOnlyBorderRight() const
 {
     return d->resizeOnlyBorders.right();
 }
 
-int Decoration::borderTop() const
+qreal Decoration::borderTop() const
 {
     return d->borders.top();
 }
 
-int Decoration::resizeOnlyBorderTop() const
+qreal Decoration::resizeOnlyBorderTop() const
 {
     return d->resizeOnlyBorders.top();
 }
 
-int Decoration::borderBottom() const
+qreal Decoration::borderBottom() const
 {
     return d->borders.bottom();
 }
 
-int Decoration::resizeOnlyBorderBottom() const
+qreal Decoration::resizeOnlyBorderBottom() const
 {
     return d->resizeOnlyBorders.bottom();
 }
 
-QSize Decoration::size() const
+QSizeF Decoration::size() const
 {
-    const QMargins &b = d->borders;
-    return QSize(d->client->width() + b.left() + b.right(), //
-                 (d->client->isShaded() ? 0 : d->client->height()) + b.top() + b.bottom());
+    const QMarginsF &b = d->borders;
+    return QSizeF(d->client->width() + b.left() + b.right(), (d->client->isShaded() ? 0 : d->client->height()) + b.top() + b.bottom());
 }
 
-QRect Decoration::rect() const
+QRectF Decoration::rect() const
 {
-    return QRect(QPoint(0, 0), size());
+    return QRectF(QPointF(0, 0), size());
 }
 
 bool Decoration::event(QEvent *event)
@@ -470,9 +469,9 @@ void Decoration::wheelEvent(QWheelEvent *event)
     }
 }
 
-void Decoration::update(const QRect &r)
+void Decoration::update(const QRectF &r)
 {
-    Q_EMIT damaged(r.isNull() ? rect() : r);
+    Q_EMIT damaged(r.isNull() ? rect().toAlignedRect() : r.toAlignedRect());
 }
 
 void Decoration::update()

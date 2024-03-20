@@ -228,7 +228,7 @@ void DecorationButtonGroup::removeButton(DecorationButton *button)
     }
 }
 
-void DecorationButtonGroup::paint(QPainter *painter, const QRect &repaintArea)
+void DecorationButtonGroup::paint(QPainter *painter, const QRectF &repaintArea)
 {
     const auto &buttons = d->buttons;
     for (auto button : buttons) {

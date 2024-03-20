@@ -16,7 +16,7 @@ public:
     explicit MockDecoration(QObject *parent, const QVariantList &args);
     explicit MockDecoration(MockBridge *bridge);
     bool init() override;
-    void paint(QPainter *painter, const QRect &repaintRegion) override;
+    void paint(QPainter *painter, const QRectF &repaintRegion) override;
     void setOpaque(bool set);
     using Decoration::setBorders;
     void setBorders(const QMargins &m);

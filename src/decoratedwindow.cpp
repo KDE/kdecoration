@@ -109,17 +109,17 @@ bool DecoratedWindow::isResizeable() const
     return d->isResizeable();
 }
 
-int DecoratedWindow::width() const
+qreal DecoratedWindow::width() const
 {
     return d->width();
 }
 
-int DecoratedWindow::height() const
+qreal DecoratedWindow::height() const
 {
     return d->height();
 }
 
-QSize DecoratedWindow::size() const
+QSizeF DecoratedWindow::size() const
 {
     return d->size();
 }

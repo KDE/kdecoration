@@ -42,28 +42,27 @@ void DecorationShadowTest::testPadding()
     QMetaProperty metaProperty = shadow.metaObject()->property(propertyIndex);
     QCOMPARE(metaProperty.isReadable(), true);
     QCOMPARE(metaProperty.hasNotifySignal(), true);
-    QCOMPARE(metaProperty.type(), QVariant::Int);
     QSignalSpy changedSpy(&shadow, &KDecoration3::DecorationShadow::paddingChanged);
     QVERIFY(changedSpy.isValid());
 
     QCOMPARE(shadow.property(propertyName.constData()).isValid(), true);
-    QCOMPARE(shadow.property(propertyName.constData()).toInt(), 0);
+    QCOMPARE(shadow.property(propertyName.constData()).toDouble(), 0);
     QFETCH(QMargins, padding);
     shadow.setPadding(padding);
     QCOMPARE(shadow.padding(), padding);
-    QCOMPARE(shadow.property(propertyName.constData()).toInt(), 10);
+    QCOMPARE(shadow.property(propertyName.constData()).toDouble(), 10);
     QCOMPARE(changedSpy.count(), 1);
 
     // trying to set to same value shouldn't emit the signal
     shadow.setPadding(padding);
-    QCOMPARE(shadow.property(propertyName.constData()).toInt(), 10);
+    QCOMPARE(shadow.property(propertyName.constData()).toDouble(), 10);
     QCOMPARE(changedSpy.count(), 1);
 
     // changing to different value should emit signal
     padding += 1;
     shadow.setPadding(padding);
     QCOMPARE(shadow.padding(), padding);
-    QCOMPARE(shadow.property(propertyName.constData()).toInt(), 11);
+    QCOMPARE(shadow.property(propertyName.constData()).toDouble(), 11);
     QCOMPARE(changedSpy.count(), 2);
 }
 
@@ -96,27 +95,26 @@ void DecorationShadowTest::testSizes()
     QMetaProperty metaProperty = shadow.metaObject()->property(propertyIndex);
     QCOMPARE(metaProperty.isReadable(), true);
     QCOMPARE(metaProperty.hasNotifySignal(), true);
-    QCOMPARE(metaProperty.type(), QVariant::Rect);
     QSignalSpy changedSpy(&shadow, &KDecoration3::DecorationShadow::innerShadowRectChanged);
     QVERIFY(changedSpy.isValid());
 
-    QCOMPARE(shadow.innerShadowRect(), QRect());
+    QCOMPARE(shadow.innerShadowRect(), QRectF());
     QCOMPARE(shadow.property(propertyName.constData()).isValid(), true);
-    QCOMPARE(shadow.property(propertyName.constData()).toRect(), QRect());
+    QCOMPARE(shadow.property(propertyName.constData()).toRectF(), QRectF());
     QFETCH(QRect, innerShadowRect);
     QFETCH(QRect, shadowRect);
     QFETCH(QSize, shadowSize);
     shadow.setInnerShadowRect(innerShadowRect);
     QCOMPARE(shadow.innerShadowRect(), innerShadowRect);
     // property should still be invalid as the image is not yet set
-    QCOMPARE(shadow.property(propertyName.constData()).toRect(), QRect());
+    QCOMPARE(shadow.property(propertyName.constData()).toRectF(), QRectF());
     shadow.setShadow(QImage(shadowSize, QImage::Format_ARGB32));
-    QCOMPARE(shadow.property(propertyName.constData()).toRect(), shadowRect);
+    QCOMPARE(shadow.property(propertyName.constData()).toRectF(), shadowRect);
     QCOMPARE(changedSpy.count(), 1);
 
     // trying to set to same value shouldn't emit the signal
     shadow.setInnerShadowRect(innerShadowRect);
-    QCOMPARE(shadow.property(propertyName.constData()).toRect(), shadowRect);
+    QCOMPARE(shadow.property(propertyName.constData()).toRectF(), shadowRect);
     QCOMPARE(changedSpy.count(), 1);
 
     // changing to different value should emit signal

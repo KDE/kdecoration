@@ -10,7 +10,7 @@ MockButton::MockButton(KDecoration3::DecorationButtonType type, KDecoration3::De
 {
 }
 
-void MockButton::paint(QPainter *painter, const QRect &repaintRegion)
+void MockButton::paint(QPainter *painter, const QRectF &repaintRegion)
 {
     Q_UNUSED(painter)
     Q_UNUSED(repaintRegion)

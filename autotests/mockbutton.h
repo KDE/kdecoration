@@ -12,5 +12,5 @@ class MockButton : public KDecoration3::DecorationButton
     Q_OBJECT
 public:
     MockButton(KDecoration3::DecorationButtonType type, KDecoration3::Decoration *decoration, QObject *parent = nullptr);
-    void paint(QPainter *painter, const QRect &repaintRegion) override;
+    void paint(QPainter *painter, const QRectF &repaintRegion) override;
 };

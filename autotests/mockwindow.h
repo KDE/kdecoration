@@ -17,7 +17,7 @@ public:
 
     Qt::Edges adjacentScreenEdges() const override;
     QString caption() const override;
-    int height() const override;
+    qreal height() const override;
     QIcon icon() const override;
     bool isActive() const override;
     bool isCloseable() const override;
@@ -50,8 +50,8 @@ public:
     void requestToggleShade() override;
     void requestShowToolTip(const QString &text) override;
     void requestHideToolTip() override;
-    QSize size() const override;
-    int width() const override;
+    QSizeF size() const override;
+    qreal width() const override;
     QString windowClass() const override;
 
     void showApplicationMenu(int actionId) override;
@@ -84,6 +84,6 @@ private:
     bool m_maximizedVertically = false;
     bool m_maximizedHorizontally = false;
     bool m_onAllDesktops = false;
-    int m_width = 0;
-    int m_height = 0;
+    qreal m_width = 0;
+    qreal m_height = 0;
 };

@@ -24,7 +24,7 @@ QString MockWindow::caption() const
     return QString();
 }
 
-int MockWindow::height() const
+qreal MockWindow::height() const
 {
     return m_height;
 }
@@ -217,12 +217,12 @@ void MockWindow::requestHideToolTip()
 {
 }
 
-QSize MockWindow::size() const
+QSizeF MockWindow::size() const
 {
     return QSize(m_width, m_height);
 }
 
-int MockWindow::width() const
+qreal MockWindow::width() const
 {
     return m_width;
 }
