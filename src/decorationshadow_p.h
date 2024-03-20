@@ -28,8 +28,8 @@ public:
     explicit Private(DecorationShadow *parent);
     ~Private();
     QImage shadow;
-    QRect innerShadowRect;
-    QMargins padding;
+    QRectF innerShadowRect;
+    QMarginsF padding;
 
 private:
     DecorationShadow *q;

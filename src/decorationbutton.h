@@ -110,7 +110,7 @@ public:
      * @param painter The QPainter to paint this DecorationButton.
      * @param repaintArea The area which is going to be repainted in Decoration coordinates
      **/
-    virtual void paint(QPainter *painter, const QRect &repaintArea) = 0;
+    virtual void paint(QPainter *painter, const QRectF &repaintArea) = 0;
 
     Decoration *decoration() const;
 

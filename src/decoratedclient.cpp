@@ -119,17 +119,17 @@ WId DecoratedClient::decorationId() const
     return d->decorationId();
 }
 
-int DecoratedClient::width() const
+double DecoratedClient::width() const
 {
     return d->width();
 }
 
-int DecoratedClient::height() const
+double DecoratedClient::height() const
 {
     return d->height();
 }
 
-QSize DecoratedClient::size() const
+QSizeF DecoratedClient::size() const
 {
     return d->size();
 }
