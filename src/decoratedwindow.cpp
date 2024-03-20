@@ -6,6 +6,7 @@
 #include "decoratedwindow.h"
 #include "private/decoratedwindowprivate.h"
 #include "private/decorationbridge.h"
+#include "scalehelpers.h"
 
 #include <QColor>
 
@@ -172,6 +173,31 @@ void DecoratedWindow::showApplicationMenu(int actionId)
 qreal DecoratedWindow::scale() const
 {
     return d->scale();
+}
+
+qreal DecoratedWindow::pixelSize() const
+{
+    return ::KDecoration3::pixelSize(scale());
+}
+
+qreal DecoratedWindow::snapToPixelGrid(qreal value) const
+{
+    return ::KDecoration3::snapToPixelGrid(value, d->scale());
+}
+
+QPointF DecoratedWindow::snapToPixelGrid(const QPointF &value) const
+{
+    return ::KDecoration3::snapToPixelGrid(value, d->scale());
+}
+
+QSizeF DecoratedWindow::snapToPixelGrid(const QSizeF &value) const
+{
+    return ::KDecoration3::snapToPixelGrid(value, d->scale());
+}
+
+QRectF DecoratedWindow::snapToPixelGrid(const QRectF &value) const
+{
+    return ::KDecoration3::snapToPixelGrid(value, d->scale());
 }
 
 } // namespace

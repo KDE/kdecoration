@@ -241,6 +241,35 @@ public:
      * @since 6.3
      */
     qreal scale() const;
+    /**
+     * @returns the pixel size with the current scale
+     * @since 6.3
+     */
+    qreal pixelSize() const;
+    /**
+     * snaps the logical geometry value to a fractional logical geometry value
+     * that aligns to the pixel grid with the current scale factor
+     * @since 6.3
+     */
+    qreal snapToPixelGrid(qreal value) const;
+    /**
+     * snaps the logical geometry value to a fractional logical geometry value
+     * that aligns to the pixel grid with the current scale factor
+     * @since 6.3
+     */
+    QPointF snapToPixelGrid(const QPointF &value) const;
+    /**
+     * snaps the logical geometry value to a fractional logical geometry value
+     * that aligns to the pixel grid with the current scale factor
+     * @since 6.3
+     */
+    QSizeF snapToPixelGrid(const QSizeF &value) const;
+    /**
+     * snaps the logical geometry value to a fractional logical geometry value
+     * that aligns to the pixel grid with the current scale factor
+     * @since 6.3
+     */
+    QRectF snapToPixelGrid(const QRectF &value) const;
 
 Q_SIGNALS:
     void activeChanged(bool);
