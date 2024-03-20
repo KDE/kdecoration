@@ -31,14 +31,14 @@ class Q_DECL_HIDDEN Decoration::Private
 public:
     Private(Decoration *decoration, const QVariantList &args);
 
-    QMargins borders;
-    QMargins resizeOnlyBorders;
+    QMarginsF borders;
+    QMarginsF resizeOnlyBorders;
 
     Qt::WindowFrameSection sectionUnderMouse;
     void setSectionUnderMouse(Qt::WindowFrameSection section);
     void updateSectionUnderMouse(const QPoint &mousePosition);
 
-    QRect titleBar;
+    QRectF titleBar;
     QRegion blurRegion;
 
     void addButton(DecorationButton *button);

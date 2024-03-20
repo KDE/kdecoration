@@ -67,7 +67,7 @@ public:
      * @param painter The QPainter which is used to paint this DecorationButtonGroup
      * @param repaintArea The area which is going to be repainted in Decoration coordinates
      **/
-    virtual void paint(QPainter *painter, const QRect &repaintArea);
+    virtual void paint(QPainter *painter, const QRectF &repaintArea);
 
     Decoration *decoration() const;
 
