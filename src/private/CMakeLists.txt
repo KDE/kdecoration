@@ -41,14 +41,6 @@ ecm_generate_headers(KDecoration2Private_CamelCase_HEADERS
     KDecoration2/Private
   REQUIRED_HEADERS KDecoration2Private_HEADERS
 )
-
-# See https://bugreports.qt.io/browse/QTBUG-123052
-set(METATYPES_INSTALL_DIR "metatypes")
-qt_extract_metatypes(kdecorations2private OUTPUT_FILES METATYPES_FILE)
-get_filename_component(METATYPES_FILE_NAME ${METATYPES_FILE} NAME)
-target_sources(kdecorations2private INTERFACE $<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${METATYPES_INSTALL_DIR}/${METATYPES_FILE_NAME}>)
-install(FILES ${METATYPES_FILE} DESTINATION ${METATYPES_INSTALL_DIR})
-
 install(FILES ${KDecoration2Private_CamelCase_HEADERS}
         DESTINATION ${KDECORATION2_INCLUDEDIR}/KDecoration2/Private
         COMPONENT Devel)
