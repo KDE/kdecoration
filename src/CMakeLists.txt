@@ -15,6 +15,7 @@ set(libkdecoration2_SRCS
     decorationdefines.h
     decoration.h
     decoration_p.h
+    decorationmetrics.cpp
     decorationsettings.cpp
     decorationsettings.h
     decorationshadow.cpp
@@ -58,6 +59,7 @@ ecm_generate_headers(KDecoration2_CamelCase_HEADERS
     DecorationButton
     DecorationButtonGroup
     DecorationSettings
+    DecorationMetrics
     DecorationShadow
     DecorationThemeProvider
   PREFIX

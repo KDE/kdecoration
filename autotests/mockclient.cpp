@@ -12,6 +12,10 @@ MockClient::MockClient(KDecoration2::DecoratedClient *client, KDecoration2::Deco
     : QObject()
     , ApplicationMenuEnabledDecoratedClientPrivate(client, decoration)
 {
+    m_metrics.setPixelUnit(1);
+    m_metrics.setGridUnit(1);
+    m_metrics.setSmallSpacing(1);
+    m_metrics.setLargeSpacing(1);
 }
 
 Qt::Edges MockClient::adjacentScreenEdges() const
@@ -220,6 +224,11 @@ void MockClient::requestShowToolTip(const QString &text)
 
 void MockClient::requestHideToolTip()
 {
+}
+
+KDecoration2::DecorationMetrics MockClient::metrics() const
+{
+    return m_metrics;
 }
 
 QSize MockClient::size() const

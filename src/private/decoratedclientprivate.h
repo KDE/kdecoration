@@ -26,6 +26,7 @@ namespace KDecoration2
 {
 class Decoration;
 class DecoratedClient;
+class DecorationMetrics;
 
 class KDECORATIONS_PRIVATE_EXPORT DecoratedClientPrivate
 {
@@ -54,6 +55,7 @@ public:
     virtual WId windowId() const = 0;
     virtual WId decorationId() const = 0;
 
+    virtual DecorationMetrics metrics() const = 0;
     virtual int width() const = 0;
     virtual int height() const = 0;
     virtual QSize size() const = 0;

@@ -51,6 +51,7 @@ public:
     void requestToggleShade() override;
     void requestShowToolTip(const QString &text) override;
     void requestHideToolTip() override;
+    KDecoration2::DecorationMetrics metrics() const override;
     QSize size() const override;
     int width() const override;
     WId windowId() const override;
@@ -75,6 +76,7 @@ Q_SIGNALS:
     void applicationMenuRequested();
 
 private:
+    KDecoration2::DecorationMetrics m_metrics;
     bool m_closeable = false;
     bool m_minimizable = false;
     bool m_contextHelp = false;

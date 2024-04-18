@@ -21,6 +21,7 @@
 namespace KDecoration2
 {
 class DecorationBridge;
+class DecorationMetrics;
 class DecoratedClientPrivate;
 
 /**
@@ -200,6 +201,7 @@ public:
 
     Decoration *decoration() const;
     QPalette palette() const;
+    DecorationMetrics metrics() const;
     /**
      * Used to get colors in QPalette.
      * @param group The color group
@@ -263,6 +265,7 @@ Q_SIGNALS:
 
     void hasApplicationMenuChanged(bool);
     void applicationMenuActiveChanged(bool);
+    void metricsChanged();
 
 private:
     friend class Decoration;

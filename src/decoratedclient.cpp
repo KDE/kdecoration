@@ -4,6 +4,7 @@
  * SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
  */
 #include "decoratedclient.h"
+#include "decorationmetrics.h"
 #include "private/decoratedclientprivate.h"
 #include "private/decorationbridge.h"
 
@@ -137,6 +138,11 @@ QSize DecoratedClient::size() const
 QPalette DecoratedClient::palette() const
 {
     return d->palette();
+}
+
+DecorationMetrics DecoratedClient::metrics() const
+{
+    return d->metrics();
 }
 
 Qt::Edges DecoratedClient::adjacentScreenEdges() const
