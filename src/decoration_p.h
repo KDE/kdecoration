@@ -47,6 +47,7 @@ public:
     DecorationBridge *bridge;
     std::shared_ptr<DecoratedClient> client;
     bool opaque;
+    QString decorationName;
     QList<DecorationButton *> buttons;
     std::shared_ptr<DecorationShadow> shadow;
 

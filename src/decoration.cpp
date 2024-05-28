@@ -346,11 +346,32 @@ int Decoration::resizeOnlyBorderBottom() const
     return d->resizeOnlyBorders.bottom();
 }
 
+QString Decoration::decorationName() const
+{
+    return d->decorationName;
+}
+
+void Decoration::setDecorationName(QString name)
+{
+    d->decorationName = name;
+}
+
 QSize Decoration::size() const
 {
     const QMargins &b = d->borders;
-    return QSize(d->client->width() + b.left() + b.right(), //
-                 (d->client->isShaded() ? 0 : d->client->height()) + b.top() + b.bottom());
+
+    const qreal width = d->client->width() + b.left() + b.right();
+    const qreal height = (d->client->isShaded() ? 0 : d->client->height()) + b.top() + b.bottom();
+    // HACK -1 for fractional scaling issues when using breeze, this pushes the border under the
+    // window slightly and avoids the fractional scaling gap
+    if (decorationName() == "breeze") {
+        const bool outlineEnabled = b.right() > b.left();
+        if (outlineEnabled) {
+            return QSize(width - 1, height - 1);
+        }
+    }
+    // For all non-breeze themes
+    return QSize(width, height);
 }
 
 QRect Decoration::rect() const

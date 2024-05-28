@@ -85,6 +85,9 @@ class KDECORATIONS2_EXPORT Decoration : public QObject
      * Decoration should set this property to @c true.
      **/
     Q_PROPERTY(bool opaque READ isOpaque NOTIFY opaqueChanged)
+
+    Q_PROPERTY(QString decorationName READ decorationName);
+
 public:
     ~Decoration() override;
 
@@ -106,6 +109,8 @@ public:
     Qt::WindowFrameSection sectionUnderMouse() const;
     QRect titleBar() const;
     bool isOpaque() const;
+    QString decorationName() const;
+    void setDecorationName(QString name);
 
     /**
      * DecorationShadow for this Decoration. It is recommended that multiple Decorations share
