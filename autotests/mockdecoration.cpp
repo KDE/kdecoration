@@ -57,4 +57,10 @@ void MockDecoration::setTitleBar(const QRect &rect)
     Decoration::setTitleBar(rect);
 }
 
+QMarginsF MockDecoration::bordersFor(double scale) const
+{
+    Q_UNUSED(scale)
+    return borders();
+}
+
 #include "moc_mockdecoration.cpp"
