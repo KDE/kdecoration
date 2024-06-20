@@ -93,6 +93,7 @@ public:
      **/
     DecoratedClient *client() const;
 
+    virtual QMarginsF bordersFor(double scale) const = 0;
     QMarginsF borders() const;
     double borderLeft() const;
     double borderRight() const;
