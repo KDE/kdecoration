@@ -11,7 +11,7 @@
 #include <QDebug>
 #include <QGuiApplication>
 
-namespace KDecoration2
+namespace KDecoration3
 {
 DecorationButtonGroup::Private::Private(Decoration *decoration, DecorationButtonGroup *parent)
     : decoration(decoration)
@@ -85,7 +85,7 @@ void DecorationButtonGroup::Private::updateLayout()
             rightPosition -= size.width() + spacing;
         }
     else {
-        qCritical() << "There's an unhandled layout direction! This is likely an issue of KDecoration2 not being updated to handle it\n"
+        qCritical() << "There's an unhandled layout direction! This is likely an issue of KDecoration3 not being updated to handle it\n"
                     << "or the application having an invalid layout direction set. Either way, this is a critical bug.";
     }
 

@@ -9,7 +9,7 @@
 
 #include <QColor>
 
-namespace KDecoration2
+namespace KDecoration3
 {
 DecoratedClient::DecoratedClient(Decoration *parent, DecorationBridge *bridge)
     : QObject()

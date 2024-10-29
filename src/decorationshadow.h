@@ -5,13 +5,13 @@
  */
 #pragma once
 
-#include <kdecoration2/kdecoration2_export.h>
+#include <kdecoration3/kdecoration3_export.h>
 
 #include <QImage>
 #include <QMargins>
 #include <QObject>
 
-namespace KDecoration2
+namespace KDecoration3
 {
 class DecorationShadowPrivate;
 
@@ -125,4 +125,4 @@ private:
 
 }
 
-Q_DECLARE_METATYPE(KDecoration2::DecorationShadow *)
+Q_DECLARE_METATYPE(KDecoration3::DecorationShadow *)

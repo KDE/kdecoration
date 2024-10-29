@@ -9,12 +9,12 @@
 #include "decorationdefines.h"
 #include <QObject>
 #include <QSharedDataPointer>
-#include <kdecoration2/kdecoration2_export.h>
+#include <kdecoration3/kdecoration3_export.h>
 
 class KPluginMetaData;
 class DecorationThemeMetaDataPrivate;
 
-namespace KDecoration2
+namespace KDecoration3
 {
 /**
  * Class providing type-safe access to data of themes
@@ -44,8 +44,8 @@ public:
 
     /// Border size of the decoration, this gets set based on the "recommendedBorderSize" key in the json metadata
     /// @internal
-    KDecoration2::BorderSize borderSize() const;
-    void setBorderSize(KDecoration2::BorderSize size);
+    KDecoration3::BorderSize borderSize() const;
+    void setBorderSize(KDecoration3::BorderSize size);
 
     /// plugin id of theme provider
     /// @see KPluginMetaData::pluginId

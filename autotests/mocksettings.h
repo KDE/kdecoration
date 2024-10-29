@@ -7,14 +7,14 @@
 
 #include "../src/private/decorationsettingsprivate.h"
 
-class MockSettings : public KDecoration2::DecorationSettingsPrivate
+class MockSettings : public KDecoration3::DecorationSettingsPrivate
 {
 public:
-    explicit MockSettings(KDecoration2::DecorationSettings *parent);
+    explicit MockSettings(KDecoration3::DecorationSettings *parent);
 
-    KDecoration2::BorderSize borderSize() const override;
-    QList<KDecoration2::DecorationButtonType> decorationButtonsLeft() const override;
-    QList<KDecoration2::DecorationButtonType> decorationButtonsRight() const override;
+    KDecoration3::BorderSize borderSize() const override;
+    QList<KDecoration3::DecorationButtonType> decorationButtonsLeft() const override;
+    QList<KDecoration3::DecorationButtonType> decorationButtonsRight() const override;
     bool isAlphaChannelSupported() const override;
     bool isCloseOnDoubleClickOnMenu() const override;
     bool isOnAllDesktopsAvailable() const override;

@@ -8,7 +8,7 @@
 
 #include <QPalette>
 
-MockClient::MockClient(KDecoration2::DecoratedClient *client, KDecoration2::Decoration *decoration)
+MockClient::MockClient(KDecoration3::DecoratedClient *client, KDecoration3::Decoration *decoration)
     : QObject()
     , ApplicationMenuEnabledDecoratedClientPrivate(client, decoration)
 {

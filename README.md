@@ -1,10 +1,10 @@
-# KDecoration2
+# KDecoration3
 
 Plugin based library to create window decorations.
 
 ## Introduction
 
-KDecoration2 is a library to create window decorations. These window decorations can be used by
+KDecoration3 is a library to create window decorations. These window decorations can be used by
 for example an X11 based window manager which re-parents a Client window to a window decoration
 frame.
 
@@ -15,7 +15,7 @@ The library consists of two parts:
 ## Providing a Decoration
 
 To provide a custom decoration one needs to create a plugin and provide an own implementation
-of KDecoration2::Decoration. For a framework to load and find the plugin it needs to be compiled
+of KDecoration3::Decoration. For a framework to load and find the plugin it needs to be compiled
 with the proper json metadata. An example for such metadata (deco.json):
 
 ```json
@@ -23,11 +23,11 @@ with the proper json metadata. An example for such metadata (deco.json):
     "KPlugin": {
         "Id": "org.kde.myAweseomeDecoration",
         "ServiceTypes": [
-            "org.kde.kdecoration2"
+            "org.kde.kdecoration3"
         ]
     },
     "X-KDE-ConfigModule": "kcm_name", /* comes with a configuration module */
-    "org.kde.kdecoration2": {
+    "org.kde.kdecoration3": {
         "blur": false, /* blur behind not needed */
     }
 }
@@ -43,7 +43,7 @@ K_PLUGIN_FACTORY_WITH_JSON(
 )
 ```
 
-The plugin needs to get installed to `${KDE_INSTALL_PLUGINDIR}/org.kde.kdecoration2`.
+The plugin needs to get installed to `${KDE_INSTALL_PLUGINDIR}/org.kde.kdecoration3`.
 
 ## Configuring the Decoration
 
@@ -51,4 +51,4 @@ It is possible to provide a configuration module to tweak some aspects of the de
 by creating a plugin that provides such a configuration module.
 
 The `kcmoduleName` specifies the name of the configuration module. It needs to be installed under
-`${KDE_INSTALL_PLUGINDIR}/org.kde.kdecoration2.kcm` so that it can be looked up.
+`${KDE_INSTALL_PLUGINDIR}/org.kde.kdecoration3.kcm` so that it can be looked up.

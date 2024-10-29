@@ -9,7 +9,7 @@
 
 #include <QFontMetrics>
 
-namespace KDecoration2
+namespace KDecoration3
 {
 DecorationSettings::DecorationSettings(DecorationBridge *bridge, QObject *parent)
     : QObject(parent)

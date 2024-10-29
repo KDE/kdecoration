@@ -16,7 +16,7 @@
 
 #include <cmath>
 
-namespace KDecoration2
+namespace KDecoration3
 {
 namespace
 {

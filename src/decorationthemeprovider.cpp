@@ -13,10 +13,10 @@ public:
     QString themeName;
     QString configurationName;
     QString pluginId;
-    KDecoration2::BorderSize borderSize = KDecoration2::BorderSize::Normal;
+    KDecoration3::BorderSize borderSize = KDecoration3::BorderSize::Normal;
 };
 
-using namespace KDecoration2;
+using namespace KDecoration3;
 
 DecorationThemeMetaData::DecorationThemeMetaData()
     : d(new DecorationThemeMetaDataPrivate())
@@ -55,12 +55,12 @@ void DecorationThemeMetaData::setConfigurationName(const QString &name)
     d->configurationName = name;
 }
 
-void DecorationThemeMetaData::setBorderSize(KDecoration2::BorderSize size)
+void DecorationThemeMetaData::setBorderSize(KDecoration3::BorderSize size)
 {
     d->borderSize = size;
 }
 
-KDecoration2::BorderSize DecorationThemeMetaData::borderSize() const
+KDecoration3::BorderSize DecorationThemeMetaData::borderSize() const
 {
     return d->borderSize;
 }

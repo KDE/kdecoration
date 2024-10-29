@@ -6,24 +6,24 @@
 #include "mocksettings.h"
 #include "../src/decorationsettings.h"
 
-MockSettings::MockSettings(KDecoration2::DecorationSettings *parent)
+MockSettings::MockSettings(KDecoration3::DecorationSettings *parent)
     : DecorationSettingsPrivate(parent)
 {
 }
 
-KDecoration2::BorderSize MockSettings::borderSize() const
+KDecoration3::BorderSize MockSettings::borderSize() const
 {
-    return KDecoration2::BorderSize::Normal;
+    return KDecoration3::BorderSize::Normal;
 }
 
-QList<KDecoration2::DecorationButtonType> MockSettings::decorationButtonsLeft() const
+QList<KDecoration3::DecorationButtonType> MockSettings::decorationButtonsLeft() const
 {
-    return QList<KDecoration2::DecorationButtonType>();
+    return QList<KDecoration3::DecorationButtonType>();
 }
 
-QList<KDecoration2::DecorationButtonType> MockSettings::decorationButtonsRight() const
+QList<KDecoration3::DecorationButtonType> MockSettings::decorationButtonsRight() const
 {
-    return QList<KDecoration2::DecorationButtonType>();
+    return QList<KDecoration3::DecorationButtonType>();
 }
 
 bool MockSettings::isAlphaChannelSupported() const

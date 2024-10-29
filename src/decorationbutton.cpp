@@ -22,13 +22,13 @@
 #include <cmath>
 
 #ifndef K_DOXYGEN
-size_t qHash(const KDecoration2::DecorationButtonType &type, size_t seed)
+size_t qHash(const KDecoration3::DecorationButtonType &type, size_t seed)
 {
     return qHash(uint(type), seed);
 }
 #endif
 
-namespace KDecoration2
+namespace KDecoration3
 {
 
 DecorationButton::Private::Private(DecorationButtonType type, const QPointer<Decoration> &decoration, DecorationButton *parent)

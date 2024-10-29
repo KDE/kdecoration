@@ -52,7 +52,7 @@ void DecorationTest::testOpaque()
 {
     MockBridge bridge;
     MockDecoration deco(&bridge);
-    QSignalSpy opaqueChangedSpy(&deco, &KDecoration2::Decoration::opaqueChanged);
+    QSignalSpy opaqueChangedSpy(&deco, &KDecoration3::Decoration::opaqueChanged);
     QVERIFY(opaqueChangedSpy.isValid());
     QCOMPARE(deco.isOpaque(), false);
     deco.setOpaque(false);
@@ -100,7 +100,7 @@ void DecorationTest::testSection_data()
 void DecorationTest::testSection()
 {
     MockBridge bridge;
-    auto decoSettings = std::make_shared<KDecoration2::DecorationSettings>(&bridge);
+    auto decoSettings = std::make_shared<KDecoration3::DecorationSettings>(&bridge);
     MockDecoration deco(&bridge);
     deco.setSettings(decoSettings);
 
@@ -129,7 +129,7 @@ void DecorationTest::testSection()
     QCOMPARE(deco.titleBar(), titleBar);
     QCOMPARE(deco.size(), QSize(100 + deco.borderLeft() + deco.borderRight(), 100 + deco.borderTop() + deco.borderBottom()));
 
-    QSignalSpy spy(&deco, &KDecoration2::Decoration::sectionUnderMouseChanged);
+    QSignalSpy spy(&deco, &KDecoration3::Decoration::sectionUnderMouseChanged);
     QVERIFY(spy.isValid());
     QFETCH(QPoint, pos);
     QHoverEvent event(QEvent::HoverMove, QPointF(pos), QPointF(pos));

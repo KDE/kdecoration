@@ -6,7 +6,7 @@
 #include "decorationshadow.h"
 #include "decorationshadow_p.h"
 
-namespace KDecoration2
+namespace KDecoration3
 {
 DecorationShadow::Private::Private(DecorationShadow *parent)
     : q(parent)

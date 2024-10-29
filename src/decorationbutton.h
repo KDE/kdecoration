@@ -6,7 +6,7 @@
 #pragma once
 
 #include "decorationdefines.h"
-#include <kdecoration2/kdecoration2_export.h>
+#include <kdecoration3/kdecoration3_export.h>
 
 #include <QObject>
 #include <QRect>
@@ -16,7 +16,7 @@ class QMouseEvent;
 class QPainter;
 class QWheelEvent;
 
-namespace KDecoration2
+namespace KDecoration3
 {
 class DecorationButtonPrivate;
 class Decoration;
@@ -173,7 +173,7 @@ private:
 } // namespace
 
 #ifndef K_DOXYGEN
-size_t KDECORATIONS2_EXPORT qHash(const KDecoration2::DecorationButtonType &type, size_t seed = 0);
+size_t KDECORATIONS2_EXPORT qHash(const KDecoration3::DecorationButtonType &type, size_t seed = 0);
 #endif
 
-Q_DECLARE_METATYPE(KDecoration2::DecorationButtonType)
+Q_DECLARE_METATYPE(KDecoration3::DecorationButtonType)

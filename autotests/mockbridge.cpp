@@ -8,14 +8,14 @@
 #include "mocksettings.h"
 #include <QtGlobal>
 
-std::unique_ptr<KDecoration2::DecoratedClientPrivate> MockBridge::createClient(KDecoration2::DecoratedClient *client, KDecoration2::Decoration *decoration)
+std::unique_ptr<KDecoration3::DecoratedClientPrivate> MockBridge::createClient(KDecoration3::DecoratedClient *client, KDecoration3::Decoration *decoration)
 {
     auto ptr = std::make_unique<MockClient>(client, decoration);
     m_lastCreatedClient = ptr.get();
     return ptr;
 }
 
-std::unique_ptr<KDecoration2::DecorationSettingsPrivate> MockBridge::settings(KDecoration2::DecorationSettings *parent)
+std::unique_ptr<KDecoration3::DecorationSettingsPrivate> MockBridge::settings(KDecoration3::DecorationSettings *parent)
 {
     auto ptr = std::make_unique<MockSettings>(parent);
     m_lastCreatedSettings = ptr.get();

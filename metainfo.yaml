@@ -1,5 +1,5 @@
 maintainer: graesslin
-fancyname: KDecoration2
+fancyname: KDecoration3
 description: Plugin based library to create window decorations.
 irc: kwin
 mailinglist: kwin
@@ -11,8 +11,8 @@ portingAid: false
 deprecated: false
 release: false
 libraries:
-    - cmake: KDecoration2::KDecoration
-cmakename: KDecoration2
+    - cmake: KDecoration3::KDecoration
+cmakename: KDecoration3
 group: plasma
 
 public_lib: true

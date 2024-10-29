@@ -9,7 +9,7 @@
 //  W A R N I N G
 //  -------------
 //
-// This file is not part of the KDecoration2 API.  It exists purely as an
+// This file is not part of the KDecoration3 API.  It exists purely as an
 // implementation detail.  This header file may change from version to
 // version without notice, or even be removed.
 //
@@ -20,7 +20,7 @@
 
 #include <QImage>
 
-namespace KDecoration2
+namespace KDecoration3
 {
 class Q_DECL_HIDDEN DecorationShadow::Private
 {

@@ -7,7 +7,7 @@
 
 #include "decoration.h"
 #include "decorationdefines.h"
-#include <kdecoration2/kdecoration2_export.h>
+#include <kdecoration3/kdecoration3_export.h>
 
 #include <QFont>
 #include <QIcon>
@@ -18,7 +18,7 @@
 
 #include <memory>
 
-namespace KDecoration2
+namespace KDecoration3
 {
 class DecorationBridge;
 class DecoratedClientPrivate;
@@ -41,7 +41,7 @@ class KDECORATIONS2_EXPORT DecoratedClient : public QObject
     /**
      * The Decoration of this DecoratedClient
      **/
-    Q_PROPERTY(KDecoration2::Decoration *decoration READ decoration CONSTANT)
+    Q_PROPERTY(KDecoration3::Decoration *decoration READ decoration CONSTANT)
     /**
      * Whether the DecoratedClient is active (has focus) or is inactive.
      **/

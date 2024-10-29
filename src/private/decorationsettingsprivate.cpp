@@ -6,7 +6,7 @@
 #include "decorationsettingsprivate.h"
 #include <QFontDatabase>
 
-namespace KDecoration2
+namespace KDecoration3
 {
 class Q_DECL_HIDDEN DecorationSettingsPrivate::Private
 {

@@ -10,7 +10,7 @@ set(decorationButtonTest_SRCS
     )
 add_executable(decorationButtonTest ${decorationButtonTest_SRCS})
 target_link_libraries(decorationButtonTest kdecorations2 kdecorations2private Qt::Test)
-add_test(NAME kdecoration2-decorationButtonTest COMMAND decorationButtonTest)
+add_test(NAME kdecoration3-decorationButtonTest COMMAND decorationButtonTest)
 ecm_mark_as_test(decorationButtonTest)
 
 set(decorationTest_SRCS
@@ -23,7 +23,7 @@ set(decorationTest_SRCS
     )
 add_executable(decorationTest ${decorationTest_SRCS})
 target_link_libraries(decorationTest kdecorations2 kdecorations2private Qt::Test)
-add_test(NAME kdecoration2-decorationTest COMMAND decorationTest)
+add_test(NAME kdecoration3-decorationTest COMMAND decorationTest)
 ecm_mark_as_test(decorationTest)
 
 set(decorationShadowTest_SRCS
@@ -31,5 +31,5 @@ set(decorationShadowTest_SRCS
     )
 add_executable(decorationShadowTest ${decorationShadowTest_SRCS})
 target_link_libraries(decorationShadowTest kdecorations2 Qt::Test)
-add_test(NAME kdecoration2-decorationShadowTest COMMAND decorationShadowTest)
+add_test(NAME kdecoration3-decorationShadowTest COMMAND decorationShadowTest)
 ecm_mark_as_test(decorationShadowTest)

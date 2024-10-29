@@ -5,7 +5,7 @@
  */
 #pragma once
 
-namespace KDecoration2
+namespace KDecoration3
 {
 /**
  * The DecorationButtonType is a helper type for the DecorationButton.

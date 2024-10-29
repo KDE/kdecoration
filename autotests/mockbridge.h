@@ -11,12 +11,12 @@
 class MockClient;
 class MockSettings;
 
-class MockBridge : public KDecoration2::DecorationBridge
+class MockBridge : public KDecoration3::DecorationBridge
 {
     Q_OBJECT
 public:
-    std::unique_ptr<KDecoration2::DecoratedClientPrivate> createClient(KDecoration2::DecoratedClient *client, KDecoration2::Decoration *decoration) override;
-    std::unique_ptr<KDecoration2::DecorationSettingsPrivate> settings(KDecoration2::DecorationSettings *parent) override;
+    std::unique_ptr<KDecoration3::DecoratedClientPrivate> createClient(KDecoration3::DecoratedClient *client, KDecoration3::Decoration *decoration) override;
+    std::unique_ptr<KDecoration3::DecorationSettingsPrivate> settings(KDecoration3::DecorationSettings *parent) override;
 
     MockClient *lastCreatedClient() const
     {

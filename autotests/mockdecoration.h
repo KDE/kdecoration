@@ -9,7 +9,7 @@
 
 class MockBridge;
 
-class MockDecoration : public KDecoration2::Decoration
+class MockDecoration : public KDecoration3::Decoration
 {
     Q_OBJECT
 public:

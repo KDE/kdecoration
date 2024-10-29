@@ -9,13 +9,13 @@
 
 #include <memory>
 
-#include <kdecoration2/private/kdecoration2_private_export.h>
+#include <kdecoration3/private/kdecoration3_private_export.h>
 
 //
 //  W A R N I N G
 //  -------------
 //
-// This file is not part of the KDecoration2 API.  It exists purely as an
+// This file is not part of the KDecoration3 API.  It exists purely as an
 // implementation detail.  This header file may change from version to
 // version without notice, or even be removed.
 //
@@ -24,7 +24,7 @@
 
 class QRect;
 
-namespace KDecoration2
+namespace KDecoration3
 {
 class Decoration;
 class DecorationSettings;
@@ -47,4 +47,4 @@ protected:
 
 } // namespace
 
-Q_DECLARE_METATYPE(KDecoration2::DecorationBridge *)
+Q_DECLARE_METATYPE(KDecoration3::DecorationBridge *)

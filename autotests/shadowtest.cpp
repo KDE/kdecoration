@@ -32,7 +32,7 @@ void DecorationShadowTest::testPadding_data()
 
 void DecorationShadowTest::testPadding()
 {
-    using namespace KDecoration2;
+    using namespace KDecoration3;
     DecorationShadow shadow;
 
     QFETCH(QByteArray, propertyName);
@@ -43,7 +43,7 @@ void DecorationShadowTest::testPadding()
     QCOMPARE(metaProperty.isReadable(), true);
     QCOMPARE(metaProperty.hasNotifySignal(), true);
     QCOMPARE(metaProperty.type(), QVariant::Int);
-    QSignalSpy changedSpy(&shadow, &KDecoration2::DecorationShadow::paddingChanged);
+    QSignalSpy changedSpy(&shadow, &KDecoration3::DecorationShadow::paddingChanged);
     QVERIFY(changedSpy.isValid());
 
     QCOMPARE(shadow.property(propertyName.constData()).isValid(), true);
@@ -86,7 +86,7 @@ void DecorationShadowTest::testSizes_data()
 
 void DecorationShadowTest::testSizes()
 {
-    using namespace KDecoration2;
+    using namespace KDecoration3;
     DecorationShadow shadow;
 
     QFETCH(QByteArray, propertyName);
@@ -97,7 +97,7 @@ void DecorationShadowTest::testSizes()
     QCOMPARE(metaProperty.isReadable(), true);
     QCOMPARE(metaProperty.hasNotifySignal(), true);
     QCOMPARE(metaProperty.type(), QVariant::Rect);
-    QSignalSpy changedSpy(&shadow, &KDecoration2::DecorationShadow::innerShadowRectChanged);
+    QSignalSpy changedSpy(&shadow, &KDecoration3::DecorationShadow::innerShadowRectChanged);
     QVERIFY(changedSpy.isValid());
 
     QCOMPARE(shadow.innerShadowRect(), QRect());

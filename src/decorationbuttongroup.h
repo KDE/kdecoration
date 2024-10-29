@@ -6,11 +6,11 @@
 #pragma once
 #include "decorationbutton.h"
 #include <functional>
-#include <kdecoration2/kdecoration2_export.h>
+#include <kdecoration3/kdecoration3_export.h>
 
 class QPainter;
 
-namespace KDecoration2
+namespace KDecoration3
 {
 class Decoration;
 class DecorationButtonGroupPrivate;

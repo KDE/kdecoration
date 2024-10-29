@@ -6,7 +6,7 @@
 #pragma once
 
 #include "decorationshadow.h"
-#include <kdecoration2/kdecoration2_export.h>
+#include <kdecoration3/kdecoration3_export.h>
 
 #include <QMargins>
 #include <QObject>
@@ -21,7 +21,7 @@ class QWheelEvent;
  * @brief Framework for creating window decorations.
  *
  **/
-namespace KDecoration2
+namespace KDecoration3
 {
 class DecorationPrivate;
 class DecoratedClient;
@@ -245,4 +245,4 @@ private:
 
 } // namespace
 
-Q_DECLARE_METATYPE(KDecoration2::Decoration *)
+Q_DECLARE_METATYPE(KDecoration3::Decoration *)

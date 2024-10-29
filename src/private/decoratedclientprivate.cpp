@@ -7,7 +7,7 @@
 
 #include <QColor>
 
-namespace KDecoration2
+namespace KDecoration3
 {
 class Q_DECL_HIDDEN DecoratedClientPrivate::Private
 {

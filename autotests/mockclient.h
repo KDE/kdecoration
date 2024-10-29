@@ -9,11 +9,11 @@
 
 #include <QObject>
 
-class MockClient : public QObject, public KDecoration2::ApplicationMenuEnabledDecoratedClientPrivate
+class MockClient : public QObject, public KDecoration3::ApplicationMenuEnabledDecoratedClientPrivate
 {
     Q_OBJECT
 public:
-    explicit MockClient(KDecoration2::DecoratedClient *client, KDecoration2::Decoration *decoration);
+    explicit MockClient(KDecoration3::DecoratedClient *client, KDecoration3::Decoration *decoration);
 
     Qt::Edges adjacentScreenEdges() const override;
     QString caption() const override;

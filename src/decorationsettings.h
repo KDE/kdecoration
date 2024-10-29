@@ -6,14 +6,14 @@
 #pragma once
 
 #include "decorationbutton.h"
-#include <kdecoration2/kdecoration2_export.h>
+#include <kdecoration3/kdecoration3_export.h>
 
 #include <QFontMetricsF>
 #include <QObject>
 
 #include <memory>
 
-namespace KDecoration2
+namespace KDecoration3
 {
 class DecorationBridge;
 class DecorationSettingsPrivate;
@@ -51,15 +51,15 @@ class KDECORATIONS2_EXPORT DecorationSettings : public QObject
     /**
      * The suggested ordering of the decoration buttons on the left.
      **/
-    Q_PROPERTY(QList<KDecoration2::DecorationButtonType> decorationButtonsLeft READ decorationButtonsLeft NOTIFY decorationButtonsLeftChanged)
+    Q_PROPERTY(QList<KDecoration3::DecorationButtonType> decorationButtonsLeft READ decorationButtonsLeft NOTIFY decorationButtonsLeftChanged)
     /**
      * The suggested ordering of the decoration buttons on the right.
      **/
-    Q_PROPERTY(QList<KDecoration2::DecorationButtonType> decorationButtonsRight READ decorationButtonsRight NOTIFY decorationButtonsRightChanged)
+    Q_PROPERTY(QList<KDecoration3::DecorationButtonType> decorationButtonsRight READ decorationButtonsRight NOTIFY decorationButtonsRightChanged)
     /**
      * The suggested border size.
      **/
-    Q_PROPERTY(KDecoration2::BorderSize borderSize READ borderSize NOTIFY borderSizeChanged)
+    Q_PROPERTY(KDecoration3::BorderSize borderSize READ borderSize NOTIFY borderSizeChanged)
     /**
      * The fundamental unit of space that should be used for sizes, expressed in pixels.
      * Given the screen has an accurate DPI settings, it corresponds to a millimeter
@@ -109,9 +109,9 @@ Q_SIGNALS:
     void onAllDesktopsAvailableChanged(bool);
     void alphaChannelSupportedChanged(bool);
     void closeOnDoubleClickOnMenuChanged(bool);
-    void decorationButtonsLeftChanged(const QList<KDecoration2::DecorationButtonType> &);
-    void decorationButtonsRightChanged(const QList<KDecoration2::DecorationButtonType> &);
-    void borderSizeChanged(KDecoration2::BorderSize size);
+    void decorationButtonsLeftChanged(const QList<KDecoration3::DecorationButtonType> &);
+    void decorationButtonsRightChanged(const QList<KDecoration3::DecorationButtonType> &);
+    void borderSizeChanged(KDecoration3::BorderSize size);
     void fontChanged(const QFont &font);
     void gridUnitChanged(int);
     void spacingChanged();
@@ -129,4 +129,4 @@ private:
 
 }
 
-Q_DECLARE_METATYPE(KDecoration2::BorderSize)
+Q_DECLARE_METATYPE(KDecoration3::BorderSize)
