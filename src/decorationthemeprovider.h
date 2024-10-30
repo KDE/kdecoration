@@ -16,7 +16,7 @@ class DecorationThemeMetaDataPrivate;
 
 namespace KDecoration2
 {
-/**
+/*!
  * Class providing type-safe access to data of themes
  *
  * @since 5.23
@@ -55,7 +55,7 @@ public:
 private:
     QSharedDataPointer<DecorationThemeMetaDataPrivate> d;
 };
-/**
+/*!
  * Class to give the KWin decorationmodel access to the plugin's themes.
  *
  * @since 5.23
@@ -68,7 +68,7 @@ class KDECORATIONS2_EXPORT DecorationThemeProvider : public QObject
 public:
     explicit DecorationThemeProvider(QObject *parent);
 
-    /**
+    /*!
      * List containing information of supported themes
      */
     virtual QList<DecorationThemeMetaData> themes() const = 0;

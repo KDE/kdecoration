@@ -15,7 +15,7 @@ namespace KDecoration2
 {
 class DecorationShadowPrivate;
 
-/**
+/*!
  * @brief A wrapper to define the shadow around the Decoration.
  *
  * The shadow around the Decoration should not be rendered as part of the Decoration.

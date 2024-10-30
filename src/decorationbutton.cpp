@@ -21,12 +21,10 @@
 
 #include <cmath>
 
-#ifndef K_DOXYGEN
 size_t qHash(const KDecoration2::DecorationButtonType &type, size_t seed)
 {
     return qHash(uint(type), seed);
 }
-#endif
 
 namespace KDecoration2
 {

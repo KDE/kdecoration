@@ -102,8 +102,6 @@ QRect DecorationShadow::leftGeometry() const
     return QRect(0, d->innerShadowRect.top(), d->innerShadowRect.left(), d->innerShadowRect.height());
 }
 
-#ifndef K_DOXYGEN
-
 QImage DecorationShadow::shadow() const
 {
     return d->shadow;
@@ -147,8 +145,6 @@ void DecorationShadow::setShadow(const QImage &shadow)
     d->shadow = shadow;
     Q_EMIT shadowChanged(d->shadow);
 }
-
-#endif
 
 void DecorationShadow::setPadding(const QMargins &margins)
 {

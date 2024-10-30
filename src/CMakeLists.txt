@@ -64,6 +64,9 @@ ecm_generate_headers(KDecoration2_CamelCase_HEADERS
     KDecoration2
   REQUIRED_HEADERS KDecoration2_HEADERS
 )
+
+ecm_generate_qdoc(kdecorations2 kdecoration.qdocconf)
+
 install(FILES ${KDecoration2_CamelCase_HEADERS}
         DESTINATION ${KDECORATION2_INCLUDEDIR}/KDecoration2
         COMPONENT Devel)

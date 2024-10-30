@@ -23,8 +23,12 @@ namespace KDecoration2
 class DecorationBridge;
 class DecoratedClientPrivate;
 
-/**
- * @brief The Client which gets decorated.
+/*!
+ * \class KDecoration2::DecoratedClient
+ * \inheaderfile KDecoration2/DecoratedClient
+ * \inmodule KDecoration
+ *
+ * \brief The Client which gets decorated.
  *
  * The DecoratedClient provides access to all the properties relevant for decorating the Client.
  * Each DecoratedClient is bound to one Decoration and each Decoration is bound to this one
@@ -38,127 +42,179 @@ class DecoratedClientPrivate;
 class KDECORATIONS2_EXPORT DecoratedClient : public QObject
 {
     Q_OBJECT
-    /**
+    /*!
+     * \property KDecoration2::DecoratedClient::decoration
+     *
      * The Decoration of this DecoratedClient
      **/
     Q_PROPERTY(KDecoration2::Decoration *decoration READ decoration CONSTANT)
-    /**
+    /*!
+     * \property KDecoration2::DecoratedClient::active
+     *
      * Whether the DecoratedClient is active (has focus) or is inactive.
      **/
     Q_PROPERTY(bool active READ isActive NOTIFY activeChanged)
-    /**
+    /*!
+     * \property KDecoration2::DecoratedClient::caption
+     *
      * The caption of the DecoratedClient.
      **/
     Q_PROPERTY(QString caption READ caption NOTIFY captionChanged)
-    /**
+    /*!
+     * \property KDecoration2::DecoratedClient::onAllDesktops
+     *
      * Whether the DecoratedClient is on all desktops or on just one.
      **/
     Q_PROPERTY(bool onAllDesktops READ isOnAllDesktops NOTIFY onAllDesktopsChanged)
-    /**
+    /*!
+     * \property KDecoration2::DecoratedClient::shaded
+     *
      * Whether the DecoratedClient is shaded. Shaded means that the actual content is
      * not visible, only the Decoration is visible.
      **/
     Q_PROPERTY(bool shaded READ isShaded NOTIFY shadedChanged)
-    /**
+    /*!
+     * \property KDecoration2::DecoratedClient::icon
+     *
      * The icon of the DecoratedClient. This can be used as the icon for the window menu button.
      **/
     Q_PROPERTY(QIcon icon READ icon NOTIFY iconChanged)
-    /**
+    /*!
+     * \property KDecoration2::DecoratedClient::maximized
+     *
      * Whether the DecoratedClient is maximized. A DecoratedClient is maximized if it is both
      * maximizedHorizontally and maximizedVertically. The Decoration of a maximized DecoratedClient
      * should only consist of the title bar area.
      **/
     Q_PROPERTY(bool maximized READ isMaximized NOTIFY maximizedChanged)
-    /**
+    /*!
+     * \property KDecoration2::DecoratedClient::maximizedHorizontally
+     *
      * Whether the DecoratedClient is maximized horizontally. A horizontally maximized DecoratedClient
      * uses the maximal possible width.
      **/
     Q_PROPERTY(bool maximizedHorizontally READ isMaximizedHorizontally NOTIFY maximizedHorizontallyChanged)
-    /**
+    /*!
+     * \property KDecoration2::DecoratedClient::maximizedVertically
+     *
      * Whether the DecoratedClient is maximized vertically. A vertically maximized DecoratedClient
      * uses the maximal possible height.
      **/
     Q_PROPERTY(bool maximizedVertically READ isMaximizedVertically NOTIFY maximizedVerticallyChanged)
-    /**
+    /*!
+     * \property KDecoration2::DecoratedClient::keepAbove
+     *
      * Whether the DecoratedClient is set to be kept above other DecoratedClients. There can be multiple
      * DecoratedClients which are set to be kept above.
      **/
     Q_PROPERTY(bool keepAbove READ isKeepAbove NOTIFY keepAboveChanged)
-    /**
+    /*!
+     * \property KDecoration2::DecoratedClient::keepBelow
+     *
      * Whether the DecoratedClient is set to be kept below other DecoratedClients. There can be multiple
      * DecoratedClients which are set to be kept below.
      **/
     Q_PROPERTY(bool keepBelow READ isKeepBelow NOTIFY keepBelowChanged)
 
-    /**
-     * Whether the DecoratedClient can be closed. If this property is @c false a DecorationButton
+    /*!
+     * \property KDecoration2::DecoratedClient::closeable
+     *
+     * Whether the DecoratedClient can be closed. If this property is \c false a DecorationButton
      * for closing the DecoratedClient should be disabled.
      **/
     Q_PROPERTY(bool closeable READ isCloseable NOTIFY closeableChanged)
-    /**
-     * Whether the DecoratedClient can be maximized. If this property is @c false a DecorationButton
+    /*!
+     * \property KDecoration2::DecoratedClient::maximizeable
+     *
+     * Whether the DecoratedClient can be maximized. If this property is \c false a DecorationButton
      * for maximizing the DecoratedClient should be disabled.
      **/
     Q_PROPERTY(bool maximizeable READ isMaximizeable NOTIFY maximizeableChanged)
-    /**
-     * Whether the DecoratedClient can be minimized. If this property is @c false a DecorationButton
+    /*!
+     * \property KDecoration2::DecoratedClient::minimizeable
+     *
+     * Whether the DecoratedClient can be minimized. If this property is \c false a DecorationButton
      * for minimizing the DecoratedClient should be disabled.
      **/
     Q_PROPERTY(bool minimizeable READ isMinimizeable NOTIFY minimizeableChanged)
-    /**
+    /*!
+     * \property KDecoration2::DecoratedClient::providesContextHelp
+     *
      * Whether the DecoratedClient provides context help.
-     * The Decoration should only show a context help button if this property is @c true.
+     * The Decoration should only show a context help button if this property is \c true.
      **/
     Q_PROPERTY(bool providesContextHelp READ providesContextHelp NOTIFY providesContextHelpChanged)
-    /**
+    /*!
+     * \property KDecoration2::DecoratedClient::modal
+     *
      * Whether the DecoratedClient is a modal dialog.
      **/
     Q_PROPERTY(bool modal READ isModal CONSTANT)
-    /**
-     * Whether the DecoratedClient can be shaded. If this property is @c false a DecorationButton
+    /*!
+     * \property KDecoration2::DecoratedClient::shadeable
+     *
+     * Whether the DecoratedClient can be shaded. If this property is \c false a DecorationButton
      * for shading the DecoratedClient should be disabled.
      **/
     Q_PROPERTY(bool shadeable READ isShadeable NOTIFY shadeableChanged)
-    /**
+    /*!
+     * \property KDecoration2::DecoratedClient::moveable
+     *
      * Whether the DecoratedClient can be moved.
      **/
     Q_PROPERTY(bool moveable READ isMoveable NOTIFY moveableChanged)
-    /**
+    /*!
+     * \property KDecoration2::DecoratedClient::resizeable
+     *
      * Whether the DecoratedClient can be resized.
      **/
     Q_PROPERTY(bool resizeable READ isResizeable NOTIFY resizeableChanged)
 
-    /**
+    /*!
+     * \property KDecoration2::DecoratedClient::width
+     *
      * The width of the DecoratedClient.
      **/
     Q_PROPERTY(int width READ width NOTIFY widthChanged)
-    /**
+    /*!
+     * \property KDecoration2::DecoratedClient::height
+     *
      * The height of the DecoratedClient.
      **/
     Q_PROPERTY(int height READ height NOTIFY heightChanged)
-    /**
+    /*!
+     * \property KDecoration2::DecoratedClient::size
+     *
      * The size of the DecoratedClient.
      **/
     Q_PROPERTY(QSize size READ size NOTIFY sizeChanged)
-    /**
+    /*!
+     * \property KDecoration2::DecoratedClient::palette
+     *
      * The palette this DecoratedClient uses. The palette might be different for each
      * DecoratedClient and the Decoration should honor the palette.
      **/
     Q_PROPERTY(QPalette palette READ palette NOTIFY paletteChanged)
-    /**
+    /*!
+     * \property KDecoration2::DecoratedClient::adjacentScreenEdges
+     *
      * The Edges which are adjacent to a screen edge. E.g. for a maximized DecoratedClient this
      * will include all Edges. The Decoration can use this information to hide borders.
      **/
     Q_PROPERTY(Qt::Edges adjacentScreenEdges READ adjacentScreenEdges NOTIFY adjacentScreenEdgesChanged)
-    /**
+    /*!
+     * \property KDecoration2::DecoratedClient::hasApplicationMenu
+     *
      * Whether the DecoratedClient has an application menu
-     * @since 5.9
+     * \since 5.9
      */
     Q_PROPERTY(bool hasApplicationMenu READ hasApplicationMenu NOTIFY hasApplicationMenuChanged)
-    /**
+    /*!
+     * \property KDecoration2::DecoratedClient::applicationMenuActive
+     *
      * Whether the application menu for this DecoratedClient is currently shown to the user
      * The Decoration can use this information to highlight the respective button.
-     * @since 5.9
+     * \since 5.9
      */
     Q_PROPERTY(bool applicationMenuActive READ isApplicationMenuActive NOTIFY applicationMenuActiveChanged)
 
@@ -200,38 +256,49 @@ public:
 
     Decoration *decoration() const;
     QPalette palette() const;
-    /**
+    /*!
      * Used to get colors in QPalette.
-     * @param group The color group
-     * @param role The color role
-     * @return palette().color(group, role)
-     * @since 5.3
+     *
+     * \a group The color group
+     *
+     * \a role The color role
+     *
+     * Returns palette().color(group, role)
+     *
+     * \since 5.3
      **/
     QColor color(QPalette::ColorGroup group, QPalette::ColorRole role) const;
-    /**
+    /*!
      * Used to get additional colors that are not in QPalette.
-     * @param group The color group
-     * @param role The color role
-     * @return The color if provided for combination of group and role, otherwise invalid QColor.
-     * @since 5.3
+     *
+     * \a group The color group
+     *
+     * \a role The color role
+     *
+     * Returns the color if provided for combination of group and role, otherwise invalid QColor.
+     *
+     * \since 5.3
      **/
     QColor color(ColorGroup group, ColorRole role) const;
 
-    /**
+    /*!
      * Whether the DecoratedClient has an application menu
-     * @since 5.9
+     *
+     * \since 5.9
      */
     bool hasApplicationMenu() const;
-    /**
+    /*!
      * Whether the application menu for this DecoratedClient is currently shown to the user
      * The Decoration can use this information to highlight the respective button.
-     * @since 5.9
+     *
+     * \since 5.9
      */
     bool isApplicationMenuActive() const;
 
-    /**
+    /*!
      * Request the application menu to be shown to the user
-     * @param actionId The DBus menu ID of the action that should be highlighted, 0 for none.
+     *
+     * \a actionId The DBus menu ID of the action that should be highlighted, 0 for none.
      */
     void showApplicationMenu(int actionId);
 

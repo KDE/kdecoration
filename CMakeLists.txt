@@ -27,6 +27,7 @@ include(CMakePackageConfigHelpers)
 include(KDEClangFormat)
 include(KDEGitCommitHooks)
 include(ECMDeprecationSettings)
+include(ECMGenerateQDoc)
 
 ecm_setup_version(${PROJECT_VERSION} VARIABLE_PREFIX KDECORATION2
                         VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kdecoration2_version.h"
