@@ -1,0 +1,9 @@
+/*!
+    \module KDecoration
+    \title KDecoration C++ Classes
+    \cmakepackage KDecoration2
+
+    \brief Decoration Stuff.
+
+    Stuff
+*/
