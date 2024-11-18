@@ -5,15 +5,15 @@
  */
 #pragma once
 
-#include "../src/private/decoratedclientprivate.h"
+#include "../src/private/decoratedwindowprivate.h"
 
 #include <QObject>
 
-class MockClient : public QObject, public KDecoration3::ApplicationMenuEnabledDecoratedClientPrivate
+class MockWindow : public QObject, public KDecoration3::ApplicationMenuEnabledDecoratedWindowPrivate
 {
     Q_OBJECT
 public:
-    explicit MockClient(KDecoration3::DecoratedClient *client, KDecoration3::Decoration *decoration);
+    explicit MockWindow(KDecoration3::DecoratedWindow *client, KDecoration3::Decoration *decoration);
 
     Qt::Edges adjacentScreenEdges() const override;
     QString caption() const override;

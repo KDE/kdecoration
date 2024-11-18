@@ -24,7 +24,7 @@ class QWheelEvent;
 namespace KDecoration3
 {
 class DecorationPrivate;
-class DecoratedClient;
+class DecoratedWindow;
 class DecorationButton;
 class DecorationSettings;
 
@@ -32,11 +32,11 @@ class DecorationSettings;
  * @brief Base class for the Decoration.
  *
  * To provide a Decoration one needs to inherit from this class. The framework will instantiate
- * an instance of the inherited class for each DecoratedClient.
+ * an instance of the inherited class for each DecoratedWindow.
  *
- * The main tasks of the Decoration is to provide borders around the DecoratedClient. For this
+ * The main tasks of the Decoration is to provide borders around the DecoratedWindow. For this
  * the Deocration provides border sizes: those should be adjusted depending on the state of the
- * DecoratedClient. E.g. commonly a maximized DecoratedClient does not have borders on the side,
+ * DecoratedWindow. E.g. commonly a maximized DecoratedWindow does not have borders on the side,
  * only the title bar.
  *
  * Whenever the visual representation of the Decoration changes the slot @link Decoration::update @endlink
@@ -45,12 +45,12 @@ class DecorationSettings;
  * classes.
  *
  * A Decoration commonly provides buttons for interaction. E.g. a close button to close the
- * DecoratedClient. For such actions the Decoration provides slots which should be connected to
+ * DecoratedWindow. For such actions the Decoration provides slots which should be connected to
  * the clicked signals of the buttons. For convenience the framework provides the @link DecorationButton @endlink
  * and the @link DecorationButtonGroup @endlink for easier layout. It is not required to use those,
  * if one uses different ways to represent the actions one needs to filter the events accordingly.
  *
- * @see DecoratedClient
+ * @see DecoratedWindow
  * @see DecorationButton
  * @see DecorationButtonGroup
  **/
@@ -81,7 +81,7 @@ class KDECORATIONS2_EXPORT Decoration : public QObject
     /**
      * Whether the Decoration is fully opaque. By default a Decoration is considered to
      * use the alpha channel and this property has the value @c false. But for e.g. a maximized
-     * DecoratedClient it is possible that the Decoration is fully opaque. In this case the
+     * DecoratedWindow it is possible that the Decoration is fully opaque. In this case the
      * Decoration should set this property to @c true.
      **/
     Q_PROPERTY(bool opaque READ isOpaque NOTIFY opaqueChanged)
@@ -89,9 +89,9 @@ public:
     ~Decoration() override;
 
     /**
-     * The DecoratedClient for this Decoration.
+     * The DecoratedWindow for this Decoration.
      **/
-    DecoratedClient *client() const;
+    DecoratedWindow *window() const;
 
     QMargins borders() const;
     int borderLeft() const;
@@ -117,7 +117,7 @@ public:
     /**
      * The decoration's geometry in local coordinates.
      *
-     * Basically the size of the DecoratedClient combined with the borders.
+     * Basically the size of the DecoratedWindow combined with the borders.
      **/
     QRect rect() const;
     QSize size() const;

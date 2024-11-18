@@ -4,14 +4,14 @@
  * SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
  */
 #include "mockbridge.h"
-#include "mockclient.h"
 #include "mocksettings.h"
+#include "mockwindow.h"
 #include <QtGlobal>
 
-std::unique_ptr<KDecoration3::DecoratedClientPrivate> MockBridge::createClient(KDecoration3::DecoratedClient *client, KDecoration3::Decoration *decoration)
+std::unique_ptr<KDecoration3::DecoratedWindowPrivate> MockBridge::createClient(KDecoration3::DecoratedWindow *client, KDecoration3::Decoration *decoration)
 {
-    auto ptr = std::make_unique<MockClient>(client, decoration);
-    m_lastCreatedClient = ptr.get();
+    auto ptr = std::make_unique<MockWindow>(client, decoration);
+    m_lastCreatedWindow = ptr.get();
     return ptr;
 }
 

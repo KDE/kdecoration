@@ -8,19 +8,19 @@
 #include "../src/private/decorationbridge.h"
 #include <QObject>
 
-class MockClient;
+class MockWindow;
 class MockSettings;
 
 class MockBridge : public KDecoration3::DecorationBridge
 {
     Q_OBJECT
 public:
-    std::unique_ptr<KDecoration3::DecoratedClientPrivate> createClient(KDecoration3::DecoratedClient *client, KDecoration3::Decoration *decoration) override;
+    std::unique_ptr<KDecoration3::DecoratedWindowPrivate> createClient(KDecoration3::DecoratedWindow *client, KDecoration3::Decoration *decoration) override;
     std::unique_ptr<KDecoration3::DecorationSettingsPrivate> settings(KDecoration3::DecorationSettings *parent) override;
 
-    MockClient *lastCreatedClient() const
+    MockWindow *lastCreatedWindow() const
     {
-        return m_lastCreatedClient;
+        return m_lastCreatedWindow;
     }
     MockSettings *lastCreatedSettings() const
     {
@@ -28,6 +28,6 @@ public:
     }
 
 private:
-    MockClient *m_lastCreatedClient = nullptr;
+    MockWindow *m_lastCreatedWindow = nullptr;
     MockSettings *m_lastCreatedSettings = nullptr;
 };

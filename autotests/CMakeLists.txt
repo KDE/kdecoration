@@ -3,7 +3,7 @@ include(ECMMarkAsTest)
 set(decorationButtonTest_SRCS
     mockbridge.cpp mockbridge.h
     mockbutton.cpp mockbutton.h
-    mockclient.cpp mockclient.h
+    mockwindow.cpp mockwindow.h
     mockdecoration.cpp mockdecoration.h
     mocksettings.cpp mocksettings.h
     decorationbuttontest.cpp
@@ -16,7 +16,7 @@ ecm_mark_as_test(decorationButtonTest)
 set(decorationTest_SRCS
     mockbridge.cpp mockbridge.h
     mockbutton.cpp mockbutton.h
-    mockclient.cpp mockclient.h
+    mockwindow.cpp mockwindow.h
     mockdecoration.cpp mockdecoration.h
     mocksettings.cpp mocksettings.h
     decorationtest.cpp

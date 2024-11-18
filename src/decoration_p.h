@@ -22,7 +22,7 @@ namespace KDecoration3
 class Decoration;
 class DecorationBridge;
 class DecorationButton;
-class DecoratedClient;
+class DecoratedWindow;
 class DecorationSettings;
 class DecorationShadow;
 
@@ -45,7 +45,7 @@ public:
 
     std::shared_ptr<DecorationSettings> settings;
     DecorationBridge *bridge;
-    std::shared_ptr<DecoratedClient> client;
+    std::shared_ptr<DecoratedWindow> client;
     bool opaque;
     QList<DecorationButton *> buttons;
     std::shared_ptr<DecorationShadow> shadow;

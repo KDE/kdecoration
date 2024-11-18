@@ -29,8 +29,8 @@ namespace KDecoration3
 class Decoration;
 class DecorationSettings;
 class DecorationSettingsPrivate;
-class DecoratedClient;
-class DecoratedClientPrivate;
+class DecoratedWindow;
+class DecoratedWindowPrivate;
 
 class KDECORATIONS_PRIVATE_EXPORT DecorationBridge : public QObject
 {
@@ -38,7 +38,7 @@ class KDECORATIONS_PRIVATE_EXPORT DecorationBridge : public QObject
 public:
     ~DecorationBridge() override;
 
-    virtual std::unique_ptr<DecoratedClientPrivate> createClient(DecoratedClient *client, Decoration *decoration) = 0;
+    virtual std::unique_ptr<DecoratedWindowPrivate> createClient(DecoratedWindow *client, Decoration *decoration) = 0;
     virtual std::unique_ptr<DecorationSettingsPrivate> settings(DecorationSettings *parent) = 0;
 
 protected:

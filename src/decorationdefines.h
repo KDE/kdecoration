@@ -12,7 +12,7 @@ namespace KDecoration3
  * A Decoration should provide a DecorationButton for each of the types,
  * if it wants to provide further buttons it should use the Custom type.
  * The DecorationButton gets configured depending on the type. E.g. the
- * Close button gets disabled if the DecoratedClient is not closeable.
+ * Close button gets disabled if the DecoratedWindow is not closeable.
  **/
 enum class DecorationButtonType {
     /**
@@ -24,44 +24,44 @@ enum class DecorationButtonType {
      */
     ApplicationMenu,
     /**
-     * The OnAllDesktops button requests toggling the DecoratedClient's on all desktops state.
+     * The OnAllDesktops button requests toggling the DecoratedWindow's on all desktops state.
      * The DecoratedButton is only visible if multiple virtual desktops are available.
      **/
     OnAllDesktops,
     /**
-     * The Minimize button requests minimizing the DecoratedClient. The DecorationButton is only
-     * enabled if the DecoratedClient is minimizeable.
+     * The Minimize button requests minimizing the DecoratedWindow. The DecorationButton is only
+     * enabled if the DecoratedWindow is minimizeable.
      **/
     Minimize,
     /**
-     * The Maximize button requests maximizing the DecoratedClient. The DecorationButton is checkable
-     * and if the DecoratedClient is maximized the DecorationButton is checked. The DecorationButton
+     * The Maximize button requests maximizing the DecoratedWindow. The DecorationButton is checkable
+     * and if the DecoratedWindow is maximized the DecorationButton is checked. The DecorationButton
      * supports multiple mouse buttons to change horizontal, vertical and overall maximized state.
      *
-     * The DecorationButton is only enabled if the DecoratedClient is maximizeable.
+     * The DecorationButton is only enabled if the DecoratedWindow is maximizeable.
      **/
     Maximize,
     /**
-     * The Close button requests closing the DecoratedClient. The DecorationButton is only enabled
-     * if the DecoratedClient is closeable.
+     * The Close button requests closing the DecoratedWindow. The DecorationButton is only enabled
+     * if the DecoratedWindow is closeable.
      **/
     Close,
     /**
      * The ContextHelp button requests entering the context help mode. The DecorationButton is only
-     * visible if the DecoratedClient provides context help.
+     * visible if the DecoratedWindow provides context help.
      **/
     ContextHelp,
     /**
-     * The Shade button requests toggling the DecoratedClient's shaded state. The DecoratedButton
-     * is only enabled if the DecoratedClient is shadeable.
+     * The Shade button requests toggling the DecoratedWindow's shaded state. The DecoratedButton
+     * is only enabled if the DecoratedWindow is shadeable.
      **/
     Shade,
     /**
-     * The KeepBelow button requests toggling the DecoratedClient's keep below state.
+     * The KeepBelow button requests toggling the DecoratedWindow's keep below state.
      **/
     KeepBelow,
     /**
-     * The KeepAbove button requests toggling the DecoratedClient's keep above state.
+     * The KeepAbove button requests toggling the DecoratedWindow's keep above state.
      **/
     KeepAbove,
     /**
@@ -122,7 +122,7 @@ enum class BorderSize {
 };
 
 /**
- * Color groups are used for DecoratedClient::color().
+ * Color groups are used for DecoratedWindow::color().
  * @since 5.3
  **/
 enum class ColorGroup {
@@ -142,7 +142,7 @@ enum class ColorGroup {
 };
 
 /**
- * Color roles are used for DecoratedClient::color().
+ * Color roles are used for DecoratedWindow::color().
  * @since 5.3
  **/
 enum class ColorRole {

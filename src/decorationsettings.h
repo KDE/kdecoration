@@ -31,7 +31,7 @@ class KDECORATIONS2_EXPORT DecorationSettings : public QObject
 {
     Q_OBJECT
     /**
-     * Whether the feature to put a DecoratedClient on all desktops is available.
+     * Whether the feature to put a DecoratedWindow on all desktops is available.
      *
      * If this feature is not available a Decoration might decide to not show the
      * DecorationButtonType::OnAllDesktops.
@@ -44,7 +44,7 @@ class KDECORATIONS2_EXPORT DecorationSettings : public QObject
      **/
     Q_PROPERTY(bool alphaChannelSupported READ isAlphaChannelSupported NOTIFY alphaChannelSupportedChanged)
     /**
-     * Whether the Decoration should close the DecoratedClient when double clicking on the
+     * Whether the Decoration should close the DecoratedWindow when double clicking on the
      * DecorationButtonType::Menu.
      **/
     Q_PROPERTY(bool closeOnDoubleClickOnMenu READ isCloseOnDoubleClickOnMenu NOTIFY closeOnDoubleClickOnMenuChanged)

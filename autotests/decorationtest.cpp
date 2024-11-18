@@ -5,9 +5,9 @@
  */
 #include "../src/decorationsettings.h"
 #include "mockbridge.h"
-#include "mockclient.h"
 #include "mockdecoration.h"
 #include "mocksettings.h"
+#include "mockwindow.h"
 #include <QSignalSpy>
 #include <QTest>
 #include <QVariant>
@@ -45,7 +45,7 @@ void DecorationTest::testCreate()
                              QVariantMap({{bridgeKey, QVariant::fromValue(&bridge)}})
 #endif
                          }));
-    QVERIFY(deco1.client());
+    QVERIFY(deco1.window());
 }
 
 void DecorationTest::testOpaque()
@@ -107,7 +107,7 @@ void DecorationTest::testSection()
     MockSettings *settings = bridge.lastCreatedSettings();
     settings->setLargeSpacing(0);
 
-    MockClient *client = bridge.lastCreatedClient();
+    MockWindow *client = bridge.lastCreatedWindow();
     client->setWidth(100);
     client->setHeight(100);
     QCOMPARE(deco.size(), QSize(100, 100));

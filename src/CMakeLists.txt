@@ -3,18 +3,18 @@ add_definitions(-DTRANSLATION_DOMAIN=\"kdecoration\")
 add_subdirectory(private)
 
 set(libkdecoration3_SRCS
-    decoratedclient.cpp
-    decoratedclient.h
+    decoratedwindow.cpp
+    decoratedwindow.h
+    decoration.cpp
+    decoration.h
+    decoration_p.h
     decorationbutton.cpp
+    decorationbutton.h
+    decorationbutton_p.h
     decorationbuttongroup.cpp
     decorationbuttongroup.h
     decorationbuttongroup_p.h
-    decorationbutton.h
-    decorationbutton_p.h
-    decoration.cpp
     decorationdefines.h
-    decoration.h
-    decoration_p.h
     decorationsettings.cpp
     decorationsettings.h
     decorationshadow.cpp
@@ -53,7 +53,7 @@ set_target_properties(kdecorations2 PROPERTIES VERSION   ${KDECORATION3_VERSION}
 
 ecm_generate_headers(KDecoration3_CamelCase_HEADERS
   HEADER_NAMES
-    DecoratedClient
+    DecoratedWindow
     Decoration
     DecorationButton
     DecorationButtonGroup

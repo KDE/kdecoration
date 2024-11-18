@@ -25,12 +25,12 @@
 namespace KDecoration3
 {
 class Decoration;
-class DecoratedClient;
+class DecoratedWindow;
 
-class KDECORATIONS_PRIVATE_EXPORT DecoratedClientPrivate
+class KDECORATIONS_PRIVATE_EXPORT DecoratedWindowPrivate
 {
 public:
-    virtual ~DecoratedClientPrivate();
+    virtual ~DecoratedWindowPrivate();
     virtual bool isActive() const = 0;
     virtual QString caption() const = 0;
     virtual bool isOnAllDesktops() const = 0;
@@ -76,18 +76,18 @@ public:
     virtual QString windowClass() const = 0;
 
 protected:
-    explicit DecoratedClientPrivate(DecoratedClient *client, Decoration *decoration);
-    DecoratedClient *client();
+    explicit DecoratedWindowPrivate(DecoratedWindow *client, Decoration *decoration);
+    DecoratedWindow *window();
 
 private:
     class Private;
     const std::unique_ptr<Private> d;
 };
 
-class KDECORATIONS_PRIVATE_EXPORT ApplicationMenuEnabledDecoratedClientPrivate : public DecoratedClientPrivate
+class KDECORATIONS_PRIVATE_EXPORT ApplicationMenuEnabledDecoratedWindowPrivate : public DecoratedWindowPrivate
 {
 public:
-    ~ApplicationMenuEnabledDecoratedClientPrivate() override;
+    ~ApplicationMenuEnabledDecoratedWindowPrivate() override;
 
     virtual bool hasApplicationMenu() const = 0;
     virtual bool isApplicationMenuActive() const = 0;
@@ -96,7 +96,7 @@ public:
     virtual void requestShowApplicationMenu(const QRect &rect, int actionId) = 0;
 
 protected:
-    explicit ApplicationMenuEnabledDecoratedClientPrivate(DecoratedClient *client, Decoration *decoration);
+    explicit ApplicationMenuEnabledDecoratedWindowPrivate(DecoratedWindow *client, Decoration *decoration);
 };
 
 } // namespace

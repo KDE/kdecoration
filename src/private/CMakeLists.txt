@@ -1,6 +1,6 @@
 set(libkdecoration3Private_SRCS
-    decoratedclientprivate.cpp
-    decoratedclientprivate.h
+    decoratedwindowprivate.cpp
+    decoratedwindowprivate.h
     decorationbridge.cpp
     decorationbridge.h
     decorationsettingsprivate.cpp
@@ -34,7 +34,7 @@ set_target_properties(kdecorations2private PROPERTIES VERSION   ${KDECORATION3_V
 
 ecm_generate_headers(KDecoration3Private_CamelCase_HEADERS
   HEADER_NAMES
-    DecoratedClientPrivate
+    DecoratedWindowPrivate
     DecorationBridge
     DecorationSettingsPrivate
   PREFIX

@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
  */
 #include "decorationbutton.h"
-#include "decoratedclient.h"
+#include "decoratedwindow.h"
 #include "decoration.h"
 #include "decoration_p.h"
 #include "decorationbutton_p.h"
@@ -52,7 +52,7 @@ DecorationButton::Private::~Private() = default;
 
 void DecorationButton::Private::init()
 {
-    auto c = decoration->client();
+    auto c = decoration->window();
     auto settings = decoration->settings();
     switch (type) {
     case DecorationButtonType::Menu:
@@ -91,8 +91,8 @@ void DecorationButton::Private::init()
                 decoration->requestShowApplicationMenu(q->geometry().toRect(), 0 /* actionId */);
             },
             Qt::QueuedConnection); //&Decoration::requestShowApplicationMenu, Qt::QueuedConnection);
-        QObject::connect(c, &DecoratedClient::hasApplicationMenuChanged, q, &DecorationButton::setVisible);
-        QObject::connect(c, &DecoratedClient::applicationMenuActiveChanged, q, &DecorationButton::setChecked);
+        QObject::connect(c, &DecoratedWindow::hasApplicationMenuChanged, q, &DecorationButton::setVisible);
+        QObject::connect(c, &DecoratedWindow::applicationMenuActiveChanged, q, &DecorationButton::setChecked);
         break;
     case DecorationButtonType::OnAllDesktops:
         setVisible(settings->isOnAllDesktopsAvailable());
@@ -100,12 +100,12 @@ void DecorationButton::Private::init()
         setChecked(c->isOnAllDesktops());
         QObject::connect(q, &DecorationButton::clicked, decoration.data(), &Decoration::requestToggleOnAllDesktops, Qt::QueuedConnection);
         QObject::connect(settings.get(), &DecorationSettings::onAllDesktopsAvailableChanged, q, &DecorationButton::setVisible);
-        QObject::connect(c, &DecoratedClient::onAllDesktopsChanged, q, &DecorationButton::setChecked);
+        QObject::connect(c, &DecoratedWindow::onAllDesktopsChanged, q, &DecorationButton::setChecked);
         break;
     case DecorationButtonType::Minimize:
         setEnabled(c->isMinimizeable());
         QObject::connect(q, &DecorationButton::clicked, decoration.data(), &Decoration::requestMinimize, Qt::QueuedConnection);
-        QObject::connect(c, &DecoratedClient::minimizeableChanged, q, &DecorationButton::setEnabled);
+        QObject::connect(c, &DecoratedWindow::minimizeableChanged, q, &DecorationButton::setEnabled);
         break;
     case DecorationButtonType::Maximize:
         setEnabled(c->isMaximizeable());
@@ -113,38 +113,38 @@ void DecorationButton::Private::init()
         setChecked(c->isMaximized());
         setAcceptedButtons(Qt::LeftButton | Qt::MiddleButton | Qt::RightButton);
         QObject::connect(q, &DecorationButton::clicked, decoration.data(), &Decoration::requestToggleMaximization, Qt::QueuedConnection);
-        QObject::connect(c, &DecoratedClient::maximizeableChanged, q, &DecorationButton::setEnabled);
-        QObject::connect(c, &DecoratedClient::maximizedChanged, q, &DecorationButton::setChecked);
+        QObject::connect(c, &DecoratedWindow::maximizeableChanged, q, &DecorationButton::setEnabled);
+        QObject::connect(c, &DecoratedWindow::maximizedChanged, q, &DecorationButton::setChecked);
         break;
     case DecorationButtonType::Close:
         setEnabled(c->isCloseable());
         QObject::connect(q, &DecorationButton::clicked, decoration.data(), &Decoration::requestClose, Qt::QueuedConnection);
-        QObject::connect(c, &DecoratedClient::closeableChanged, q, &DecorationButton::setEnabled);
+        QObject::connect(c, &DecoratedWindow::closeableChanged, q, &DecorationButton::setEnabled);
         break;
     case DecorationButtonType::ContextHelp:
         setVisible(c->providesContextHelp());
         QObject::connect(q, &DecorationButton::clicked, decoration.data(), &Decoration::requestContextHelp, Qt::QueuedConnection);
-        QObject::connect(c, &DecoratedClient::providesContextHelpChanged, q, &DecorationButton::setVisible);
+        QObject::connect(c, &DecoratedWindow::providesContextHelpChanged, q, &DecorationButton::setVisible);
         break;
     case DecorationButtonType::KeepAbove:
         setCheckable(true);
         setChecked(c->isKeepAbove());
         QObject::connect(q, &DecorationButton::clicked, decoration.data(), &Decoration::requestToggleKeepAbove, Qt::QueuedConnection);
-        QObject::connect(c, &DecoratedClient::keepAboveChanged, q, &DecorationButton::setChecked);
+        QObject::connect(c, &DecoratedWindow::keepAboveChanged, q, &DecorationButton::setChecked);
         break;
     case DecorationButtonType::KeepBelow:
         setCheckable(true);
         setChecked(c->isKeepBelow());
         QObject::connect(q, &DecorationButton::clicked, decoration.data(), &Decoration::requestToggleKeepBelow, Qt::QueuedConnection);
-        QObject::connect(c, &DecoratedClient::keepBelowChanged, q, &DecorationButton::setChecked);
+        QObject::connect(c, &DecoratedWindow::keepBelowChanged, q, &DecorationButton::setChecked);
         break;
     case DecorationButtonType::Shade:
         setEnabled(c->isShadeable());
         setCheckable(true);
         setChecked(c->isShaded());
         QObject::connect(q, &DecorationButton::clicked, decoration.data(), &Decoration::requestToggleShade, Qt::QueuedConnection);
-        QObject::connect(c, &DecoratedClient::shadedChanged, q, &DecorationButton::setChecked);
-        QObject::connect(c, &DecoratedClient::shadeableChanged, q, &DecorationButton::setEnabled);
+        QObject::connect(c, &DecoratedWindow::shadedChanged, q, &DecorationButton::setChecked);
+        QObject::connect(c, &DecoratedWindow::shadeableChanged, q, &DecorationButton::setEnabled);
         break;
     case DecorationButtonType::Spacer:
         setEnabled(false);

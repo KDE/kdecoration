@@ -4,11 +4,11 @@
  * SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
  */
 #include "decoration.h"
-#include "decoratedclient.h"
+#include "decoratedwindow.h"
 #include "decoration_p.h"
 #include "decorationbutton.h"
 #include "decorationsettings.h"
-#include "private/decoratedclientprivate.h"
+#include "private/decoratedwindowprivate.h"
 #include "private/decorationbridge.h"
 
 #include <QCoreApplication>
@@ -34,7 +34,7 @@ DecorationBridge *findBridge(const QVariantList &args)
 Decoration::Private::Private(Decoration *deco, const QVariantList &args)
     : sectionUnderMouse(Qt::NoSection)
     , bridge(findBridge(args))
-    , client(std::shared_ptr<DecoratedClient>(new DecoratedClient(deco, bridge)))
+    , client(std::shared_ptr<DecoratedWindow>(new DecoratedWindow(deco, bridge)))
     , opaque(false)
     , q(deco)
 {
@@ -139,7 +139,7 @@ Decoration::Decoration(QObject *parent, const QVariantList &args)
 
 Decoration::~Decoration() = default;
 
-DecoratedClient *Decoration::client() const
+DecoratedWindow *Decoration::window() const
 {
     return d->client.get();
 }
@@ -218,7 +218,7 @@ void Decoration::showApplicationMenu(int actionId)
 
 void Decoration::requestShowApplicationMenu(const QRect &rect, int actionId)
 {
-    if (auto *appMenuEnabledPrivate = dynamic_cast<ApplicationMenuEnabledDecoratedClientPrivate *>(d->client->d.get())) {
+    if (auto *appMenuEnabledPrivate = dynamic_cast<ApplicationMenuEnabledDecoratedWindowPrivate *>(d->client->d.get())) {
         appMenuEnabledPrivate->requestShowApplicationMenu(rect, actionId);
     }
 }

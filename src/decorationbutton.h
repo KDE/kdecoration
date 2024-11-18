@@ -42,7 +42,7 @@ class KDECORATIONS2_EXPORT DecorationButton : public QObject
     Q_OBJECT
     /**
      * Whether the DecorationButton is visible. By default this is @c true, OnAllDesktops and
-     * QuickHelp depend on the DecoratedClient's state.
+     * QuickHelp depend on the DecoratedWindow's state.
      **/
     Q_PROPERTY(bool visible READ isVisible WRITE setVisible NOTIFY visibilityChanged)
     /**
@@ -66,7 +66,7 @@ class KDECORATIONS2_EXPORT DecorationButton : public QObject
     /**
      * Whether the DecorationButton is checked. A DecorationButton can only be checked if the
      * DecorationButton is checkable. Note: the checked state is not changed by clicking the
-     * DecorationButton. It gets changed if the DecoratedClient changes it's state, though.
+     * DecorationButton. It gets changed if the DecoratedWindow changes it's state, though.
      **/
     Q_PROPERTY(bool checked READ isChecked WRITE setChecked NOTIFY checkedChanged)
     /**

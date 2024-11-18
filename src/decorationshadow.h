@@ -22,7 +22,7 @@ class DecorationShadowPrivate;
  * Instead a DecorationShadow should be used. That way a backend can optimize the
  * rendering of the shadow in a better way. If the shadow were part of the Decoration
  * directly it would need to be updated when the rendering changes. By using a dedicated
- * DecorationShadow the same shadow can be shared between multiple DecoratedClients.
+ * DecorationShadow the same shadow can be shared between multiple DecoratedWindows.
  *
  * The DecorationShadow consists of a shadow QImage which is composed of multiple parts:
  * @li topLeft: rendered as it is
