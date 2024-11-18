@@ -51,9 +51,6 @@ public:
     virtual bool isMoveable() const = 0;
     virtual bool isResizeable() const = 0;
 
-    virtual WId windowId() const = 0;
-    virtual WId decorationId() const = 0;
-
     virtual int width() const = 0;
     virtual int height() const = 0;
     virtual QSize size() const = 0;

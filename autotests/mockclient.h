@@ -17,7 +17,6 @@ public:
 
     Qt::Edges adjacentScreenEdges() const override;
     QString caption() const override;
-    WId decorationId() const override;
     int height() const override;
     QIcon icon() const override;
     bool isActive() const override;
@@ -53,7 +52,6 @@ public:
     void requestHideToolTip() override;
     QSize size() const override;
     int width() const override;
-    WId windowId() const override;
     QString windowClass() const override;
 
     void showApplicationMenu(int actionId) override;

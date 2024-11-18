@@ -162,8 +162,6 @@ class KDECORATIONS2_EXPORT DecoratedClient : public QObject
      */
     Q_PROPERTY(bool applicationMenuActive READ isApplicationMenuActive NOTIFY applicationMenuActiveChanged)
 
-    // TODO: properties for windowId and decorationId?
-
 public:
     DecoratedClient() = delete;
     ~DecoratedClient() override;
@@ -188,9 +186,6 @@ public:
     bool isResizeable() const;
 
     Qt::Edges adjacentScreenEdges() const;
-
-    WId windowId() const;
-    WId decorationId() const;
 
     QString windowClass() const;
 

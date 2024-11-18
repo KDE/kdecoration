@@ -24,11 +24,6 @@ QString MockClient::caption() const
     return QString();
 }
 
-WId MockClient::decorationId() const
-{
-    return 0;
-}
-
 int MockClient::height() const
 {
     return m_height;
@@ -235,11 +230,6 @@ int MockClient::width() const
 QString MockClient::windowClass() const
 {
     return QString();
-}
-
-WId MockClient::windowId() const
-{
-    return 0;
 }
 
 void MockClient::setCloseable(bool set)

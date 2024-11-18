@@ -109,16 +109,6 @@ bool DecoratedClient::isResizeable() const
     return d->isResizeable();
 }
 
-WId DecoratedClient::windowId() const
-{
-    return d->windowId();
-}
-
-WId DecoratedClient::decorationId() const
-{
-    return d->decorationId();
-}
-
 int DecoratedClient::width() const
 {
     return d->width();
