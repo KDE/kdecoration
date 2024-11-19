@@ -218,9 +218,7 @@ void Decoration::showApplicationMenu(int actionId)
 
 void Decoration::requestShowApplicationMenu(const QRect &rect, int actionId)
 {
-    if (auto *appMenuEnabledPrivate = dynamic_cast<ApplicationMenuEnabledDecoratedWindowPrivate *>(d->client->d.get())) {
-        appMenuEnabledPrivate->requestShowApplicationMenu(rect, actionId);
-    }
+    d->client->d->requestShowApplicationMenu(rect, actionId);
 }
 
 void Decoration::setBlurRegion(const QRegion &region)

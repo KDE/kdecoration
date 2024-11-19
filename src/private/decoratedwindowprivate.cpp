@@ -52,12 +52,4 @@ QColor DecoratedWindowPrivate::color(ColorGroup group, ColorRole role) const
 
     return QColor();
 }
-
-ApplicationMenuEnabledDecoratedWindowPrivate::ApplicationMenuEnabledDecoratedWindowPrivate(DecoratedWindow *client, Decoration *decoration)
-    : DecoratedWindowPrivate(client, decoration)
-{
-}
-
-ApplicationMenuEnabledDecoratedWindowPrivate::~ApplicationMenuEnabledDecoratedWindowPrivate() = default;
-
 }

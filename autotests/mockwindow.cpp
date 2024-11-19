@@ -10,7 +10,7 @@
 
 MockWindow::MockWindow(KDecoration3::DecoratedWindow *client, KDecoration3::Decoration *decoration)
     : QObject()
-    , ApplicationMenuEnabledDecoratedWindowPrivate(client, decoration)
+    , DecoratedWindowPrivate(client, decoration)
 {
 }
 

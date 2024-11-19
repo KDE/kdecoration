@@ -141,18 +141,12 @@ QString DecoratedWindow::windowClass() const
 
 bool DecoratedWindow::hasApplicationMenu() const
 {
-    if (const auto *appMenuEnabledPrivate = dynamic_cast<ApplicationMenuEnabledDecoratedWindowPrivate *>(d.get())) {
-        return appMenuEnabledPrivate->hasApplicationMenu();
-    }
-    return false;
+    return d->hasApplicationMenu();
 }
 
 bool DecoratedWindow::isApplicationMenuActive() const
 {
-    if (const auto *appMenuEnabledPrivate = dynamic_cast<ApplicationMenuEnabledDecoratedWindowPrivate *>(d.get())) {
-        return appMenuEnabledPrivate->isApplicationMenuActive();
-    }
-    return false;
+    return d->isApplicationMenuActive();
 }
 
 Decoration *DecoratedWindow::decoration() const
@@ -172,9 +166,7 @@ QColor DecoratedWindow::color(ColorGroup group, ColorRole role) const
 
 void DecoratedWindow::showApplicationMenu(int actionId)
 {
-    if (auto *appMenuEnabledPrivate = dynamic_cast<ApplicationMenuEnabledDecoratedWindowPrivate *>(d.get())) {
-        appMenuEnabledPrivate->showApplicationMenu(actionId);
-    }
+    d->showApplicationMenu(actionId);
 }
 
 } // namespace

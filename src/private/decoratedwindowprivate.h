@@ -75,20 +75,6 @@ public:
     virtual QColor color(ColorGroup group, ColorRole role) const;
     virtual QString windowClass() const = 0;
 
-protected:
-    explicit DecoratedWindowPrivate(DecoratedWindow *client, Decoration *decoration);
-    DecoratedWindow *window();
-
-private:
-    class Private;
-    const std::unique_ptr<Private> d;
-};
-
-class KDECORATIONS_PRIVATE_EXPORT ApplicationMenuEnabledDecoratedWindowPrivate : public DecoratedWindowPrivate
-{
-public:
-    ~ApplicationMenuEnabledDecoratedWindowPrivate() override;
-
     virtual bool hasApplicationMenu() const = 0;
     virtual bool isApplicationMenuActive() const = 0;
 
@@ -96,7 +82,12 @@ public:
     virtual void requestShowApplicationMenu(const QRect &rect, int actionId) = 0;
 
 protected:
-    explicit ApplicationMenuEnabledDecoratedWindowPrivate(DecoratedWindow *client, Decoration *decoration);
+    explicit DecoratedWindowPrivate(DecoratedWindow *client, Decoration *decoration);
+    DecoratedWindow *window();
+
+private:
+    class Private;
+    const std::unique_ptr<Private> d;
 };
 
 } // namespace

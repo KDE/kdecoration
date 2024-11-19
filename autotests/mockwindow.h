@@ -9,7 +9,7 @@
 
 #include <QObject>
 
-class MockWindow : public QObject, public KDecoration3::ApplicationMenuEnabledDecoratedWindowPrivate
+class MockWindow : public QObject, public KDecoration3::DecoratedWindowPrivate
 {
     Q_OBJECT
 public:
