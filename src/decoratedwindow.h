@@ -35,7 +35,7 @@ class DecoratedWindowPrivate;
  * disallow state changes. Therefore any changes should be bound to the change signals of the
  * DecoratedWindow and not be bound to state changes of input elements (such as a button).
  */
-class KDECORATIONS2_EXPORT DecoratedWindow : public QObject
+class KDECORATIONS3_EXPORT DecoratedWindow : public QObject
 {
     Q_OBJECT
     /**

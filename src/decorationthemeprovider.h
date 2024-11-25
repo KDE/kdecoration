@@ -22,7 +22,7 @@ namespace KDecoration3
  * @since 5.23
  * @author Alexander Lohnau
  */
-class KDECORATIONS2_EXPORT DecorationThemeMetaData
+class KDECORATIONS3_EXPORT DecorationThemeMetaData
 {
 public:
     explicit DecorationThemeMetaData();
@@ -61,7 +61,7 @@ private:
  * @since 5.23
  * @author Alexander Lohnau
  */
-class KDECORATIONS2_EXPORT DecorationThemeProvider : public QObject
+class KDECORATIONS3_EXPORT DecorationThemeProvider : public QObject
 {
     Q_OBJECT
 

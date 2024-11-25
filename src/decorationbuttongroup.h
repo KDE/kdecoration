@@ -27,7 +27,7 @@ class DecorationButtonGroupPrivate;
  * element it provides a paint method allowing a sub class to provide custom painting for the
  * DecorationButtonGroup.
  **/
-class KDECORATIONS2_EXPORT DecorationButtonGroup : public QObject
+class KDECORATIONS3_EXPORT DecorationButtonGroup : public QObject
 {
     Q_OBJECT
     /**

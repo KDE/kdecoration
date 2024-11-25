@@ -71,7 +71,7 @@ class DecorationShadowPrivate;
  * will overlap with the Decoration and be rendered behind the Decoration.
  *
  **/
-class KDECORATIONS2_EXPORT DecorationShadow : public QObject
+class KDECORATIONS3_EXPORT DecorationShadow : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QImage shadow READ shadow WRITE setShadow NOTIFY shadowChanged)

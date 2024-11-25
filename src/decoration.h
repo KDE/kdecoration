@@ -54,7 +54,7 @@ class DecorationSettings;
  * @see DecorationButton
  * @see DecorationButtonGroup
  **/
-class KDECORATIONS2_EXPORT Decoration : public QObject
+class KDECORATIONS3_EXPORT Decoration : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QMarginsF borders READ borders NOTIFY bordersChanged)
@@ -161,12 +161,12 @@ public Q_SLOTS:
     void requestToggleKeepAbove();
     void requestToggleKeepBelow();
 
-#if KDECORATIONS2_ENABLE_DEPRECATED_SINCE(5, 21)
+#if KDECORATIONS3_ENABLE_DEPRECATED_SINCE(5, 21)
     /**
      * @deprecated
      * @see requestShowWindowMenu(const QRect &rect)
      */
-    KDECORATIONS2_DEPRECATED_VERSION(5, 21, "Use Decoration::requestShowWindowMenu(QRect)")
+    KDECORATIONS3_DEPRECATED_VERSION(5, 21, "Use Decoration::requestShowWindowMenu(QRect)")
     void requestShowWindowMenu();
 #endif
 

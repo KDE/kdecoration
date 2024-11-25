@@ -25,28 +25,28 @@ set(libkdecoration3_SRCS
 
 )
 
-add_library(kdecorations2 SHARED ${libkdecoration3_SRCS})
-ecm_generate_export_header(kdecorations2
+add_library(kdecorations3 SHARED ${libkdecoration3_SRCS})
+ecm_generate_export_header(kdecorations3
     VERSION ${PROJECT_VERSION}
     EXPORT_FILE_NAME kdecoration3/kdecoration3_export.h
     DEPRECATION_VERSIONS 5.21
     EXCLUDE_DEPRECATED_BEFORE_AND_AT ${EXCLUDE_DEPRECATED_BEFORE_AND_AT}
 )
 
-add_library(KDecoration3::KDecoration ALIAS kdecorations2)
+add_library(KDecoration3::KDecoration ALIAS kdecorations3)
 
-target_link_libraries(kdecorations2
+target_link_libraries(kdecorations3
     PUBLIC
         Qt::Core
         Qt::Gui
     PRIVATE
-        kdecorations2private
+        kdecorations3private
         KF6::I18n
 )
 
-target_include_directories(kdecorations2 INTERFACE "$<INSTALL_INTERFACE:${KDECORATION3_INCLUDEDIR}>" )
+target_include_directories(kdecorations3 INTERFACE "$<INSTALL_INTERFACE:${KDECORATION3_INCLUDEDIR}>" )
 
-set_target_properties(kdecorations2 PROPERTIES VERSION   ${KDECORATION3_VERSION}
+set_target_properties(kdecorations3 PROPERTIES VERSION   ${KDECORATION3_VERSION}
                                                SOVERSION ${KDECORATION3_SOVERSION}
                                                EXPORT_NAME KDecoration
 )
@@ -68,7 +68,7 @@ install(FILES ${KDecoration3_CamelCase_HEADERS}
         DESTINATION ${KDECORATION3_INCLUDEDIR}/KDecoration3
         COMPONENT Devel)
 
-install(TARGETS kdecorations2 EXPORT KDecoration3Targets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS kdecorations3 EXPORT KDecoration3Targets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 
 install(
     FILES

@@ -37,7 +37,7 @@ class Decoration;
  * @see Decoration
  * @see DecorationButtonGroup
  **/
-class KDECORATIONS2_EXPORT DecorationButton : public QObject
+class KDECORATIONS3_EXPORT DecorationButton : public QObject
 {
     Q_OBJECT
     /**
@@ -173,7 +173,7 @@ private:
 } // namespace
 
 #ifndef K_DOXYGEN
-size_t KDECORATIONS2_EXPORT qHash(const KDecoration3::DecorationButtonType &type, size_t seed = 0);
+size_t KDECORATIONS3_EXPORT qHash(const KDecoration3::DecorationButtonType &type, size_t seed = 0);
 #endif
 
 Q_DECLARE_METATYPE(KDecoration3::DecorationButtonType)

@@ -179,7 +179,7 @@ void Decoration::requestToggleKeepBelow()
     d->client->d->requestToggleKeepBelow();
 }
 
-#if KDECORATIONS2_ENABLE_DEPRECATED_SINCE(5, 21)
+#if KDECORATIONS3_ENABLE_DEPRECATED_SINCE(5, 21)
 void Decoration::requestShowWindowMenu()
 {
     requestShowWindowMenu(QRect());

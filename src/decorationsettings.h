@@ -27,7 +27,7 @@ class DecorationSettingsPrivate;
  *
  * @see Decoration
  **/
-class KDECORATIONS2_EXPORT DecorationSettings : public QObject
+class KDECORATIONS3_EXPORT DecorationSettings : public QObject
 {
     Q_OBJECT
     /**
