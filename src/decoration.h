@@ -112,10 +112,6 @@ public:
      **/
     DecoratedWindow *window() const;
 
-    /**
-     * @returns the border size, adjusted for the scale factor
-     */
-    virtual QMarginsF bordersFor(qreal scale) const = 0;
     QMarginsF borders() const;
     qreal borderLeft() const;
     qreal borderRight() const;
