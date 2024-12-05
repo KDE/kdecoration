@@ -284,4 +284,9 @@ qreal MockWindow::scale() const
     return 1;
 }
 
+qreal MockWindow::nextScale() const
+{
+    return 1;
+}
+
 #include "moc_mockwindow.cpp"

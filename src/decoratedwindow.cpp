@@ -175,6 +175,11 @@ qreal DecoratedWindow::scale() const
     return d->scale();
 }
 
+qreal DecoratedWindow::nextScale() const
+{
+    return d->nextScale();
+}
+
 qreal DecoratedWindow::pixelSize() const
 {
     return ::KDecoration3::pixelSize(scale());
