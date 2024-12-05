@@ -29,6 +29,25 @@ class DecorationButton;
 class DecorationSettings;
 
 /**
+ * \brief Decoration state.
+ *
+ * The DecorationState type represents double bufferred state associated with a decoration.
+ */
+class KDECORATIONS3_EXPORT DecorationState
+{
+public:
+    virtual ~DecorationState();
+
+    virtual std::shared_ptr<DecorationState> clone() const;
+
+    QMarginsF borders() const;
+    void setBorders(const QMarginsF &margins);
+
+private:
+    QMarginsF m_borders;
+};
+
+/**
  * @brief Base class for the Decoration.
  *
  * To provide a Decoration one needs to inherit from this class. The framework will instantiate
@@ -188,6 +207,16 @@ public Q_SLOTS:
     void update();
 
     /**
+     * \internal
+     *
+     * Allocates the resources associated with the decoration, for example state containers.
+     *
+     * \note This method gets invoked by the compositor before init(), the decoration implementation
+     * must not call it.
+     */
+    void create();
+
+    /**
      * This method gets invoked from the framework once the Decoration is created and
      * completely setup.
      *
@@ -199,6 +228,37 @@ public Q_SLOTS:
      **/
     virtual bool init() = 0;
 
+    /**
+     * \internal
+     *
+     * Make the specified \a state current.
+     *
+     * The decoration maintains a double-buffered state. If a double-buffered property needs
+     * to be changed, the next state will be updated and the stateRequested() signal will be
+     * emitted to notify the compositor about it.
+     *
+     * When the next state gets applied is subject to compositor policies. For example, the
+     * compositor may apply the new state immediately, or it can synchronize double-buffered
+     * decoration state with double-buffered toplevel state.
+     *
+     * \sa currentState(), nextState(), createState()
+     */
+    void apply(std::shared_ptr<DecorationState> state);
+
+    /**
+     * Returns the currently applied state.
+     *
+     * \sa apply()
+     */
+    std::shared_ptr<DecorationState> currentState() const;
+
+    /**
+     * Returns the next state, i.e. the state that the decoration implementation wants to be current.
+     *
+     * \sa apply()
+     */
+    std::shared_ptr<DecorationState> nextState() const;
+
 Q_SIGNALS:
     void blurRegionChanged();
     void bordersChanged();
@@ -208,6 +268,15 @@ Q_SIGNALS:
     void opaqueChanged(bool);
     void shadowChanged(const std::shared_ptr<DecorationShadow> &shadow);
     void damaged(const QRegion &region);
+
+    /**
+     * \internal
+     *
+     * This signal is emitted when the next decoration state changes.
+     *
+     * \sa apply()
+     */
+    void stateRequested(std::shared_ptr<DecorationState> state);
 
 protected:
     /**
@@ -240,6 +309,16 @@ protected:
     virtual void mousePressEvent(QMouseEvent *event);
     virtual void mouseReleaseEvent(QMouseEvent *event);
     virtual void wheelEvent(QWheelEvent *event);
+
+    /**
+     * Create a state container. The decoration implementation can override this method to attach
+     * its own properties to the decoration state.
+     *
+     * The default implementation simply creates an instance of the DecorationState type.
+     *
+     * \sa currentState(), nextState()
+     */
+    virtual std::shared_ptr<DecorationState> createState();
 
 private:
     friend class DecorationButton;
