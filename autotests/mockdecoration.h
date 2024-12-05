@@ -17,7 +17,6 @@ public:
     explicit MockDecoration(MockBridge *bridge);
     bool init() override;
     void paint(QPainter *painter, const QRectF &repaintRegion) override;
-    QMarginsF bordersFor(qreal scale) const override;
     void setOpaque(bool set);
     using Decoration::setBorders;
     void setBorders(const QMargins &m);
