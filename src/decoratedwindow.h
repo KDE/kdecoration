@@ -163,10 +163,16 @@ class KDECORATIONS3_EXPORT DecoratedWindow : public QObject
     Q_PROPERTY(bool applicationMenuActive READ isApplicationMenuActive NOTIFY applicationMenuActiveChanged)
 
     /**
-     * the scale this decorated window is targeting
+     * The current scale this decorated window is targeting.
      * @since 6.3
      */
     Q_PROPERTY(qreal scale READ scale NOTIFY scaleChanged);
+
+    /**
+     * The next scale this decorated window is going to target.
+     * @since 6.3
+     */
+    Q_PROPERTY(qreal nextScale READ nextScale NOTIFY nextScaleChanged)
 
 public:
     DecoratedWindow() = delete;
@@ -237,10 +243,14 @@ public:
     void showApplicationMenu(int actionId);
 
     /**
-     * the scale this decorated window is targeting
+     * Returns the current scale this decorated window is targeting
      * @since 6.3
      */
     qreal scale() const;
+    /**
+     * Returns the next scale this decorated window is going to target.
+     */
+    qreal nextScale() const;
     /**
      * @returns the pixel size with the current scale
      * @since 6.3
@@ -300,6 +310,7 @@ Q_SIGNALS:
     void hasApplicationMenuChanged(bool);
     void applicationMenuActiveChanged(bool);
     void scaleChanged();
+    void nextScaleChanged();
 
 private:
     friend class Decoration;
