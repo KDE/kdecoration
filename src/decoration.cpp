@@ -31,10 +31,48 @@ DecorationBridge *findBridge(const QVariantList &args)
 }
 }
 
+BorderRadius::BorderRadius()
+{
+}
+
+BorderRadius::BorderRadius(qreal radius)
+    : BorderRadius(radius, radius, radius, radius)
+{
+}
+
+BorderRadius::BorderRadius(qreal topLeft, qreal topRight, qreal bottomRight, qreal bottomLeft)
+    : m_topLeft(topLeft)
+    , m_topRight(topRight)
+    , m_bottomRight(bottomRight)
+    , m_bottomLeft(bottomLeft)
+{
+}
+
+qreal BorderRadius::topLeft() const
+{
+    return m_topLeft;
+}
+
+qreal BorderRadius::topRight() const
+{
+    return m_topRight;
+}
+
+qreal BorderRadius::bottomRight() const
+{
+    return m_bottomRight;
+}
+
+qreal BorderRadius::bottomLeft() const
+{
+    return m_bottomLeft;
+}
+
 class DecorationStateData : public QSharedData
 {
 public:
     QMarginsF borders;
+    BorderRadius borderRadius;
 };
 
 DecorationState::DecorationState()
@@ -64,6 +102,16 @@ QMarginsF DecorationState::borders() const
 void DecorationState::setBorders(const QMarginsF &borders)
 {
     d->borders = borders;
+}
+
+BorderRadius DecorationState::borderRadius() const
+{
+    return d->borderRadius;
+}
+
+void DecorationState::setBorderRadius(const BorderRadius &radius)
+{
+    d->borderRadius = radius;
 }
 
 Positioner::Positioner()
@@ -303,6 +351,15 @@ void Decoration::setResizeOnlyBorders(const QMarginsF &borders)
     }
 }
 
+void Decoration::setBorderRadius(const BorderRadius &radius)
+{
+    if (d->next->borderRadius() != radius) {
+        setState([radius](DecorationState *state) {
+            state->setBorderRadius(radius);
+        });
+    }
+}
+
 void Decoration::setTitleBar(const QRectF &rect)
 {
     if (d->titleBar != rect) {
@@ -400,6 +457,11 @@ qreal Decoration::borderBottom() const
 qreal Decoration::resizeOnlyBorderBottom() const
 {
     return d->resizeOnlyBorders.bottom();
+}
+
+BorderRadius Decoration::borderRadius() const
+{
+    return d->current->borderRadius();
 }
 
 QSizeF Decoration::size() const
@@ -586,6 +648,9 @@ void Decoration::apply(std::shared_ptr<DecorationState> state)
 
     if (previous->borders() != state->borders()) {
         Q_EMIT bordersChanged();
+    }
+    if (previous->borderRadius() != state->borderRadius()) {
+        Q_EMIT borderRadiusChanged();
     }
 
     Q_EMIT currentStateChanged(state);
