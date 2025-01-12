@@ -251,35 +251,6 @@ public:
      * Returns the next scale this decorated window is going to target.
      */
     qreal nextScale() const;
-    /**
-     * @returns the logical size of a device pixel with the current scale
-     * @since 6.3
-     */
-    qreal pixelSize() const;
-    /**
-     * snaps the logical geometry value to a fractional logical geometry value
-     * that aligns to the pixel grid with the current scale factor
-     * @since 6.3
-     */
-    qreal snapToPixelGrid(qreal value) const;
-    /**
-     * snaps the logical geometry value to a fractional logical geometry value
-     * that aligns to the pixel grid with the current scale factor
-     * @since 6.3
-     */
-    QPointF snapToPixelGrid(const QPointF &value) const;
-    /**
-     * snaps the logical geometry value to a fractional logical geometry value
-     * that aligns to the pixel grid with the current scale factor
-     * @since 6.3
-     */
-    QSizeF snapToPixelGrid(const QSizeF &value) const;
-    /**
-     * snaps the logical geometry value to a fractional logical geometry value
-     * that aligns to the pixel grid with the current scale factor
-     * @since 6.3
-     */
-    QRectF snapToPixelGrid(const QRectF &value) const;
 
 Q_SIGNALS:
     void activeChanged(bool);

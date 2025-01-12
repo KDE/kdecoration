@@ -180,31 +180,6 @@ qreal DecoratedWindow::nextScale() const
     return d->nextScale();
 }
 
-qreal DecoratedWindow::pixelSize() const
-{
-    return ::KDecoration3::pixelSize(scale());
-}
-
-qreal DecoratedWindow::snapToPixelGrid(qreal value) const
-{
-    return ::KDecoration3::snapToPixelGrid(value, d->scale());
-}
-
-QPointF DecoratedWindow::snapToPixelGrid(const QPointF &value) const
-{
-    return ::KDecoration3::snapToPixelGrid(value, d->scale());
-}
-
-QSizeF DecoratedWindow::snapToPixelGrid(const QSizeF &value) const
-{
-    return ::KDecoration3::snapToPixelGrid(value, d->scale());
-}
-
-QRectF DecoratedWindow::snapToPixelGrid(const QRectF &value) const
-{
-    return ::KDecoration3::snapToPixelGrid(value, d->scale());
-}
-
 } // namespace
 
 #include "moc_decoratedwindow.cpp"
