@@ -52,3 +52,6 @@ by creating a plugin that provides such a configuration module.
 
 The `kcmoduleName` specifies the name of the configuration module. It needs to be installed under
 `${KDE_INSTALL_PLUGINDIR}/org.kde.kdecoration3.kcm` so that it can be looked up.
+
+# KDecoration2 -> KDecoration3
+The porting guide can be found [here](docs/KDecoration 3 porting guide.md).
