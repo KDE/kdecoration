@@ -205,6 +205,22 @@ QRectF DecoratedWindow::snapToPixelGrid(const QRectF &value) const
     return ::KDecoration3::snapToPixelGrid(value, d->scale());
 }
 
+QString DecoratedWindow::applicationMenuServiceName() const
+{
+    if (auto impl = dynamic_cast<DecoratedWindowPrivateV2 *>(d.get())) {
+        return impl->applicationMenuServiceName();
+    }
+    return QString();
+}
+
+QString DecoratedWindow::applicationMenuObjectPath() const
+{
+    if (auto impl = dynamic_cast<DecoratedWindowPrivateV2 *>(d.get())) {
+        return impl->applicationMenuObjectPath();
+    }
+    return QString();
+}
+
 } // namespace
 
 #include "moc_decoratedwindow.cpp"
