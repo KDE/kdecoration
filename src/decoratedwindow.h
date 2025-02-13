@@ -161,6 +161,20 @@ class KDECORATIONS3_EXPORT DecoratedWindow : public QObject
      * @since 5.9
      */
     Q_PROPERTY(bool applicationMenuActive READ isApplicationMenuActive NOTIFY applicationMenuActiveChanged)
+    /**
+     * Returns the DBus service name of the application menu. If the window has no application
+     * menu associated with it, an empty string will be returned.
+     *
+     * @since 6.3.2
+     */
+    Q_PROPERTY(QString applicationMenuServiceName READ applicationMenuServiceName NOTIFY applicationMenuChanged)
+    /**
+     * Returns the DBus object path of the application menu. If the window has no application
+     * menu associated with it, an empty string will be returned.
+     *
+     * @since 6.3.2
+     */
+    Q_PROPERTY(QString applicationMenuObjectPath READ applicationMenuObjectPath NOTIFY applicationMenuChanged)
 
     /**
      * The current scale this decorated window is targeting.
@@ -230,6 +244,20 @@ public:
      */
     bool hasApplicationMenu() const;
     /**
+     * Returns the DBus service name of the application menu. If the window has no application
+     * menu associated with it, an empty string will be returned.
+     *
+     * @since 6.3.2
+     */
+    QString applicationMenuServiceName() const;
+    /**
+     * Returns the DBus object path of the application menu. If the window has no application
+     * menu associated with it, an empty string will be returned.
+     *
+     * @since 6.3.2
+     */
+    QString applicationMenuObjectPath() const;
+    /**
      * Whether the application menu for this DecoratedWindow is currently shown to the user
      * The Decoration can use this information to highlight the respective button.
      * @since 5.9
@@ -282,6 +310,7 @@ Q_SIGNALS:
     void applicationMenuActiveChanged(bool);
     void scaleChanged();
     void nextScaleChanged();
+    void applicationMenuChanged();
 
 private:
     friend class Decoration;

@@ -92,4 +92,14 @@ private:
     const std::unique_ptr<Private> d;
 };
 
+class KDECORATIONS_PRIVATE_EXPORT DecoratedWindowPrivateV2 : public DecoratedWindowPrivate
+{
+public:
+    virtual QString applicationMenuServiceName() const = 0;
+    virtual QString applicationMenuObjectPath() const = 0;
+
+protected:
+    explicit DecoratedWindowPrivateV2(DecoratedWindow *client, Decoration *decoration);
+};
+
 } // namespace

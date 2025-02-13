@@ -10,7 +10,7 @@
 
 MockWindow::MockWindow(KDecoration3::DecoratedWindow *client, KDecoration3::Decoration *decoration)
     : QObject()
-    , DecoratedWindowPrivate(client, decoration)
+    , DecoratedWindowPrivateV2(client, decoration)
 {
 }
 
@@ -287,6 +287,16 @@ qreal MockWindow::scale() const
 qreal MockWindow::nextScale() const
 {
     return 1;
+}
+
+QString MockWindow::applicationMenuServiceName() const
+{
+    return QString();
+}
+
+QString MockWindow::applicationMenuObjectPath() const
+{
+    return QString();
 }
 
 #include "moc_mockwindow.cpp"

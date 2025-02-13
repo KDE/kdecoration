@@ -28,7 +28,7 @@ target_link_libraries(kdecorations3private
 target_include_directories(kdecorations3private INTERFACE "$<INSTALL_INTERFACE:${KDECORATION3_INCLUDEDIR}>" )
 
 set_target_properties(kdecorations3private PROPERTIES VERSION   ${KDECORATION3_VERSION}
-                                                      SOVERSION 1
+                                                      SOVERSION 2
                                                       EXPORT_NAME KDecoration3Private
 )
 

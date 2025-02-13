@@ -52,4 +52,9 @@ QColor DecoratedWindowPrivate::color(ColorGroup group, ColorRole role) const
 
     return QColor();
 }
+
+DecoratedWindowPrivateV2::DecoratedWindowPrivateV2(DecoratedWindow *client, Decoration *decoration)
+    : DecoratedWindowPrivate(client, decoration)
+{
+}
 }
