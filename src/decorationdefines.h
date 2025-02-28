@@ -72,6 +72,10 @@ enum class DecorationButtonType {
      * The Spacer button provides some space between buttons.
      */
     Spacer,
+    /**
+     * The locally integrated menu shows the application menu embedded in the decoration.
+     */
+    LocallyIntegratedMenu,
 };
 
 /**
