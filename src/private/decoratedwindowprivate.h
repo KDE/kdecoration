@@ -11,6 +11,8 @@
 #include <QIcon>
 #include <QString>
 
+class QMenu;
+
 //
 //  W A R N I N G
 //  -------------
@@ -26,6 +28,7 @@ namespace KDecoration3
 {
 class Decoration;
 class DecoratedWindow;
+class Positioner;
 
 class KDECORATIONS_PRIVATE_EXPORT DecoratedWindowPrivate
 {
@@ -100,6 +103,15 @@ public:
 
 protected:
     explicit DecoratedWindowPrivateV2(DecoratedWindow *client, Decoration *decoration);
+};
+
+class KDECORATIONS_PRIVATE_EXPORT DecoratedWindowPrivateV3 : public DecoratedWindowPrivateV2
+{
+public:
+    virtual void popup(const Positioner &positioner, QMenu *menu) = 0;
+
+protected:
+    explicit DecoratedWindowPrivateV3(DecoratedWindow *client, Decoration *decoration);
 };
 
 } // namespace

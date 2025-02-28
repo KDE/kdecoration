@@ -9,7 +9,7 @@
 
 #include <QObject>
 
-class MockWindow : public QObject, public KDecoration3::DecoratedWindowPrivateV2
+class MockWindow : public QObject, public KDecoration3::DecoratedWindowPrivateV3
 {
     Q_OBJECT
 public:
@@ -57,8 +57,8 @@ public:
     qreal nextScale() const override;
     QString applicationMenuServiceName() const override;
     QString applicationMenuObjectPath() const override;
-
     void showApplicationMenu(int actionId) override;
+    void popup(const KDecoration3::Positioner &positioner, QMenu *menu) override;
 
     void setCloseable(bool set);
     void setMinimizable(bool set);

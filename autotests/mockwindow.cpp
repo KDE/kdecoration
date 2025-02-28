@@ -10,7 +10,7 @@
 
 MockWindow::MockWindow(KDecoration3::DecoratedWindow *client, KDecoration3::Decoration *decoration)
     : QObject()
-    , DecoratedWindowPrivateV2(client, decoration)
+    , DecoratedWindowPrivateV3(client, decoration)
 {
 }
 
@@ -297,6 +297,12 @@ QString MockWindow::applicationMenuServiceName() const
 QString MockWindow::applicationMenuObjectPath() const
 {
     return QString();
+}
+
+void MockWindow::popup(const KDecoration3::Positioner &positioner, QMenu *menu)
+{
+    Q_UNUSED(positioner)
+    Q_UNUSED(menu)
 }
 
 #include "moc_mockwindow.cpp"

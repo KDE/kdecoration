@@ -14,6 +14,7 @@
 #include <QSharedDataPointer>
 
 class QHoverEvent;
+class QMenu;
 class QMouseEvent;
 class QPainter;
 class QWheelEvent;
@@ -29,6 +30,7 @@ class DecoratedWindow;
 class DecorationButton;
 class DecorationSettings;
 class DecorationStateData;
+class PositionerData;
 
 /**
  * \brief Decoration state.
@@ -51,6 +53,33 @@ public:
 
 private:
     QSharedDataPointer<DecorationStateData> d;
+};
+
+/**
+ * \brief Popup positioner.
+ *
+ * The Positioner type provides a way to position a popup relative to the decoration.
+ */
+class KDECORATIONS3_EXPORT Positioner
+{
+public:
+    Positioner();
+    Positioner(const Positioner &other);
+    ~Positioner();
+
+    /**
+     * Returns the anchor rectangle. The anchor rectangle is specified relative to the top left
+     * corner of the decoration.
+     */
+    QRectF anchorRect() const;
+
+    /**
+     * Sets the anchor rectangle to \a rect.
+     */
+    void setAnchorRect(const QRectF &rect);
+
+private:
+    QSharedDataPointer<PositionerData> d;
 };
 
 /**
@@ -223,6 +252,13 @@ public:
      * and apply the new state when the window is repainted.
      */
     void setState(std::function<void(DecorationState *state)> callback);
+
+    /**
+     * Shows the given \a menu at the position specified by the \a positioner.
+     *
+     * If the menu is already shown, it will be re-positioned according to the \a positioner.
+     */
+    void popup(const Positioner &positioner, QMenu *menu);
 
 public Q_SLOTS:
     void requestClose();

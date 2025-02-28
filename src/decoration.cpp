@@ -66,6 +66,30 @@ void DecorationState::setBorders(const QMarginsF &borders)
     d->borders = borders;
 }
 
+Positioner::Positioner()
+    : d(new PositionerData)
+{
+}
+
+Positioner::Positioner(const Positioner &other)
+    : d(other.d)
+{
+}
+
+Positioner::~Positioner()
+{
+}
+
+QRectF Positioner::anchorRect() const
+{
+    return d->anchorRect;
+}
+
+void Positioner::setAnchorRect(const QRectF &rect)
+{
+    d->anchorRect = rect;
+}
+
 Decoration::Private::Private(Decoration *deco, const QVariantList &args)
     : sectionUnderMouse(Qt::NoSection)
     , bridge(findBridge(args))
@@ -565,6 +589,13 @@ void Decoration::apply(std::shared_ptr<DecorationState> state)
     }
 
     Q_EMIT currentStateChanged(state);
+}
+
+void Decoration::popup(const Positioner &positioner, QMenu *menu)
+{
+    if (auto window = dynamic_cast<DecoratedWindowPrivateV3 *>(d->client->d.get())) {
+        window->popup(positioner, menu);
+    }
 }
 
 } // namespace
