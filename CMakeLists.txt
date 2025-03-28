@@ -52,8 +52,8 @@ set(EXCLUDE_DEPRECATED_BEFORE_AND_AT 0 CACHE STRING "Control the range of deprec
 set(KDECORATION3_INCLUDEDIR "${KDE_INSTALL_INCLUDEDIR}/KDecoration3")
 find_package(KF6I18n ${KF6_MIN_VERSION} CONFIG REQUIRED)
 
-ecm_set_disabled_deprecation_versions(QT 5.15.2
-    KF 5.240.0
+ecm_set_disabled_deprecation_versions(QT 6.2.0
+    KF 6.12.0
     )
 
 add_definitions(-DQT_NO_KEYWORDS)
