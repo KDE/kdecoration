@@ -300,7 +300,7 @@ QString DecorationButton::Private::typeToString(DecorationButtonType type)
 {
     switch (type) {
     case DecorationButtonType::Menu:
-        return i18n("More actions for this window");
+        return i18nc("@info:tooltip The Name of the menu that appears when you click a window's app icon", "Window menu");
     case DecorationButtonType::ApplicationMenu:
         return i18n("Application menu");
     case DecorationButtonType::OnAllDesktops:
