@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdecoration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-10 00:40+0000\n"
+"POT-Creation-Date: 2025-05-31 00:43+0000\n"
 "PO-Revision-Date: 2024-03-19 08:16+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -20,8 +20,11 @@ msgstr ""
 
 #: decorationbutton.cpp:303
 #, kde-format
-msgid "More actions for this window"
-msgstr "פעולות נוספות לחלון הזה"
+msgctxt ""
+"@info:tooltip The Name of the menu that appears when you click a window's "
+"app icon"
+msgid "Window menu"
+msgstr ""
 
 #: decorationbutton.cpp:305
 #, kde-format
@@ -92,3 +95,6 @@ msgstr "לא לקדם מעל חלונות אחרים"
 #, kde-format
 msgid "Keep above other windows"
 msgstr "לקדם מעל חלונות אחרים"
+
+#~ msgid "More actions for this window"
+#~ msgstr "פעולות נוספות לחלון הזה"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-10 00:40+0000\n"
+"POT-Creation-Date: 2025-05-31 00:43+0000\n"
 "PO-Revision-Date: 2021-12-30 13:22+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -19,8 +19,11 @@ msgstr ""
 
 #: decorationbutton.cpp:303
 #, kde-format
-msgid "More actions for this window"
-msgstr "Więcej działań dla tego okna"
+msgctxt ""
+"@info:tooltip The Name of the menu that appears when you click a window's "
+"app icon"
+msgid "Window menu"
+msgstr ""
 
 #: decorationbutton.cpp:305
 #, kde-format
@@ -91,6 +94,9 @@ msgstr "Nie utrzymuj nad innymi oknami"
 #, kde-format
 msgid "Keep above other windows"
 msgstr "Utrzymuj nad innymi oknami"
+
+#~ msgid "More actions for this window"
+#~ msgstr "Więcej działań dla tego okna"
 
 #~ msgid "Menu"
 #~ msgstr "Menu"
