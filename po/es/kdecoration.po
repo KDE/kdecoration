@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kdecoration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-31 00:43+0000\n"
-"PO-Revision-Date: 2025-05-12 14:13+0100\n"
+"PO-Revision-Date: 2025-05-31 17:10+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 21.04.0\n"
+"X-Generator: Lokalize 25.04.1\n"
 
 #: decorationbutton.cpp:303
 #, kde-format
@@ -25,7 +25,7 @@ msgctxt ""
 "@info:tooltip The Name of the menu that appears when you click a window's "
 "app icon"
 msgid "Window menu"
-msgstr ""
+msgstr "Menú de la ventana"
 
 #: decorationbutton.cpp:305
 #, kde-format
@@ -96,6 +96,3 @@ msgstr "No mantener por encima de otras ventanas"
 #, kde-format
 msgid "Keep above other windows"
 msgstr "Mantener por encima de otras ventanas"
-
-#~ msgid "More actions for this window"
-#~ msgstr "Más acciones para esta ventana"
