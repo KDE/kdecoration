@@ -95,6 +95,3 @@ msgstr "Ikke hold over andre vinduer"
 #, kde-format
 msgid "Keep above other windows"
 msgstr "Hold over andre vinduer"
-
-#~ msgid "More actions for this window"
-#~ msgstr "Flere handlinger for vinduet"

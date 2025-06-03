@@ -97,6 +97,3 @@ msgstr "Ikkje hald over andre vindauge"
 #, kde-format
 msgid "Keep above other windows"
 msgstr "Hald over andre vindauge"
-
-#~ msgid "More actions for this window"
-#~ msgstr "Fleire handlingar for vindauget"
