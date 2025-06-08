@@ -23,7 +23,7 @@ msgctxt ""
 "@info:tooltip The Name of the menu that appears when you click a window's "
 "app icon"
 msgid "Window menu"
-msgstr ""
+msgstr "窗口菜单"
 
 #: decorationbutton.cpp:305
 #, kde-format
@@ -94,6 +94,3 @@ msgstr "不要保持在其他窗口之上"
 #, kde-format
 msgid "Keep above other windows"
 msgstr "保持在其他窗口之上"
-
-#~ msgid "More actions for this window"
-#~ msgstr "此窗口的更多操作"
