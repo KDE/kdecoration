@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-# Shinjo Park <kde@peremen.name>, 2018, 2020, 2021.
+# SPDX-FileCopyrightText: 2018, 2020, 2021, 2025 Shinjo Park <kde@peremen.name>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-31 00:43+0000\n"
-"PO-Revision-Date: 2021-05-16 21:48+0200\n"
+"PO-Revision-Date: 2025-06-10 23:29+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 20.12.3\n"
+"X-Generator: Lokalize 24.12.3\n"
 
 #: decorationbutton.cpp:303
 #, kde-format
@@ -23,7 +23,7 @@ msgctxt ""
 "@info:tooltip The Name of the menu that appears when you click a window's "
 "app icon"
 msgid "Window menu"
-msgstr ""
+msgstr "창 메뉴"
 
 #: decorationbutton.cpp:305
 #, kde-format
