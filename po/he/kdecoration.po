@@ -1,0 +1,93 @@
+# Copyright (C) 2025 This file is copyright:
+# This file is distributed under the same license as the kdecoration package.
+#
+# SPDX-FileCopyrightText: 2025 Yaron Shahrabani <sh.yaron@gmail.com>
+msgid ""
+msgstr ""
+"Project-Id-Version: kdecoration\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-10-26 00:47+0000\n"
+"PO-Revision-Date: 2025-06-19 12:34+0300\n"
+"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
+"Language-Team: צוות התרגום של KDE ישראל\n"
+"Language: he\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 25.04.2\n"
+
+#: decorationbutton.cpp:301
+#, kde-format
+msgid "More actions for this window"
+msgstr "פעולות נוספות לחלון הזה"
+
+#: decorationbutton.cpp:303
+#, kde-format
+msgid "Application menu"
+msgstr "תפריט יישומים"
+
+#: decorationbutton.cpp:306
+#, kde-format
+msgid "On one desktop"
+msgstr "בשולחן עבודה אחד"
+
+#: decorationbutton.cpp:308
+#, kde-format
+msgid "On all desktops"
+msgstr "בכל שולחנות העבודה"
+
+#: decorationbutton.cpp:310
+#, kde-format
+msgid "Minimize"
+msgstr "מזעור"
+
+#: decorationbutton.cpp:313
+#, kde-format
+msgid "Restore"
+msgstr "שחזור"
+
+#: decorationbutton.cpp:315
+#, kde-format
+msgid "Maximize"
+msgstr "הגדלה"
+
+#: decorationbutton.cpp:317
+#, kde-format
+msgid "Close"
+msgstr "סגירה"
+
+#: decorationbutton.cpp:319
+#, kde-format
+msgid "Context help"
+msgstr "עזרה לפי הקשר"
+
+#: decorationbutton.cpp:322
+#, kde-format
+msgid "Unshade"
+msgstr "ביטול הצללה"
+
+#: decorationbutton.cpp:324
+#, kde-format
+msgid "Shade"
+msgstr "הצללה"
+
+#: decorationbutton.cpp:327
+#, kde-format
+msgid "Don't keep below other windows"
+msgstr "לא להסתיר מאחורי חלונות אחרים"
+
+#: decorationbutton.cpp:329
+#, kde-format
+msgid "Keep below other windows"
+msgstr "להנמיך מתחת לחלונות אחרים"
+
+#: decorationbutton.cpp:332
+#, kde-format
+msgid "Don't keep above other windows"
+msgstr "לא לקדם מעל חלונות אחרים"
+
+#: decorationbutton.cpp:334
+#, kde-format
+msgid "Keep above other windows"
+msgstr "להגביה מעל לחלונות אחרים"
