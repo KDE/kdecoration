@@ -94,6 +94,3 @@ msgstr "Без задържане над другите прозорци"
 #, kde-format
 msgid "Keep above other windows"
 msgstr "Задържане над другите прозорци"
-
-#~ msgid "More actions for this window"
-#~ msgstr "Допълнителни действия за този прозорец"
