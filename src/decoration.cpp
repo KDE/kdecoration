@@ -68,11 +68,43 @@ qreal BorderRadius::bottomLeft() const
     return m_bottomLeft;
 }
 
+BorderOutline::BorderOutline()
+{
+}
+
+BorderOutline::BorderOutline(qreal thickness, const QColor &color, const BorderRadius &radius)
+    : m_thickness(thickness)
+    , m_color(color)
+    , m_radius(radius)
+{
+}
+
+bool BorderOutline::isNull() const
+{
+    return qFuzzyIsNull(m_thickness);
+}
+
+qreal BorderOutline::thickness() const
+{
+    return m_thickness;
+}
+
+QColor BorderOutline::color() const
+{
+    return m_color;
+}
+
+BorderRadius BorderOutline::radius() const
+{
+    return m_radius;
+}
+
 class DecorationStateData : public QSharedData
 {
 public:
     QMarginsF borders;
     BorderRadius borderRadius;
+    BorderOutline borderOutline;
 };
 
 DecorationState::DecorationState()
@@ -112,6 +144,16 @@ BorderRadius DecorationState::borderRadius() const
 void DecorationState::setBorderRadius(const BorderRadius &radius)
 {
     d->borderRadius = radius;
+}
+
+BorderOutline DecorationState::borderOutline() const
+{
+    return d->borderOutline;
+}
+
+void DecorationState::setBorderOutline(const BorderOutline &outline)
+{
+    d->borderOutline = outline;
 }
 
 Positioner::Positioner()
@@ -360,6 +402,15 @@ void Decoration::setBorderRadius(const BorderRadius &radius)
     }
 }
 
+void Decoration::setBorderOutline(const BorderOutline &outline)
+{
+    if (d->next->borderOutline() != outline) {
+        setState([outline](DecorationState *state) {
+            state->setBorderOutline(outline);
+        });
+    }
+}
+
 void Decoration::setTitleBar(const QRectF &rect)
 {
     if (d->titleBar != rect) {
@@ -462,6 +513,11 @@ qreal Decoration::resizeOnlyBorderBottom() const
 BorderRadius Decoration::borderRadius() const
 {
     return d->current->borderRadius();
+}
+
+BorderOutline Decoration::borderOutline() const
+{
+    return d->current->borderOutline();
 }
 
 QSizeF Decoration::size() const
@@ -651,6 +707,9 @@ void Decoration::apply(std::shared_ptr<DecorationState> state)
     }
     if (previous->borderRadius() != state->borderRadius()) {
         Q_EMIT borderRadiusChanged();
+    }
+    if (previous->borderOutline() != state->borderOutline()) {
+        Q_EMIT borderOutlineChanged();
     }
 
     Q_EMIT currentStateChanged(state);

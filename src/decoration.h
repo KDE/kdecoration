@@ -57,6 +57,30 @@ private:
 };
 
 /**
+ * \brief Decoration border outline.
+ */
+class KDECORATIONS3_EXPORT BorderOutline
+{
+public:
+    BorderOutline();
+    explicit BorderOutline(qreal thickness, const QColor &color = Qt::transparent, const BorderRadius &radius = BorderRadius());
+
+    bool operator==(const BorderOutline &other) const = default;
+    bool operator!=(const BorderOutline &other) const = default;
+
+    bool isNull() const;
+
+    qreal thickness() const;
+    QColor color() const;
+    BorderRadius radius() const;
+
+private:
+    qreal m_thickness = 0;
+    QColor m_color = Qt::transparent;
+    BorderRadius m_radius;
+};
+
+/**
  * \brief Decoration state.
  *
  * The DecorationState type represents double bufferred state associated with a decoration.
@@ -77,6 +101,9 @@ public:
 
     BorderRadius borderRadius() const;
     void setBorderRadius(const BorderRadius &radius);
+
+    BorderOutline borderOutline() const;
+    void setBorderOutline(const BorderOutline &outline);
 
 private:
     QSharedDataPointer<DecorationStateData> d;
@@ -193,6 +220,11 @@ public:
      * should be rounded. The border radius is specified in the logical pixels.
      */
     BorderRadius borderRadius() const;
+
+    /**
+     * The outline around the window.
+     */
+    BorderOutline borderOutline() const;
 
     /**
      * DecorationShadow for this Decoration. It is recommended that multiple Decorations share
@@ -349,6 +381,7 @@ Q_SIGNALS:
     void currentStateChanged(std::shared_ptr<DecorationState> state);
     void nextStateChanged(std::shared_ptr<DecorationState> state);
     void borderRadiusChanged();
+    void borderOutlineChanged();
 
 protected:
     /**
@@ -374,6 +407,7 @@ protected:
     void setOpaque(bool opaque);
     void setShadow(const std::shared_ptr<DecorationShadow> &shadow);
     void setBorderRadius(const BorderRadius &radius);
+    void setBorderOutline(const BorderOutline &outline);
 
     virtual void hoverEnterEvent(QHoverEvent *event);
     virtual void hoverLeaveEvent(QHoverEvent *event);
