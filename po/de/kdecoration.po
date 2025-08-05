@@ -1,8 +1,9 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-#
 # Frederik Schwarzer <schwarzer@kde.org>, 2018.
 # Burkhard Lück <lueck@hube-lueck.de>, 2018, 2021.
+# SPDX-FileCopyrightText: 2025 Alexander Becker <alex-at-kde-l10n-de@freenet.de>
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: kdecoration\n"
@@ -16,6 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 24.12.3\n"
 
 #: decorationbutton.cpp:301
 #, kde-format
