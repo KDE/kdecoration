@@ -94,6 +94,3 @@ msgstr "Neponechat nad jinými okny"
 #, kde-format
 msgid "Keep above other windows"
 msgstr "Podržet nad jinými okny"
-
-#~ msgid "More actions for this window"
-#~ msgstr "Více činností pro toto okno"
