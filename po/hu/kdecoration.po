@@ -1,14 +1,14 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the kdecoration package.
 #
 # Kristóf Kiszel <ulysses@kubuntu.org>, 2019.
-# Kristof Kiszel <ulysses@fsf.hu>, 2021.
+# SPDX-FileCopyrightText: 2021, 2025 Kristof Kiszel <ulysses@fsf.hu>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdecoration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-31 00:43+0000\n"
-"PO-Revision-Date: 2021-11-24 13:23+0100\n"
+"PO-Revision-Date: 2025-10-17 21:35+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 21.08.3\n"
+"X-Generator: Lokalize 25.08.2\n"
 
 #: decorationbutton.cpp:303
 #, kde-format
@@ -24,7 +24,7 @@ msgctxt ""
 "@info:tooltip The Name of the menu that appears when you click a window's "
 "app icon"
 msgid "Window menu"
-msgstr ""
+msgstr "Ablakmenü"
 
 #: decorationbutton.cpp:305
 #, kde-format
