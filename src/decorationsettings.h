@@ -49,6 +49,11 @@ class KDECORATIONS3_EXPORT DecorationSettings : public QObject
      **/
     Q_PROPERTY(bool closeOnDoubleClickOnMenu READ isCloseOnDoubleClickOnMenu NOTIFY closeOnDoubleClickOnMenuChanged)
     /**
+     * Whether the Decoration should always show "Hide from Screencast" icon, even if
+     * the window is currently not excluded from capture.
+     **/
+    Q_PROPERTY(bool alwaysShowExcludeFromCapture READ isAlwaysShowExcludeFromCapture NOTIFY alwaysShowExcludeFromCaptureChanged)
+    /**
      * The suggested ordering of the decoration buttons on the left.
      **/
     Q_PROPERTY(QList<KDecoration3::DecorationButtonType> decorationButtonsLeft READ decorationButtonsLeft NOTIFY decorationButtonsLeftChanged)
@@ -90,6 +95,7 @@ public:
     bool isOnAllDesktopsAvailable() const;
     bool isAlphaChannelSupported() const;
     bool isCloseOnDoubleClickOnMenu() const;
+    bool isAlwaysShowExcludeFromCapture() const;
     QList<DecorationButtonType> decorationButtonsLeft() const;
     QList<DecorationButtonType> decorationButtonsRight() const;
     BorderSize borderSize() const;
@@ -109,6 +115,7 @@ Q_SIGNALS:
     void onAllDesktopsAvailableChanged(bool);
     void alphaChannelSupportedChanged(bool);
     void closeOnDoubleClickOnMenuChanged(bool);
+    void alwaysShowExcludeFromCaptureChanged(bool);
     void decorationButtonsLeftChanged(const QList<KDecoration3::DecorationButtonType> &);
     void decorationButtonsRightChanged(const QList<KDecoration3::DecorationButtonType> &);
     void borderSizeChanged(KDecoration3::BorderSize size);

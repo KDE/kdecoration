@@ -52,6 +52,11 @@ bool DecorationSettings::isCloseOnDoubleClickOnMenu() const
     return d->isCloseOnDoubleClickOnMenu();
 }
 
+bool DecorationSettings::isAlwaysShowExcludeFromCapture() const
+{
+    return d->isAlwaysShowExcludeFromCapture();
+}
+
 QList<DecorationButtonType> DecorationSettings::decorationButtonsLeft() const
 {
     return d->decorationButtonsLeft();

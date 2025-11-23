@@ -326,6 +326,11 @@ void Decoration::requestToggleKeepBelow()
     d->client->d->requestToggleKeepBelow();
 }
 
+void Decoration::requestToggleExcludeFromCapture()
+{
+    d->client->d->requestToggleExcludeFromCapture();
+}
+
 #if KDECORATIONS3_ENABLE_DEPRECATED_SINCE(5, 21)
 void Decoration::requestShowWindowMenu()
 {

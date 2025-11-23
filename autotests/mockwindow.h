@@ -23,6 +23,7 @@ public:
     bool isCloseable() const override;
     bool isKeepAbove() const override;
     bool isKeepBelow() const override;
+    bool isExcludedFromCapture() const override;
     bool isMaximizeable() const override;
     bool isMaximized() const override;
     bool isMaximizedHorizontally() const override;
@@ -46,6 +47,7 @@ public:
     void requestShowApplicationMenu(const QRect &rect, int actionId) override;
     void requestToggleKeepAbove() override;
     void requestToggleKeepBelow() override;
+    void requestToggleExcludeFromCapture() override;
     void requestToggleOnAllDesktops() override;
     void requestToggleShade() override;
     void requestShowToolTip(const QString &text) override;
@@ -82,6 +84,7 @@ private:
     bool m_contextHelp = false;
     bool m_keepAbove = false;
     bool m_keepBelow = false;
+    bool m_excludeFromCapture = false;
     bool m_shadeable = false;
     bool m_shaded = false;
     bool m_maximizable = false;

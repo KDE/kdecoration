@@ -70,6 +70,11 @@ bool DecoratedWindow::isKeepBelow() const
     return d->isKeepBelow();
 }
 
+bool DecoratedWindow::isExcludedFromCapture() const
+{
+    return d->isExcludedFromCapture();
+}
+
 bool DecoratedWindow::isCloseable() const
 {
     return d->isCloseable();

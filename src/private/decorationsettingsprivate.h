@@ -34,6 +34,7 @@ public:
     virtual bool isOnAllDesktopsAvailable() const = 0;
     virtual bool isAlphaChannelSupported() const = 0;
     virtual bool isCloseOnDoubleClickOnMenu() const = 0;
+    virtual bool isAlwaysShowExcludeFromCapture() const = 0;
     virtual QList<DecorationButtonType> decorationButtonsLeft() const = 0;
     virtual QList<DecorationButtonType> decorationButtonsRight() const = 0;
     virtual BorderSize borderSize() const = 0;
