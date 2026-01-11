@@ -44,7 +44,6 @@ public:
     virtual bool isMaximizedVertically() const = 0;
     virtual bool isKeepAbove() const = 0;
     virtual bool isKeepBelow() const = 0;
-    virtual bool isExcludedFromCapture() const = 0;
 
     virtual bool isCloseable() const = 0;
     virtual bool isMaximizeable() const = 0;
@@ -73,7 +72,6 @@ public:
     virtual void requestToggleShade() = 0;
     virtual void requestToggleKeepAbove() = 0;
     virtual void requestToggleKeepBelow() = 0;
-    virtual void requestToggleExcludeFromCapture() = 0;
     virtual void requestShowWindowMenu(const QRect &rect) = 0;
 
     Decoration *decoration();

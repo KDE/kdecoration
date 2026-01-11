@@ -72,14 +72,6 @@ enum class DecorationButtonType {
      * The Spacer button provides some space between buttons.
      */
     Spacer,
-    /**
-     * The ExcludeFromCapture button toggles the DecoratedWindow's visibility
-     * for screen capture and displays the current exclusion state.
-     *
-     * By default this button is only visible when the window is excluded from capture,
-     * but it can be made always visible via settings.
-     **/
-    ExcludeFromCapture,
 };
 
 /**

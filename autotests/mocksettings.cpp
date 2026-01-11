@@ -41,11 +41,6 @@ bool MockSettings::isOnAllDesktopsAvailable() const
     return m_onAllDesktopsAvailable;
 }
 
-bool MockSettings::isAlwaysShowExcludeFromCapture() const
-{
-    return m_alwaysShowExcludeFromCapture;
-}
-
 void MockSettings::setOnAllDesktopsAvailabe(bool set)
 {
     if (m_onAllDesktopsAvailable == set) {
@@ -62,13 +57,4 @@ void MockSettings::setCloseOnDoubleClickOnMenu(bool set)
     }
     m_closeDoubleClickOnMenu = set;
     Q_EMIT decorationSettings()->closeOnDoubleClickOnMenuChanged(m_closeDoubleClickOnMenu);
-}
-
-void MockSettings::setAlwaysShowExcludeFromCapture(bool set)
-{
-    if (m_alwaysShowExcludeFromCapture == set) {
-        return;
-    }
-    m_alwaysShowExcludeFromCapture = set;
-    Q_EMIT decorationSettings()->alwaysShowExcludeFromCaptureChanged(m_alwaysShowExcludeFromCapture);
 }

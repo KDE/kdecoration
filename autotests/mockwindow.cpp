@@ -54,11 +54,6 @@ bool MockWindow::isKeepBelow() const
     return m_keepBelow;
 }
 
-bool MockWindow::isExcludedFromCapture() const
-{
-    return m_excludeFromCapture;
-}
-
 bool MockWindow::isMaximizeable() const
 {
     return m_maximizable;
@@ -199,12 +194,6 @@ void MockWindow::requestToggleKeepBelow()
 {
     m_keepBelow = !m_keepBelow;
     Q_EMIT window()->keepBelowChanged(m_keepBelow);
-}
-
-void MockWindow::requestToggleExcludeFromCapture()
-{
-    m_excludeFromCapture = !m_excludeFromCapture;
-    Q_EMIT window()->excludeFromCaptureChanged(m_excludeFromCapture);
 }
 
 void MockWindow::requestToggleOnAllDesktops()
