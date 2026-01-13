@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2026-01-13 08:42+0000\n"
 "PO-Revision-Date: 2025-12-01 10:05+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Generator: Lokalize 25.08.3\n"
 
-#: decorationbutton.cpp:303
+#: decorationbutton.cpp:325
 #, kde-format
 msgctxt ""
 "@info:tooltip The Name of the menu that appears when you click a window's "
@@ -25,72 +25,82 @@ msgctxt ""
 msgid "Window menu"
 msgstr "Nabídka Okno"
 
-#: decorationbutton.cpp:305
+#: decorationbutton.cpp:327
 #, kde-format
 msgid "Application menu"
 msgstr "Nabídka aplikací"
 
-#: decorationbutton.cpp:308
+#: decorationbutton.cpp:330
 #, kde-format
 msgid "On one desktop"
 msgstr "Na pracovní ploše"
 
-#: decorationbutton.cpp:310
+#: decorationbutton.cpp:332
 #, kde-format
 msgid "On all desktops"
 msgstr "Na všech plochách"
 
-#: decorationbutton.cpp:312
+#: decorationbutton.cpp:334
 #, kde-format
 msgid "Minimize"
 msgstr "Minimalizovat"
 
-#: decorationbutton.cpp:315
+#: decorationbutton.cpp:337
 #, kde-format
 msgid "Restore"
 msgstr "Obnovit"
 
-#: decorationbutton.cpp:317
+#: decorationbutton.cpp:339
 #, kde-format
 msgid "Maximize"
 msgstr "Maximalizovat"
 
-#: decorationbutton.cpp:319
+#: decorationbutton.cpp:341
 #, kde-format
 msgid "Close"
 msgstr "Zavřít"
 
-#: decorationbutton.cpp:321
+#: decorationbutton.cpp:343
 #, kde-format
 msgid "Context help"
 msgstr "Kontextová nápověda"
 
-#: decorationbutton.cpp:324
+#: decorationbutton.cpp:346
 #, kde-format
 msgid "Unshade"
 msgstr "Rozbalit"
 
-#: decorationbutton.cpp:326
+#: decorationbutton.cpp:348
 #, kde-format
 msgid "Shade"
 msgstr "Sbalit"
 
-#: decorationbutton.cpp:329
+#: decorationbutton.cpp:351
 #, kde-format
 msgid "Don't keep below other windows"
 msgstr "Neponechat pod ostatními okny"
 
-#: decorationbutton.cpp:331
+#: decorationbutton.cpp:353
 #, kde-format
 msgid "Keep below other windows"
 msgstr "Ponechat pod ostatními okny"
 
-#: decorationbutton.cpp:334
+#: decorationbutton.cpp:356
 #, kde-format
 msgid "Don't keep above other windows"
 msgstr "Neponechat nad jinými okny"
 
-#: decorationbutton.cpp:336
+#: decorationbutton.cpp:358
 #, kde-format
 msgid "Keep above other windows"
 msgstr "Podržet nad jinými okny"
+
+#: decorationbutton.cpp:361
+#, kde-format
+msgid "The window is hidden from Screencast. Press to make it visible"
+msgstr ""
+
+#: decorationbutton.cpp:363
+#, kde-format
+msgid "Hide from Screencast"
+msgstr ""

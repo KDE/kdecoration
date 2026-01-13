@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdecoration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2026-01-13 08:42+0000\n"
 "PO-Revision-Date: 2025-12-20 03:08+0200\n"
 "Last-Translator: Moo\n"
 "Language-Team: lt\n"
@@ -19,7 +19,7 @@ msgstr ""
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
 "X-Generator: Poedit 3.8\n"
 
-#: decorationbutton.cpp:303
+#: decorationbutton.cpp:325
 #, kde-format
 msgctxt ""
 "@info:tooltip The Name of the menu that appears when you click a window's "
@@ -27,75 +27,85 @@ msgctxt ""
 msgid "Window menu"
 msgstr "Lango meniu"
 
-#: decorationbutton.cpp:305
+#: decorationbutton.cpp:327
 #, kde-format
 msgid "Application menu"
 msgstr "Programos meniu"
 
-#: decorationbutton.cpp:308
+#: decorationbutton.cpp:330
 #, kde-format
 msgid "On one desktop"
 msgstr "Viename darbalaukyje"
 
-#: decorationbutton.cpp:310
+#: decorationbutton.cpp:332
 #, kde-format
 msgid "On all desktops"
 msgstr "Visuose darbalaukiuose"
 
-#: decorationbutton.cpp:312
+#: decorationbutton.cpp:334
 #, kde-format
 msgid "Minimize"
 msgstr "Suskleisti"
 
-#: decorationbutton.cpp:315
+#: decorationbutton.cpp:337
 #, kde-format
 msgid "Restore"
 msgstr "Grąžinti iš suskleidimo"
 
-#: decorationbutton.cpp:317
+#: decorationbutton.cpp:339
 #, kde-format
 msgid "Maximize"
 msgstr "Išskleisti"
 
-#: decorationbutton.cpp:319
+#: decorationbutton.cpp:341
 #, kde-format
 msgid "Close"
 msgstr "Užverti"
 
-#: decorationbutton.cpp:321
+#: decorationbutton.cpp:343
 #, kde-format
 msgid "Context help"
 msgstr "Kontekstinė pagalba"
 
-#: decorationbutton.cpp:324
+#: decorationbutton.cpp:346
 #, kde-format
 msgid "Unshade"
 msgstr "Rodyti ne tik lango antraštės juostą"
 
-#: decorationbutton.cpp:326
+#: decorationbutton.cpp:348
 #, kde-format
 msgid "Shade"
 msgstr "Rodyti tik lango antraštės juostą"
 
-#: decorationbutton.cpp:329
+#: decorationbutton.cpp:351
 #, kde-format
 msgid "Don't keep below other windows"
 msgstr "Nelaikyti po kitais langais"
 
-#: decorationbutton.cpp:331
+#: decorationbutton.cpp:353
 #, kde-format
 msgid "Keep below other windows"
 msgstr "Laikyti po kitais langais"
 
-#: decorationbutton.cpp:334
+#: decorationbutton.cpp:356
 #, kde-format
 msgid "Don't keep above other windows"
 msgstr "Nelaikyti virš kitų langų"
 
-#: decorationbutton.cpp:336
+#: decorationbutton.cpp:358
 #, kde-format
 msgid "Keep above other windows"
 msgstr "Laikyti virš kitų langų"
+
+#: decorationbutton.cpp:361
+#, kde-format
+msgid "The window is hidden from Screencast. Press to make it visible"
+msgstr ""
+
+#: decorationbutton.cpp:363
+#, kde-format
+msgid "Hide from Screencast"
+msgstr ""
 
 #~ msgid "More actions for this window"
 #~ msgstr "Daugiau veiksmų šiam langui"

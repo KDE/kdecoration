@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2026-01-13 08:42+0000\n"
 "PO-Revision-Date: 2025-07-07 20:57+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 23.08.5\n"
 
-#: decorationbutton.cpp:303
+#: decorationbutton.cpp:325
 #, kde-format
 msgctxt ""
 "@info:tooltip The Name of the menu that appears when you click a window's "
@@ -25,75 +25,85 @@ msgctxt ""
 msgid "Window menu"
 msgstr "Ikkunavalikko"
 
-#: decorationbutton.cpp:305
+#: decorationbutton.cpp:327
 #, kde-format
 msgid "Application menu"
 msgstr "Sovellusvalikko"
 
-#: decorationbutton.cpp:308
+#: decorationbutton.cpp:330
 #, kde-format
 msgid "On one desktop"
 msgstr "Yhdellä työpöydällä"
 
-#: decorationbutton.cpp:310
+#: decorationbutton.cpp:332
 #, kde-format
 msgid "On all desktops"
 msgstr "Kaikilla työpöydillä"
 
-#: decorationbutton.cpp:312
+#: decorationbutton.cpp:334
 #, kde-format
 msgid "Minimize"
 msgstr "Pienennä"
 
-#: decorationbutton.cpp:315
+#: decorationbutton.cpp:337
 #, kde-format
 msgid "Restore"
 msgstr "Palauta"
 
-#: decorationbutton.cpp:317
+#: decorationbutton.cpp:339
 #, kde-format
 msgid "Maximize"
 msgstr "Suurenna"
 
-#: decorationbutton.cpp:319
+#: decorationbutton.cpp:341
 #, kde-format
 msgid "Close"
 msgstr "Sulje"
 
-#: decorationbutton.cpp:321
+#: decorationbutton.cpp:343
 #, kde-format
 msgid "Context help"
 msgstr "Kontekstiohje"
 
-#: decorationbutton.cpp:324
+#: decorationbutton.cpp:346
 #, kde-format
 msgid "Unshade"
 msgstr "Avaa rullaus"
 
-#: decorationbutton.cpp:326
+#: decorationbutton.cpp:348
 #, kde-format
 msgid "Shade"
 msgstr "Rullaa"
 
-#: decorationbutton.cpp:329
+#: decorationbutton.cpp:351
 #, kde-format
 msgid "Don't keep below other windows"
 msgstr "Älä pidä muiden ikkunoiden alla"
 
-#: decorationbutton.cpp:331
+#: decorationbutton.cpp:353
 #, kde-format
 msgid "Keep below other windows"
 msgstr "Pidä muiden ikkunoiden alla"
 
-#: decorationbutton.cpp:334
+#: decorationbutton.cpp:356
 #, kde-format
 msgid "Don't keep above other windows"
 msgstr "Älä pidä muiden ikkunoiden yllä"
 
-#: decorationbutton.cpp:336
+#: decorationbutton.cpp:358
 #, kde-format
 msgid "Keep above other windows"
 msgstr "Pidä muiden ikkunoiden yllä"
+
+#: decorationbutton.cpp:361
+#, kde-format
+msgid "The window is hidden from Screencast. Press to make it visible"
+msgstr ""
+
+#: decorationbutton.cpp:363
+#, kde-format
+msgid "Hide from Screencast"
+msgstr ""
 
 #~ msgid "More actions for this window"
 #~ msgstr "Lisää toimintoja tälle ikkunalle"

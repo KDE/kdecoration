@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2026-01-13 08:42+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -17,7 +17,7 @@ msgstr ""
 "X-Crowdin-File: /kf6-trunk/messages/kdecoration/kdecoration.pot\n"
 "X-Crowdin-File-ID: 42939\n"
 
-#: decorationbutton.cpp:303
+#: decorationbutton.cpp:325
 #, kde-format
 msgctxt ""
 "@info:tooltip The Name of the menu that appears when you click a window's "
@@ -25,72 +25,82 @@ msgctxt ""
 msgid "Window menu"
 msgstr "窗口菜单"
 
-#: decorationbutton.cpp:305
+#: decorationbutton.cpp:327
 #, kde-format
 msgid "Application menu"
 msgstr "应用程序菜单"
 
-#: decorationbutton.cpp:308
+#: decorationbutton.cpp:330
 #, kde-format
 msgid "On one desktop"
 msgstr "在一个桌面"
 
-#: decorationbutton.cpp:310
+#: decorationbutton.cpp:332
 #, kde-format
 msgid "On all desktops"
 msgstr "在全部桌面"
 
-#: decorationbutton.cpp:312
+#: decorationbutton.cpp:334
 #, kde-format
 msgid "Minimize"
 msgstr "最小化"
 
-#: decorationbutton.cpp:315
+#: decorationbutton.cpp:337
 #, kde-format
 msgid "Restore"
 msgstr "还原"
 
-#: decorationbutton.cpp:317
+#: decorationbutton.cpp:339
 #, kde-format
 msgid "Maximize"
 msgstr "最大化"
 
-#: decorationbutton.cpp:319
+#: decorationbutton.cpp:341
 #, kde-format
 msgid "Close"
 msgstr "关闭"
 
-#: decorationbutton.cpp:321
+#: decorationbutton.cpp:343
 #, kde-format
 msgid "Context help"
 msgstr "相关帮助"
 
-#: decorationbutton.cpp:324
+#: decorationbutton.cpp:346
 #, kde-format
 msgid "Unshade"
 msgstr "展开"
 
-#: decorationbutton.cpp:326
+#: decorationbutton.cpp:348
 #, kde-format
 msgid "Shade"
 msgstr "折叠"
 
-#: decorationbutton.cpp:329
+#: decorationbutton.cpp:351
 #, kde-format
 msgid "Don't keep below other windows"
 msgstr "不要保持在其他窗口之下"
 
-#: decorationbutton.cpp:331
+#: decorationbutton.cpp:353
 #, kde-format
 msgid "Keep below other windows"
 msgstr "保持在其他窗口之下"
 
-#: decorationbutton.cpp:334
+#: decorationbutton.cpp:356
 #, kde-format
 msgid "Don't keep above other windows"
 msgstr "不要保持在其他窗口之上"
 
-#: decorationbutton.cpp:336
+#: decorationbutton.cpp:358
 #, kde-format
 msgid "Keep above other windows"
 msgstr "保持在其他窗口之上"
+
+#: decorationbutton.cpp:361
+#, kde-format
+msgid "The window is hidden from Screencast. Press to make it visible"
+msgstr ""
+
+#: decorationbutton.cpp:363
+#, kde-format
+msgid "Hide from Screencast"
+msgstr ""
