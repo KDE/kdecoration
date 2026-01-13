@@ -114,4 +114,14 @@ protected:
     explicit DecoratedWindowPrivateV3(DecoratedWindow *client, Decoration *decoration);
 };
 
+class KDECORATIONS_PRIVATE_EXPORT DecoratedWindowPrivateV4 : public DecoratedWindowPrivateV3
+{
+public:
+    virtual bool isExcludedFromCapture() const = 0;
+    virtual void requestToggleExcludeFromCapture() = 0;
+
+protected:
+    explicit DecoratedWindowPrivateV4(DecoratedWindow *client, Decoration *decoration);
+};
+
 } // namespace

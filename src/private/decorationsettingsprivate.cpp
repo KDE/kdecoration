@@ -82,4 +82,8 @@ void DecorationSettingsPrivate::setSmallSpacing(int spacing)
     d->smallSpacing = spacing;
 }
 
+DecorationSettingsPrivateV2::DecorationSettingsPrivateV2(DecorationSettings *parent)
+    : DecorationSettingsPrivate(parent)
+{
+}
 }

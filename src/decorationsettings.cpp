@@ -91,6 +91,14 @@ int DecorationSettings::largeSpacing() const
 {
     return d->largeSpacing();
 }
+
+bool DecorationSettings::isAlwaysShowExcludeFromCapture() const
+{
+    if (auto impl = dynamic_cast<DecorationSettingsPrivateV2 *>(d.get())) {
+        return impl->isAlwaysShowExcludeFromCapture();
+    }
+    return false;
+}
 }
 
 #include "moc_decorationsettings.cpp"

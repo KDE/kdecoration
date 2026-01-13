@@ -7,7 +7,7 @@
 
 #include "../src/private/decorationsettingsprivate.h"
 
-class MockSettings : public KDecoration3::DecorationSettingsPrivate
+class MockSettings : public KDecoration3::DecorationSettingsPrivateV2
 {
 public:
     explicit MockSettings(KDecoration3::DecorationSettings *parent);
@@ -18,11 +18,14 @@ public:
     bool isAlphaChannelSupported() const override;
     bool isCloseOnDoubleClickOnMenu() const override;
     bool isOnAllDesktopsAvailable() const override;
+    bool isAlwaysShowExcludeFromCapture() const override;
 
     void setOnAllDesktopsAvailabe(bool set);
     void setCloseOnDoubleClickOnMenu(bool set);
+    void setAlwaysShowExcludeFromCapture(bool set);
 
 private:
     bool m_onAllDesktopsAvailable = false;
     bool m_closeDoubleClickOnMenu = false;
+    bool m_alwaysShowExcludeFromCapture = false;
 };

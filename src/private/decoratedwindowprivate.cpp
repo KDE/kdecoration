@@ -62,4 +62,9 @@ DecoratedWindowPrivateV3::DecoratedWindowPrivateV3(DecoratedWindow *client, Deco
     : DecoratedWindowPrivateV2(client, decoration)
 {
 }
+
+DecoratedWindowPrivateV4::DecoratedWindowPrivateV4(DecoratedWindow *client, Decoration *decoration)
+    : DecoratedWindowPrivateV3(client, decoration)
+{
+}
 }

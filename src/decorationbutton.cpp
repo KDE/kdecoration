@@ -138,6 +138,28 @@ void DecorationButton::Private::init()
         QObject::connect(q, &DecorationButton::clicked, decoration.data(), &Decoration::requestToggleKeepBelow, Qt::QueuedConnection);
         QObject::connect(c, &DecoratedWindow::keepBelowChanged, q, &DecorationButton::setChecked);
         break;
+    case DecorationButtonType::ExcludeFromCapture:
+        QObject::connect(q, &DecorationButton::clicked, decoration.data(), &Decoration::requestToggleExcludeFromCapture, Qt::QueuedConnection);
+
+        setCheckable(true);
+        setChecked(c->isExcludedFromCapture());
+
+        QObject::connect(
+            settings.get(),
+            &DecorationSettings::alwaysShowExcludeFromCaptureChanged,
+            q,
+            [this](bool alwaysShow) {
+                setVisible(alwaysShow || q->isChecked());
+            },
+            Qt::QueuedConnection);
+
+        QObject::connect(c, &DecoratedWindow::excludeFromCaptureChanged, q, [this](bool excluded) {
+            setChecked(excluded);
+            setVisible(decoration->settings()->isAlwaysShowExcludeFromCapture() || excluded);
+        });
+
+        setVisible(settings->isAlwaysShowExcludeFromCapture() || c->isExcludedFromCapture());
+        break;
     case DecorationButtonType::Shade:
         setEnabled(c->isShadeable());
         setCheckable(true);
@@ -334,6 +356,11 @@ QString DecorationButton::Private::typeToString(DecorationButtonType type)
             return i18n("Don't keep above other windows");
         else
             return i18n("Keep above other windows");
+    case DecorationButtonType::ExcludeFromCapture:
+        if (this->q->isChecked())
+            return i18n("The window is hidden from Screencast. Press to make it visible");
+        else
+            return i18n("Hide from Screencast");
     default:
         return QString();
     }

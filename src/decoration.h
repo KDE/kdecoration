@@ -334,6 +334,7 @@ public Q_SLOTS:
     void requestToggleShade();
     void requestToggleKeepAbove();
     void requestToggleKeepBelow();
+    void requestToggleExcludeFromCapture();
 
 #if KDECORATIONS3_ENABLE_DEPRECATED_SINCE(5, 21)
     /**

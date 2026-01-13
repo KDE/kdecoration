@@ -89,6 +89,10 @@ class KDECORATIONS3_EXPORT DecoratedWindow : public QObject
      * DecoratedWindows which are set to be kept below.
      **/
     Q_PROPERTY(bool keepBelow READ isKeepBelow NOTIFY keepBelowChanged)
+    /**
+     * Whether the DecoratedWindow is hidden from Screencasts.
+     **/
+    Q_PROPERTY(bool excludeFromCapture READ isExcludedFromCapture NOTIFY excludeFromCaptureChanged)
 
     /**
      * Whether the DecoratedWindow can be closed. If this property is @c false a DecorationButton
@@ -201,6 +205,7 @@ public:
     bool isMaximizedVertically() const;
     bool isKeepAbove() const;
     bool isKeepBelow() const;
+    bool isExcludedFromCapture() const;
 
     bool isCloseable() const;
     bool isMaximizeable() const;
@@ -291,6 +296,7 @@ Q_SIGNALS:
     void maximizedVerticallyChanged(bool);
     void keepAboveChanged(bool);
     void keepBelowChanged(bool);
+    void excludeFromCaptureChanged(bool);
 
     void closeableChanged(bool);
     void maximizeableChanged(bool);

@@ -70,6 +70,14 @@ bool DecoratedWindow::isKeepBelow() const
     return d->isKeepBelow();
 }
 
+bool DecoratedWindow::isExcludedFromCapture() const
+{
+    if (auto impl = dynamic_cast<DecoratedWindowPrivateV4 *>(d.get())) {
+        return impl->isExcludedFromCapture();
+    }
+    return false;
+}
+
 bool DecoratedWindow::isCloseable() const
 {
     return d->isCloseable();

@@ -57,4 +57,13 @@ private:
     class Private;
     const std::unique_ptr<Private> d;
 };
+
+class KDECORATIONS_PRIVATE_EXPORT DecorationSettingsPrivateV2 : public DecorationSettingsPrivate
+{
+public:
+    virtual bool isAlwaysShowExcludeFromCapture() const = 0;
+
+protected:
+    explicit DecorationSettingsPrivateV2(DecorationSettings *parent);
+};
 }

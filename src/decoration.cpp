@@ -722,6 +722,13 @@ void Decoration::popup(const Positioner &positioner, QMenu *menu)
     }
 }
 
+void Decoration::requestToggleExcludeFromCapture()
+{
+    if (auto window = dynamic_cast<DecoratedWindowPrivateV4 *>(d->client->d.get())) {
+        window->requestToggleExcludeFromCapture();
+    }
+}
+
 } // namespace
 
 #include "moc_decoration.cpp"
