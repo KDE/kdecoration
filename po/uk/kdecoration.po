@@ -3,13 +3,13 @@
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Yuri Chornoivan <yurchor@ukr.net>, 2018, 2021, 2025.
+# Yuri Chornoivan <yurchor@ukr.net>, 2018, 2021, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdecoration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-13 08:42+0000\n"
-"PO-Revision-Date: 2025-05-31 07:35+0300\n"
+"PO-Revision-Date: 2026-01-14 01:59+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -102,11 +102,12 @@ msgstr "Утримувати над іншими вікнами"
 #, kde-format
 msgid "The window is hidden from Screencast. Press to make it visible"
 msgstr ""
+"Вікно приховано на записі з екрана. Натисніть тут, щоб зробити його видимим"
 
 #: decorationbutton.cpp:363
 #, kde-format
 msgid "Hide from Screencast"
-msgstr ""
+msgstr "Приховати на записі з екрана"
 
 #~ msgid "More actions for this window"
 #~ msgstr "Додаткові дії для цього вікна"
