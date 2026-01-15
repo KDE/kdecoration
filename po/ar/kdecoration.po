@@ -1,13 +1,13 @@
 # Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the kdecoration package.
-# SPDX-FileCopyrightText: 2023, 2025 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
+# SPDX-FileCopyrightText: 2023, 2025, 2026 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kdecoration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-13 08:42+0000\n"
-"PO-Revision-Date: 2025-06-09 17:55+0400\n"
+"PO-Revision-Date: 2026-01-14 07:49+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -99,12 +99,12 @@ msgstr "أبقها أعلى النوافذ الأخرى"
 #: decorationbutton.cpp:361
 #, kde-format
 msgid "The window is hidden from Screencast. Press to make it visible"
-msgstr ""
+msgstr "النافذة مخفية عن تسجيل الشاشة. اضغط عليها لإظهارها."
 
 #: decorationbutton.cpp:363
 #, kde-format
 msgid "Hide from Screencast"
-msgstr ""
+msgstr "أخفِ من تسجيل الشاشة"
 
 #~ msgid "More actions for this window"
 #~ msgstr "إجراءات أكثر لهذه النافذة"
