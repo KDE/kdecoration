@@ -1,13 +1,13 @@
-# SPDX-FileCopyrightText: 2021, 2025 Xavier Besnard <xavier.besnard@kde.org>
+# SPDX-FileCopyrightText: 2021, 2025, 2026 Xavier Besnard <xavier.besnard@kde.org>
 # Yoann Laissus <yoann.laissus@gmail.com>, 2018.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdecoration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-13 08:42+0000\n"
-"PO-Revision-Date: 2025-06-01 19:25+0200\n"
+"PO-Revision-Date: 2026-01-14 08:14+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
-"Language-Team: French <French <kde-francophone@kde.org>>\n"
+"Language-Team: \n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Accelerator-Marker: &\n"
 "X-Environment: kde\n"
-"X-Generator: Lokalize 25.04.1\n"
+"X-Generator: Lokalize 25.12.1\n"
 "X-Text-Markup: kde4\n"
 
 #: decorationbutton.cpp:325
@@ -100,11 +100,13 @@ msgstr "Conserver en dessus des autres fenêtres"
 #, kde-format
 msgid "The window is hidden from Screencast. Press to make it visible"
 msgstr ""
+"La fenêtre est masquée pour l'enregistrement vidéo. Veuillez appuyer pour la "
+"rendre visible."
 
 #: decorationbutton.cpp:363
 #, kde-format
 msgid "Hide from Screencast"
-msgstr ""
+msgstr "Masquer de l'enregistrement vidéo"
 
 #~ msgid "More actions for this window"
 #~ msgstr "Plus d'actions pour cette fenêtre"
