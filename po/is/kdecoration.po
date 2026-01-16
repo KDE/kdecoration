@@ -1,14 +1,14 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the kdecoration package.
 #
-# SPDX-FileCopyrightText: 2023, 2025 Sveinn í Felli <sv1@fellsnet.is>
+# SPDX-FileCopyrightText: 2023, 2025, 2026 Sveinn í Felli <sv1@fellsnet.is>
 # SPDX-FileCopyrightText: 2024 Guðmundur Erlingsson <gudmundure@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdecoration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-13 08:42+0000\n"
-"PO-Revision-Date: 2025-10-08 09:46+0000\n"
+"PO-Revision-Date: 2026-01-15 16:30+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
 "Language: is\n"
@@ -100,11 +100,13 @@ msgstr "Hafa yfir öðrum gluggum"
 #, kde-format
 msgid "The window is hidden from Screencast. Press to make it visible"
 msgstr ""
+"Glugginn er falinn frá skjávörpun (screencast). Ýttu til að gera hann "
+"sýnilegan."
 
 #: decorationbutton.cpp:363
 #, kde-format
 msgid "Hide from Screencast"
-msgstr ""
+msgstr "Fela frá skjávörpun"
 
 #~ msgid "More actions for this window"
 #~ msgstr "Fleiri aðgerðir fyrir þennan glugga"
