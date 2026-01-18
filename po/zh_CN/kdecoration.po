@@ -98,9 +98,9 @@ msgstr "保持在其他窗口之上"
 #: decorationbutton.cpp:361
 #, kde-format
 msgid "The window is hidden from Screencast. Press to make it visible"
-msgstr ""
+msgstr "此窗口已在录屏中隐藏，点击以显示它。"
 
 #: decorationbutton.cpp:363
 #, kde-format
 msgid "Hide from Screencast"
-msgstr ""
+msgstr "在录屏中隐藏"
