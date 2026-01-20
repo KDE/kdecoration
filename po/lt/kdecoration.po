@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdecoration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-13 08:42+0000\n"
-"PO-Revision-Date: 2025-12-20 03:08+0200\n"
+"PO-Revision-Date: 2026-01-19 23:40+0200\n"
 "Last-Translator: Moo\n"
 "Language-Team: lt\n"
 "Language: lt\n"
@@ -101,11 +101,12 @@ msgstr "Laikyti virš kitų langų"
 #, kde-format
 msgid "The window is hidden from Screencast. Press to make it visible"
 msgstr ""
+"Langas yra paslėptas nuo filmavimo. Paspauskite norėdami padaryti jį matomą"
 
 #: decorationbutton.cpp:363
 #, kde-format
 msgid "Hide from Screencast"
-msgstr ""
+msgstr "Slėpti, kai filmuojamas ekranas"
 
 #~ msgid "More actions for this window"
 #~ msgstr "Daugiau veiksmų šiam langui"
