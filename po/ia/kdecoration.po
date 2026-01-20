@@ -1,13 +1,13 @@
 # Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the kdecoration package.
 #
-# SPDX-FileCopyrightText: 2019, 2020, 2021, 2025 Giovanni Sora <g.sora@tiscali.it>
+# SPDX-FileCopyrightText: 2019, 2020, 2021, 2025, 2026 Giovanni Sora <g.sora@tiscali.it>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdecoration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-13 08:42+0000\n"
-"PO-Revision-Date: 2025-10-14 17:31+0200\n"
+"PO-Revision-Date: 2026-01-19 12:34+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -98,12 +98,12 @@ msgstr "Mantene supra altere fenestras"
 #: decorationbutton.cpp:361
 #, kde-format
 msgid "The window is hidden from Screencast. Press to make it visible"
-msgstr ""
+msgstr "Le fenestra es celate ab Screencast.Pressa per facer lo visibile"
 
 #: decorationbutton.cpp:363
 #, kde-format
 msgid "Hide from Screencast"
-msgstr ""
+msgstr "Cela ab Screencast"
 
 #~ msgid "More actions for this window"
 #~ msgstr "Altere actiones per iste fenestra"
