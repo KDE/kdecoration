@@ -8,3 +8,4 @@ Dependencies:
     'frameworks/ki18n': '@latest-kf6'
 Options:
  require-passing-tests-on: ['Linux', 'FreeBSD']
+ enable-lsan: True
