@@ -1,13 +1,13 @@
 # Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the kdecoration package.
-# SPDX-FileCopyrightText: 2020, 2021, 2025 Sergiu Bivol <sergiu@cip.md>
+# SPDX-FileCopyrightText: 2020, 2021, 2025, 2026 Sergiu Bivol <sergiu@cip.md>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kdecoration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-13 08:42+0000\n"
-"PO-Revision-Date: 2025-09-27 11:59+0100\n"
+"PO-Revision-Date: 2026-01-28 19:59+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
 "Language: ro\n"
@@ -100,11 +100,13 @@ msgstr "Ține deasupra altor ferestre"
 #, kde-format
 msgid "The window is hidden from Screencast. Press to make it visible"
 msgstr ""
+"Fereastra e ascunsă din înregistrarea ecranului. Apăsați pentru a o face "
+"vizibilă"
 
 #: decorationbutton.cpp:363
 #, kde-format
 msgid "Hide from Screencast"
-msgstr ""
+msgstr "Ascunde din înregistrare"
 
 #~ msgid "More actions for this window"
 #~ msgstr "Acțiuni suplimentare pentru această fereastră"
