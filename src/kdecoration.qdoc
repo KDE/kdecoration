@@ -1,7 +1,8 @@
 /*!
     \module KDecoration
     \title KDecoration C++ Classes
-    \cmakepackage KDecoration2
+    \cmakepackage KDecoration3
+    \cmaketargetitem KDecoration3
 
     \brief Decoration Stuff.
 
