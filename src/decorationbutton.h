@@ -23,7 +23,7 @@ class Decoration;
 
 /*!
  * \class KDecoration2::DecorationButton
- * \inheaderfile KDecoration2/DecorationButton
+ * \inheaderfile KDecoration3/DecorationButton
  * \inmodule KDecoration
  *
  * \brief A button to be used in a Decoration.
