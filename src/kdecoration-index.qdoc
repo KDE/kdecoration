@@ -1,0 +1,31 @@
+/*!
+    \page kdecoration-index.html
+    \title KDecoration
+
+    Plugin based library to create window decorations.
+
+    \section1 Using the Module
+
+    \include {module-use.qdocinc} {using the c++ api}
+
+    \section2 Building with CMake
+
+    To import KDecoration into your project using CMake:
+
+    \code
+    find_package(KDecoration3 REQUIRED)
+    target_link_libraries(mytarget PRIVATE KDecoration3::KDecoration)
+    \endcode
+
+    For more details, see the \l {https://doc.qt.io/qt-6/cmake-manual.html} {Build with CMake} overview.
+
+    \section1 API Reference
+
+    \list
+        \li \l{KDecoration C++ Classes}
+    \endlist
+
+    \section1 Licenses
+
+    TODO
+*/
