@@ -17,10 +17,10 @@ class DecorationThemeMetaDataPrivate;
 namespace KDecoration2
 {
 /*!
- * Class providing type-safe access to data of themes
- *
- * @since 5.23
- * @author Alexander Lohnau
+ * \class KDecoration2::DecorationThemeMetaData
+ * \inheaderfile KDecoration3/DecorationThemeMetaData
+ * \brief Class providing type-safe access to data of themes.
+ * \since 5.23
  */
 class KDECORATIONS2_EXPORT DecorationThemeMetaData
 {
@@ -30,36 +30,55 @@ public:
     DecorationThemeMetaData(const DecorationThemeMetaData &other);
     DecorationThemeMetaData &operator=(const DecorationThemeMetaData &other);
 
-    /// User-visible name of the theme
+    /*!
+     * User-visible name of the theme.
+     */
     QString visibleName() const;
+    /*!
+     */
     void setVisibleName(const QString &name);
 
-    /// Internal name of the theme
+    /*!
+     * Internal name of the theme.
+     */
     QString themeName() const;
+    /*!
+     */
     void setThemeName(const QString &name);
 
-    /// Name of the kcm to configure the decoration theme
+    /*!
+     * Name of the kcm to configure the decoration theme.
+     */
     QString configurationName() const;
     void setConfigurationName(const QString &name);
 
-    /// Border size of the decoration, this gets set based on the "recommendedBorderSize" key in the json metadata
-    /// @internal
+    /*!
+     * Border size of the decoration, this gets set based on the
+     * "recommendedBorderSize" key in the json metadata.
+     * \internal
+     */
     KDecoration2::BorderSize borderSize() const;
+    /*!
+     */
     void setBorderSize(KDecoration2::BorderSize size);
 
-    /// plugin id of theme provider
-    /// @see KPluginMetaData::pluginId
+    /*!
+     * Plugin id of theme provider.
+     * \sa KPluginMetaData::pluginId
+     */
     QString pluginId() const;
+    /*!
+     */
     void setPluginId(const QString &id);
 
 private:
     QSharedDataPointer<DecorationThemeMetaDataPrivate> d;
 };
 /*!
- * Class to give the KWin decorationmodel access to the plugin's themes.
- *
- * @since 5.23
- * @author Alexander Lohnau
+ * \class KDecoration2::DecorationThemeProvider
+ * \inheaderfile KDecoration3/DecorationThemeProvider
+ * \brief Class to give the KWin decorationmodel access to the plugin's themes.
+ * \since 5.23
  */
 class KDECORATIONS2_EXPORT DecorationThemeProvider : public QObject
 {
@@ -69,7 +88,7 @@ public:
     explicit DecorationThemeProvider(QObject *parent);
 
     /*!
-     * List containing information of supported themes
+     * List containing information of supported themes.
      */
     virtual QList<DecorationThemeMetaData> themes() const = 0;
 };
