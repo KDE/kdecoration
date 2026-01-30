@@ -17,7 +17,7 @@ class DecorationButtonGroupPrivate;
 
 /*!
  * \class KDecoration2::DecorationButtonGroup
- * \inheaderfile KDecoration2/DecorationButtonGroup
+ * \inheaderfile KDecoration3/DecorationButtonGroup
  * \inmodule KDecoration
  *
  * \brief Helper class to layout DecorationButton.
