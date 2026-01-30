@@ -25,7 +25,7 @@ class DecoratedClientPrivate;
 
 /*!
  * \class KDecoration2::DecoratedClient
- * \inheaderfile KDecoration2/DecoratedClient
+ * \inheaderfile KDecoration3/DecoratedClient
  * \inmodule KDecoration
  *
  * \brief The Client which gets decorated.
