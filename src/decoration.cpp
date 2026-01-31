@@ -586,10 +586,10 @@ void Decoration::hoverMoveEvent(QHoverEvent *event)
         const bool hovered = button->isHovered();
         const bool contains = button->contains(event->position());
         if (!hovered && contains) {
-            QHoverEvent e(QEvent::HoverEnter, event->position(), event->oldPosF(), event->modifiers());
+            QHoverEvent e(QEvent::HoverEnter, event->position(), event->globalPosition(), event->oldPosF(), event->modifiers());
             QCoreApplication::instance()->sendEvent(button, &e);
         } else if (hovered && !contains) {
-            QHoverEvent e(QEvent::HoverLeave, event->position(), event->oldPosF(), event->modifiers());
+            QHoverEvent e(QEvent::HoverLeave, event->position(), event->globalPosition(), event->oldPosF(), event->modifiers());
             QCoreApplication::instance()->sendEvent(button, &e);
         } else if (hovered && contains) {
             QCoreApplication::instance()->sendEvent(button, event);

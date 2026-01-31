@@ -132,14 +132,14 @@ void DecorationTest::testSection()
     QSignalSpy spy(&deco, &KDecoration3::Decoration::sectionUnderMouseChanged);
     QVERIFY(spy.isValid());
     QFETCH(QPoint, pos);
-    QHoverEvent event(QEvent::HoverMove, QPointF(pos), QPointF(pos));
+    QHoverEvent event(QEvent::HoverMove, QPointF(pos), QPointF(pos), QPointF(pos));
     QCoreApplication::sendEvent(&deco, &event);
     QFETCH(Qt::WindowFrameSection, expected);
     QCOMPARE(deco.sectionUnderMouse(), expected);
     QCOMPARE(spy.count(), 1);
     QCOMPARE(spy.first().first().value<Qt::WindowFrameSection>(), expected);
 
-    QHoverEvent event2(QEvent::HoverMove, QPointF(50, 50), QPointF(50, 50));
+    QHoverEvent event2(QEvent::HoverMove, QPointF(50, 50), QPointF(50, 50), QPointF(50, 50));
     QCoreApplication::sendEvent(&deco, &event2);
     QCOMPARE(deco.sectionUnderMouse(), Qt::NoSection);
     QCOMPARE(spy.count(), 2);

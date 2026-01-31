@@ -172,7 +172,7 @@ void DecorationButtonTest::testEnabled()
     // now let's send it a hover entered event
     QSignalSpy hoveredChangedSpy(&button, &KDecoration3::DecorationButton::hoveredChanged);
     QVERIFY(hoveredChangedSpy.isValid());
-    QHoverEvent event(QEvent::HoverEnter, QPointF(1, 1), QPointF(-1, -1));
+    QHoverEvent event(QEvent::HoverEnter, QPointF(1, 1), QPointF(1, 1), QPointF(-1, -1));
     event.setAccepted(false);
     button.event(&event);
     QCOMPARE(event.isAccepted(), false);
@@ -228,7 +228,7 @@ void DecorationButtonTest::testPressIgnore()
 
     QFETCH(QPoint, clickPos);
     QFETCH(Qt::MouseButton, mouseButton);
-    QMouseEvent pressEvent(QEvent::MouseButtonPress, clickPos, mouseButton, mouseButton, Qt::NoModifier);
+    QMouseEvent pressEvent(QEvent::MouseButtonPress, clickPos, clickPos, mouseButton, mouseButton, Qt::NoModifier);
     pressEvent.setAccepted(false);
     button.event(&pressEvent);
     QTEST(pressEvent.isAccepted(), "expectedAccepted");
@@ -271,7 +271,7 @@ void DecorationButtonTest::testReleaseIgnore()
     QSignalSpy clickedSpy(&button, &KDecoration3::DecorationButton::clicked);
     QVERIFY(clickedSpy.isValid());
 
-    QMouseEvent pressEvent(QEvent::MouseButtonPress, QPoint(0, 0), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+    QMouseEvent pressEvent(QEvent::MouseButtonPress, QPoint(0, 0), QPointF(0, 0), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
     pressEvent.setAccepted(false);
     button.event(&pressEvent);
     QCOMPARE(pressEvent.isAccepted(), true);
@@ -287,7 +287,7 @@ void DecorationButtonTest::testReleaseIgnore()
 
     QFETCH(QPoint, clickPos);
     QFETCH(Qt::MouseButton, mouseButton);
-    QMouseEvent releaseEvent(QEvent::MouseButtonRelease, clickPos, mouseButton, Qt::NoButton, Qt::NoModifier);
+    QMouseEvent releaseEvent(QEvent::MouseButtonRelease, clickPos, clickPos, mouseButton, Qt::NoButton, Qt::NoModifier);
     releaseEvent.setAccepted(false);
     button.event(&releaseEvent);
     QTEST(releaseEvent.isAccepted(), "expectedAccepted");
@@ -329,7 +329,7 @@ void DecorationButtonTest::testHoverEnterIgnore()
     button.setVisible(visible);
 
     QFETCH(QPoint, enterPos);
-    QHoverEvent enterEvent(QEvent::HoverEnter, enterPos, QPoint());
+    QHoverEvent enterEvent(QEvent::HoverEnter, enterPos, enterPos, QPoint());
     enterEvent.setAccepted(false);
     button.event(&enterEvent);
     QCOMPARE(enterEvent.isAccepted(), false);
@@ -340,7 +340,7 @@ void DecorationButtonTest::testHoverEnterIgnore()
     // send a HoverLeft event should not be processed
     button.setEnabled(true);
     button.setVisible(true);
-    QHoverEvent leftEvent(QEvent::HoverLeave, QPoint(20, 20), enterPos);
+    QHoverEvent leftEvent(QEvent::HoverLeave, QPoint(20, 20), QPointF(20, 20), enterPos);
     leftEvent.setAccepted(false);
     button.event(&leftEvent);
     QCOMPARE(leftEvent.isAccepted(), false);
@@ -376,7 +376,7 @@ void DecorationButtonTest::testHoverLeaveIgnore()
     QSignalSpy pointerLeavedSpy(&button, &KDecoration3::DecorationButton::pointerLeft);
     QVERIFY(pointerLeavedSpy.isValid());
 
-    QHoverEvent enterEvent(QEvent::HoverEnter, QPoint(0, 0), QPoint());
+    QHoverEvent enterEvent(QEvent::HoverEnter, QPoint(0, 0), QPoint(0, 0), QPoint());
     enterEvent.setAccepted(false);
     button.event(&enterEvent);
     QCOMPARE(enterEvent.isAccepted(), true);
@@ -391,7 +391,7 @@ void DecorationButtonTest::testHoverLeaveIgnore()
     button.setVisible(visible);
 
     QFETCH(QPoint, leavePos);
-    QHoverEvent leftEvent(QEvent::HoverLeave, leavePos, QPoint(0, 0));
+    QHoverEvent leftEvent(QEvent::HoverLeave, leavePos, leavePos, QPoint(0, 0));
     leftEvent.setAccepted(false);
     button.event(&leftEvent);
     QCOMPARE(leftEvent.isAccepted(), false);
@@ -419,7 +419,7 @@ void DecorationButtonTest::testHover()
     QSignalSpy pointerLeavedSpy(&button, &KDecoration3::DecorationButton::pointerLeft);
     QVERIFY(pointerLeavedSpy.isValid());
 
-    QHoverEvent enterEvent(QEvent::HoverEnter, QPoint(0, 0), QPoint());
+    QHoverEvent enterEvent(QEvent::HoverEnter, QPoint(0, 0), QPointF(0, 0), QPoint());
     enterEvent.setAccepted(false);
     button.event(&enterEvent);
     QCOMPARE(enterEvent.isAccepted(), true);
@@ -429,12 +429,12 @@ void DecorationButtonTest::testHover()
     QCOMPARE(hoveredChangedSpy.last().first().toBool(), true);
 
     // send in a hovermove event - it's passed through, but not used
-    QHoverEvent moveEvent(QEvent::HoverMove, QPoint(5, 0), QPoint(0, 0));
+    QHoverEvent moveEvent(QEvent::HoverMove, QPoint(5, 0), QPoint(5, 0), QPoint(0, 0));
     moveEvent.setAccepted(false);
     button.event(&moveEvent);
     QCOMPARE(moveEvent.isAccepted(), false);
 
-    QHoverEvent leftEvent(QEvent::HoverLeave, QPointF(10.1, 0.0), QPointF(0, 0));
+    QHoverEvent leftEvent(QEvent::HoverLeave, QPointF(10.1, 0.0), QPointF(10.1, 0.0), QPointF(0, 0));
     leftEvent.setAccepted(false);
     button.event(&leftEvent);
     QCOMPARE(leftEvent.isAccepted(), true);
@@ -473,7 +473,7 @@ void DecorationButtonTest::testMouseMove()
     QSignalSpy pointerLeavedSpy(&button, &KDecoration3::DecorationButton::pointerLeft);
     QVERIFY(pointerLeavedSpy.isValid());
 
-    QHoverEvent enterEvent(QEvent::HoverEnter, QPoint(0, 0), QPoint());
+    QHoverEvent enterEvent(QEvent::HoverEnter, QPoint(0, 0), QPoint(0, 0), QPoint());
     enterEvent.setAccepted(false);
     button.event(&enterEvent);
     QCOMPARE(enterEvent.isAccepted(), true);
@@ -487,7 +487,7 @@ void DecorationButtonTest::testMouseMove()
     button.setVisible(visible);
 
     QFETCH(QPointF, movePos);
-    QMouseEvent mouseMoveEvent(QEvent::MouseMove, movePos, Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+    QMouseEvent mouseMoveEvent(QEvent::MouseMove, movePos, movePos, Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
     mouseMoveEvent.setAccepted(false);
     button.event(&mouseMoveEvent);
     QTEST(mouseMoveEvent.isAccepted(), "expectedAccepted");
@@ -497,7 +497,7 @@ void DecorationButtonTest::testMouseMove()
     QCOMPARE(hoveredChangedSpy.last().first().toBool(), button.isHovered());
 
     // explicit further move event outside of button
-    QMouseEvent mouseMoveEvent2(QEvent::MouseMove, QPoint(50, 50), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+    QMouseEvent mouseMoveEvent2(QEvent::MouseMove, QPoint(50, 50), QPoint(50, 50), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
     mouseMoveEvent2.setAccepted(false);
     button.event(&mouseMoveEvent2);
     QTEST(mouseMoveEvent2.isAccepted(), "expectedHovered");
@@ -538,7 +538,7 @@ void DecorationButtonTest::testClose()
     QSignalSpy pressedChangedSpy(&button, &KDecoration3::DecorationButton::pressedChanged);
     QVERIFY(pressedChangedSpy.isValid());
 
-    QMouseEvent pressEvent(QEvent::MouseButtonPress, QPointF(5, 5), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+    QMouseEvent pressEvent(QEvent::MouseButtonPress, QPointF(5, 5), QPointF(5, 5), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
     pressEvent.setAccepted(false);
     button.event(&pressEvent);
     QCOMPARE(pressEvent.isAccepted(), true);
@@ -550,7 +550,7 @@ void DecorationButtonTest::testClose()
     QCOMPARE(pressedChangedSpy.count(), 1);
     QCOMPARE(pressedChangedSpy.first().first().toBool(), true);
 
-    QMouseEvent releaseEvent(QEvent::MouseButtonRelease, QPointF(5, 5), Qt::LeftButton, Qt::NoButton, Qt::NoModifier);
+    QMouseEvent releaseEvent(QEvent::MouseButtonRelease, QPointF(5, 5), QPointF(5, 5), Qt::LeftButton, Qt::NoButton, Qt::NoModifier);
     releaseEvent.setAccepted(false);
     button.event(&releaseEvent);
     QCOMPARE(releaseEvent.isAccepted(), true);
@@ -599,7 +599,7 @@ void DecorationButtonTest::testMinimize()
     QSignalSpy pressedChangedSpy(&button, &KDecoration3::DecorationButton::pressedChanged);
     QVERIFY(pressedChangedSpy.isValid());
 
-    QMouseEvent pressEvent(QEvent::MouseButtonPress, QPointF(5, 5), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+    QMouseEvent pressEvent(QEvent::MouseButtonPress, QPointF(5, 5), QPointF(5, 5), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
     pressEvent.setAccepted(false);
     button.event(&pressEvent);
     QCOMPARE(pressEvent.isAccepted(), true);
@@ -611,7 +611,7 @@ void DecorationButtonTest::testMinimize()
     QCOMPARE(pressedChangedSpy.count(), 1);
     QCOMPARE(pressedChangedSpy.first().first().toBool(), true);
 
-    QMouseEvent releaseEvent(QEvent::MouseButtonRelease, QPointF(5, 5), Qt::LeftButton, Qt::NoButton, Qt::NoModifier);
+    QMouseEvent releaseEvent(QEvent::MouseButtonRelease, QPointF(5, 5), QPointF(5, 5), Qt::LeftButton, Qt::NoButton, Qt::NoModifier);
     releaseEvent.setAccepted(false);
     button.event(&releaseEvent);
     QCOMPARE(releaseEvent.isAccepted(), true);
@@ -660,7 +660,7 @@ void DecorationButtonTest::testQuickHelp()
     QSignalSpy pressedChangedSpy(&button, &KDecoration3::DecorationButton::pressedChanged);
     QVERIFY(pressedChangedSpy.isValid());
 
-    QMouseEvent pressEvent(QEvent::MouseButtonPress, QPointF(5, 5), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+    QMouseEvent pressEvent(QEvent::MouseButtonPress, QPointF(5, 5), QPointF(5, 5), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
     pressEvent.setAccepted(false);
     button.event(&pressEvent);
     QCOMPARE(pressEvent.isAccepted(), true);
@@ -672,7 +672,7 @@ void DecorationButtonTest::testQuickHelp()
     QCOMPARE(pressedChangedSpy.count(), 1);
     QCOMPARE(pressedChangedSpy.first().first().toBool(), true);
 
-    QMouseEvent releaseEvent(QEvent::MouseButtonRelease, QPointF(5, 5), Qt::LeftButton, Qt::NoButton, Qt::NoModifier);
+    QMouseEvent releaseEvent(QEvent::MouseButtonRelease, QPointF(5, 5), QPointF(5, 5), Qt::LeftButton, Qt::NoButton, Qt::NoModifier);
     releaseEvent.setAccepted(false);
     button.event(&releaseEvent);
     QCOMPARE(releaseEvent.isAccepted(), true);
@@ -712,7 +712,7 @@ void DecorationButtonTest::testKeepAbove()
     QSignalSpy pressedChangedSpy(&button, &KDecoration3::DecorationButton::pressedChanged);
     QVERIFY(pressedChangedSpy.isValid());
 
-    QMouseEvent pressEvent(QEvent::MouseButtonPress, QPointF(5, 5), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+    QMouseEvent pressEvent(QEvent::MouseButtonPress, QPointF(5, 5), QPointF(5, 5), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
     pressEvent.setAccepted(false);
     button.event(&pressEvent);
     QCOMPARE(pressEvent.isAccepted(), true);
@@ -724,7 +724,7 @@ void DecorationButtonTest::testKeepAbove()
     QCOMPARE(pressedChangedSpy.count(), 1);
     QCOMPARE(pressedChangedSpy.first().first().toBool(), true);
 
-    QMouseEvent releaseEvent(QEvent::MouseButtonRelease, QPointF(5, 5), Qt::LeftButton, Qt::NoButton, Qt::NoModifier);
+    QMouseEvent releaseEvent(QEvent::MouseButtonRelease, QPointF(5, 5), QPointF(5, 5), Qt::LeftButton, Qt::NoButton, Qt::NoModifier);
     releaseEvent.setAccepted(false);
     button.event(&releaseEvent);
     QCOMPARE(releaseEvent.isAccepted(), true);
@@ -775,7 +775,7 @@ void DecorationButtonTest::testKeepBelow()
     QSignalSpy pressedChangedSpy(&button, &KDecoration3::DecorationButton::pressedChanged);
     QVERIFY(pressedChangedSpy.isValid());
 
-    QMouseEvent pressEvent(QEvent::MouseButtonPress, QPointF(5, 5), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+    QMouseEvent pressEvent(QEvent::MouseButtonPress, QPointF(5, 5), QPointF(5, 5), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
     pressEvent.setAccepted(false);
     button.event(&pressEvent);
     QCOMPARE(pressEvent.isAccepted(), true);
@@ -787,7 +787,7 @@ void DecorationButtonTest::testKeepBelow()
     QCOMPARE(pressedChangedSpy.count(), 1);
     QCOMPARE(pressedChangedSpy.first().first().toBool(), true);
 
-    QMouseEvent releaseEvent(QEvent::MouseButtonRelease, QPointF(5, 5), Qt::LeftButton, Qt::NoButton, Qt::NoModifier);
+    QMouseEvent releaseEvent(QEvent::MouseButtonRelease, QPointF(5, 5), QPointF(5, 5), Qt::LeftButton, Qt::NoButton, Qt::NoModifier);
     releaseEvent.setAccepted(false);
     button.event(&releaseEvent);
     QCOMPARE(releaseEvent.isAccepted(), true);
@@ -848,7 +848,7 @@ void DecorationButtonTest::testShade()
     QSignalSpy pressedChangedSpy(&button, &KDecoration3::DecorationButton::pressedChanged);
     QVERIFY(pressedChangedSpy.isValid());
 
-    QMouseEvent pressEvent(QEvent::MouseButtonPress, QPointF(5, 5), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+    QMouseEvent pressEvent(QEvent::MouseButtonPress, QPointF(5, 5), QPointF(5, 5), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
     pressEvent.setAccepted(false);
     button.event(&pressEvent);
     QCOMPARE(pressEvent.isAccepted(), true);
@@ -860,7 +860,7 @@ void DecorationButtonTest::testShade()
     QCOMPARE(pressedChangedSpy.count(), 1);
     QCOMPARE(pressedChangedSpy.first().first().toBool(), true);
 
-    QMouseEvent releaseEvent(QEvent::MouseButtonRelease, QPointF(5, 5), Qt::LeftButton, Qt::NoButton, Qt::NoModifier);
+    QMouseEvent releaseEvent(QEvent::MouseButtonRelease, QPointF(5, 5), QPointF(5, 5), Qt::LeftButton, Qt::NoButton, Qt::NoModifier);
     releaseEvent.setAccepted(false);
     button.event(&releaseEvent);
     QCOMPARE(releaseEvent.isAccepted(), true);
@@ -925,7 +925,7 @@ void DecorationButtonTest::testMaximize()
     QSignalSpy pressedChangedSpy(&button, &KDecoration3::DecorationButton::pressedChanged);
     QVERIFY(pressedChangedSpy.isValid());
 
-    QMouseEvent leftPressEvent(QEvent::MouseButtonPress, QPointF(5, 5), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+    QMouseEvent leftPressEvent(QEvent::MouseButtonPress, QPointF(5, 5), QPointF(5, 5), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
     leftPressEvent.setAccepted(false);
     button.event(&leftPressEvent);
     QCOMPARE(leftPressEvent.isAccepted(), true);
@@ -937,7 +937,7 @@ void DecorationButtonTest::testMaximize()
     QCOMPARE(pressedChangedSpy.count(), 1);
     QCOMPARE(pressedChangedSpy.first().first().toBool(), true);
 
-    QMouseEvent leftReleaseEvent(QEvent::MouseButtonRelease, QPointF(5, 5), Qt::LeftButton, Qt::NoButton, Qt::NoModifier);
+    QMouseEvent leftReleaseEvent(QEvent::MouseButtonRelease, QPointF(5, 5), QPointF(5, 5), Qt::LeftButton, Qt::NoButton, Qt::NoModifier);
     leftReleaseEvent.setAccepted(false);
     button.event(&leftReleaseEvent);
     QCOMPARE(leftReleaseEvent.isAccepted(), true);
@@ -963,19 +963,19 @@ void DecorationButtonTest::testMaximize()
     QCOMPARE(button.isChecked(), false);
 
     // test the other buttons
-    QMouseEvent rightPressEvent(QEvent::MouseButtonPress, QPointF(5, 5), Qt::RightButton, Qt::RightButton, Qt::NoModifier);
+    QMouseEvent rightPressEvent(QEvent::MouseButtonPress, QPointF(5, 5), QPointF(5, 5), Qt::RightButton, Qt::RightButton, Qt::NoModifier);
     rightPressEvent.setAccepted(false);
     button.event(&rightPressEvent);
     QCOMPARE(rightPressEvent.isAccepted(), true);
     QCOMPARE(button.isPressed(), true);
 
-    QMouseEvent middlePressEvent(QEvent::MouseButtonPress, QPointF(5, 5), Qt::MiddleButton, Qt::MiddleButton, Qt::NoModifier);
+    QMouseEvent middlePressEvent(QEvent::MouseButtonPress, QPointF(5, 5), QPointF(5, 5), Qt::MiddleButton, Qt::MiddleButton, Qt::NoModifier);
     middlePressEvent.setAccepted(false);
     button.event(&middlePressEvent);
     QCOMPARE(middlePressEvent.isAccepted(), true);
     QCOMPARE(button.isPressed(), true);
 
-    QMouseEvent middleReleaseEvent(QEvent::MouseButtonRelease, QPointF(5, 5), Qt::MiddleButton, Qt::NoButton, Qt::NoModifier);
+    QMouseEvent middleReleaseEvent(QEvent::MouseButtonRelease, QPointF(5, 5), QPointF(5, 5), Qt::MiddleButton, Qt::NoButton, Qt::NoModifier);
     middleReleaseEvent.setAccepted(false);
     button.event(&middleReleaseEvent);
     QCOMPARE(middleReleaseEvent.isAccepted(), true);
@@ -986,7 +986,7 @@ void DecorationButtonTest::testMaximize()
     QCOMPARE(client->isMaximizedHorizontally(), true);
     QCOMPARE(client->isMaximizedVertically(), false);
 
-    QMouseEvent rightReleaseEvent(QEvent::MouseButtonRelease, QPointF(5, 5), Qt::RightButton, Qt::NoButton, Qt::NoModifier);
+    QMouseEvent rightReleaseEvent(QEvent::MouseButtonRelease, QPointF(5, 5), QPointF(5, 5), Qt::RightButton, Qt::NoButton, Qt::NoModifier);
     rightReleaseEvent.setAccepted(false);
     button.event(&rightReleaseEvent);
     QCOMPARE(rightReleaseEvent.isAccepted(), true);
@@ -1041,7 +1041,7 @@ void DecorationButtonTest::testOnAllDesktops()
     QSignalSpy pressedChangedSpy(&button, &KDecoration3::DecorationButton::pressedChanged);
     QVERIFY(pressedChangedSpy.isValid());
 
-    QMouseEvent pressEvent(QEvent::MouseButtonPress, QPointF(5, 5), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+    QMouseEvent pressEvent(QEvent::MouseButtonPress, QPointF(5, 5), QPointF(5, 5), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
     pressEvent.setAccepted(false);
     button.event(&pressEvent);
     QCOMPARE(pressEvent.isAccepted(), true);
@@ -1053,7 +1053,7 @@ void DecorationButtonTest::testOnAllDesktops()
     QCOMPARE(pressedChangedSpy.count(), 1);
     QCOMPARE(pressedChangedSpy.first().first().toBool(), true);
 
-    QMouseEvent releaseEvent(QEvent::MouseButtonRelease, QPointF(5, 5), Qt::LeftButton, Qt::NoButton, Qt::NoModifier);
+    QMouseEvent releaseEvent(QEvent::MouseButtonRelease, QPointF(5, 5), QPointF(5, 5), Qt::LeftButton, Qt::NoButton, Qt::NoModifier);
     releaseEvent.setAccepted(false);
     button.event(&releaseEvent);
     QCOMPARE(releaseEvent.isAccepted(), true);
@@ -1098,7 +1098,7 @@ void DecorationButtonTest::testMenu()
     QSignalSpy menuRequestedSpy(client, &MockWindow::menuRequested);
     QVERIFY(menuRequestedSpy.isValid());
 
-    QMouseEvent pressEvent(QEvent::MouseButtonPress, QPointF(5, 5), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+    QMouseEvent pressEvent(QEvent::MouseButtonPress, QPointF(5, 5), QPointF(5, 5), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
     pressEvent.setAccepted(false);
     button.event(&pressEvent);
     QCOMPARE(pressEvent.isAccepted(), true);
@@ -1110,7 +1110,7 @@ void DecorationButtonTest::testMenu()
     QCOMPARE(pressedChangedSpy.count(), 1);
     QCOMPARE(pressedChangedSpy.first().first().toBool(), true);
 
-    QMouseEvent releaseEvent(QEvent::MouseButtonRelease, QPointF(5, 5), Qt::LeftButton, Qt::NoButton, Qt::NoModifier);
+    QMouseEvent releaseEvent(QEvent::MouseButtonRelease, QPointF(5, 5), QPointF(5, 5), Qt::LeftButton, Qt::NoButton, Qt::NoModifier);
     releaseEvent.setAccepted(false);
     button.event(&releaseEvent);
     QCOMPARE(releaseEvent.isAccepted(), true);
@@ -1155,11 +1155,11 @@ void DecorationButtonTest::testMenuDoubleClick()
     QSignalSpy menuRequestedSpy(client, &MockWindow::menuRequested);
     QVERIFY(menuRequestedSpy.isValid());
 
-    QMouseEvent pressEvent(QEvent::MouseButtonPress, QPointF(5, 5), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+    QMouseEvent pressEvent(QEvent::MouseButtonPress, QPointF(5, 5), QPointF(5, 5), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
     pressEvent.setAccepted(false);
     button.event(&pressEvent);
     QCOMPARE(pressEvent.isAccepted(), true);
-    QMouseEvent releaseEvent(QEvent::MouseButtonRelease, QPointF(5, 5), Qt::LeftButton, Qt::NoButton, Qt::NoModifier);
+    QMouseEvent releaseEvent(QEvent::MouseButtonRelease, QPointF(5, 5), QPointF(5, 5), Qt::LeftButton, Qt::NoButton, Qt::NoModifier);
     releaseEvent.setAccepted(false);
     button.event(&releaseEvent);
     QCOMPARE(releaseEvent.isAccepted(), true);
@@ -1186,11 +1186,11 @@ void DecorationButtonTest::testMenuDoubleClick()
     QCOMPARE(menuRequestedSpy.count(), 0);
 
     // a double click of right button shouldn't trigger the double click event
-    QMouseEvent rightPressEvent(QEvent::MouseButtonPress, QPointF(5, 5), Qt::RightButton, Qt::RightButton, Qt::NoModifier);
+    QMouseEvent rightPressEvent(QEvent::MouseButtonPress, QPointF(5, 5), QPointF(5, 5), Qt::RightButton, Qt::RightButton, Qt::NoModifier);
     rightPressEvent.setAccepted(false);
     button.event(&rightPressEvent);
     QCOMPARE(rightPressEvent.isAccepted(), true);
-    QMouseEvent rightReleaseEvent(QEvent::MouseButtonRelease, QPointF(5, 5), Qt::RightButton, Qt::NoButton, Qt::NoModifier);
+    QMouseEvent rightReleaseEvent(QEvent::MouseButtonRelease, QPointF(5, 5), QPointF(5, 5), Qt::RightButton, Qt::NoButton, Qt::NoModifier);
     rightReleaseEvent.setAccepted(false);
     button.event(&rightReleaseEvent);
     QCOMPARE(rightReleaseEvent.isAccepted(), true);
@@ -1240,7 +1240,7 @@ void DecorationButtonTest::testMenuPressAndHold()
     QVERIFY(clickedSpy.isValid());
 
     // send a press event
-    QMouseEvent pressEvent(QEvent::MouseButtonPress, QPointF(5, 5), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+    QMouseEvent pressEvent(QEvent::MouseButtonPress, QPointF(5, 5), QPointF(5, 5), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
     pressEvent.setAccepted(false);
     button.event(&pressEvent);
     QCOMPARE(pressEvent.isAccepted(), true);
@@ -1252,7 +1252,7 @@ void DecorationButtonTest::testMenuPressAndHold()
     QCOMPARE(clickedSpy.count(), 1);
 
     // send release event
-    QMouseEvent releaseEvent(QEvent::MouseButtonRelease, QPointF(5, 5), Qt::LeftButton, Qt::NoButton, Qt::NoModifier);
+    QMouseEvent releaseEvent(QEvent::MouseButtonRelease, QPointF(5, 5), QPointF(5, 5), Qt::LeftButton, Qt::NoButton, Qt::NoModifier);
     releaseEvent.setAccepted(false);
     button.event(&releaseEvent);
     QCOMPARE(releaseEvent.isAccepted(), true);
@@ -1310,7 +1310,7 @@ void DecorationButtonTest::testApplicationMenu()
     QSignalSpy applicationMenuRequestedSpy(client, &MockWindow::applicationMenuRequested);
     QVERIFY(applicationMenuRequestedSpy.isValid());
 
-    QMouseEvent pressEvent(QEvent::MouseButtonPress, QPointF(5, 5), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+    QMouseEvent pressEvent(QEvent::MouseButtonPress, QPointF(5, 5), QPointF(5, 5), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
     pressEvent.setAccepted(false);
     button.event(&pressEvent);
     QCOMPARE(pressEvent.isAccepted(), true);
@@ -1322,7 +1322,7 @@ void DecorationButtonTest::testApplicationMenu()
     QCOMPARE(pressedChangedSpy.count(), 1);
     QCOMPARE(pressedChangedSpy.first().first().toBool(), true);
 
-    QMouseEvent releaseEvent(QEvent::MouseButtonRelease, QPointF(5, 5), Qt::LeftButton, Qt::NoButton, Qt::NoModifier);
+    QMouseEvent releaseEvent(QEvent::MouseButtonRelease, QPointF(5, 5), QPointF(5, 5), Qt::LeftButton, Qt::NoButton, Qt::NoModifier);
     releaseEvent.setAccepted(false);
     button.event(&releaseEvent);
     QCOMPARE(releaseEvent.isAccepted(), true);
