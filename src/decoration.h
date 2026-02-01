@@ -32,7 +32,7 @@ class DecorationSettings;
 
 /*!
  * \class KDecoration2::Decoration
- * \inheaderfile KDecoration2/Decoration
+ * \inheaderfile KDecoration3/Decoration
  * \inmodule KDecoration
  *
  * \brief Base class for the Decoration.

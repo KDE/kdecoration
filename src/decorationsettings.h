@@ -19,13 +19,15 @@ class DecorationBridge;
 class DecorationSettingsPrivate;
 
 /*!
- * @brief Common settings for the Decoration.
+ * \class KDecoration2::DecorationSettings
+ * \inheaderfile KDecoration3/DecorationSettings
+ * \brief Common settings for the Decoration.
  *
  * This class gets injected into the Decoration and provides recommendations for the
  * Decoration. The Decoration is suggested to honor the settings, but may decide that some
  * settings don't fit the design and ignore them.
  *
- * @see Decoration
+ * \sa Decoration
  **/
 class KDECORATIONS2_EXPORT DecorationSettings : public QObject
 {
@@ -97,7 +99,7 @@ public:
     QFont font() const;
     /*!
      * The fontMetrics for the recommended font.
-     * @see font
+     * \sa font
      **/
     QFontMetricsF fontMetrics() const;
 
