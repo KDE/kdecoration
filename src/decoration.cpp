@@ -187,6 +187,12 @@ Decoration::Private::Private(Decoration *deco, const QVariantList &args)
     , opaque(false)
     , q(deco)
 {
+    for (const auto &arg : args) {
+        const auto map = arg.toMap();
+        if (const auto it = map.find(QStringLiteral("style")); it != map.end()) {
+            style = it->value<Style>();
+        }
+    }
 }
 
 void Decoration::Private::setSectionUnderMouse(Qt::WindowFrameSection section)
@@ -468,6 +474,11 @@ std::shared_ptr<DecorationShadow> Decoration::shadow() const
 bool Decoration::isOpaque() const
 {
     return d->opaque;
+}
+
+Style Decoration::style() const
+{
+    return d->style;
 }
 
 qreal Decoration::borderLeft() const

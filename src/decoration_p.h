@@ -6,6 +6,8 @@
 #pragma once
 #include "decoration.h"
 
+#include <QSet>
+
 //
 //  W A R N I N G
 //  -------------
@@ -47,6 +49,7 @@ public:
     std::shared_ptr<DecoratedWindow> client;
     bool opaque;
     QList<DecorationButton *> buttons;
+    Style style = Style::Titled;
     std::shared_ptr<DecorationShadow> shadow;
     std::shared_ptr<DecorationState> next;
     std::shared_ptr<DecorationState> current;

@@ -137,6 +137,47 @@ private:
 };
 
 /**
+ * The Style type specifies the visuals of a decoration.
+ */
+enum class Style {
+    /**
+     * A regular decoration that displays a title bar. A decoration plugin is required to support
+     * titled decorations.
+     *
+     * The @c "titled" item is implicitly included in the styles list in the plugin metadata, in other
+     * words
+     *
+     * @code
+     * {
+     *     "org.kde.kdecoration3": {
+     *         "styles": ["titled"]
+     *     }
+     * }
+     * @endcode
+     */
+    Titled = 0x1,
+    /**
+     * A decoration that only adds a drop shadow or an outline around the window. No title bar will
+     * be drawn. If the decoration plugin supports creating shadow-only decorations, it should add
+     * the corresponding @c "shadow" item in the styles list in the plugin metadata, e.g.
+     *
+     * @code
+     * {
+     *     "org.kde.kdecoration3": {
+     *         "styles": ["titled", "shadow"]
+     *     }
+     * }
+     * @endcode
+     *
+     * A decoration plugin is not required to support shadow-only decorations.
+     *
+     * The compositor can put shadowed decorations around windows with client-side decorations to
+     * provide more consistent visuals.
+     */
+    Shadow = 0x2,
+};
+
+/**
  * @brief Base class for the Decoration.
  *
  * To provide a Decoration one needs to inherit from this class. The framework will instantiate
@@ -214,6 +255,11 @@ public:
     Qt::WindowFrameSection sectionUnderMouse() const;
     QRectF titleBar() const;
     bool isOpaque() const;
+
+    /**
+     * Returns the decoration style.
+     */
+    Style style() const;
 
     /**
      * The decoration border radius specifies how much the corners of the decorated window
