@@ -49,6 +49,11 @@ public:
     qreal bottomRight() const;
     qreal bottomLeft() const;
 
+    void setTopLeft(qreal radius);
+    void setTopRight(qreal radius);
+    void setBottomRight(qreal radius);
+    void setBottomLeft(qreal radius);
+
 private:
     qreal m_topLeft = 0;
     qreal m_topRight = 0;

@@ -68,6 +68,26 @@ qreal BorderRadius::bottomLeft() const
     return m_bottomLeft;
 }
 
+void BorderRadius::setTopLeft(qreal radius)
+{
+    m_topLeft = radius;
+}
+
+void BorderRadius::setTopRight(qreal radius)
+{
+    m_topRight = radius;
+}
+
+void BorderRadius::setBottomRight(qreal radius)
+{
+    m_bottomRight = radius;
+}
+
+void BorderRadius::setBottomLeft(qreal radius)
+{
+    m_bottomLeft = radius;
+}
+
 BorderOutline::BorderOutline()
 {
 }
