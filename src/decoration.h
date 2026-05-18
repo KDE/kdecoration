@@ -42,7 +42,7 @@ public:
     explicit BorderRadius(qreal radius);
     explicit BorderRadius(qreal topLeft, qreal topRight, qreal bottomRight, qreal bottomLeft);
 
-    bool operator<=>(const BorderRadius &other) const = default;
+    auto operator<=>(const BorderRadius &other) const = default;
 
     qreal topLeft() const;
     qreal topRight() const;
