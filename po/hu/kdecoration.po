@@ -2,13 +2,13 @@
 # This file is distributed under the same license as the kdecoration package.
 #
 # Kristóf Kiszel <ulysses@kubuntu.org>, 2019.
-# SPDX-FileCopyrightText: 2021, 2025 Kristof Kiszel <ulysses@fsf.hu>
+# SPDX-FileCopyrightText: 2021, 2025-2026 Kristof Kiszel <ulysses@fsf.hu>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdecoration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-13 08:42+0000\n"
-"PO-Revision-Date: 2025-10-17 21:35+0200\n"
+"PO-Revision-Date: 2026-05-30 21:27+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 25.08.2\n"
+"X-Generator: Lokalize 26.04.1\n"
 
 #: decorationbutton.cpp:325
 #, kde-format
@@ -100,11 +100,13 @@ msgstr "Maradjon más ablakok fölött"
 #, kde-format
 msgid "The window is hidden from Screencast. Press to make it visible"
 msgstr ""
+"Az ablak nem jelenik meg a képernyőátjátszásban. Nyomja meg a láthatóvá "
+"tételhez"
 
 #: decorationbutton.cpp:363
 #, kde-format
 msgid "Hide from Screencast"
-msgstr ""
+msgstr "Elrejtés a képernyőátjátszásból"
 
 #~ msgid "More actions for this window"
 #~ msgstr "További műveletek"
