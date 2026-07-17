@@ -179,6 +179,7 @@ void MockWindow::requestMinimize()
 
 void MockWindow::requestShowWindowMenu(const QRect &rect)
 {
+    Q_UNUSED(rect);
     Q_EMIT menuRequested();
 }
 
