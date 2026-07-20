@@ -105,6 +105,7 @@ public:
     QMarginsF borders;
     BorderRadius borderRadius;
     BorderOutline borderOutline;
+    QList<QRectF> cutouts;
 };
 
 DecorationState::DecorationState()
@@ -154,6 +155,16 @@ BorderOutline DecorationState::borderOutline() const
 void DecorationState::setBorderOutline(const BorderOutline &outline)
 {
     d->borderOutline = outline;
+}
+
+QList<QRectF> DecorationState::cutouts() const
+{
+    return d->cutouts;
+}
+
+void DecorationState::setCutouts(const QList<QRectF> &cutouts)
+{
+    d->cutouts = cutouts;
 }
 
 Positioner::Positioner()
@@ -417,6 +428,15 @@ void Decoration::setBorderOutline(const BorderOutline &outline)
     }
 }
 
+void Decoration::setCutouts(const QList<QRectF> &cutouts)
+{
+    if (d->next->cutouts() != cutouts) {
+        setState([cutouts](DecorationState *state) {
+            state->setCutouts(cutouts);
+        });
+    }
+}
+
 void Decoration::setTitleBar(const QRectF &rect)
 {
     if (d->titleBar != rect) {
@@ -481,6 +501,11 @@ Style Decoration::style() const
     return d->style;
 }
 
+bool Decoration::isOverlay() const
+{
+    return d->style == Style::Overlay || d->style == Style::SimplifiedOverlay;
+}
+
 qreal Decoration::borderLeft() const
 {
     return d->current->borders().left();
@@ -534,7 +559,8 @@ BorderOutline Decoration::borderOutline() const
 QSizeF Decoration::size() const
 {
     const QMarginsF b = d->current->borders();
-    return QSizeF(d->client->width() + b.left() + b.right(), (d->client->isShaded() ? 0 : d->client->height()) + b.top() + b.bottom());
+    return QSizeF(d->client->width() + b.left() + b.right(),
+                  (d->client->isShaded() ? 0 : d->client->height()) + (d->client->handlesCutouts() ? 0 : b.top()) + b.bottom());
 }
 
 QRectF Decoration::rect() const
@@ -722,6 +748,9 @@ void Decoration::apply(std::shared_ptr<DecorationState> state)
     if (previous->borderOutline() != state->borderOutline()) {
         Q_EMIT borderOutlineChanged();
     }
+    if (previous->cutouts() != state->cutouts()) {
+        Q_EMIT cutoutsChanged();
+    }
 
     Q_EMIT currentStateChanged(state);
 }
@@ -738,6 +767,11 @@ void Decoration::requestToggleExcludeFromCapture()
     if (auto window = dynamic_cast<DecoratedWindowPrivateV4 *>(d->client->d.get())) {
         window->requestToggleExcludeFromCapture();
     }
+}
+
+QList<QRectF> Decoration::cutouts() const
+{
+    return d->current->cutouts();
 }
 
 } // namespace

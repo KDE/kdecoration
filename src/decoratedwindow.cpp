@@ -30,6 +30,14 @@ QString DecoratedWindow::caption() const
     return d->caption();
 }
 
+QString DecoratedWindow::appName() const
+{
+    if (auto impl = dynamic_cast<DecoratedWindowPrivateV5 *>(d.get())) {
+        return impl->appName();
+    }
+    return QString{};
+}
+
 bool DecoratedWindow::isOnAllDesktops() const
 {
     return d->isOnAllDesktops();
@@ -202,6 +210,14 @@ QString DecoratedWindow::applicationMenuObjectPath() const
         return impl->applicationMenuObjectPath();
     }
     return QString();
+}
+
+bool DecoratedWindow::handlesCutouts() const
+{
+    if (auto impl = dynamic_cast<DecoratedWindowPrivateV5 *>(d.get())) {
+        return impl->handlesCutouts();
+    }
+    return false;
 }
 
 } // namespace

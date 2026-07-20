@@ -105,6 +105,9 @@ public:
     BorderOutline borderOutline() const;
     void setBorderOutline(const BorderOutline &outline);
 
+    QList<QRectF> cutouts() const;
+    void setCutouts(const QList<QRectF> &cutouts);
+
 private:
     QSharedDataPointer<DecorationStateData> d;
 };
@@ -175,6 +178,41 @@ enum class Style {
      * provide more consistent visuals.
      */
     Shadow = 0x2,
+    /**
+     * A decoration that displays a title bar, with its background being transparent and the application
+     * being able to paint below it. If the decoration plugin supports creating overlay decorations, it
+     * should add the corresponding @c "overlay" item in the styles list in the plugin metadata, e.g.
+     *
+     * @code
+     * {
+     *     "org.kde.kdecoration3": {
+     *         "styles": ["titled", "overlay"]
+     *     }
+     * }
+     * @endcode
+     *
+     * A decoration plugin is not required to support overlay decorations.
+     */
+    Overlay = 0x3,
+    /**
+     * A decoration that displays a simplified title bar, with its background being transparent and the
+     * application being able to paint below it. The simplified titlebar should keep cutouts at the
+     * corners of the window, so the application can make use of the space in between.
+     *
+     * If the decoration plugin supports creating simplified overlay decorations, it should add the
+     * corresponding @c "simplifiedoverlay" item in the styles list in the plugin metadata, e.g.
+     *
+     * @code
+     * {
+     *     "org.kde.kdecoration3": {
+     *         "styles": ["titled", "simplifiedoverlay"]
+     *     }
+     * }
+     * @endcode
+     *
+     * A decoration plugin is not required to support simplified overlay decorations.
+     */
+    SimplifiedOverlay = 0x4,
 };
 
 /**
@@ -260,6 +298,11 @@ public:
      * Returns the decoration style.
      */
     Style style() const;
+
+    /**
+     * Returns if this decoration is one of the overlay styles
+     */
+    bool isOverlay() const;
 
     /**
      * The decoration border radius specifies how much the corners of the decorated window
@@ -371,6 +414,8 @@ public:
      */
     void popup(const Positioner &positioner, QMenu *menu);
 
+    QList<QRectF> cutouts() const;
+
 public Q_SLOTS:
     void requestClose();
     void requestToggleMaximization(Qt::MouseButtons buttons);
@@ -429,6 +474,7 @@ Q_SIGNALS:
     void nextStateChanged(std::shared_ptr<DecorationState> state);
     void borderRadiusChanged();
     void borderOutlineChanged();
+    void cutoutsChanged();
 
 protected:
     /**
@@ -455,6 +501,7 @@ protected:
     void setShadow(const std::shared_ptr<DecorationShadow> &shadow);
     void setBorderRadius(const BorderRadius &radius);
     void setBorderOutline(const BorderOutline &outline);
+    void setCutouts(const QList<QRectF> &cutouts);
 
     virtual void hoverEnterEvent(QHoverEvent *event);
     virtual void hoverLeaveEvent(QHoverEvent *event);
