@@ -285,6 +285,11 @@ public:
      */
     qreal nextScale() const;
 
+    /**
+     * Whether or not the client handles cutouts
+     */
+    bool handlesCutouts() const;
+
 Q_SIGNALS:
     void activeChanged(bool);
     void captionChanged(QString);

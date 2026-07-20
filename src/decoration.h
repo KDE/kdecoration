@@ -175,6 +175,21 @@ enum class Style {
      * provide more consistent visuals.
      */
     Shadow = 0x2,
+    /**
+     * A regular decoration that displays a title bar, with its background being transparent and the
+     * application being able to paint below it. If the decoration plugin supports creating overlayed
+     * decorations, it should add the corresponding @c "overlayed" item in the styles list in the
+     * plugin metadata, e.g.
+     *
+     * @code
+     * {
+     *     "org.kde.kdecoration3": {
+     *         "styles": ["titled", "overlayed"]
+     *     }
+     * }
+     * @endcode
+     */
+    Overlayed = 0x3,
 };
 
 /**

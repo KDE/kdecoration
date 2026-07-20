@@ -534,7 +534,8 @@ BorderOutline Decoration::borderOutline() const
 QSizeF Decoration::size() const
 {
     const QMarginsF b = d->current->borders();
-    return QSizeF(d->client->width() + b.left() + b.right(), (d->client->isShaded() ? 0 : d->client->height()) + b.top() + b.bottom());
+    return QSizeF(d->client->width() + b.left() + b.right(),
+                  (d->client->isShaded() ? 0 : d->client->height()) + (d->client->handlesCutouts() ? 0 : b.top()) + b.bottom());
 }
 
 QRectF Decoration::rect() const

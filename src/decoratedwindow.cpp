@@ -204,6 +204,14 @@ QString DecoratedWindow::applicationMenuObjectPath() const
     return QString();
 }
 
+bool DecoratedWindow::handlesCutouts() const
+{
+    if (auto impl = dynamic_cast<DecoratedWindowPrivateV5 *>(d.get())) {
+        return impl->handlesCutouts();
+    }
+    return false;
+}
+
 } // namespace
 
 #include "moc_decoratedwindow.cpp"
