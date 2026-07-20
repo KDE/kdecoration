@@ -197,6 +197,7 @@ public:
     ~DecoratedWindow() override;
     bool isActive() const;
     QString caption() const;
+    QString appName() const;
     bool isOnAllDesktops() const;
     bool isShaded() const;
     QIcon icon() const;
@@ -284,6 +285,11 @@ public:
      * Returns the next scale this decorated window is going to target.
      */
     qreal nextScale() const;
+
+    /**
+     * Whether or not the client handles cutouts
+     */
+    bool handlesCutouts() const;
 
 Q_SIGNALS:
     void activeChanged(bool);

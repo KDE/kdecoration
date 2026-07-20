@@ -124,4 +124,14 @@ protected:
     explicit DecoratedWindowPrivateV4(DecoratedWindow *client, Decoration *decoration);
 };
 
+class KDECORATIONS_PRIVATE_EXPORT DecoratedWindowPrivateV5 : public DecoratedWindowPrivateV4
+{
+public:
+    virtual bool handlesCutouts() const = 0;
+    virtual QString appName() const = 0;
+
+protected:
+    explicit DecoratedWindowPrivateV5(DecoratedWindow *client, Decoration *decoration);
+};
+
 } // namespace
